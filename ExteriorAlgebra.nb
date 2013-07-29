@@ -1,22 +1,3 @@
-(* Content-type: application/vnd.wolfram.mathematica *)
-
-(*** Wolfram Notebook File ***)
-(* http://www.wolfram.com/nb *)
-
-(* CreatedBy='Mathematica 9.0' *)
-
-(*CacheID: 234*)
-(* Internal cache information:
-NotebookFileLineBreakTest
-NotebookFileLineBreakTest
-NotebookDataPosition[       157,          7]
-NotebookDataLength[   3951051,     112312]
-NotebookOptionsPosition[   3908645,     110973]
-NotebookOutlinePosition[   3909021,     110990]
-CellTagsIndexPosition[   3908978,     110987]
-WindowFrame->Normal*)
-
-(* Beginning of Notebook Content *)
 Notebook[{
 
 Cell[CellGroupData[{
@@ -24,7 +5,9 @@ Cell["Exterior algebra and differential forms", "Title"],
 
 Cell["An example of a graded associative product", "Subtitle"],
 
-Cell["Alfonso, edited by Jose, June 2013", "Subsubtitle"],
+Cell["\<\
+Alfonso, edited by Jose, June 2013, edited by Leo, July 2013\
+\>", "Subsubtitle"],
 
 Cell[CellGroupData[{
 
@@ -34,8 +17,8 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
-  "2013", ",", "7", ",", "3", ",", "22", ",", "11", ",", 
-   "30.094549`8.231062820305262"}], "}"}]], "Output"]
+  "2013", ",", "7", ",", "29", ",", "13", ",", "59", ",", 
+   "27.405311`8.190409716677385"}], "}"}]], "Output"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -58,8 +41,8 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\"1.2.1\"\>", "\[InvisibleSpace]", "\<\", \"\>", 
    "\[InvisibleSpace]", 
    RowBox[{"{", 
-    RowBox[{"2013", ",", "6", ",", "1"}], "}"}]}],
-  SequenceForm["Package xAct`xPerm`  version ", "1.2.1", ", ", {2013, 6, 1}],
+    RowBox[{"2013", ",", "7", ",", "1"}], "}"}]}],
+  SequenceForm["Package xAct`xPerm`  version ", "1.2.1", ", ", {2013, 7, 1}],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"CopyRight (C) 2003-2013, Jose M. Martin-Garcia, under the \
@@ -78,8 +61,8 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\"1.1.0\"\>", "\[InvisibleSpace]", "\<\", \"\>", 
    "\[InvisibleSpace]", 
    RowBox[{"{", 
-    RowBox[{"2013", ",", "6", ",", "1"}], "}"}]}],
-  SequenceForm["Package xAct`xTensor`  version ", "1.1.0", ", ", {2013, 6, 1}],
+    RowBox[{"2013", ",", "7", ",", "1"}], "}"}]}],
+  SequenceForm["Package xAct`xTensor`  version ", "1.1.0", ", ", {2013, 7, 1}],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"CopyRight (C) 2002-2013, Jose M. Martin-Garcia, under the \
@@ -112,7 +95,215 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{
     "a", ",", "b", ",", "c", ",", "d", ",", "e", ",", "f", ",", "g", ",", 
-     "h"}], "}"}]}], "]"}]], "Input"]
+     "h"}], "}"}]}], "]"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["My overloaded DefInertHead", "Subsubsection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Unprotect", "[", "DefInertHead", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"DefInertHead", "[", 
+    RowBox[{
+     RowBox[{"ih", ":", 
+      RowBox[{"head_", "[", "args___", "]"}]}], ",", "options___"}], "]"}], ":=", 
+   RowBox[{"Catch", "@", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "lin", ",", "cthrough", ",", "master", ",", "pa", ",", "pns", ",", 
+        "info", ",", "x", ",", "y"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+         "lin", ",", "cthrough", ",", "master", ",", "pa", ",", "pns", ",", 
+          "info"}], "}"}], "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+           "LinearQ", ",", "ContractThrough", ",", "Master", ",", "PrintAs", 
+            ",", "ProtectNewSymbol", ",", "DefInfo"}], "}"}], "/.", 
+          RowBox[{"CheckOptions", "[", "options", "]"}]}], "/.", 
+         RowBox[{"Options", "[", "DefInertHead", "]"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", "Validate", " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"ValidateSymbol", "[", "head", "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"ValidateSymbolInSession", "[", "head", "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", "Register", " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"xAct`xTensor`Private`MakeDefInfo", "[", 
+        RowBox[{"DefInertHead", ",", "head", ",", "info"}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"MakexTensions", "[", 
+        RowBox[{
+        "DefInertHead", ",", "\"\<Beginning\>\"", ",", "ih", ",", "options"}],
+         "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendToUnevaluated", "[", 
+        RowBox[{"$InertHeads", ",", "head"}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"InertHeadQ", "[", 
+         RowBox[{"head", "[", "___", "]"}], "]"}], "^=", "True"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"DefInfo", "[", "head", "]"}], "^=", "info"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"DefInfo", "[", 
+         RowBox[{"head", "[", "___", "]"}], "]"}], "^=", "info"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"xAct`xTensor`Private`SetPrintAs", "[", 
+        RowBox[{"ih", ",", 
+         RowBox[{"xAct`xTensor`Private`PrintAsString", "[", 
+          RowBox[{"ih", ",", "pa"}], "]"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"xAct`xTensor`Private`SymbolRelations", "[", 
+        RowBox[{"head", ",", "master", ",", 
+         RowBox[{"{", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Metric", " ", "/", " ", "projector"}], " ", "/", " ", 
+          "delta"}], " ", "contraction"}], " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"xTagSet", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"head", ",", 
+             RowBox[{"ContractThroughQ", "[", 
+              RowBox[{"head", ",", "#"}], "]"}]}], "}"}], ",", "True"}], 
+          "]"}], "&"}], "/@", 
+        RowBox[{"Flatten", "[", 
+         RowBox[{"{", "cthrough", "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Linearity", ".", " ", "Only"}], " ", "with", " ", 
+          "respect", " ", "to", " ", "constants"}], ",", " ", 
+         RowBox[{"not", " ", "general", " ", "scalar", " ", "fields"}]}], " ",
+         "*)"}], "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"LinearQ", "[", 
+         RowBox[{"head", "[", "___", "]"}], "]"}], "^=", "lin"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{"lin", ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"head", "[", "argz___", "]"}], "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"x_", "?", "ConstantQ"}], " ", "y_"}], ",", "z___"}], 
+            "]"}], ":=", 
+           RowBox[{"x", " ", 
+            RowBox[{
+             RowBox[{"head", "[", "argz", "]"}], "[", 
+             RowBox[{"y", ",", "z"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"head", "[", "argz___", "]"}], "[", 
+            RowBox[{"expr_Plus", ",", "z___"}], "]"}], ":=", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"head", "[", "argz", "]"}], "[", 
+              RowBox[{"#", ",", "z"}], "]"}], "&"}], "/@", "expr"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"head", "[", "argz___", "]"}], "[", 
+            RowBox[{"expr_SeriesData", ",", "z___"}], "]"}], ":=", 
+           RowBox[{"xAct`xTensor`Private`SeriesDataMap", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"head", "[", "argz", "]"}], "[", 
+               RowBox[{"#", ",", "z"}], "]"}], "&"}], ",", "expr"}], "]"}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"head", "[", "argz___", "]"}], "[", 
+            RowBox[{"0", ",", "z___"}], "]"}], ":=", "0"}]}]}], " ", "]"}], 
+       ";", "\[IndentingNewLine]", 
+       RowBox[{"MakexTensions", "[", 
+        RowBox[{
+        "DefInertHead", ",", "\"\<End\>\"", ",", "ih", ",", "options"}], 
+        "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", "Protect", " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{"pns", ",", 
+         RowBox[{"Protect", "[", "head", "]"}]}], "]"}], ";"}]}], 
+     "\[IndentingNewLine]", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Protect", "[", "DefInertHead", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Unprotect", "[", "UndefInertHead", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"UndefInertHead", "[", 
+    RowBox[{"ih_Symbol", "[", "args___", "]"}], "]"}], ":=", 
+   RowBox[{"Catch", "@", 
+    RowBox[{"With", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"servants", "=", 
+        RowBox[{"ServantsOf", "[", "ih", "]"}]}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"!", 
+          RowBox[{"InertHeadQ", "[", 
+           RowBox[{"ih", "[", "args", "]"}], "]"}]}], ",", 
+         RowBox[{"Throw", "@", 
+          RowBox[{"Message", "[", 
+           RowBox[{
+            RowBox[{"UndefInertHead", "::", "unknown"}], ",", 
+            "\"\<inert head\>\"", ",", "ih"}], "]"}]}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"xAct`xTensor`Private`CheckRemoveSymbol", "[", "ih", "]"}], 
+       ";", "\[IndentingNewLine]", 
+       RowBox[{"MakexTensions", "[", 
+        RowBox[{"UndefInertHead", ",", "\"\<Beginning\>\"", ",", 
+         RowBox[{"ih", "[", "args", "]"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"xUpSet", "[", 
+        RowBox[{
+         RowBox[{"ServantsOf", "[", "ih", "]"}], ",", 
+         RowBox[{"{", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"xAct`xTensor`Private`DropFromHosts", "[", "ih", "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Undef", "/@", 
+        RowBox[{"Reverse", "[", "servants", "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"$InertHeads", "=", 
+        RowBox[{"DeleteCases", "[", 
+         RowBox[{"$InertHeads", ",", "ih"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"MakexTensions", "[", 
+        RowBox[{"UndefInertHead", ",", "\"\<End\>\"", ",", 
+         RowBox[{"ih", "[", "args", "]"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"xAct`xTensor`Private`MakeUndefInfo", "[", 
+        RowBox[{"UndefInertHead", ",", "ih"}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"xAct`xTensor`Private`RemoveSymbol", "[", "ih", "]"}], ";"}]}],
+      "\[IndentingNewLine]", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Protect", "[", "UndefInertHead", "]"}], ";"}]}], "Input"]
+}, Closed]]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1519,66 +1710,51 @@ Cell[BoxData[
 Cell[BoxData["2"], "Output"]
 }, Open  ]],
 
-Cell["\<\
-Leibnitz rule (Jose: this should be done better, in a non-recursive way)\
-\>", "Text"],
-
 Cell[BoxData[
  RowBox[{
-  RowBox[{"diff", "[", 
-   RowBox[{"x_", "?", "ConstantQ"}], "]"}], ":=", "0"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"diff", "[", 
-   RowBox[{"HoldPattern", "@", 
-    RowBox[{"Wedge", "[", 
-     RowBox[{"x_", ",", "y_"}], "]"}]}], "]"}], ":=", 
   RowBox[{
-   RowBox[{"Wedge", "[", 
-    RowBox[{
-     RowBox[{"diff", "[", "x", "]"}], ",", "y"}], "]"}], "+", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"(", 
-      RowBox[{"-", "1"}], ")"}], "^", 
-     RowBox[{"Grade", "[", 
-      RowBox[{"x", ",", "Wedge"}], "]"}]}], 
-    RowBox[{"Wedge", "[", 
-     RowBox[{"x", ",", 
-      RowBox[{"diff", "[", "y", "]"}]}], "]"}]}]}]}]], "Input"],
+   RowBox[{"diff", "[", 
+    RowBox[{"x_", "?", "ConstantQ"}], "]"}], ":=", "0"}], ";"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"diff", "[", 
-   RowBox[{"Times", "[", 
-    RowBox[{"x_", ",", "y_"}], "]"}], "]"}], ":=", 
   RowBox[{
-   RowBox[{
-    RowBox[{"Wedge", "[", 
+   RowBox[{"diff", "[", 
+    RowBox[{"HoldPattern", "@", 
      RowBox[{
-      RowBox[{"diff", "[", "x", "]"}], ",", "y"}], "]"}], "+", 
-    RowBox[{"x", " ", 
-     RowBox[{"diff", "[", "y", "]"}]}]}], "/;", 
-   RowBox[{
-    RowBox[{"Grade", "[", 
-     RowBox[{"x", ",", "Wedge"}], "]"}], "===", "0"}]}]}]], "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"diff", "[", 
-   RowBox[{"Power", "[", 
-    RowBox[{"x_", ",", 
-     RowBox[{"n_", "?", "ConstantQ"}]}], "]"}], "]"}], ":=", 
-  RowBox[{
-   RowBox[{"n", " ", 
-    RowBox[{"Power", "[", 
-     RowBox[{"x", ",", 
-      RowBox[{"n", "-", "1"}]}], "]"}], 
-    RowBox[{"diff", "[", "x", "]"}]}], "/;", 
-   RowBox[{
-    RowBox[{"Grade", "[", 
-     RowBox[{"x", ",", "Wedge"}], "]"}], "===", "0"}]}]}]], "Input"],
+      RowBox[{"(", 
+       RowBox[{"Wedge", "|", "Times"}], ")"}], "[", "args__", "]"}]}], "]"}], 
+   ":=", 
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"argl", "=", 
+        RowBox[{"{", "args", "}"}]}], ",", 
+       RowBox[{"n", "=", 
+        RowBox[{"Length", "@", 
+         RowBox[{"{", "args", "}"}]}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+     
+     RowBox[{"Sum", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"-", "1"}], ")"}], "^", 
+         RowBox[{"Grade", "[", 
+          RowBox[{
+           RowBox[{"Wedge", "@@", 
+            RowBox[{"Take", "[", 
+             RowBox[{"argl", ",", 
+              RowBox[{"i", "-", "1"}]}], "]"}]}], ",", "Wedge"}], "]"}]}], 
+        " ", 
+        RowBox[{"Wedge", "@@", 
+         RowBox[{"MapAt", "[", 
+          RowBox[{"diff", ",", "argl", ",", "i"}], "]"}]}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], "]"}]}], 
+  ";"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -1586,21 +1762,9 @@ Cell[BoxData[
    RowBox[{"diff", "[", 
     RowBox[{
      RowBox[{"func_", "?", "ScalarFunctionQ"}], "[", "args__", "]"}], "]"}], ":=", 
-   RowBox[{"Plus", "@@", 
-    RowBox[{
-     RowBox[{"(", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"D", "[", 
-         RowBox[{
-          RowBox[{"func", "[", "args", "]"}], ",", "#"}], "]"}], 
-        RowBox[{"diff", "@", "#"}]}], "&"}], ")"}], "/@", 
-     RowBox[{"{", "args", "}"}]}]}]}], ";"}]], "Input",
- CellChangeTimes->{{3.56883496835891*^9, 3.5688350045854187`*^9}, {
-   3.568835036584744*^9, 3.568835040841227*^9}, {3.56883516284403*^9, 
-   3.5688351757223473`*^9}, {3.568835607989977*^9, 3.5688356677196503`*^9}, 
-   3.568835781980589*^9, {3.5688358301942797`*^9, 3.568835831250783*^9}, {
-   3.5688358867825537`*^9, 3.5688359084311953`*^9}}],
+   RowBox[{"xAct`xTensor`Private`multiD", "[", 
+    RowBox[{"diff", ",", 
+     RowBox[{"func", "[", "args", "]"}]}], "]"}]}], ";"}]], "Input"],
 
 Cell["The exterior derivative applied twice is zero:", "Text"],
 
@@ -2344,290 +2508,302 @@ Cell[BoxData[
      AutoSpacing->False],
     $CellContext`A0[],
     Editable->False], " ", 
-   RowBox[{"(", 
-    RowBox[{
-     RowBox[{
-      InterpretationBox[
-       StyleBox[
-        RowBox[{"d", "[", 
-         InterpretationBox[
-          StyleBox[GridBox[{
-             {"\[Omega]1", 
-              StyleBox[GridBox[{
-                 {"a"},
-                 {" "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}],
-           ShowAutoStyles->False,
-           AutoSpacing->False],
-          $CellContext`\[Omega]1[$CellContext`a],
-          Editable->False], "]"}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`diff[
-        $CellContext`\[Omega]1[$CellContext`a]],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[GridBox[{
-          {"\[Omega]2", 
-           StyleBox[GridBox[{
-              {"b", "c"},
-              {" ", " "}
-             },
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                  Offset[0.]}}, "RowsIndexed" -> {}}],
-            FontSize->Rational[39, 4]]}
-         },
-         GridBoxAlignment->{
-          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-         GridBoxSpacings->{"Columns" -> {
-             Offset[0.27999999999999997`], {
-              Offset[0.034999999999999996`]}, 
-             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-             Offset[0.2], {
-              Offset[0.4]}, 
-             Offset[0.2]}, "RowsIndexed" -> {}}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[GridBox[{
-          {"\[Omega]3", 
-           StyleBox[GridBox[{
-              {"d", "e"},
-              {" ", " "}
-             },
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                  Offset[0.]}}, "RowsIndexed" -> {}}],
-            FontSize->Rational[39, 4]]}
-         },
-         GridBoxAlignment->{
-          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-         GridBoxSpacings->{"Columns" -> {
-             Offset[0.27999999999999997`], {
-              Offset[0.034999999999999996`]}, 
-             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-             Offset[0.2], {
-              Offset[0.4]}, 
-             Offset[0.2]}, "RowsIndexed" -> {}}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
-       Editable->False]}], "-", 
-     RowBox[{
-      InterpretationBox[
-       StyleBox[GridBox[{
-          {"\[Omega]1", 
-           StyleBox[GridBox[{
-              {"a"},
-              {" "}
-             },
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                  Offset[0.]}}, "RowsIndexed" -> {}}],
-            FontSize->Rational[39, 4]]}
-         },
-         GridBoxAlignment->{
-          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-         GridBoxSpacings->{"Columns" -> {
-             Offset[0.27999999999999997`], {
-              Offset[0.034999999999999996`]}, 
-             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-             Offset[0.2], {
-              Offset[0.4]}, 
-             Offset[0.2]}, "RowsIndexed" -> {}}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`\[Omega]1[$CellContext`a],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[
-        RowBox[{"d", "[", 
-         InterpretationBox[
-          StyleBox[GridBox[{
-             {"\[Omega]2", 
-              StyleBox[GridBox[{
-                 {"b", "c"},
-                 {" ", " "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}],
-           ShowAutoStyles->False,
-           AutoSpacing->False],
-          $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
-          Editable->False], "]"}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`diff[
-        $CellContext`\[Omega]2[$CellContext`b, $CellContext`c]],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[GridBox[{
-          {"\[Omega]3", 
-           StyleBox[GridBox[{
-              {"d", "e"},
-              {" ", " "}
-             },
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                  Offset[0.]}}, "RowsIndexed" -> {}}],
-            FontSize->Rational[39, 4]]}
-         },
-         GridBoxAlignment->{
-          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-         GridBoxSpacings->{"Columns" -> {
-             Offset[0.27999999999999997`], {
-              Offset[0.034999999999999996`]}, 
-             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-             Offset[0.2], {
-              Offset[0.4]}, 
-             Offset[0.2]}, "RowsIndexed" -> {}}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
-       Editable->False]}], "-", 
-     RowBox[{
-      InterpretationBox[
-       StyleBox[GridBox[{
-          {"\[Omega]1", 
-           StyleBox[GridBox[{
-              {"a"},
-              {" "}
-             },
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                  Offset[0.]}}, "RowsIndexed" -> {}}],
-            FontSize->Rational[39, 4]]}
-         },
-         GridBoxAlignment->{
-          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-         GridBoxSpacings->{"Columns" -> {
-             Offset[0.27999999999999997`], {
-              Offset[0.034999999999999996`]}, 
-             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-             Offset[0.2], {
-              Offset[0.4]}, 
-             Offset[0.2]}, "RowsIndexed" -> {}}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`\[Omega]1[$CellContext`a],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[GridBox[{
-          {"\[Omega]2", 
-           StyleBox[GridBox[{
-              {"b", "c"},
-              {" ", " "}
-             },
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                  Offset[0.]}}, "RowsIndexed" -> {}}],
-            FontSize->Rational[39, 4]]}
-         },
-         GridBoxAlignment->{
-          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-         GridBoxSpacings->{"Columns" -> {
-             Offset[0.27999999999999997`], {
-              Offset[0.034999999999999996`]}, 
-             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-             Offset[0.2], {
-              Offset[0.4]}, 
-             Offset[0.2]}, "RowsIndexed" -> {}}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[
-        RowBox[{"d", "[", 
-         InterpretationBox[
-          StyleBox[GridBox[{
-             {"\[Omega]3", 
-              StyleBox[GridBox[{
-                 {"d", "e"},
-                 {" ", " "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}],
-           ShowAutoStyles->False,
-           AutoSpacing->False],
-          $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
-          Editable->False], "]"}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`diff[
-        $CellContext`\[Omega]3[$CellContext`d, $CellContext`e]],
-       Editable->False]}]}], ")"}]}], "+", 
+   RowBox[{
+    InterpretationBox[
+     StyleBox[
+      RowBox[{"d", "[", 
+       InterpretationBox[
+        StyleBox[GridBox[{
+           {"\[Omega]1", 
+            StyleBox[GridBox[{
+               {"a"},
+               {" "}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.], {
+                   Offset[0.034999999999999996`]}, 
+                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                   Offset[0.]}}, "RowsIndexed" -> {}}],
+             FontSize->Rational[39, 4]]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.4]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         ShowAutoStyles->False,
+         AutoSpacing->False],
+        $CellContext`\[Omega]1[$CellContext`a],
+        Editable->False], "]"}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`diff[
+      $CellContext`\[Omega]1[$CellContext`a]],
+     Editable->False], "\[Wedge]", 
+    InterpretationBox[
+     StyleBox[GridBox[{
+        {"\[Omega]2", 
+         StyleBox[GridBox[{
+            {"b", "c"},
+            {" ", " "}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                Offset[0.]}}, "RowsIndexed" -> {}}],
+          FontSize->Rational[39, 4]]}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.034999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
+     Editable->False], "\[Wedge]", 
+    InterpretationBox[
+     StyleBox[GridBox[{
+        {"\[Omega]3", 
+         StyleBox[GridBox[{
+            {"d", "e"},
+            {" ", " "}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                Offset[0.]}}, "RowsIndexed" -> {}}],
+          FontSize->Rational[39, 4]]}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.034999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
+     Editable->False]}]}], "-", 
+  RowBox[{
+   InterpretationBox[
+    StyleBox["A0",
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`A0[],
+    Editable->False], " ", 
+   RowBox[{
+    InterpretationBox[
+     StyleBox[GridBox[{
+        {"\[Omega]1", 
+         StyleBox[GridBox[{
+            {"a"},
+            {" "}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                Offset[0.]}}, "RowsIndexed" -> {}}],
+          FontSize->Rational[39, 4]]}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.034999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`\[Omega]1[$CellContext`a],
+     Editable->False], "\[Wedge]", 
+    InterpretationBox[
+     StyleBox[
+      RowBox[{"d", "[", 
+       InterpretationBox[
+        StyleBox[GridBox[{
+           {"\[Omega]2", 
+            StyleBox[GridBox[{
+               {"b", "c"},
+               {" ", " "}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.], {
+                   Offset[0.034999999999999996`]}, 
+                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                   Offset[0.]}}, "RowsIndexed" -> {}}],
+             FontSize->Rational[39, 4]]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.4]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         ShowAutoStyles->False,
+         AutoSpacing->False],
+        $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
+        Editable->False], "]"}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`diff[
+      $CellContext`\[Omega]2[$CellContext`b, $CellContext`c]],
+     Editable->False], "\[Wedge]", 
+    InterpretationBox[
+     StyleBox[GridBox[{
+        {"\[Omega]3", 
+         StyleBox[GridBox[{
+            {"d", "e"},
+            {" ", " "}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                Offset[0.]}}, "RowsIndexed" -> {}}],
+          FontSize->Rational[39, 4]]}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.034999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
+     Editable->False]}]}], "-", 
+  RowBox[{
+   InterpretationBox[
+    StyleBox["A0",
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`A0[],
+    Editable->False], " ", 
+   RowBox[{
+    InterpretationBox[
+     StyleBox[GridBox[{
+        {"\[Omega]1", 
+         StyleBox[GridBox[{
+            {"a"},
+            {" "}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                Offset[0.]}}, "RowsIndexed" -> {}}],
+          FontSize->Rational[39, 4]]}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.034999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`\[Omega]1[$CellContext`a],
+     Editable->False], "\[Wedge]", 
+    InterpretationBox[
+     StyleBox[GridBox[{
+        {"\[Omega]2", 
+         StyleBox[GridBox[{
+            {"b", "c"},
+            {" ", " "}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                Offset[0.]}}, "RowsIndexed" -> {}}],
+          FontSize->Rational[39, 4]]}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.034999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
+     Editable->False], "\[Wedge]", 
+    InterpretationBox[
+     StyleBox[
+      RowBox[{"d", "[", 
+       InterpretationBox[
+        StyleBox[GridBox[{
+           {"\[Omega]3", 
+            StyleBox[GridBox[{
+               {"d", "e"},
+               {" ", " "}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.], {
+                   Offset[0.034999999999999996`]}, 
+                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                   Offset[0.]}}, "RowsIndexed" -> {}}],
+             FontSize->Rational[39, 4]]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.4]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         ShowAutoStyles->False,
+         AutoSpacing->False],
+        $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
+        Editable->False], "]"}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`diff[
+      $CellContext`\[Omega]3[$CellContext`d, $CellContext`e]],
+     Editable->False]}]}], "+", 
   RowBox[{
    InterpretationBox[
     StyleBox[
@@ -3156,214 +3332,109 @@ Cell[BoxData[
       AutoSpacing->False],
      $CellContext`A0[],
      Editable->False]}], " ", 
-   RowBox[{"(", 
-    RowBox[{
-     RowBox[{
-      InterpretationBox[
-       StyleBox[
-        RowBox[{"d", "[", 
-         InterpretationBox[
-          StyleBox[GridBox[{
-             {"\[Omega]1", 
-              StyleBox[GridBox[{
-                 {"a"},
-                 {" "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}],
-           ShowAutoStyles->False,
-           AutoSpacing->False],
-          $CellContext`\[Omega]1[$CellContext`a],
-          Editable->False], "]"}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`diff[
-        $CellContext`\[Omega]1[$CellContext`a]],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[
-        RowBox[{"d", "[", 
-         InterpretationBox[
-          StyleBox[GridBox[{
-             {"\[Omega]3", 
-              StyleBox[GridBox[{
-                 {"d", "e"},
-                 {" ", " "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}],
-           ShowAutoStyles->False,
-           AutoSpacing->False],
-          $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
-          Editable->False], "]"}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`diff[
-        $CellContext`\[Omega]3[$CellContext`d, $CellContext`e]],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[GridBox[{
-          {"\[Omega]2", 
-           StyleBox[GridBox[{
-              {"b", "c"},
-              {" ", " "}
-             },
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                  Offset[0.]}}, "RowsIndexed" -> {}}],
-            FontSize->Rational[39, 4]]}
-         },
-         GridBoxAlignment->{
-          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-         GridBoxSpacings->{"Columns" -> {
-             Offset[0.27999999999999997`], {
-              Offset[0.034999999999999996`]}, 
-             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-             Offset[0.2], {
-              Offset[0.4]}, 
-             Offset[0.2]}, "RowsIndexed" -> {}}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
-       Editable->False]}], "-", 
-     RowBox[{
-      InterpretationBox[
-       StyleBox[GridBox[{
-          {"\[Omega]1", 
-           StyleBox[GridBox[{
-              {"a"},
-              {" "}
-             },
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                  Offset[0.]}}, "RowsIndexed" -> {}}],
-            FontSize->Rational[39, 4]]}
-         },
-         GridBoxAlignment->{
-          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-         GridBoxSpacings->{"Columns" -> {
-             Offset[0.27999999999999997`], {
-              Offset[0.034999999999999996`]}, 
-             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-             Offset[0.2], {
-              Offset[0.4]}, 
-             Offset[0.2]}, "RowsIndexed" -> {}}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`\[Omega]1[$CellContext`a],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[
-        RowBox[{"d", "[", 
-         InterpretationBox[
-          StyleBox[GridBox[{
-             {"\[Omega]3", 
-              StyleBox[GridBox[{
-                 {"d", "e"},
-                 {" ", " "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}],
-           ShowAutoStyles->False,
-           AutoSpacing->False],
-          $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
-          Editable->False], "]"}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`diff[
-        $CellContext`\[Omega]3[$CellContext`d, $CellContext`e]],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[
-        RowBox[{"d", "[", 
-         InterpretationBox[
-          StyleBox[GridBox[{
-             {"\[Omega]2", 
-              StyleBox[GridBox[{
-                 {"b", "c"},
-                 {" ", " "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}],
-           ShowAutoStyles->False,
-           AutoSpacing->False],
-          $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
-          Editable->False], "]"}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`diff[
-        $CellContext`\[Omega]2[$CellContext`b, $CellContext`c]],
-       Editable->False]}]}], ")"}]}], "+", 
+   RowBox[{
+    InterpretationBox[
+     StyleBox[
+      RowBox[{"d", "[", 
+       InterpretationBox[
+        StyleBox[GridBox[{
+           {"\[Omega]1", 
+            StyleBox[GridBox[{
+               {"a"},
+               {" "}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.], {
+                   Offset[0.034999999999999996`]}, 
+                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                   Offset[0.]}}, "RowsIndexed" -> {}}],
+             FontSize->Rational[39, 4]]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.4]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         ShowAutoStyles->False,
+         AutoSpacing->False],
+        $CellContext`\[Omega]1[$CellContext`a],
+        Editable->False], "]"}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`diff[
+      $CellContext`\[Omega]1[$CellContext`a]],
+     Editable->False], "\[Wedge]", 
+    InterpretationBox[
+     StyleBox[
+      RowBox[{"d", "[", 
+       InterpretationBox[
+        StyleBox[GridBox[{
+           {"\[Omega]3", 
+            StyleBox[GridBox[{
+               {"d", "e"},
+               {" ", " "}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.], {
+                   Offset[0.034999999999999996`]}, 
+                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                   Offset[0.]}}, "RowsIndexed" -> {}}],
+             FontSize->Rational[39, 4]]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.4]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         ShowAutoStyles->False,
+         AutoSpacing->False],
+        $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
+        Editable->False], "]"}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`diff[
+      $CellContext`\[Omega]3[$CellContext`d, $CellContext`e]],
+     Editable->False], "\[Wedge]", 
+    InterpretationBox[
+     StyleBox[GridBox[{
+        {"\[Omega]2", 
+         StyleBox[GridBox[{
+            {"b", "c"},
+            {" ", " "}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                Offset[0.]}}, "RowsIndexed" -> {}}],
+          FontSize->Rational[39, 4]]}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.034999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
+     Editable->False]}]}], "+", 
   RowBox[{
    InterpretationBox[
     StyleBox["A0",
@@ -3371,214 +3442,109 @@ Cell[BoxData[
      AutoSpacing->False],
     $CellContext`A0[],
     Editable->False], " ", 
-   RowBox[{"(", 
-    RowBox[{
-     RowBox[{
-      InterpretationBox[
-       StyleBox[
-        RowBox[{"d", "[", 
-         InterpretationBox[
-          StyleBox[GridBox[{
-             {"\[Omega]1", 
-              StyleBox[GridBox[{
-                 {"a"},
-                 {" "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}],
-           ShowAutoStyles->False,
-           AutoSpacing->False],
-          $CellContext`\[Omega]1[$CellContext`a],
-          Editable->False], "]"}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`diff[
-        $CellContext`\[Omega]1[$CellContext`a]],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[GridBox[{
-          {"\[Omega]3", 
-           StyleBox[GridBox[{
-              {"d", "e"},
-              {" ", " "}
-             },
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                  Offset[0.]}}, "RowsIndexed" -> {}}],
-            FontSize->Rational[39, 4]]}
-         },
-         GridBoxAlignment->{
-          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-         GridBoxSpacings->{"Columns" -> {
-             Offset[0.27999999999999997`], {
-              Offset[0.034999999999999996`]}, 
-             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-             Offset[0.2], {
-              Offset[0.4]}, 
-             Offset[0.2]}, "RowsIndexed" -> {}}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[
-        RowBox[{"d", "[", 
-         InterpretationBox[
-          StyleBox[GridBox[{
-             {"\[Omega]2", 
-              StyleBox[GridBox[{
-                 {"b", "c"},
-                 {" ", " "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}],
-           ShowAutoStyles->False,
-           AutoSpacing->False],
-          $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
-          Editable->False], "]"}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`diff[
-        $CellContext`\[Omega]2[$CellContext`b, $CellContext`c]],
-       Editable->False]}], "-", 
-     RowBox[{
-      InterpretationBox[
-       StyleBox[GridBox[{
-          {"\[Omega]1", 
-           StyleBox[GridBox[{
-              {"a"},
-              {" "}
-             },
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                  Offset[0.]}}, "RowsIndexed" -> {}}],
-            FontSize->Rational[39, 4]]}
-         },
-         GridBoxAlignment->{
-          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-         GridBoxSpacings->{"Columns" -> {
-             Offset[0.27999999999999997`], {
-              Offset[0.034999999999999996`]}, 
-             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-             Offset[0.2], {
-              Offset[0.4]}, 
-             Offset[0.2]}, "RowsIndexed" -> {}}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`\[Omega]1[$CellContext`a],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[
-        RowBox[{"d", "[", 
-         InterpretationBox[
-          StyleBox[GridBox[{
-             {"\[Omega]3", 
-              StyleBox[GridBox[{
-                 {"d", "e"},
-                 {" ", " "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}],
-           ShowAutoStyles->False,
-           AutoSpacing->False],
-          $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
-          Editable->False], "]"}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`diff[
-        $CellContext`\[Omega]3[$CellContext`d, $CellContext`e]],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[
-        RowBox[{"d", "[", 
-         InterpretationBox[
-          StyleBox[GridBox[{
-             {"\[Omega]2", 
-              StyleBox[GridBox[{
-                 {"b", "c"},
-                 {" ", " "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}],
-           ShowAutoStyles->False,
-           AutoSpacing->False],
-          $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
-          Editable->False], "]"}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`diff[
-        $CellContext`\[Omega]2[$CellContext`b, $CellContext`c]],
-       Editable->False]}]}], ")"}]}], "+", 
+   RowBox[{
+    InterpretationBox[
+     StyleBox[
+      RowBox[{"d", "[", 
+       InterpretationBox[
+        StyleBox[GridBox[{
+           {"\[Omega]1", 
+            StyleBox[GridBox[{
+               {"a"},
+               {" "}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.], {
+                   Offset[0.034999999999999996`]}, 
+                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                   Offset[0.]}}, "RowsIndexed" -> {}}],
+             FontSize->Rational[39, 4]]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.4]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         ShowAutoStyles->False,
+         AutoSpacing->False],
+        $CellContext`\[Omega]1[$CellContext`a],
+        Editable->False], "]"}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`diff[
+      $CellContext`\[Omega]1[$CellContext`a]],
+     Editable->False], "\[Wedge]", 
+    InterpretationBox[
+     StyleBox[GridBox[{
+        {"\[Omega]3", 
+         StyleBox[GridBox[{
+            {"d", "e"},
+            {" ", " "}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                Offset[0.]}}, "RowsIndexed" -> {}}],
+          FontSize->Rational[39, 4]]}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.034999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
+     Editable->False], "\[Wedge]", 
+    InterpretationBox[
+     StyleBox[
+      RowBox[{"d", "[", 
+       InterpretationBox[
+        StyleBox[GridBox[{
+           {"\[Omega]2", 
+            StyleBox[GridBox[{
+               {"b", "c"},
+               {" ", " "}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.], {
+                   Offset[0.034999999999999996`]}, 
+                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                   Offset[0.]}}, "RowsIndexed" -> {}}],
+             FontSize->Rational[39, 4]]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.4]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         ShowAutoStyles->False,
+         AutoSpacing->False],
+        $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
+        Editable->False], "]"}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`diff[
+      $CellContext`\[Omega]2[$CellContext`b, $CellContext`c]],
+     Editable->False]}]}], "+", 
   RowBox[{
    InterpretationBox[
     StyleBox["A0",
@@ -3586,214 +3552,219 @@ Cell[BoxData[
      AutoSpacing->False],
     $CellContext`A0[],
     Editable->False], " ", 
-   RowBox[{"(", 
-    RowBox[{
-     RowBox[{
-      InterpretationBox[
-       StyleBox[
-        RowBox[{"d", "[", 
-         InterpretationBox[
-          StyleBox[GridBox[{
-             {"\[Omega]3", 
-              StyleBox[GridBox[{
-                 {"d", "e"},
-                 {" ", " "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}],
-           ShowAutoStyles->False,
-           AutoSpacing->False],
-          $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
-          Editable->False], "]"}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`diff[
-        $CellContext`\[Omega]3[$CellContext`d, $CellContext`e]],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[
-        RowBox[{"d", "[", 
-         InterpretationBox[
-          StyleBox[GridBox[{
-             {"\[Omega]1", 
-              StyleBox[GridBox[{
-                 {"a"},
-                 {" "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}],
-           ShowAutoStyles->False,
-           AutoSpacing->False],
-          $CellContext`\[Omega]1[$CellContext`a],
-          Editable->False], "]"}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`diff[
-        $CellContext`\[Omega]1[$CellContext`a]],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[GridBox[{
-          {"\[Omega]2", 
-           StyleBox[GridBox[{
-              {"b", "c"},
-              {" ", " "}
-             },
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                  Offset[0.]}}, "RowsIndexed" -> {}}],
-            FontSize->Rational[39, 4]]}
-         },
-         GridBoxAlignment->{
-          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-         GridBoxSpacings->{"Columns" -> {
-             Offset[0.27999999999999997`], {
-              Offset[0.034999999999999996`]}, 
-             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-             Offset[0.2], {
-              Offset[0.4]}, 
-             Offset[0.2]}, "RowsIndexed" -> {}}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
-       Editable->False]}], "-", 
-     RowBox[{
-      InterpretationBox[
-       StyleBox[GridBox[{
-          {"\[Omega]3", 
-           StyleBox[GridBox[{
-              {"d", "e"},
-              {" ", " "}
-             },
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                  Offset[0.]}}, "RowsIndexed" -> {}}],
-            FontSize->Rational[39, 4]]}
-         },
-         GridBoxAlignment->{
-          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-         GridBoxSpacings->{"Columns" -> {
-             Offset[0.27999999999999997`], {
-              Offset[0.034999999999999996`]}, 
-             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-             Offset[0.2], {
-              Offset[0.4]}, 
-             Offset[0.2]}, "RowsIndexed" -> {}}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[
-        RowBox[{"d", "[", 
-         InterpretationBox[
-          StyleBox[GridBox[{
-             {"\[Omega]1", 
-              StyleBox[GridBox[{
-                 {"a"},
-                 {" "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}],
-           ShowAutoStyles->False,
-           AutoSpacing->False],
-          $CellContext`\[Omega]1[$CellContext`a],
-          Editable->False], "]"}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`diff[
-        $CellContext`\[Omega]1[$CellContext`a]],
-       Editable->False], "\[Wedge]", 
-      InterpretationBox[
-       StyleBox[
-        RowBox[{"d", "[", 
-         InterpretationBox[
-          StyleBox[GridBox[{
-             {"\[Omega]2", 
-              StyleBox[GridBox[{
-                 {"b", "c"},
-                 {" ", " "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}],
-           ShowAutoStyles->False,
-           AutoSpacing->False],
-          $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
-          Editable->False], "]"}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`diff[
-        $CellContext`\[Omega]2[$CellContext`b, $CellContext`c]],
-       Editable->False]}]}], ")"}]}], "-", 
+   RowBox[{
+    InterpretationBox[
+     StyleBox[
+      RowBox[{"d", "[", 
+       InterpretationBox[
+        StyleBox[GridBox[{
+           {"\[Omega]3", 
+            StyleBox[GridBox[{
+               {"d", "e"},
+               {" ", " "}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.], {
+                   Offset[0.034999999999999996`]}, 
+                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                   Offset[0.]}}, "RowsIndexed" -> {}}],
+             FontSize->Rational[39, 4]]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.4]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         ShowAutoStyles->False,
+         AutoSpacing->False],
+        $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
+        Editable->False], "]"}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`diff[
+      $CellContext`\[Omega]3[$CellContext`d, $CellContext`e]],
+     Editable->False], "\[Wedge]", 
+    InterpretationBox[
+     StyleBox[
+      RowBox[{"d", "[", 
+       InterpretationBox[
+        StyleBox[GridBox[{
+           {"\[Omega]1", 
+            StyleBox[GridBox[{
+               {"a"},
+               {" "}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.], {
+                   Offset[0.034999999999999996`]}, 
+                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                   Offset[0.]}}, "RowsIndexed" -> {}}],
+             FontSize->Rational[39, 4]]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.4]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         ShowAutoStyles->False,
+         AutoSpacing->False],
+        $CellContext`\[Omega]1[$CellContext`a],
+        Editable->False], "]"}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`diff[
+      $CellContext`\[Omega]1[$CellContext`a]],
+     Editable->False], "\[Wedge]", 
+    InterpretationBox[
+     StyleBox[GridBox[{
+        {"\[Omega]2", 
+         StyleBox[GridBox[{
+            {"b", "c"},
+            {" ", " "}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                Offset[0.]}}, "RowsIndexed" -> {}}],
+          FontSize->Rational[39, 4]]}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.034999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
+     Editable->False]}]}], "-", 
+  RowBox[{
+   InterpretationBox[
+    StyleBox["A0",
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`A0[],
+    Editable->False], " ", 
+   RowBox[{
+    InterpretationBox[
+     StyleBox[GridBox[{
+        {"\[Omega]3", 
+         StyleBox[GridBox[{
+            {"d", "e"},
+            {" ", " "}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                Offset[0.]}}, "RowsIndexed" -> {}}],
+          FontSize->Rational[39, 4]]}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.034999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
+     Editable->False], "\[Wedge]", 
+    InterpretationBox[
+     StyleBox[
+      RowBox[{"d", "[", 
+       InterpretationBox[
+        StyleBox[GridBox[{
+           {"\[Omega]1", 
+            StyleBox[GridBox[{
+               {"a"},
+               {" "}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.], {
+                   Offset[0.034999999999999996`]}, 
+                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                   Offset[0.]}}, "RowsIndexed" -> {}}],
+             FontSize->Rational[39, 4]]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.4]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         ShowAutoStyles->False,
+         AutoSpacing->False],
+        $CellContext`\[Omega]1[$CellContext`a],
+        Editable->False], "]"}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`diff[
+      $CellContext`\[Omega]1[$CellContext`a]],
+     Editable->False], "\[Wedge]", 
+    InterpretationBox[
+     StyleBox[
+      RowBox[{"d", "[", 
+       InterpretationBox[
+        StyleBox[GridBox[{
+           {"\[Omega]2", 
+            StyleBox[GridBox[{
+               {"b", "c"},
+               {" ", " "}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.], {
+                   Offset[0.034999999999999996`]}, 
+                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                   Offset[0.]}}, "RowsIndexed" -> {}}],
+             FontSize->Rational[39, 4]]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.4]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
+         ShowAutoStyles->False,
+         AutoSpacing->False],
+        $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
+        Editable->False], "]"}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     $CellContext`diff[
+      $CellContext`\[Omega]2[$CellContext`b, $CellContext`c]],
+     Editable->False]}]}], "-", 
   RowBox[{
    InterpretationBox[
     StyleBox[
@@ -4480,9 +4451,7 @@ Cell[BoxData[
     RowBox[{"{", 
      RowBox[{"Wedge", "\[Rule]", "1"}], "}"}]}]}], "]"}]], "Input"],
 
-Cell["\<\
-Torsion 2-form (we use gothic T):\
-\>", "Text"],
+Cell["Torsion 2-form (we use gothic T):", "Text"],
 
 Cell[BoxData[
  RowBox[{"DefTensor", "[", 
@@ -4492,9 +4461,7 @@ Cell[BoxData[
     RowBox[{"{", 
      RowBox[{"Wedge", "\[Rule]", "2"}], "}"}]}]}], "]"}]], "Input"],
 
-Cell["\<\
-Curvature 2-form (we use gothic R):\
-\>", "Text"],
+Cell["Curvature 2-form (we use gothic R):", "Text"],
 
 Cell[BoxData[
  RowBox[{"DefTensor", "[", 
@@ -5438,6 +5405,7 @@ Cell[BoxData[
                    Offset[0.]}}, "RowsIndexed" -> {}}],
              FontSize->Rational[39, 4]]}
           },
+          
           GridBoxAlignment->{
            "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
             "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -14455,7 +14423,8 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   RowBox[{
-   RowBox[{"PrintAs", "@", "RiemannCV"}], "^=", "\"\<R\>\""}], ";"}]], "Input"],
+   RowBox[{"PrintAs", "@", "RiemannCV"}], "^=", "\"\<R\>\""}], 
+  ";"}]], "Input"],
 
 Cell["\<\
 [Jose: I\[CloseCurlyQuote]d like to rename things, to have some systematic \
@@ -17536,6 +17505,7 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                FontSize->Rational[39, 4]]}
             },
+            
             GridBoxAlignment->{
              "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
               "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -18275,7 +18245,6 @@ Cell[BoxData[
                    Offset[0.]}}, "RowsIndexed" -> {}}],
              FontSize->Rational[39, 4]]}
           },
-          
           GridBoxAlignment->{
            "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
             "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -23998,18 +23967,14 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["The CircleTimes product", "Subsection",
- CellChangeTimes->{{3.579780206873187*^9, 3.579780216768845*^9}}],
+Cell["The CircleTimes product", "Subsection"],
 
-Cell["\<\
-[Jose: This product should probably be defined by default.]\
-\>", "Text"],
+Cell["[Jose: This product should probably be defined by default.]", "Text"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"Options", "@", "DefProduct"}]], "Input",
- CellChangeTimes->{{3.579778248989971*^9, 3.579778255033477*^9}}],
+ RowBox[{"Options", "@", "DefProduct"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -24123,15 +24088,13 @@ Jose: This part taken from Leo\[CloseCurlyQuote]s notebook.\
 \>", "Text"],
 
 Cell["\<\
-We define the interior product of form with a vector as an inert head. The \
-notation is inconvenient because the vector is contracted in the first \
-\[OpenCurlyDoubleQuote]slot\[CloseCurlyDoubleQuote] of the form, even though \
-we place the vector after the form:\
+We define the interior product of form with a vector as an inert head.\
 \>", "Text"],
 
 Cell[BoxData[
  RowBox[{"DefInertHead", "[", 
-  RowBox[{"Int", ",", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Int", "[", "v_", "]"}], ",", "\[IndentingNewLine]", 
    RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
    RowBox[{"ContractThrough", "\[Rule]", 
     RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
@@ -24143,94 +24106,110 @@ Cell[BoxData[{
   RowBox[{"Int", "/:", 
    RowBox[{"Grade", "[", 
     RowBox[{
-     RowBox[{"Int", "[", 
-      RowBox[{"form_", ",", "v_"}], "]"}], ",", "Wedge"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Verbatim", "[", "Int", "]"}], "[", "v_", "]"}], "[", "form_", 
+      "]"}], ",", "Wedge"}], "]"}], ":=", 
    RowBox[{
     RowBox[{"Grade", "[", 
      RowBox[{"form", ",", "Wedge"}], "]"}], "-", "1"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"Int", "[", 
-    RowBox[{"0", ",", "v_"}], "]"}], ":=", "0"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"Int", "[", 
-    RowBox[{"form_", ",", "0"}], "]"}], ":=", "0"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"Int", "[", 
-    RowBox[{
-     RowBox[{"f_", "?", "ZeroFormQ"}], ",", "v_"}], "]"}], ":=", "0"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"Int", "[", 
-    RowBox[{
-     RowBox[{
-      RowBox[{"f_", "?", "ZeroFormQ"}], " ", "form_"}], ",", "v_"}], "]"}], ":=", 
-   RowBox[{"f", " ", 
-    RowBox[{"Int", "[", 
-     RowBox[{"form", ",", "v"}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"Int", "[", 
-    RowBox[{"form_", ",", 
-     RowBox[{
-      RowBox[{"f_", "?", "ZeroFormQ"}], " ", "v_"}]}], "]"}], ":=", 
-   RowBox[{"f", " ", 
-    RowBox[{"Int", "[", 
-     RowBox[{"form", ",", "v"}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"Int", "[", 
-    RowBox[{
-     RowBox[{
-      RowBox[{"Verbatim", "[", "Wedge", "]"}], "[", 
-      RowBox[{"form_", ",", "forms__"}], "]"}], ",", "v_"}], "]"}], ":=", 
    RowBox[{
-    RowBox[{"Wedge", "[", 
-     RowBox[{
-      RowBox[{"Int", "[", 
-       RowBox[{"form", ",", "v"}], "]"}], ",", "forms"}], "]"}], "+", 
+    RowBox[{"Int", "[", "0", "]"}], "[", "form_", "]"}], ":=", "0"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Int", "[", "v_Plus", "]"}], "[", "form_", "]"}], ":=", 
+   RowBox[{
     RowBox[{
-     SuperscriptBox[
-      RowBox[{"(", 
-       RowBox[{"-", "1"}], ")"}], 
-      RowBox[{"Grade", "[", 
-       RowBox[{"form", ",", "Wedge"}], "]"}]], 
-     RowBox[{"Wedge", "[", 
-      RowBox[{"form", ",", 
-       RowBox[{"Int", "[", 
+     RowBox[{
+      RowBox[{"Int", "[", "#", "]"}], "[", "form", "]"}], "&"}], "/@", 
+    "v"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Int", "[", "v_", "]"}], "[", 
+    RowBox[{"f_", "?", "ZeroFormQ"}], "]"}], ":=", "0"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Int", "[", "v_", "]"}], "[", 
+    RowBox[{
+     RowBox[{"f_", "?", "ZeroFormQ"}], " ", "form_"}], "]"}], ":=", 
+   RowBox[{"f", " ", 
+    RowBox[{
+     RowBox[{"Int", "[", "v", "]"}], "[", "form", "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Int", "[", 
+     RowBox[{
+      RowBox[{"f_", "?", "ScalarQ"}], " ", "v_"}], "]"}], "[", "form_", "]"}],
+    ":=", 
+   RowBox[{"f", " ", 
+    RowBox[{
+     RowBox[{"Int", "[", "v", "]"}], "[", "form", "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Int", "[", "v_", "]"}], "[", 
+    RowBox[{"HoldPattern", "@", 
+     RowBox[{"Wedge", "[", "args__", "]"}]}], "]"}], ":=", 
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"argl", "=", 
+        RowBox[{"{", "args", "}"}]}], ",", 
+       RowBox[{"n", "=", 
+        RowBox[{"Length", "@", 
+         RowBox[{"{", "args", "}"}]}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+     
+     RowBox[{"Sum", "[", 
+      RowBox[{
+       RowBox[{
         RowBox[{
-         RowBox[{"Wedge", "[", "forms", "]"}], ",", "v"}], "]"}]}], 
-      "]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"Int", "[", 
-    RowBox[{"form_", ",", "v_Plus"}], "]"}], ":=", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"Int", "[", 
-      RowBox[{"form", ",", "#"}], "]"}], "&"}], "/@", "v"}]}], 
+         RowBox[{"(", 
+          RowBox[{"-", "1"}], ")"}], "^", 
+         RowBox[{"Grade", "[", 
+          RowBox[{
+           RowBox[{"Wedge", "@@", 
+            RowBox[{"Take", "[", 
+             RowBox[{"argl", ",", 
+              RowBox[{"i", "-", "1"}]}], "]"}]}], ",", "Wedge"}], "]"}]}], 
+        " ", 
+        RowBox[{"Wedge", "@@", 
+         RowBox[{"MapAt", "[", 
+          RowBox[{
+           RowBox[{"Int", "[", "v", "]"}], ",", "argl", ",", "i"}], "]"}]}]}],
+        ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], "]"}]}], 
   ";"}]}], "Input"],
 
-Cell["Canonicalization:", "Text"],
+Cell["\<\
+Canonicalization:
+LEO Don\[CloseCurlyQuote]t do this automatically?\
+\>", "Text"],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"Int", "[", 
+  RowBox[{
+   RowBox[{"Int", "[", "v2_", "]"}], "[", 
    RowBox[{
-    RowBox[{"Int", "[", 
-     RowBox[{"form_", ",", "v1_"}], "]"}], ",", "v2_"}], "]"}], ":=", 
+    RowBox[{"Int", "[", "v1_", "]"}], "[", "form_", "]"}], "]"}], ":=", 
   RowBox[{
    RowBox[{"-", 
-    RowBox[{"Int", "[", 
+    RowBox[{
+     RowBox[{"Int", "[", "v1", "]"}], "[", 
      RowBox[{
-      RowBox[{"Int", "[", 
-       RowBox[{"form", ",", "v2"}], "]"}], ",", "v1"}], "]"}]}], "/;", 
+      RowBox[{"Int", "[", "v2", "]"}], "[", "form", "]"}], "]"}]}], "/;", 
    RowBox[{"OrderedQ", "[", 
     RowBox[{"{", 
      RowBox[{"v2", ",", "v1"}], "}"}], "]"}]}]}]], "Input"],
@@ -24239,9 +24218,9 @@ Cell[BoxData[
  RowBox[{"Int", "/:", 
   RowBox[{"MakeBoxes", "[", 
    RowBox[{
-    RowBox[{"Int", "[", 
-     RowBox[{"form_", ",", "v_"}], "]"}], ",", "StandardForm"}], "]"}], ":=", 
-  
+    RowBox[{
+     RowBox[{"Int", "[", "v_", "]"}], "[", "form_", "]"}], ",", 
+    "StandardForm"}], "]"}], ":=", 
   RowBox[{"RowBox", "[", 
    RowBox[{"{", 
     RowBox[{
@@ -24257,20 +24236,17 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"DefTensor", "[", 
   RowBox[{
-   RowBox[{"v", "[", "]"}], ",", "M4", ",", 
-   RowBox[{"Grade", "\[Rule]", 
-    RowBox[{"{", 
-     RowBox[{"CircleTimes", "\[Rule]", "1"}], "}"}]}]}], "]"}]], "Input"],
+   RowBox[{"v", "[", "a", "]"}], ",", "M4"}], "]"}]], "Input"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"Int", "[", 
+ RowBox[{
+  RowBox[{"Int", "[", 
+   RowBox[{"v", "[", "a", "]"}], "]"}], "[", 
   RowBox[{
-   RowBox[{
-    RowBox[{"A3", "[", "]"}], "\[Wedge]", 
-    RowBox[{"A2", "[", "]"}]}], ",", 
-   RowBox[{"v", "[", "]"}]}], "]"}]], "Input"],
+   RowBox[{"A3", "[", "]"}], "\[Wedge]", 
+   RowBox[{"A2", "[", "]"}]}], "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -24286,10 +24262,32 @@ Cell[BoxData[
      RowBox[{
       SubscriptBox["\[Iota]", 
        InterpretationBox[
-        StyleBox["v",
+        StyleBox[GridBox[{
+           {"v", 
+            StyleBox[GridBox[{
+               {"a"},
+               {" "}
+              },
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.], {
+                   Offset[0.034999999999999996`]}, 
+                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                   Offset[0.]}}, "RowsIndexed" -> {}}],
+             FontSize->Rational[39, 4]]}
+          },
+          GridBoxAlignment->{
+           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.4]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}],
          ShowAutoStyles->False,
          AutoSpacing->False],
-        $CellContext`v[],
+        $CellContext`v[$CellContext`a],
         Editable->False]], "[", 
       InterpretationBox[
        StyleBox["A2",
@@ -24301,10 +24299,33 @@ Cell[BoxData[
    RowBox[{
     SubscriptBox["\[Iota]", 
      InterpretationBox[
-      StyleBox["v",
+      StyleBox[GridBox[{
+         {"v", 
+          StyleBox[GridBox[{
+             {"a"},
+             {" "}
+            },
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.], {
+                 Offset[0.034999999999999996`]}, 
+                Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                 Offset[0.]}}, "RowsIndexed" -> {}}],
+           FontSize->Rational[39, 4]]}
+        },
+        GridBoxAlignment->{
+         "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.034999999999999996`]}, 
+            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}, "RowsIndexed" -> {}}],
        ShowAutoStyles->False,
        AutoSpacing->False],
-      $CellContext`v[],
+      $CellContext`v[$CellContext`a],
       Editable->False]], "[", 
     InterpretationBox[
      StyleBox["A3",
@@ -24332,8 +24353,9 @@ Cell["The Lie derivative is defined in a very similar form:", "Text"],
 
 Cell[BoxData[
  RowBox[{"DefInertHead", "[", 
-  RowBox[{"Lie", ",", "\[IndentingNewLine]", 
-   RowBox[{"LinearQ", "\[Rule]", "False"}], ",", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Lie", "[", "v_", "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
    RowBox[{"ContractThrough", "\[Rule]", 
     RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
    RowBox[{"PrintAs", "\[Rule]", "\"\<\[ScriptCapitalL]\>\""}]}], 
@@ -24344,45 +24366,122 @@ Cell[BoxData[{
   RowBox[{"Lie", "/:", 
    RowBox[{"Grade", "[", 
     RowBox[{
-     RowBox[{"Lie", "[", 
-      RowBox[{"form_", ",", "v_"}], "]"}], ",", "Wedge"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"Lie", "[", "v_", "]"}], "[", "form_", "]"}], ",", "Wedge"}], 
+    "]"}], ":=", 
    RowBox[{"Grade", "[", 
     RowBox[{"form", ",", "Wedge"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"Lie", "[", 
-    RowBox[{
-     RowBox[{
-      RowBox[{"Verbatim", "[", "Wedge", "]"}], "[", 
-      RowBox[{"form_", ",", "forms__"}], "]"}], ",", "v_"}], "]"}], ":=", 
    RowBox[{
-    RowBox[{"Wedge", "[", 
-     RowBox[{
-      RowBox[{"Lie", "[", 
-       RowBox[{"form", ",", "v"}], "]"}], ",", "forms"}], "]"}], "+", 
-    RowBox[{"Wedge", "[", 
-     RowBox[{"form", ",", 
-      RowBox[{"Lie", "[", 
-       RowBox[{
-        RowBox[{"Wedge", "[", "forms", "]"}], ",", "v"}], "]"}]}], "]"}]}]}], 
+    RowBox[{"Lie", "[", "0", "]"}], "[", "_", "]"}], ":=", "0"}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"Lie", "[", 
+   RowBox[{
+    RowBox[{"Lie", "[", "v_Plus", "]"}], "[", "form_", "]"}], ":=", 
+   RowBox[{
     RowBox[{
      RowBox[{
-      RowBox[{"Verbatim", "[", "Int", "]"}], "[", 
-      RowBox[{"form_", ",", "v2_"}], "]"}], ",", "v1_"}], "]"}], ":=", 
+      RowBox[{"Lie", "[", "#", "]"}], "[", "form", "]"}], "&"}], "/@", 
+    "v"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
    RowBox[{
-    RowBox[{"Int", "[", 
-     RowBox[{"form", ",", 
-      RowBox[{"Lie", "[", 
-       RowBox[{"v2", ",", "v1"}], "]"}]}], "]"}], "+", 
-    RowBox[{"Int", "[", 
+    RowBox[{"Lie", "[", 
      RowBox[{
-      RowBox[{"LieD", "[", 
-       RowBox[{"form", ",", "v1"}], "]"}], ",", "v2"}], "]"}]}]}], 
-  ";"}]}], "Input"],
+      RowBox[{"f_", "?", "ScalarQ"}], " ", "v_"}], "]"}], "[", "form_", "]"}],
+    ":=", 
+   RowBox[{
+    RowBox[{"f", " ", 
+     RowBox[{
+      RowBox[{"Lie", "[", "v", "]"}], "@", "form"}]}], "+", 
+    RowBox[{"Wedge", "[", 
+     RowBox[{
+      RowBox[{"diff", "@", "f"}], ",", 
+      RowBox[{
+       RowBox[{"Int", "[", "v", "]"}], "@", "form"}]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Lie", "[", "v_", "]"}], "[", 
+     RowBox[{"HoldPattern", "@", 
+      RowBox[{"Wedge", "[", "args__", "]"}]}], "]"}], ":=", 
+    RowBox[{"With", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"argl", "=", 
+         RowBox[{"{", "args", "}"}]}], ",", 
+        RowBox[{"n", "=", 
+         RowBox[{"Length", "@", 
+          RowBox[{"{", "args", "}"}]}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Sum", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"+", "1"}], ")"}], "^", 
+          RowBox[{"Grade", "[", 
+           RowBox[{
+            RowBox[{"Wedge", "@@", 
+             RowBox[{"Take", "[", 
+              RowBox[{"argl", ",", 
+               RowBox[{"i", "-", "1"}]}], "]"}]}], ",", "Wedge"}], "]"}]}], 
+         " ", 
+         RowBox[{"Wedge", "@@", 
+          RowBox[{"MapAt", "[", 
+           RowBox[{
+            RowBox[{"Lie", "[", "v", "]"}], ",", "argl", ",", "i"}], 
+           "]"}]}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"LEO", " ", 
+    RowBox[{"Don", "'"}], "t", " ", "do", " ", "this", " ", "automatically"}],
+    " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Lie", "[", "v_", "]"}], "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Verbatim", "[", "Int", "]"}], "[", 
+        RowBox[{"form_", ",", "v2_"}], "]"}], ",", "v1_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Int", "[", 
+        RowBox[{"Lie", "[", 
+         RowBox[{"v2", ",", "v1"}], "]"}], "]"}], "[", "form", "]"}], "+", 
+      RowBox[{
+       RowBox[{"Int", "[", "v2", "]"}], "[", 
+       RowBox[{
+        RowBox[{"Lie", "[", "v1", "]"}], "[", "form", "]"}], "]"}]}]}], ";"}],
+    " ", "*)"}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Lie", "/:", 
+  RowBox[{"MakeBoxes", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Lie", "[", "v_", "]"}], "[", "form_", "]"}], ",", 
+    "StandardForm"}], "]"}], ":=", 
+  RowBox[{"RowBox", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"SubscriptBox", "[", 
+      RowBox[{"\"\<\[ScriptCapitalL]\>\"", ",", 
+       RowBox[{"MakeBoxes", "[", 
+        RowBox[{"v", ",", "StandardForm"}], "]"}]}], "]"}], ",", "\"\<[\>\"", 
+     ",", 
+     RowBox[{"MakeBoxes", "[", 
+      RowBox[{"form", ",", "StandardForm"}], "]"}], ",", "\"\<]\>\""}], "}"}],
+    "]"}]}]], "Input"],
 
 Cell["\<\
 In the last line we find the Lie derivative of a vector by another vector, a \
@@ -24405,16 +24504,15 @@ Cell[BoxData[
    RowBox[{"expr", "/.", 
     RowBox[{"{", 
      RowBox[{
-      RowBox[{"Lie", "[", 
-       RowBox[{"form_", ",", "v_"}], "]"}], "\[RuleDelayed]", 
       RowBox[{
-       RowBox[{"diff", "[", 
-        RowBox[{"Int", "[", 
-         RowBox[{"form", ",", "v"}], "]"}], "]"}], "+", 
-       RowBox[{"Int", "[", 
+       RowBox[{"Lie", "[", "v_", "]"}], "[", "form_", "]"}], "\[RuleDelayed]", 
+      RowBox[{
+       RowBox[{"diff", "@", 
         RowBox[{
-         RowBox[{"diff", "[", "f", "]"}], ",", "v"}], "]"}]}]}], "}"}]}]}], 
-  ";"}]], "Input"]
+         RowBox[{"Int", "[", "v", "]"}], "@", "form"}]}], "+", 
+       RowBox[{
+        RowBox[{"Int", "[", "v", "]"}], "@", 
+        RowBox[{"diff", "@", "form"}]}]}]}], "}"}]}]}], ";"}]], "Input"]
 }, Closed]]
 }, Open  ]],
 
@@ -24793,7 +24891,6 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
               FontSize->Rational[39, 4]]}
            },
-           
            GridBoxAlignment->{
             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -32073,6 +32170,7 @@ $CellContext`metricg],
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                     FontSize->Rational[39, 4]]}
                  },
+                 
                  GridBoxAlignment->{
                   "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                    "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -33186,6 +33284,7 @@ $CellContext`metricg],
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                     FontSize->Rational[39, 4]]}
                  },
+                 
                  GridBoxAlignment->{
                   "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                    "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -34486,6 +34585,7 @@ $CellContext`metricg],
                     Offset[0.]}}, "RowsIndexed" -> {}}],
               FontSize->Rational[39, 4]]}
            },
+           
            GridBoxAlignment->{
             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -35019,7 +35119,6 @@ $CellContext`metricg],
                     Offset[0.]}}, "RowsIndexed" -> {}}],
               FontSize->Rational[39, 4]]}
            },
-           
            GridBoxAlignment->{
             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -39463,6 +39562,7 @@ Cell[BoxData[
                    Offset[0.]}}, "RowsIndexed" -> {}}],
              FontSize->Rational[39, 4]]}
           },
+          
           GridBoxAlignment->{
            "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
             "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -42447,6 +42547,7 @@ Cell[BoxData[
                    Offset[0.]}}, "RowsIndexed" -> {}}],
              FontSize->Rational[39, 4]]}
           },
+          
           GridBoxAlignment->{
            "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
             "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -47447,7 +47548,6 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                 FontSize->Rational[39, 4]]}
              },
-             
              GridBoxAlignment->{
               "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -47477,6 +47577,7 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                 FontSize->Rational[39, 4]]}
              },
+             
              GridBoxAlignment->{
               "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -47896,6 +47997,7 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                    FontSize->Rational[39, 4]]}
                 },
+                
                 GridBoxAlignment->{
                  "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                   "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -48594,6 +48696,7 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                    FontSize->Rational[39, 4]]}
                 },
+                
                 GridBoxAlignment->{
                  "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                   "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -48895,7 +48998,6 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                    FontSize->Rational[39, 4]]}
                 },
-                
                 GridBoxAlignment->{
                  "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                   "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -54793,7 +54895,6 @@ Cell[BoxData[
                    Offset[0.]}}, "RowsIndexed" -> {}}],
              FontSize->Rational[39, 4]]}
           },
-          
           GridBoxAlignment->{
            "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
             "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -55272,7 +55373,8 @@ Cell[BoxData[
               ShowAutoStyles->False,
               AutoSpacing->False],
              $CellContext`\[CapitalGamma][$CellContext`f, -$CellContext`h],
-             Editable->False]}]}], ")"}]}]}], ")"}]}]}], ")"}]}]}]], "Output"]
+             Editable->False]}]}], ")"}]}]}], ")"}]}]}], 
+    ")"}]}]}]], "Output"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -63320,8 +63422,7 @@ Cell[BoxData[
            GridBoxSpacings->{"Columns" -> {
                Offset[0.27999999999999997`], {
                 Offset[0.034999999999999996`]}, 
-               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-             "Rows" -> {
+               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
                Offset[0.2], {
                 Offset[0.4]}, 
                Offset[0.2]}, "RowsIndexed" -> {}}],
@@ -74967,16 +75068,12 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["xCoba & differential forms", "Subsection",
- CellChangeTimes->{{3.568834142066228*^9, 3.56883414223349*^9}, {
-  3.568840154854103*^9, 3.5688401822227287`*^9}}],
+Cell["xCoba & differential forms", "Subsection"],
 
 Cell["\<\
 We introduce the volume form associated to the metric \
 \[OpenCurlyDoubleQuote]metricg\[CloseCurlyDoubleQuote]\
-\>", "Text",
- CellChangeTimes->{{3.568875581920824*^9, 3.568875587527995*^9}, {
-  3.568875641789008*^9, 3.5688756581399403`*^9}}],
+\>", "Text"],
 
 Cell[BoxData[
  RowBox[{"DefTensor", "[", 
@@ -74987,8 +75084,7 @@ Cell[BoxData[
     RowBox[{"{", 
      RowBox[{"Wedge", "\[Rule]", "4"}], "}"}]}]}], "]"}]], "Input"],
 
-Cell["In the holonomic frame we have", "Text",
- CellChangeTimes->{{3.568875730225087*^9, 3.568875753864089*^9}}],
+Cell["In the holonomic frame we have", "Text"],
 
 Cell[CellGroupData[{
 
@@ -75009,9 +75105,7 @@ Cell[BoxData[
      RowBox[{"dx", "[", "a", "]"}], "\[Wedge]", 
      RowBox[{"dx", "[", "b", "]"}], "\[Wedge]", 
      RowBox[{"dx", "[", "c", "]"}], "\[Wedge]", 
-     RowBox[{"dx", "[", "d", "]"}]}]}]}]}]], "Input",
- CellChangeTimes->{{3.5688756963821707`*^9, 3.568875721690062*^9}, {
-  3.56887575841683*^9, 3.568875764777047*^9}}],
+     RowBox[{"dx", "[", "d", "]"}]}]}]}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -75170,8 +75264,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"<<", "xAct`xCoba`"}]], "Input",
- CellChangeTimes->{{3.5688341446164913`*^9, 3.568834151338923*^9}}],
+ RowBox[{"<<", "xAct`xCoba`"}]], "Input"],
 
 Cell[CellGroupData[{
 
@@ -75206,13 +75299,9 @@ Cell[BoxData["\<\"------------------------------------------------------------\
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"$CVVerbose", "=", "False"}], ";"}]], "Input",
- CellChangeTimes->{{3.568876436124228*^9, 3.568876443591855*^9}}],
+  RowBox[{"$CVVerbose", "=", "False"}], ";"}]], "Input"],
 
-Cell["Expansion of the exterior derivative in a local chart", "Text",
- CellChangeTimes->{{3.568837241612214*^9, 3.568837262723344*^9}, {
-  3.568837485396636*^9, 3.56883748734064*^9}, {3.5688387586426897`*^9, 
-  3.568838795673354*^9}}],
+Cell["Expansion of the exterior derivative in a local chart", "Text"],
 
 Cell[BoxData[
  RowBox[{
@@ -75242,13 +75331,7 @@ Cell[BoxData[
         RowBox[{"ScalarsOfChart", "@", "chart"}], ",", "Plus"}], "]"}], "/;", 
       
       RowBox[{
-       RowBox[{"Deg", "@", "expr"}], "===", "0"}]}]}]}]}], ";"}]], "Input",
- CellChangeTimes->{{3.56883749877803*^9, 3.5688375359583197`*^9}, {
-   3.568837567406083*^9, 3.568837674991284*^9}, {3.5688377705298843`*^9, 
-   3.568837869952942*^9}, {3.5688380177737103`*^9, 3.56883802822613*^9}, {
-   3.568838073032497*^9, 3.568838078440854*^9}, {3.568838119340312*^9, 
-   3.568838122975573*^9}, 3.568838173715776*^9, {3.568838619358482*^9, 
-   3.568838686394169*^9}, {3.5688389275887117`*^9, 3.568838944757101*^9}}],
+       RowBox[{"Deg", "@", "expr"}], "===", "0"}]}]}]}]}], ";"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"DefChart", "[", 
@@ -75264,13 +75347,9 @@ Cell[BoxData[
    RowBox[{"FormatBasis", "\[Rule]", 
     RowBox[{"{", 
      RowBox[{"\"\<Partials\>\"", ",", "\"\<Differentials\>\""}], "}"}]}]}], 
-  "]"}]], "Input",
- CellChangeTimes->{{3.568834166012603*^9, 3.5688341680079308`*^9}, {
-  3.568834224353903*^9, 3.568834245509951*^9}, {3.5688750441171217`*^9, 
-  3.568875061400852*^9}}],
+  "]"}]], "Input"],
 
-Cell["One has the relations", "Text",
- CellChangeTimes->{{3.568834658536984*^9, 3.568834663104492*^9}}],
+Cell["One has the relations", "Text"],
 
 Cell[CellGroupData[{
 
@@ -75301,12 +75380,7 @@ Cell[BoxData[
       RowBox[{"z", "[", "]"}]}], "->", 
      RowBox[{"dx", "[", 
       RowBox[{"{", 
-       RowBox[{"3", ",", "CR"}], "}"}], "]"}]}]}], "}"}]}]], "Input",
- CellChangeTimes->{{3.568834664543545*^9, 3.568834689822311*^9}, {
-  3.5688347469666653`*^9, 3.568834784503592*^9}, {3.568834865221417*^9, 
-  3.568834893657028*^9}, {3.568836223928384*^9, 3.568836321513028*^9}, {
-  3.568836395882593*^9, 3.568836422195849*^9}, {3.5688366041767406`*^9, 
-  3.568836612938859*^9}}],
+       RowBox[{"3", ",", "CR"}], "}"}], "]"}]}]}], "}"}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -75718,9 +75792,7 @@ Cell[TextData[{
   CellChangeTimes->{3.56883966206501*^9}],
  " was defined above as an holonomic section. Indeed we could have written \
 similar relations if we introduce another chart (see below)"
-}], "Text",
- CellChangeTimes->{{3.568839601735421*^9, 3.568839620294528*^9}, {
-  3.568839693020598*^9, 3.568839776506106*^9}}],
+}], "Text"],
 
 Cell[CellGroupData[{
 
@@ -75735,8 +75807,7 @@ Cell[BoxData[
        RowBox[{"b", ",", "CR"}], "}"}]}]}], "]"}], 
    RowBox[{"dx", "[", 
     RowBox[{"{", 
-     RowBox[{"b", ",", "CR"}], "}"}], "]"}]}]}]], "Input",
- CellChangeTimes->{{3.568839644670022*^9, 3.568839661335087*^9}}],
+     RowBox[{"b", ",", "CR"}], "}"}], "]"}]}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -75834,8 +75905,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"TraceBasisDummy", "/@", "%"}]], "Input",
- CellChangeTimes->{{3.568839665541657*^9, 3.5688396711439342`*^9}}],
+ RowBox[{"TraceBasisDummy", "/@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -76115,9 +76185,7 @@ Cell[BoxData[
 }, Open  ]],
 
 Cell[BoxData[
- RowBox[{"DefScalarFunction", "[", "\[Phi]", "]"}]], "Input",
- CellChangeTimes->{{3.568834818921756*^9, 3.5688348240299883`*^9}, {
-  3.56883491300386*^9, 3.568834916900045*^9}}],
+ RowBox[{"DefScalarFunction", "[", "\[Phi]", "]"}]], "Input"],
 
 Cell[CellGroupData[{
 
@@ -76388,8 +76456,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"diff", "@", "%"}]], "Input",
- CellChangeTimes->{{3.568835925722086*^9, 3.568835927173558*^9}}],
+ RowBox[{"diff", "@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -77486,21 +77553,17 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"ToCanonical", "@", "%"}]], "Input",
- CellChangeTimes->{{3.568836672662833*^9, 3.568836677553164*^9}, {
-  3.579776633197515*^9, 3.579776634909728*^9}}],
+ RowBox[{"ToCanonical", "@", "%"}]], "Input"],
 
 Cell[BoxData["0"], "Output"]
 }, Open  ]],
 
-Cell["Let us work with the Maxwell 2-form defined above", "Text",
- CellChangeTimes->{{3.568839201500552*^9, 3.568839217347753*^9}}],
+Cell["Let us work with the Maxwell 2-form defined above", "Text"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"First", "@", "FormsToTensors"}]], "Input",
- CellChangeTimes->{{3.568836906370511*^9, 3.568836907394018*^9}}],
+ RowBox[{"First", "@", "FormsToTensors"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -77603,8 +77666,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"ToBasis", "[", "CR", "]"}], "/@", "%"}]], "Input",
- CellChangeTimes->{{3.568836911140031*^9, 3.568836919353517*^9}}],
+  RowBox[{"ToBasis", "[", "CR", "]"}], "/@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -77715,8 +77777,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"TraceBasisDummy", "/@", "%"}]], "Input",
- CellChangeTimes->{3.57977665729151*^9}],
+ RowBox[{"TraceBasisDummy", "/@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -79284,9 +79345,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"ToCanonical", "@", "%"}]], "Input",
- CellChangeTimes->{{3.56883705846208*^9, 3.568837062141101*^9}, {
-   3.579776664587708*^9, 3.579776665098555*^9}, 3.5797767897614937`*^9}],
+ RowBox[{"ToCanonical", "@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -80959,8 +81018,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"Expanddiff", "[", "CR", "]"}], "@", "%"}]], "Input",
- CellChangeTimes->{{3.5688379320524883`*^9, 3.5688379422239122`*^9}}],
+  RowBox[{"Expanddiff", "[", "CR", "]"}], "@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -83000,8 +83058,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"diff", "/@", "%"}]], "Input",
- CellChangeTimes->{{3.568839003733663*^9, 3.568839005774782*^9}}],
+ RowBox[{"diff", "/@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"0", "\[Equal]", 
@@ -85220,8 +85277,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"Expanddiff", "[", "CR", "]"}], "@", "%"}]], "Input",
- CellChangeTimes->{{3.5688390202275467`*^9, 3.5688390272296143`*^9}}],
+  RowBox[{"Expanddiff", "[", "CR", "]"}], "@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"0", "\[Equal]", 
@@ -95215,8 +95271,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"%", "//", "ToCanonical"}]], "Input",
- CellChangeTimes->{{3.579777049142219*^9, 3.579777052502956*^9}}],
+ RowBox[{"%", "//", "ToCanonical"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"0", "\[Equal]", 
@@ -96474,8 +96529,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"Simplify", "/@", "%"}]], "Input",
- CellChangeTimes->{{3.568839091435396*^9, 3.568839119691059*^9}}],
+ RowBox[{"Simplify", "/@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"0", "\[Equal]", 
@@ -97119,17 +97173,14 @@ Cell[BoxData["True"], "Output"]
 
 Cell["\<\
 Suposse that we have a metric. We assume that the metric is flat\
-\>", "Text",
- CellChangeTimes->{{3.568875845410823*^9, 3.568875861366043*^9}, {
-  3.5688767489168653`*^9, 3.568876758024282*^9}}],
+\>", "Text"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"MetricInBasis", "[", 
   RowBox[{"metricg", ",", 
-   RowBox[{"-", "CR"}], ",", "\"\<Orthonormal\>\""}], "]"}]], "Input",
- CellChangeTimes->{{3.5688759387971907`*^9, 3.5688759700334578`*^9}}],
+   RowBox[{"-", "CR"}], ",", "\"\<Orthonormal\>\""}], "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -97677,16 +97728,14 @@ Cell[BoxData[
 
 Cell["\<\
 Let us compute the expression of the volume 4-form in these coordinates.\
-\>", "Text",
- CellChangeTimes->{{3.568876770836746*^9, 3.568876792461234*^9}}],
+\>", "Text"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"MetricCompute", "[", 
   RowBox[{"metricg", ",", "CR", ",", 
-   RowBox[{"\"\<DetMetric\>\"", "[", "]"}]}], "]"}]], "Input",
- CellChangeTimes->{{3.568876007695325*^9, 3.568876040257427*^9}}],
+   RowBox[{"\"\<DetMetric\>\"", "[", "]"}]}], "]"}]], "Input"],
 
 Cell[CellGroupData[{
 
@@ -97761,8 +97810,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"DetmetricgCR", "[", "]"}], "//", "ToValues"}]], "Input",
- CellChangeTimes->{{3.568876197215575*^9, 3.568876206191141*^9}}],
+  RowBox[{"DetmetricgCR", "[", "]"}], "//", "ToValues"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"-", "1"}]], "Output"]
@@ -97787,9 +97835,7 @@ Cell[BoxData[
       RowBox[{"-", "c"}], ",", 
       RowBox[{"-", "d"}]}], "]"}], "/.", 
     RowBox[{"epsilonToetaDown", "[", 
-     RowBox[{"metricg", ",", "CR"}], "]"}]}], ")"}]}]], "Input",
- CellChangeTimes->{{3.568876249519867*^9, 3.5688762758948717`*^9}, {
-  3.568876310616186*^9, 3.568876314959045*^9}}],
+     RowBox[{"metricg", ",", "CR"}], "]"}]}], ")"}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -97874,8 +97920,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"ToValues", "@", "%"}]], "Input",
- CellChangeTimes->{{3.5688763017091923`*^9, 3.568876304271142*^9}}],
+ RowBox[{"ToValues", "@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -97946,8 +97991,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"ToBasis", "[", "CR", "]"}], "@", "%"}]], "Input",
- CellChangeTimes->{3.5688763796242037`*^9}],
+  RowBox[{"ToBasis", "[", "CR", "]"}], "@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -98035,21 +98079,16 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   RowBox[{"ToValues", "@", 
-   RowBox[{"ComponentArray", "@", "%"}]}], ";"}]], "Input",
- CellChangeTimes->{{3.568876319669546*^9, 3.568876321003172*^9}, {
-  3.568876359423929*^9, 3.568876412334776*^9}}],
+   RowBox[{"ComponentArray", "@", "%"}]}], ";"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{"%", "/.", 
-   RowBox[{"Equal", "\[Rule]", "ComponentValue"}]}], ";"}]], "Input",
- CellChangeTimes->{{3.56887641390615*^9, 3.568876423143421*^9}}],
+   RowBox[{"Equal", "\[Rule]", "ComponentValue"}]}], ";"}]], "Input"],
 
-Cell["Hence the volume element form is given by", "Text",
- CellChangeTimes->{{3.568876486731481*^9, 3.568876494987701*^9}}],
+Cell["Hence the volume element form is given by", "Text"],
 
-Cell["In the holonomic frame we have", "Text",
- CellChangeTimes->{{3.568875730225087*^9, 3.568875753864089*^9}}],
+Cell["In the holonomic frame we have", "Text"],
 
 Cell[CellGroupData[{
 
@@ -98213,8 +98252,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"ToBasis", "[", "CR", "]"}], "/@", "%"}]], "Input",
- CellChangeTimes->{{3.568876511298253*^9, 3.568876519438539*^9}}],
+  RowBox[{"ToBasis", "[", "CR", "]"}], "/@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -98389,15 +98427,12 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"TraceBasisDummy", "/@", "%"}], ";"}]], "Input",
- CellChangeTimes->{{3.5688765234467087`*^9, 3.5688765758067904`*^9}, {
-  3.579777256329644*^9, 3.579777264432991*^9}}],
+  RowBox[{"TraceBasisDummy", "/@", "%"}], ";"}]], "Input"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"ToValues", "/@", "%"}]], "Input",
- CellChangeTimes->{{3.568876578607436*^9, 3.56887658277376*^9}}],
+ RowBox[{"ToValues", "/@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -101668,11 +101703,9 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"VolumeFormCR", "=", "%"}], ";"}]], "Input",
- CellChangeTimes->{{3.568876664344514*^9, 3.5688766902700863`*^9}}],
+  RowBox[{"VolumeFormCR", "=", "%"}], ";"}]], "Input"],
 
-Cell["Another chart", "Text",
- CellChangeTimes->{{3.568875198612507*^9, 3.568875203139707*^9}}],
+Cell["Another chart", "Text"],
 
 Cell[BoxData[
  RowBox[{"DefChart", "[", 
@@ -101690,14 +101723,9 @@ Cell[BoxData[
      RowBox[{"\"\<Partials\>\"", ",", "\"\<Differentials\>\""}], "}"}]}], ",", 
    RowBox[{"BasisColor", "\[Rule]", 
     RowBox[{"RGBColor", "[", 
-     RowBox[{"0", ",", "0", ",", "1"}], "]"}]}]}], "]"}]], "Input",
- CellChangeTimes->{{3.568834166012603*^9, 3.5688341680079308`*^9}, {
-  3.568834224353903*^9, 3.568834245509951*^9}, {3.5688750441171217`*^9, 
-  3.568875061400852*^9}, {3.568875235005643*^9, 3.5688753467527103`*^9}, {
-  3.579777314314104*^9, 3.579777397991481*^9}}],
+     RowBox[{"0", ",", "0", ",", "1"}], "]"}]}]}], "]"}]], "Input"],
 
-Cell["The relation between the coordinates is", "Text",
- CellChangeTimes->{{3.5688769553531923`*^9, 3.568876966561203*^9}}],
+Cell["The relation between the coordinates is", "Text"],
 
 Cell[CellGroupData[{
 
@@ -101726,11 +101754,7 @@ Cell[BoxData[
      RowBox[{
       RowBox[{"r", "[", "]"}], 
       RowBox[{"Cos", "@", 
-       RowBox[{"\[CapitalTheta]", "[", "]"}]}]}]}]}], "}"}]}]], "Input",
- CellChangeTimes->{{3.5688754228468027`*^9, 3.5688754839761667`*^9}, {
-  3.568879400185659*^9, 3.568879419345662*^9}, {3.568882768526998*^9, 
-  3.568882797059108*^9}, {3.579777437621561*^9, 3.579777462465538*^9}, {
-  3.579779762457481*^9, 3.579779767657486*^9}}],
+       RowBox[{"\[CapitalTheta]", "[", "]"}]}]}]}]}], "}"}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -101849,8 +101873,7 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"Map", "[", 
   RowBox[{"diff", ",", "%", ",", 
-   RowBox[{"{", "2", "}"}]}], "]"}]], "Input",
- CellChangeTimes->{{3.5688754909236803`*^9, 3.568875497267149*^9}}],
+   RowBox[{"{", "2", "}"}]}], "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -102226,8 +102249,7 @@ Cell[BoxData[
 
 Cell["\<\
 Let us see what the volume form looks like in the new coordinates\
-\>", "Text",
- CellChangeTimes->{{3.568877069644246*^9, 3.568877103541244*^9}}],
+\>", "Text"],
 
 Cell[CellGroupData[{
 
@@ -104203,9 +104225,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"ToCanonical", "/@", "%"}]], "Input",
- CellChangeTimes->{{3.568877299102017*^9, 3.5688773035368958`*^9}, {
-  3.57977748978611*^9, 3.579777490298194*^9}}],
+ RowBox[{"ToCanonical", "/@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -104620,11 +104640,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"FullSimplify", "/@", "%"}]], "Input",
- CellChangeTimes->{{3.568877332220454*^9, 3.568877335726473*^9}, {
-   3.568878385726287*^9, 3.568878386623108*^9}, {3.568878479433463*^9, 
-   3.568878479752016*^9}, {3.568879849755286*^9, 3.568879854625661*^9}, 
-   3.56887990822506*^9, {3.579777505841634*^9, 3.579777506808516*^9}}],
+ RowBox[{"FullSimplify", "/@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -104718,14 +104734,12 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["The index-free representation of the metric", "Subsection",
- CellChangeTimes->{{3.579780271982852*^9, 3.579780280285914*^9}}],
+Cell["The index-free representation of the metric", "Subsection"],
 
 Cell["\<\
 We define the \[OpenCurlyDoubleQuote]index-free\[CloseCurlyDoubleQuote] \
 representation of the metric\
-\>", "Text",
- CellChangeTimes->{{3.5689803345169687`*^9, 3.568980354750148*^9}}],
+\>", "Text"],
 
 Cell[BoxData[
  RowBox[{"DefTensor", "[", 
@@ -104882,8 +104896,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"ToBasis", "[", "CR", "]"}], "@", "%"}]], "Input",
- CellChangeTimes->{{3.568980055368918*^9, 3.5689800663755703`*^9}}],
+  RowBox[{"ToBasis", "[", "CR", "]"}], "@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -104994,10 +105007,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"TraceBasisDummy", "/@", "%"}]], "Input",
- CellChangeTimes->{{3.5689800706781197`*^9, 3.5689800981709127`*^9}, 
-   3.568980452837288*^9, 3.56900050334553*^9, {3.579779426742723*^9, 
-   3.579779428294086*^9}}],
+ RowBox[{"TraceBasisDummy", "/@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -106549,8 +106559,7 @@ Cell[BoxData[
 
 Cell["\<\
 Here ToCanonical appears to work, despite the presence of basis indices.\
-\>", "Text",
- CellChangeTimes->{{3.579779701793746*^9, 3.579779716745124*^9}}],
+\>", "Text"],
 
 Cell[CellGroupData[{
 
@@ -109117,8 +109126,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"ToValues", "@", "%"}]], "Input",
- CellChangeTimes->{{3.5689801430985317`*^9, 3.568980145428417*^9}}],
+ RowBox[{"ToValues", "@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -109250,19 +109258,15 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"FlatMetricgCartesian", "=", "%"}], ";"}]], "Input",
- CellChangeTimes->{{3.5689804904431868`*^9, 3.56898050149802*^9}, 
-   3.56898060312391*^9, {3.56898989074701*^9, 3.568989892330769*^9}}],
+  RowBox[{"FlatMetricgCartesian", "=", "%"}], ";"}]], "Input"],
 
-Cell["We write now the flat metric in spherical coordinates", "Text",
- CellChangeTimes->{{3.579779730328609*^9, 3.579779749526882*^9}}],
+Cell["We write now the flat metric in spherical coordinates", "Text"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"FlatMetricgCartesian", "/.", 
-  RowBox[{"ToRule", "@", "CartesianToSpherical"}]}]], "Input",
- CellChangeTimes->{{3.57977983745826*^9, 3.579779848090687*^9}}],
+  RowBox[{"ToRule", "@", "CartesianToSpherical"}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -110810,8 +110814,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"Simplify", "/@", "%"}]], "Input",
- CellChangeTimes->{{3.579779862051077*^9, 3.579779864363709*^9}}],
+ RowBox[{"Simplify", "/@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -110971,1351 +110974,12 @@ Cell[BoxData[
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{984, 829},
+WindowSize->Automatic,
 WindowMargins->{{40, Automatic}, {Automatic, 0}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
 2013)",
 StyleDefinitions->"Default.nb"
 ]
-(* End of Notebook Content *)
 
-(* Internal cache information *)
-(*CellTagsOutline
-CellTagsIndex->{}
-*)
-(*CellTagsIndex
-CellTagsIndex->{}
-*)
-(*NotebookFileOutline
-Notebook[{
-Cell[CellGroupData[{
-Cell[579, 22, 56, 0, 92, "Title"],
-Cell[638, 24, 62, 0, 51, "Subtitle"],
-Cell[703, 26, 57, 0, 29, "Subsubtitle"],
-Cell[CellGroupData[{
-Cell[785, 30, 56, 1, 28, "Input"],
-Cell[844, 33, 151, 4, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1032, 42, 27, 0, 44, "Subsection"],
-Cell[CellGroupData[{
-Cell[1084, 46, 57, 1, 28, "Input"],
-Cell[CellGroupData[{
-Cell[1166, 51, 96, 1, 21, "Print"],
-Cell[1265, 54, 363, 8, 22, "Print"],
-Cell[1631, 64, 117, 1, 22, "Print"],
-Cell[1751, 67, 74, 0, 22, "Print"],
-Cell[1828, 69, 57, 0, 21, "Print"],
-Cell[1888, 71, 96, 1, 21, "Print"],
-Cell[1987, 74, 367, 8, 22, "Print"],
-Cell[2357, 84, 117, 1, 22, "Print"],
-Cell[2477, 87, 96, 1, 21, "Print"],
-Cell[2576, 90, 251, 3, 38, "Print"],
-Cell[2830, 95, 96, 1, 21, "Print"]
-}, Open  ]]
-}, Open  ]],
-Cell[2953, 100, 93, 2, 28, "Input"],
-Cell[3049, 104, 79, 2, 28, "Input"],
-Cell[3131, 108, 218, 6, 28, "Input"]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[3386, 119, 30, 0, 50, "Section"],
-Cell[CellGroupData[{
-Cell[3441, 123, 39, 0, 44, "Subsection"],
-Cell[CellGroupData[{
-Cell[3505, 127, 35, 0, 35, "Subsubsection"],
-Cell[3543, 129, 388, 6, 68, "Text"],
-Cell[3934, 137, 729, 18, 131, "Input"],
-Cell[4666, 157, 146, 5, 30, "Text"],
-Cell[4815, 164, 147, 4, 28, "Input"],
-Cell[4965, 170, 213, 6, 28, "Input"],
-Cell[5181, 178, 41, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[5247, 182, 56, 1, 28, "Input"],
-Cell[5306, 185, 28, 0, 70, "Output"]
-}, Open  ]],
-Cell[5349, 188, 86, 2, 30, "Text"],
-Cell[CellGroupData[{
-Cell[5460, 194, 73, 1, 28, "Input"],
-Cell[5536, 197, 28, 0, 70, "Output"]
-}, Open  ]],
-Cell[5579, 200, 90, 2, 30, "Text"],
-Cell[CellGroupData[{
-Cell[5694, 206, 89, 2, 28, "Input"],
-Cell[5786, 210, 149, 6, 70, "Output"]
-}, Open  ]],
-Cell[5950, 219, 67, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[6042, 223, 296, 10, 28, "Input"],
-Cell[6341, 235, 280, 9, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[6658, 249, 57, 1, 28, "Input"],
-Cell[6718, 252, 538, 18, 70, "Output"]
-}, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[7305, 276, 30, 0, 29, "Subsubsection"],
-Cell[7338, 278, 244, 6, 49, "Text"],
-Cell[7585, 286, 794, 23, 80, "Input"],
-Cell[8382, 311, 39, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[8446, 315, 104, 3, 28, "Input"],
-Cell[8553, 320, 317, 13, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[8907, 338, 56, 1, 28, "Input"],
-Cell[8966, 341, 28, 0, 70, "Output"]
-}, Open  ]],
-Cell[9009, 344, 60, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[9094, 348, 104, 3, 28, "Input"],
-Cell[9201, 353, 317, 13, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[9555, 371, 60, 1, 28, "Input"],
-Cell[9618, 374, 383, 15, 70, "Output"]
-}, Open  ]],
-Cell[10016, 392, 192, 5, 30, "Text"],
-Cell[10211, 399, 91, 2, 30, "Text"],
-Cell[CellGroupData[{
-Cell[10327, 405, 140, 4, 28, "Input"],
-Cell[10470, 411, 28, 0, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[10535, 416, 140, 4, 28, "Input"],
-Cell[10678, 422, 317, 13, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[11032, 440, 140, 4, 28, "Input"],
-Cell[11175, 446, 28, 0, 70, "Output"]
-}, Open  ]],
-Cell[11218, 449, 28, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[11271, 453, 182, 5, 28, "Input"],
-Cell[11456, 460, 28, 0, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[11521, 465, 182, 5, 28, "Input"],
-Cell[11706, 472, 464, 19, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[12207, 496, 224, 6, 28, "Input"],
-Cell[12434, 504, 701, 27, 70, "Output"]
-}, Open  ]],
-Cell[13150, 534, 179, 4, 49, "Text"],
-Cell[13332, 540, 866, 25, 63, "Input"],
-Cell[14201, 567, 280, 9, 28, "Input"],
-Cell[14484, 578, 65, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[14574, 582, 128, 3, 28, "Input"],
-Cell[14705, 587, 1949, 57, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[16691, 649, 60, 1, 28, "Input"],
-Cell[16754, 652, 2103, 59, 70, "Output"]
-}, Open  ]],
-Cell[18872, 714, 97, 2, 30, "Text"],
-Cell[CellGroupData[{
-Cell[18994, 720, 240, 8, 28, "Input"],
-Cell[19237, 730, 2986, 86, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[22260, 821, 60, 1, 28, "Input"],
-Cell[22323, 824, 28, 0, 70, "Output"]
-}, Open  ]],
-Cell[22366, 827, 113, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[22504, 834, 229, 6, 28, "Input"],
-Cell[22736, 842, 2964, 85, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[25737, 932, 60, 1, 28, "Input"],
-Cell[25800, 935, 3174, 87, 70, "Output"]
-}, Open  ]],
-Cell[28989, 1025, 62, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[29076, 1029, 215, 6, 28, "Input"],
-Cell[29294, 1037, 364, 11, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[29695, 1053, 236, 7, 28, "Input"],
-Cell[29934, 1062, 364, 11, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[30335, 1078, 241, 7, 28, "Input"],
-Cell[30579, 1087, 31, 0, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[30647, 1092, 274, 8, 28, "Input"],
-Cell[30924, 1102, 2054, 58, 70, "Output"]
-}, Open  ]],
-Cell[32993, 1163, 145, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[33163, 1170, 188, 5, 28, "Input"],
-Cell[33354, 1177, 3083, 86, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[36474, 1268, 350, 9, 28, "Input"],
-Cell[36827, 1279, 6480, 175, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[43344, 1459, 218, 6, 28, "Input"],
-Cell[43565, 1467, 51, 1, 70, "Output"]
-}, Open  ]]
-}, Closed]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[43677, 1475, 46, 0, 36, "Subsection"],
-Cell[43726, 1477, 243, 4, 49, "Text"],
-Cell[43972, 1483, 410, 8, 106, "Text"],
-Cell[44385, 1493, 362, 7, 97, "Input"],
-Cell[44750, 1502, 249, 7, 28, "Input"],
-Cell[CellGroupData[{
-Cell[45024, 1513, 124, 3, 28, "Input"],
-Cell[45151, 1518, 28, 0, 70, "Output"]
-}, Open  ]],
-Cell[45194, 1521, 96, 2, 30, "Text"],
-Cell[45293, 1525, 114, 3, 28, "Input"],
-Cell[45410, 1530, 545, 18, 28, "Input"],
-Cell[45958, 1550, 433, 14, 28, "Input"],
-Cell[46394, 1566, 438, 14, 28, "Input"],
-Cell[46835, 1582, 815, 20, 28, "Input"],
-Cell[47653, 1604, 62, 0, 30, "Text"],
-Cell[47718, 1606, 117, 3, 28, "Input"],
-Cell[47838, 1611, 115, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[47978, 1618, 146, 3, 28, "Input"],
-Cell[48127, 1623, 332, 9, 70, "Output"]
-}, Open  ]],
-Cell[48474, 1635, 48, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[48547, 1639, 137, 4, 28, "Input"],
-Cell[48687, 1645, 2828, 87, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[51552, 1737, 186, 5, 28, "Input"],
-Cell[51741, 1744, 4666, 131, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[56444, 1880, 161, 4, 28, "Input"],
-Cell[56608, 1886, 4598, 131, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[61243, 2022, 60, 1, 28, "Input"],
-Cell[61306, 2025, 4598, 131, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[65941, 2161, 57, 1, 28, "Input"],
-Cell[66001, 2164, 5190, 147, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[71228, 2316, 60, 1, 28, "Input"],
-Cell[71291, 2319, 28, 0, 70, "Output"]
-}, Open  ]],
-Cell[71334, 2322, 33, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[71392, 2326, 314, 9, 28, "Input"],
-Cell[71709, 2337, 14504, 391, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[86250, 2733, 60, 1, 28, "Input"],
-Cell[86313, 2736, 14250, 404, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[100600, 3145, 57, 1, 28, "Input"],
-Cell[100660, 3148, 46663, 1289, 70, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[147360, 4442, 60, 1, 28, "Input"],
-Cell[147423, 4445, 28, 0, 70, "Output"]
-}, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[147500, 4451, 73, 0, 36, "Subsection"],
-Cell[147576, 4453, 267, 5, 49, "Text"],
-Cell[147846, 4460, 24, 0, 30, "Text"],
-Cell[147873, 4462, 235, 6, 28, "Input"],
-Cell[148111, 4470, 27, 0, 30, "Text"],
-Cell[148141, 4472, 281, 8, 28, "Input"],
-Cell[148425, 4482, 57, 2, 30, "Text"],
-Cell[148485, 4486, 244, 6, 28, "Input"],
-Cell[148732, 4494, 59, 2, 30, "Text"],
-Cell[148794, 4498, 290, 8, 28, "Input"],
-Cell[149087, 4508, 125, 3, 30, "Text"],
-Cell[149215, 4513, 172, 5, 28, "Input"],
-Cell[149390, 4520, 37, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[149452, 4524, 898, 27, 46, "Input"],
-Cell[150353, 4553, 8919, 239, 47, "Output"]
-}, Open  ]],
-Cell[159287, 4795, 166, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[159478, 4802, 377, 11, 28, "Input"],
-Cell[159858, 4815, 4528, 126, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[164423, 4946, 528, 17, 28, "Input"],
-Cell[164954, 4965, 4626, 126, 37, "Output"]
-}, Open  ]],
-Cell[169595, 5094, 174, 5, 28, "Input"],
-Cell[169772, 5101, 108, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[169905, 5108, 167, 5, 28, "Input"],
-Cell[170075, 5115, 4544, 127, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[174656, 5247, 81, 2, 28, "Input"],
-Cell[174740, 5251, 4367, 123, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[179144, 5379, 53, 1, 28, "Input"],
-Cell[179200, 5382, 6099, 170, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[185336, 5557, 60, 1, 28, "Input"],
-Cell[185399, 5560, 11725, 323, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[197161, 5888, 89, 2, 28, "Input"],
-Cell[197253, 5892, 5501, 153, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[202791, 6050, 215, 7, 28, "Input"],
-Cell[203009, 6059, 4642, 127, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[207688, 6191, 81, 2, 28, "Input"],
-Cell[207772, 6195, 4465, 123, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[212274, 6323, 53, 1, 28, "Input"],
-Cell[212330, 6326, 6225, 171, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[218592, 6502, 60, 1, 28, "Input"],
-Cell[218655, 6505, 11877, 323, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[230569, 6833, 89, 2, 28, "Input"],
-Cell[230661, 6837, 5757, 155, 37, "Output"]
-}, Open  ]],
-Cell[236433, 6995, 132, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[236590, 7002, 217, 6, 28, "Input"],
-Cell[236810, 7010, 23019, 590, 113, "Output"]
-}, Open  ]],
-Cell[259844, 7603, 125, 3, 28, "Input"],
-Cell[259972, 7608, 135, 3, 30, "Text"],
-Cell[260110, 7613, 194, 4, 49, "Text"],
-Cell[CellGroupData[{
-Cell[260329, 7621, 59, 1, 28, "Input"],
-Cell[260391, 7624, 9712, 266, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[270140, 7895, 60, 1, 28, "Input"],
-Cell[270203, 7898, 23048, 626, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[293288, 8529, 60, 1, 28, "Input"],
-Cell[293351, 8532, 31, 0, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[293419, 8537, 59, 1, 28, "Input"],
-Cell[293481, 8540, 10028, 268, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[303546, 8813, 60, 1, 28, "Input"],
-Cell[303609, 8816, 23422, 628, 61, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[327068, 9449, 60, 1, 28, "Input"],
-Cell[327131, 9452, 31, 0, 28, "Output"]
-}, Open  ]],
-Cell[327177, 9455, 174, 3, 49, "Text"],
-Cell[CellGroupData[{
-Cell[327376, 9462, 377, 11, 28, "Input"],
-Cell[327756, 9475, 10317, 280, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[338110, 9760, 60, 1, 28, "Input"],
-Cell[338173, 9763, 25086, 685, 61, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[363296, 10453, 60, 1, 28, "Input"],
-Cell[363359, 10456, 28, 0, 28, "Output"]
-}, Open  ]],
-Cell[363402, 10459, 44, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[363471, 10463, 701, 20, 28, "Input"],
-Cell[364175, 10485, 39216, 1063, 61, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[403428, 11553, 60, 1, 28, "Input"],
-Cell[403491, 11556, 87255, 2374, 109, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[490783, 13935, 60, 1, 28, "Input"],
-Cell[490846, 13938, 28, 0, 28, "Output"]
-}, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[490923, 13944, 58, 0, 36, "Subsection"],
-Cell[490984, 13946, 131, 3, 30, "Text"],
-Cell[491118, 13951, 105, 3, 30, "Text"],
-Cell[491226, 13956, 400, 8, 109, "Input"],
-Cell[491629, 13966, 114, 3, 30, "Text"],
-Cell[491746, 13971, 342, 11, 28, "Input"],
-Cell[492091, 13984, 179, 3, 49, "Text"],
-Cell[CellGroupData[{
-Cell[492295, 13991, 138, 4, 28, "Input"],
-Cell[492436, 13997, 1337, 39, 37, "Output"]
-}, Open  ]],
-Cell[493788, 14039, 181, 4, 28, "Input"],
-Cell[493972, 14045, 327, 9, 28, "Input"],
-Cell[494302, 14056, 650, 22, 46, "Input"],
-Cell[494955, 14080, 85, 2, 30, "Text"],
-Cell[495043, 14084, 311, 9, 28, "Input"],
-Cell[CellGroupData[{
-Cell[495379, 14097, 124, 3, 28, "Input"],
-Cell[495506, 14102, 1273, 37, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[496816, 14144, 52, 1, 28, "Input"],
-Cell[496871, 14147, 28, 0, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[496936, 14152, 88, 2, 28, "Input"],
-Cell[497027, 14156, 946, 28, 37, "Output"]
-}, Open  ]],
-Cell[497988, 14187, 91, 2, 30, "Text"],
-Cell[498082, 14191, 2437, 65, 114, "Input"],
-Cell[500522, 14258, 61, 0, 30, "Text"],
-Cell[500586, 14260, 392, 9, 109, "Input"],
-Cell[500981, 14271, 48, 0, 30, "Text"],
-Cell[501032, 14273, 304, 9, 28, "Input"],
-Cell[501339, 14284, 112, 3, 30, "Text"],
-Cell[501454, 14289, 909, 26, 80, "Input"],
-Cell[CellGroupData[{
-Cell[502388, 14319, 150, 4, 28, "Input"],
-Cell[502541, 14325, 1325, 38, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[503903, 14368, 62, 1, 28, "Input"],
-Cell[503968, 14371, 2184, 62, 37, "Output"]
-}, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[506201, 14439, 77, 0, 36, "Subsection"],
-Cell[506281, 14441, 170, 3, 49, "Text"],
-Cell[506454, 14446, 31, 0, 30, "Text"],
-Cell[506488, 14448, 127, 4, 28, "Input"],
-Cell[506618, 14454, 114, 3, 28, "Input"],
-Cell[506735, 14459, 188, 4, 49, "Text"],
-Cell[506926, 14465, 122, 3, 30, "Text"],
-Cell[507051, 14470, 288, 8, 28, "Input"],
-Cell[507342, 14480, 290, 8, 28, "Input"],
-Cell[507635, 14490, 86, 2, 30, "Text"],
-Cell[CellGroupData[{
-Cell[507746, 14496, 504, 15, 28, "Input"],
-Cell[508253, 14513, 4181, 117, 47, "Output"]
-}, Open  ]],
-Cell[512449, 14633, 141, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[512615, 14640, 323, 7, 28, "Input"],
-Cell[512941, 14649, 16956, 447, 37, "Output"]
-}, Open  ]],
-Cell[529912, 15099, 261, 8, 28, "Input"],
-Cell[530176, 15109, 76, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[530277, 15113, 702, 24, 28, "Input"],
-Cell[530982, 15139, 5529, 153, 37, "Output"]
-}, Open  ]],
-Cell[536526, 15295, 127, 3, 28, "Input"],
-Cell[536656, 15300, 54, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[536735, 15304, 64, 1, 28, "Input"],
-Cell[536802, 15307, 9792, 266, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[546631, 15578, 65, 1, 28, "Input"],
-Cell[546699, 15581, 17910, 486, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[564646, 16072, 66, 1, 28, "Input"],
-Cell[564715, 16075, 22396, 594, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[587148, 16674, 63, 1, 28, "Input"],
-Cell[587214, 16677, 6364, 172, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[593615, 16854, 60, 1, 28, "Input"],
-Cell[593678, 16857, 2116, 58, 37, "Output"]
-}, Open  ]],
-Cell[595809, 16918, 159, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[595993, 16925, 234, 6, 28, "Input"],
-Cell[596230, 16933, 382, 13, 28, "Output"]
-}, Open  ]],
-Cell[596627, 16949, 70, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[596722, 16953, 314, 10, 28, "Input"],
-Cell[597039, 16965, 4864, 134, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[601940, 17104, 65, 1, 28, "Input"],
-Cell[602008, 17107, 8120, 217, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[610165, 17329, 107, 3, 28, "Input"],
-Cell[610275, 17334, 9566, 246, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[619878, 17585, 63, 1, 28, "Input"],
-Cell[619944, 17588, 3414, 94, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[623395, 17687, 204, 6, 28, "Input"],
-Cell[623602, 17695, 3542, 97, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[627181, 17797, 116, 3, 28, "Input"],
-Cell[627300, 17802, 3426, 96, 37, "Output"]
-}, Open  ]],
-Cell[630741, 17901, 127, 3, 28, "Input"],
-Cell[630871, 17906, 196, 4, 49, "Text"],
-Cell[631070, 17912, 73, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[631168, 17916, 1536, 50, 63, "Input"],
-Cell[632707, 17968, 10102, 273, 37, "Output"]
-}, Open  ]],
-Cell[642824, 18244, 139, 3, 28, "Input"],
-Cell[642966, 18249, 35, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[643026, 18253, 70, 1, 28, "Input"],
-Cell[643099, 18256, 20240, 542, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[663376, 18803, 71, 1, 28, "Input"],
-Cell[663450, 18806, 63088, 1694, 85, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[726575, 20505, 66, 1, 28, "Input"],
-Cell[726644, 20508, 72060, 1910, 109, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[798741, 22423, 60, 1, 28, "Input"],
-Cell[798804, 22426, 8787, 236, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[807628, 22667, 149, 4, 28, "Input"],
-Cell[807780, 22673, 10351, 267, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[818168, 22945, 63, 1, 28, "Input"],
-Cell[818234, 22948, 4278, 116, 37, "Output"]
-}, Open  ]],
-Cell[822527, 23067, 129, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[822681, 23074, 167, 4, 28, "Input"],
-Cell[822851, 23080, 31, 0, 28, "Output"]
-}, Open  ]],
-Cell[822897, 23083, 99, 2, 30, "Text"],
-Cell[822999, 23087, 230, 6, 28, "Input"],
-Cell[CellGroupData[{
-Cell[823254, 23097, 319, 10, 28, "Input"],
-Cell[823576, 23109, 9943, 270, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[833556, 23384, 134, 3, 28, "Input"],
-Cell[833693, 23389, 10464, 273, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[844194, 23667, 63, 1, 28, "Input"],
-Cell[844260, 23670, 2422, 69, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[846719, 23744, 60, 1, 28, "Input"],
-Cell[846782, 23747, 1304, 39, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[848123, 23791, 144, 4, 28, "Input"],
-Cell[848270, 23797, 1240, 36, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[849547, 23838, 81, 2, 28, "Input"],
-Cell[849631, 23842, 1184, 35, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[850852, 23882, 386, 12, 28, "Input"],
-Cell[851241, 23896, 3543, 98, 37, "Output"]
-}, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[854833, 24000, 111, 1, 36, "Subsection"],
-Cell[854947, 24003, 83, 2, 30, "Text"],
-Cell[CellGroupData[{
-Cell[855055, 24009, 130, 2, 28, "Input"],
-Cell[855188, 24013, 837, 17, 63, "Output"]
-}, Open  ]],
-Cell[856040, 24033, 735, 18, 131, "Input"],
-Cell[856778, 24053, 160, 4, 28, "Input"],
-Cell[856941, 24059, 102, 2, 30, "Text"],
-Cell[857046, 24063, 242, 6, 28, "Input"],
-Cell[857291, 24071, 88, 2, 30, "Text"],
-Cell[857382, 24075, 295, 9, 28, "Input"],
-Cell[857680, 24086, 423, 12, 46, "Input"],
-Cell[858106, 24100, 653, 11, 144, "Text"]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[858796, 24116, 102, 2, 36, "Subsection"],
-Cell[858901, 24120, 83, 2, 30, "Text"],
-Cell[858987, 24124, 288, 5, 49, "Text"],
-Cell[859278, 24131, 367, 7, 97, "Input"],
-Cell[859648, 24140, 2265, 77, 167, "Input"],
-Cell[861916, 24219, 33, 0, 30, "Text"],
-Cell[861952, 24221, 427, 14, 28, "Input"],
-Cell[862382, 24237, 572, 17, 46, "Input"],
-Cell[862957, 24256, 221, 6, 28, "Input"],
-Cell[CellGroupData[{
-Cell[863203, 24266, 186, 6, 28, "Input"],
-Cell[863392, 24274, 1160, 45, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[864589, 24324, 52, 1, 28, "Input"],
-Cell[864644, 24327, 28, 0, 28, "Output"]
-}, Open  ]],
-Cell[864687, 24330, 69, 0, 30, "Text"],
-Cell[864759, 24332, 378, 7, 97, "Input"],
-Cell[865140, 24341, 1345, 43, 63, "Input"],
-Cell[866488, 24386, 203, 4, 49, "Text"],
-Cell[866694, 24392, 186, 4, 49, "Text"],
-Cell[866883, 24398, 32, 0, 30, "Text"],
-Cell[866918, 24400, 505, 16, 28, "Input"]
-}, Closed]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[867472, 24422, 31, 0, 80, "Section"],
-Cell[CellGroupData[{
-Cell[867528, 24426, 49, 0, 44, "Subsection"],
-Cell[867580, 24428, 54, 0, 30, "Text"],
-Cell[867637, 24430, 229, 6, 28, "Input"],
-Cell[867869, 24438, 69, 0, 30, "Text"],
-Cell[867941, 24440, 127, 4, 28, "Input"],
-Cell[868071, 24446, 74, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[868170, 24450, 173, 4, 28, "Input"],
-Cell[868346, 24456, 15618, 410, 37, "Output"]
-}, Open  ]],
-Cell[883979, 24869, 46, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[884050, 24873, 52, 1, 28, "Input"],
-Cell[884105, 24876, 5785, 155, 37, "Output"]
-}, Open  ]],
-Cell[889905, 25034, 123, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[890053, 25041, 174, 4, 28, "Input"],
-Cell[890230, 25047, 12249, 339, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[902516, 25391, 553, 18, 28, "Input"],
-Cell[903072, 25411, 12970, 360, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[916079, 25776, 351, 11, 28, "Input"],
-Cell[916433, 25789, 15128, 420, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[931598, 26214, 134, 4, 28, "Input"],
-Cell[931735, 26220, 15279, 423, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[947051, 26648, 143, 4, 28, "Input"],
-Cell[947197, 26654, 25164, 674, 84, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[972398, 27333, 60, 1, 28, "Input"],
-Cell[972461, 27336, 4387, 123, 47, "Output"]
-}, Open  ]],
-Cell[976863, 27462, 70, 0, 30, "Text"]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[976970, 27467, 48, 0, 36, "Subsection"],
-Cell[977021, 27469, 67, 0, 30, "Text"],
-Cell[977091, 27471, 239, 6, 28, "Input"],
-Cell[977333, 27479, 239, 6, 28, "Input"],
-Cell[977575, 27487, 51, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[977651, 27491, 412, 13, 28, "Input"],
-Cell[978066, 27506, 1173, 39, 35, "Output"]
-}, Open  ]],
-Cell[979254, 27548, 141, 3, 30, "Text"],
-Cell[979398, 27553, 328, 11, 28, "Input"],
-Cell[979729, 27566, 115, 3, 28, "Input"],
-Cell[979847, 27571, 92, 2, 30, "Text"],
-Cell[CellGroupData[{
-Cell[979964, 27577, 623, 20, 28, "Input"],
-Cell[980590, 27599, 5790, 163, 47, "Output"]
-}, Open  ]],
-Cell[986395, 27765, 132, 3, 28, "Input"],
-Cell[986530, 27770, 123, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[986678, 27777, 86, 2, 28, "Input"],
-Cell[986767, 27781, 433, 15, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[987237, 27801, 68, 1, 28, "Input"],
-Cell[987308, 27804, 3465, 97, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[990810, 27906, 491, 17, 28, "Input"],
-Cell[991304, 27925, 4229, 119, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[995570, 28049, 143, 4, 28, "Input"],
-Cell[995716, 28055, 8911, 239, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1004664, 28299, 60, 1, 28, "Input"],
-Cell[1004727, 28302, 4304, 121, 47, "Output"]
-}, Open  ]],
-Cell[1009046, 28426, 40, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[1009111, 28430, 86, 2, 28, "Input"],
-Cell[1009200, 28434, 649, 22, 32, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1009886, 28461, 68, 1, 28, "Input"],
-Cell[1009957, 28464, 5800, 159, 47, "Output"]
-}, Open  ]],
-Cell[1015772, 28626, 45, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[1015842, 28630, 62, 1, 28, "Input"],
-Cell[1015907, 28633, 12016, 315, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1027960, 28953, 491, 17, 28, "Input"],
-Cell[1028454, 28972, 12916, 339, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1041407, 29316, 540, 17, 28, "Input"],
-Cell[1041950, 29335, 14193, 373, 48, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1056180, 29713, 469, 14, 28, "Input"],
-Cell[1056652, 29729, 14883, 388, 48, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1071572, 30122, 63, 1, 28, "Input"],
-Cell[1071638, 30125, 13884, 382, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1085559, 30512, 60, 1, 28, "Input"],
-Cell[1085622, 30515, 10621, 291, 47, "Output"]
-}, Open  ]],
-Cell[1096258, 30809, 1732, 46, 33, "Text"],
-Cell[CellGroupData[{
-Cell[1098015, 30859, 174, 4, 28, "Input"],
-Cell[1098192, 30865, 26482, 675, 73, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1124711, 31545, 71, 1, 28, "Input"],
-Cell[1124785, 31548, 44656, 1105, 73, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1169478, 32658, 65, 1, 28, "Input"],
-Cell[1169546, 32661, 53444, 1303, 97, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1223027, 33969, 55, 1, 28, "Input"],
-Cell[1223085, 33972, 65632, 1764, 121, "Output"]
-}, Open  ]],
-Cell[1288732, 35739, 89, 2, 30, "Text"],
-Cell[CellGroupData[{
-Cell[1288846, 35745, 308, 9, 28, "Input"],
-Cell[1289157, 35756, 74024, 1997, 158, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1363218, 37758, 167, 4, 28, "Input"],
-Cell[1363388, 37764, 111893, 2975, 221, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1475318, 40744, 98, 2, 28, "Input"],
-Cell[1475419, 40748, 116737, 3099, 221, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1592193, 43852, 63, 1, 28, "Input"],
-Cell[1592259, 43855, 48979, 1351, 121, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1641275, 45211, 60, 1, 28, "Input"],
-Cell[1641338, 45214, 4161, 120, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1645536, 45339, 134, 4, 28, "Input"],
-Cell[1645673, 45345, 4350, 122, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1650060, 45472, 63, 1, 28, "Input"],
-Cell[1650126, 45475, 3328, 92, 37, "Output"]
-}, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[1653503, 45573, 46, 0, 36, "Subsection"],
-Cell[1653552, 45575, 45, 0, 30, "Text"],
-Cell[1653600, 45577, 122, 3, 28, "Input"],
-Cell[CellGroupData[{
-Cell[1653747, 45584, 91, 2, 28, "Input"],
-Cell[1653841, 45588, 28, 0, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1653906, 45593, 170, 5, 28, "Input"],
-Cell[1654079, 45600, 28, 0, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1654144, 45605, 170, 5, 28, "Input"],
-Cell[1654317, 45612, 28, 0, 28, "Output"]
-}, Open  ]],
-Cell[1654360, 45615, 62, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[1654447, 45619, 311, 10, 28, "Input"],
-Cell[1654761, 45631, 1439, 49, 35, "Output"]
-}, Open  ]],
-Cell[1656215, 45683, 73, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[1656313, 45687, 319, 10, 28, "Input"],
-Cell[1656635, 45699, 2475, 74, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1659147, 45778, 61, 1, 28, "Input"],
-Cell[1659211, 45781, 6501, 192, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1665749, 45978, 635, 20, 28, "Input"],
-Cell[1666387, 46000, 12615, 339, 47, "Output"]
-}, Open  ]],
-Cell[1679017, 46342, 91, 2, 30, "Text"],
-Cell[CellGroupData[{
-Cell[1679133, 46348, 177, 5, 28, "Input"],
-Cell[1679313, 46355, 4977, 144, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1684327, 46504, 167, 4, 28, "Input"],
-Cell[1684497, 46510, 11272, 308, 48, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1695806, 46823, 488, 16, 28, "Input"],
-Cell[1696297, 46841, 12038, 328, 48, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1708372, 47174, 174, 4, 28, "Input"],
-Cell[1708549, 47180, 21436, 562, 48, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1730022, 47747, 65, 1, 28, "Input"],
-Cell[1730090, 47750, 27029, 690, 86, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1757156, 48445, 71, 1, 28, "Input"],
-Cell[1757230, 48448, 48917, 1206, 111, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1806184, 49659, 63, 1, 28, "Input"],
-Cell[1806250, 49662, 45129, 1228, 124, "Output"]
-}, Open  ]],
-Cell[1851394, 50893, 89, 2, 30, "Text"],
-Cell[CellGroupData[{
-Cell[1851508, 50899, 308, 9, 28, "Input"],
-Cell[1851819, 50910, 51231, 1407, 162, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1903087, 52322, 167, 4, 28, "Input"],
-Cell[1903257, 52328, 18475, 510, 74, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1921769, 52843, 98, 2, 28, "Input"],
-Cell[1921870, 52847, 20088, 553, 86, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1941995, 53405, 63, 1, 28, "Input"],
-Cell[1942061, 53408, 7131, 206, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1949229, 53619, 60, 1, 28, "Input"],
-Cell[1949292, 53622, 1436, 42, 37, "Output"]
-}, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[1950777, 53670, 72, 0, 36, "Subsection"],
-Cell[1950852, 53672, 85, 2, 30, "Text"],
-Cell[1950940, 53676, 151, 3, 30, "Text"],
-Cell[1951094, 53681, 248, 7, 28, "Input"],
-Cell[1951345, 53690, 55, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[1951425, 53694, 514, 16, 28, "Input"],
-Cell[1951942, 53712, 4174, 117, 47, "Output"]
-}, Open  ]],
-Cell[1956131, 53832, 88, 2, 30, "Text"],
-Cell[CellGroupData[{
-Cell[1956244, 53838, 71, 1, 28, "Input"],
-Cell[1956318, 53841, 11818, 306, 47, "Output"]
-}, Open  ]],
-Cell[1968151, 54150, 132, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[1968308, 54157, 175, 4, 28, "Input"],
-Cell[1968486, 54163, 19532, 497, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1988055, 54665, 66, 1, 28, "Input"],
-Cell[1988124, 54668, 24187, 606, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2012348, 55279, 65, 1, 28, "Input"],
-Cell[2012416, 55282, 27439, 685, 73, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2039892, 55972, 71, 1, 28, "Input"],
-Cell[2039966, 55975, 43603, 1077, 73, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2083606, 57057, 63, 1, 28, "Input"],
-Cell[2083672, 57060, 39829, 1082, 84, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2123538, 58147, 60, 1, 28, "Input"],
-Cell[2123601, 58150, 13396, 367, 47, "Output"]
-}, Open  ]],
-Cell[2137012, 58520, 112, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[2137149, 58527, 64, 1, 28, "Input"],
-Cell[2137216, 58530, 13396, 367, 47, "Output"]
-}, Open  ]],
-Cell[2150627, 58900, 122, 3, 30, "Text"],
-Cell[2150752, 58905, 264, 7, 28, "Input"],
-Cell[2151019, 58914, 264, 7, 28, "Input"],
-Cell[2151286, 58923, 29, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[2151340, 58927, 525, 16, 28, "Input"],
-Cell[2151868, 58945, 4210, 117, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2156115, 59067, 1169, 35, 63, "Input"],
-Cell[2157287, 59104, 9827, 268, 47, "Output"]
-}, Open  ]],
-Cell[2167129, 59375, 61, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[2167215, 59379, 199, 5, 28, "Input"],
-Cell[2167417, 59386, 3285, 95, 37, "Output"]
-}, Open  ]],
-Cell[2170717, 59484, 87, 2, 28, "Input"],
-Cell[2170807, 59488, 64, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[2170896, 59492, 188, 4, 28, "Input"],
-Cell[2171087, 59498, 5211, 145, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2176335, 59648, 110, 2, 28, "Input"],
-Cell[2176448, 59652, 7242, 202, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2183727, 59859, 132, 4, 28, "Input"],
-Cell[2183862, 59865, 8252, 227, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2192151, 60097, 522, 14, 28, "Input"],
-Cell[2192676, 60113, 24244, 640, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2216957, 60758, 63, 1, 28, "Input"],
-Cell[2217023, 60761, 4794, 136, 54, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2221854, 60902, 64, 1, 28, "Input"],
-Cell[2221921, 60905, 6308, 176, 54, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2228266, 61086, 63, 1, 28, "Input"],
-Cell[2228332, 61089, 3467, 98, 37, "Output"]
-}, Open  ]],
-Cell[2231814, 61190, 1355, 39, 33, "Text"],
-Cell[2233172, 61231, 79, 2, 28, "Input"],
-Cell[2233254, 61235, 1462, 43, 33, "Text"],
-Cell[CellGroupData[{
-Cell[2234741, 61282, 47, 0, 28, "Input"],
-Cell[2234791, 61284, 3285, 95, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2238113, 61384, 132, 4, 28, "Input"],
-Cell[2238248, 61390, 4372, 123, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2242657, 61518, 133, 4, 28, "Input"],
-Cell[2242793, 61524, 5751, 160, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2248581, 61689, 145, 4, 28, "Input"],
-Cell[2248729, 61695, 3672, 100, 37, "Output"]
-}, Open  ]],
-Cell[2252416, 61798, 2839, 80, 55, "Text"]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[2255292, 61883, 64, 0, 36, "Subsection"],
-Cell[CellGroupData[{
-Cell[2255381, 61887, 38, 0, 28, "Input"],
-Cell[2255422, 61889, 9827, 268, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2265286, 62162, 175, 4, 28, "Input"],
-Cell[2265464, 62168, 11885, 324, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2277386, 62497, 53, 1, 28, "Input"],
-Cell[2277442, 62500, 55705, 1353, 135, "Output"]
-}, Open  ]],
-Cell[2333162, 63856, 83, 2, 28, "Input"],
-Cell[2333248, 63860, 84, 2, 28, "Input"],
-Cell[2333335, 63864, 89, 2, 28, "Input"],
-Cell[CellGroupData[{
-Cell[2333449, 63870, 63, 1, 28, "Input"],
-Cell[2333515, 63873, 117958, 3180, 232, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2451510, 67058, 167, 4, 28, "Input"],
-Cell[2451680, 67064, 18976, 516, 47, "Output"]
-}, Open  ]],
-Cell[2470671, 67583, 72, 2, 30, "Text"],
-Cell[CellGroupData[{
-Cell[2470768, 67589, 202, 5, 28, "Input"],
-Cell[2470973, 67596, 23071, 627, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2494081, 68228, 491, 16, 28, "Input"],
-Cell[2494575, 68246, 15834, 437, 47, "Output"]
-}, Open  ]],
-Cell[2510424, 68686, 22, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[2510471, 68690, 538, 16, 28, "Input"],
-Cell[2511012, 68708, 28, 0, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2511077, 68713, 191, 6, 28, "Input"],
-Cell[2511271, 68721, 28, 0, 28, "Output"]
-}, Open  ]],
-Cell[2511314, 68724, 55, 0, 30, "Text"],
-Cell[2511372, 68726, 342, 10, 28, "Input"],
-Cell[2511717, 68738, 29, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[2511771, 68742, 384, 12, 28, "Input"],
-Cell[2512158, 68756, 15348, 419, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2527543, 69180, 177, 4, 28, "Input"],
-Cell[2527723, 69186, 19464, 531, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2547224, 69722, 151, 4, 28, "Input"],
-Cell[2547378, 69728, 23761, 652, 73, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2571176, 70385, 132, 4, 28, "Input"],
-Cell[2571311, 70391, 26701, 711, 73, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2598049, 71107, 216, 6, 28, "Input"],
-Cell[2598268, 71115, 32632, 901, 84, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2630937, 72021, 60, 1, 28, "Input"],
-Cell[2631000, 72024, 13404, 372, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2644441, 72401, 64, 1, 28, "Input"],
-Cell[2644508, 72404, 14918, 412, 48, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2659463, 72821, 97, 2, 28, "Input"],
-Cell[2659563, 72825, 11107, 307, 47, "Output"]
-}, Open  ]],
-Cell[2670685, 73135, 54, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[2670764, 73139, 633, 19, 46, "Input"],
-Cell[2671400, 73160, 12409, 340, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2683846, 73505, 60, 1, 28, "Input"],
-Cell[2683909, 73508, 4561, 128, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2688507, 73641, 145, 4, 28, "Input"],
-Cell[2688655, 73647, 3828, 107, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2692520, 73759, 132, 4, 28, "Input"],
-Cell[2692655, 73765, 3082, 87, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2695774, 73857, 84, 1, 28, "Input"],
-Cell[2695861, 73860, 16402, 447, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2712300, 74312, 161, 4, 28, "Input"],
-Cell[2712464, 74318, 19943, 537, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2732444, 74860, 236, 6, 28, "Input"],
-Cell[2732683, 74868, 3362, 95, 37, "Output"]
-}, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[2736094, 74969, 164, 2, 36, "Subsection"],
-Cell[2736261, 74973, 251, 5, 30, "Text"],
-Cell[2736515, 74980, 291, 7, 28, "Input"],
-Cell[2736809, 74989, 112, 1, 30, "Text"],
-Cell[CellGroupData[{
-Cell[2736946, 74994, 687, 19, 28, "Input"],
-Cell[2737636, 75015, 5332, 151, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2743005, 75171, 123, 2, 28, "Input"],
-Cell[CellGroupData[{
-Cell[2743153, 75177, 96, 1, 21, "Print"],
-Cell[2743252, 75180, 363, 8, 22, "Print"],
-Cell[2743618, 75190, 135, 1, 22, "Print"],
-Cell[2743756, 75193, 96, 1, 21, "Print"],
-Cell[2743855, 75196, 251, 3, 38, "Print"],
-Cell[2744109, 75201, 96, 1, 21, "Print"]
-}, Open  ]]
-}, Open  ]],
-Cell[2744232, 75206, 146, 3, 28, "Input"],
-Cell[2744381, 75211, 234, 3, 30, "Text"],
-Cell[2744618, 75216, 1411, 34, 80, "Input"],
-Cell[2746032, 75252, 655, 17, 28, "Input"],
-Cell[2746690, 75271, 103, 1, 30, "Text"],
-Cell[CellGroupData[{
-Cell[2746818, 75276, 1124, 32, 46, "Input"],
-Cell[2747945, 75310, 5897, 182, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2753879, 75497, 111, 2, 28, "Input"],
-Cell[2753993, 75501, 5897, 182, 37, "Output"]
-}, Open  ]],
-Cell[2759905, 75686, 1327, 36, 52, "Text"],
-Cell[CellGroupData[{
-Cell[2761257, 75726, 386, 12, 28, "Input"],
-Cell[2761646, 75740, 3138, 90, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2764821, 75835, 132, 2, 28, "Input"],
-Cell[2764956, 75839, 9736, 274, 39, "Output"]
-}, Open  ]],
-Cell[2774707, 76116, 191, 3, 28, "Input"],
-Cell[CellGroupData[{
-Cell[2774923, 76123, 198, 6, 28, "Input"],
-Cell[2775124, 76131, 770, 32, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2775931, 76168, 52, 1, 28, "Input"],
-Cell[2775986, 76171, 5430, 213, 32, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2781453, 76389, 118, 2, 28, "Input"],
-Cell[2781574, 76393, 28046, 1089, 128, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2809657, 77487, 174, 3, 28, "Input"],
-Cell[2809834, 77492, 28, 0, 28, "Output"]
-}, Open  ]],
-Cell[2809877, 77495, 131, 1, 30, "Text"],
-Cell[CellGroupData[{
-Cell[2810033, 77500, 132, 2, 28, "Input"],
-Cell[2810168, 77504, 3265, 94, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2813470, 77603, 151, 3, 28, "Input"],
-Cell[2813624, 77608, 3625, 103, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2817286, 77716, 105, 2, 28, "Input"],
-Cell[2817394, 77720, 55884, 1560, 121, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2873315, 79285, 198, 3, 28, "Input"],
-Cell[2873516, 79290, 20896, 584, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2894449, 79879, 53, 1, 28, "Input"],
-Cell[2894505, 79882, 22666, 628, 53, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2917208, 80515, 66, 1, 28, "Input"],
-Cell[2917277, 80518, 14158, 436, 61, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2931472, 80959, 157, 3, 28, "Input"],
-Cell[2931632, 80964, 64924, 2032, 157, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2996593, 83001, 119, 2, 28, "Input"],
-Cell[2996715, 83005, 71916, 2210, 181, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3068668, 85220, 157, 3, 28, "Input"],
-Cell[3068828, 85225, 316860, 9986, 781, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3385725, 95216, 126, 2, 28, "Input"],
-Cell[3385854, 95220, 39660, 1250, 109, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3425551, 96475, 123, 2, 28, "Input"],
-Cell[3425677, 96479, 22058, 601, 61, "Output"]
-}, Open  ]],
-Cell[3447750, 97083, 103, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[3447878, 97090, 689, 24, 28, "Input"],
-Cell[3448570, 97116, 31, 0, 28, "Output"]
-}, Open  ]],
-Cell[3448616, 97119, 205, 4, 30, "Text"],
-Cell[CellGroupData[{
-Cell[3448846, 97127, 213, 4, 28, "Input"],
-Cell[3449062, 97133, 20755, 541, 61, "Output"]
-}, Open  ]],
-Cell[3469832, 97677, 162, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[3470019, 97684, 212, 4, 28, "Input"],
-Cell[CellGroupData[{
-Cell[3470256, 97692, 228, 6, 22, "Print"],
-Cell[3470487, 97700, 358, 8, 21, "Print"],
-Cell[3470848, 97710, 436, 9, 22, "Print"],
-Cell[3471287, 97721, 259, 7, 22, "Print"],
-Cell[3471549, 97730, 308, 6, 22, "Print"],
-Cell[3471860, 97738, 219, 5, 22, "Print"],
-Cell[3472082, 97745, 448, 10, 22, "Print"]
-}, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3472579, 97761, 157, 3, 28, "Input"],
-Cell[3472739, 97766, 45, 1, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3472821, 97772, 641, 19, 28, "Input"],
-Cell[3473465, 97793, 2624, 77, 42, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3476126, 97875, 124, 2, 28, "Input"],
-Cell[3476253, 97879, 2203, 62, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3478493, 97946, 128, 3, 28, "Input"],
-Cell[3478624, 97951, 2903, 80, 37, "Output"]
-}, Open  ]],
-Cell[3481542, 98034, 226, 5, 28, "Input"],
-Cell[3481771, 98041, 180, 4, 28, "Input"],
-Cell[3481954, 98047, 123, 1, 30, "Text"],
-Cell[3482080, 98050, 112, 1, 30, "Text"],
-Cell[CellGroupData[{
-Cell[3482217, 98055, 45, 0, 28, "Input"],
-Cell[3482265, 98057, 5332, 151, 47, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3487634, 98213, 151, 3, 28, "Input"],
-Cell[3487788, 98218, 6050, 168, 47, "Output"]
-}, Open  ]],
-Cell[3493853, 98389, 201, 4, 28, "Input"],
-Cell[CellGroupData[{
-Cell[3494079, 98397, 122, 2, 28, "Input"],
-Cell[3494204, 98401, 109354, 3056, 232, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3603595, 101462, 60, 1, 28, "Input"],
-Cell[3603658, 101465, 4403, 128, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3608098, 101598, 66, 1, 28, "Input"],
-Cell[3608167, 101601, 1631, 64, 28, "Output"]
-}, Open  ]],
-Cell[3609813, 101668, 146, 3, 28, "Input"],
-Cell[3609962, 101673, 95, 1, 30, "Text"],
-Cell[3610060, 101676, 896, 20, 46, "Input"],
-Cell[3610959, 101698, 123, 1, 30, "Text"],
-Cell[CellGroupData[{
-Cell[3611107, 101703, 1063, 29, 28, "Input"],
-Cell[3612173, 101734, 2873, 109, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3615083, 101848, 184, 4, 28, "Input"],
-Cell[3615270, 101854, 10762, 369, 46, "Output"]
-}, Open  ]],
-Cell[3626047, 102226, 155, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[3626227, 102233, 94, 2, 28, "Input"],
-Cell[3626324, 102237, 60839, 1962, 209, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3687200, 104204, 176, 3, 28, "Input"],
-Cell[3687379, 104209, 11302, 407, 52, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3698718, 104621, 344, 5, 28, "Input"],
-Cell[3699065, 104628, 2310, 86, 32, "Output"]
-}, Open  ]]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[3701424, 104720, 131, 1, 36, "Subsection"],
-Cell[3701558, 104723, 194, 4, 30, "Text"],
-Cell[3701755, 104729, 341, 9, 35, "Input"],
-Cell[3702099, 104740, 28, 0, 30, "Text"],
-Cell[CellGroupData[{
-Cell[3702152, 104744, 133, 4, 28, "Input"],
-Cell[3702288, 104750, 28, 0, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3702353, 104755, 124, 3, 28, "Input"],
-Cell[3702480, 104760, 28, 0, 28, "Output"]
-}, Open  ]],
-Cell[3702523, 104763, 162, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[3702710, 104770, 336, 11, 28, "Input"],
-Cell[3703049, 104783, 3255, 94, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3706341, 104882, 152, 3, 28, "Input"],
-Cell[3706496, 104887, 3615, 103, 37, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3710148, 104995, 231, 4, 28, "Input"],
-Cell[3710382, 105001, 55558, 1545, 85, "Output"]
-}, Open  ]],
-Cell[3765955, 106549, 162, 3, 30, "Text"],
-Cell[CellGroupData[{
-Cell[3766142, 106556, 60, 1, 28, "Input"],
-Cell[3766205, 106559, 55558, 1545, 85, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3821800, 108109, 66, 1, 28, "Input"],
-Cell[3821869, 108112, 32006, 1001, 85, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3853912, 109118, 124, 2, 28, "Input"],
-Cell[3854039, 109122, 3266, 125, 32, "Output"]
-}, Open  ]],
-Cell[3857320, 109250, 223, 4, 28, "Input"],
-Cell[3857546, 109256, 135, 1, 30, "Text"],
-Cell[CellGroupData[{
-Cell[3857706, 109261, 181, 3, 28, "Input"],
-Cell[3857890, 109266, 46141, 1540, 185, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3904068, 110811, 123, 2, 28, "Input"],
-Cell[3904194, 110815, 4399, 152, 35, "Output"]
-}, Open  ]]
-}, Closed]]
-}, Open  ]]
-}, Open  ]]
-}
-]
-*)
-
-(* End of internal cache information *)
