@@ -1933,7 +1933,7 @@ Cell[BoxData[
            RowBox[{"form", ",", "StandardForm"}], "]"}], ",", "\"\<]\>\""}], 
          "}"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", "]"}]}], 
   ";"}]], "Input"]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -1956,22 +1956,32 @@ derivative properties.]\
 \>", "Text"],
 
 Cell[BoxData[
- RowBox[{"DefInertHead", "[", 
-  RowBox[{"diff", ",", "\[IndentingNewLine]", 
-   RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
-   RowBox[{"ContractThrough", "\[Rule]", 
-    RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
-   RowBox[{"PrintAs", "\[Rule]", "\"\<d\>\""}]}], "\[IndentingNewLine]", 
-  "]"}]], "Input"],
+ RowBox[{
+  RowBox[{"DefGradedDerivation", "[", 
+   RowBox[{"diff", ",", "Wedge", ",", 
+    RowBox[{"+", "1"}], ",", 
+    RowBox[{"PrintAs", "\[Rule]", "\"\<d\>\""}]}], "]"}], ";"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"diff", "/:", 
-  RowBox[{"Grade", "[", 
-   RowBox[{
-    RowBox[{"diff", "[", "expr_", "]"}], ",", "Wedge"}], "]"}], ":=", 
-  RowBox[{"1", "+", 
+ RowBox[{"(*", "\[IndentingNewLine]", 
+  RowBox[{"DefInertHead", "[", 
+   RowBox[{"diff", ",", "\[IndentingNewLine]", 
+    RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"ContractThrough", "\[Rule]", 
+     RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{"PrintAs", "\[Rule]", "\"\<d\>\""}]}], "\[IndentingNewLine]", 
+   "]"}], "\[IndentingNewLine]", "*)"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"(*", "\[IndentingNewLine]", 
+  RowBox[{"diff", "/:", 
    RowBox[{"Grade", "[", 
-    RowBox[{"expr", ",", "Wedge"}], "]"}]}]}]], "Input"],
+    RowBox[{
+     RowBox[{"diff", "[", "expr_", "]"}], ",", "Wedge"}], "]"}], ":=", 
+   RowBox[{"1", "+", 
+    RowBox[{"Grade", "[", 
+     RowBox[{"expr", ",", "Wedge"}], "]"}]}]}], "\[IndentingNewLine]", 
+  "*)"}]], "Input"],
 
 Cell[CellGroupData[{
 
@@ -1999,38 +2009,43 @@ Cell[BoxData[
      " ", 
     RowBox[{"and", " ", "still", " ", "easily", " ", "readable"}]}], " ", 
    "*)"}], "\[IndentingNewLine]", 
-  RowBox[{
+  RowBox[{"(*", "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"diff", "[", "expr_Wedge", "]"}], ":=", 
-    RowBox[{"With", "[", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"grades", "=", 
+    RowBox[{
+     RowBox[{"diff", "[", "expr_Wedge", "]"}], ":=", 
+     RowBox[{"With", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"grades", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Grade", "[", 
+            RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
+          RowBox[{"List", "@@", "expr"}]}]}], "}"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Sum", "[", "\[IndentingNewLine]", 
         RowBox[{
          RowBox[{
-          RowBox[{"Grade", "[", 
-           RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
-         RowBox[{"List", "@@", "expr"}]}]}], "}"}], ",", 
-      "\[IndentingNewLine]", 
-      RowBox[{"Sum", "[", "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{
-         RowBox[{
-          RowBox[{"(", 
-           RowBox[{"-", "1"}], ")"}], "^", 
-          RowBox[{"Total", "[", 
-           RowBox[{"Take", "[", 
-            RowBox[{"grades", ",", 
-             RowBox[{"i", "-", "1"}]}], "]"}], "]"}]}], " ", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"-", "1"}], ")"}], "^", 
+           RowBox[{"Total", "[", 
+            RowBox[{"Take", "[", 
+             RowBox[{"grades", ",", 
+              RowBox[{"i", "-", "1"}]}], "]"}], "]"}]}], " ", 
+          "\[IndentingNewLine]", 
+          RowBox[{"MapAt", "[", 
+           RowBox[{"diff", ",", "expr", ",", "i"}], "]"}]}], ",", 
          "\[IndentingNewLine]", 
-         RowBox[{"MapAt", "[", 
-          RowBox[{"diff", ",", "expr", ",", "i"}], "]"}]}], ",", 
-        "\[IndentingNewLine]", 
-        RowBox[{"{", 
-         RowBox[{"i", ",", "1", ",", 
-          RowBox[{"Length", "[", "expr", "]"}]}], "}"}]}], 
-       "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
-   ";"}]}]], "Input"],
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", 
+           RowBox[{"Length", "[", "expr", "]"}]}], "}"}]}], 
+        "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], ";"}],
+    "\[IndentingNewLine]", "*)"}]}]], "Input"],
+
+Cell["\<\
+Still need definition when acting on Times\
+\>", "Text"],
 
 Cell[BoxData[
  RowBox[{
@@ -2139,18 +2154,25 @@ Cell[BoxData[
       RowBox[{"expr_", ",", "form_"}], "]"}], ":=", 
      RowBox[{"Wedge", "[", 
       RowBox[{
-       RowBox[{"diff", "[", "expr", "]"}], ",", "form"}], "]"}]}], 
-    ";"}]}]}]], "Input"],
+       RowBox[{"diff", "[", "expr", "]"}], ",", "form"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"diff0", "[", "expr_", "]"}], ":=", 
+     RowBox[{"diff", "[", "expr", "]"}]}], ";"}]}]}]], "Input"],
 
 Cell[BoxData[
- RowBox[{
+ RowBox[{"(*", "\[IndentingNewLine]", 
   RowBox[{
-   RowBox[{"diff", "[", 
-    RowBox[{
-     RowBox[{"func_", "?", "ScalarFunctionQ"}], "[", "args__", "]"}], "]"}], ":=", 
-   RowBox[{"xAct`xTensor`Private`multiD", "[", 
-    RowBox[{"diff", ",", 
-     RowBox[{"func", "[", "args", "]"}]}], "]"}]}], ";"}]], "Input"],
+   RowBox[{
+    RowBox[{"diff", "[", 
+     RowBox[{
+      RowBox[{"func_", "?", "ScalarFunctionQ"}], "[", "args__", "]"}], "]"}], 
+    ":=", 
+    RowBox[{"xAct`xTensor`Private`multiD", "[", 
+     RowBox[{"diff", ",", 
+      RowBox[{"func", "[", "args", "]"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "*)"}]], "Input"],
 
 Cell["The exterior derivative applied twice is zero:", "Text"],
 
@@ -2894,302 +2916,290 @@ Cell[BoxData[
      AutoSpacing->False],
     $CellContext`A0[],
     Editable->False], " ", 
-   RowBox[{
-    InterpretationBox[
-     StyleBox[
-      RowBox[{"d", "[", 
-       InterpretationBox[
-        StyleBox[GridBox[{
-           {"\[Omega]1", 
-            StyleBox[GridBox[{
-               {"a"},
-               {" "}
-              },
-              GridBoxSpacings->{"Columns" -> {
-                  Offset[0.], {
-                   Offset[0.034999999999999996`]}, 
-                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                   Offset[0.]}}, "RowsIndexed" -> {}}],
-             FontSize->Rational[39, 4]]}
-          },
-          
-          GridBoxAlignment->{
-           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-          GridBoxSpacings->{"Columns" -> {
-              Offset[0.27999999999999997`], {
-               Offset[0.034999999999999996`]}, 
-              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-              Offset[0.2], {
-               Offset[0.4]}, 
-              Offset[0.2]}, "RowsIndexed" -> {}}],
-         ShowAutoStyles->False,
-         AutoSpacing->False],
-        $CellContext`\[Omega]1[$CellContext`a],
-        Editable->False], "]"}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`diff[
-      $CellContext`\[Omega]1[$CellContext`a]],
-     Editable->False], "\[Wedge]", 
-    InterpretationBox[
-     StyleBox[GridBox[{
-        {"\[Omega]2", 
-         StyleBox[GridBox[{
-            {"b", "c"},
-            {" ", " "}
-           },
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                Offset[0.]}}, "RowsIndexed" -> {}}],
-          FontSize->Rational[39, 4]]}
-       },
-       GridBoxAlignment->{
-        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
-          "RowsIndexed" -> {}},
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.034999999999999996`]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.4]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
-     Editable->False], "\[Wedge]", 
-    InterpretationBox[
-     StyleBox[GridBox[{
-        {"\[Omega]3", 
-         StyleBox[GridBox[{
-            {"d", "e"},
-            {" ", " "}
-           },
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                Offset[0.]}}, "RowsIndexed" -> {}}],
-          FontSize->Rational[39, 4]]}
-       },
-       GridBoxAlignment->{
-        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
-          "RowsIndexed" -> {}},
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.034999999999999996`]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.4]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
-     Editable->False]}]}], "-", 
-  RowBox[{
-   InterpretationBox[
-    StyleBox["A0",
-     ShowAutoStyles->False,
-     AutoSpacing->False],
-    $CellContext`A0[],
-    Editable->False], " ", 
-   RowBox[{
-    InterpretationBox[
-     StyleBox[GridBox[{
-        {"\[Omega]1", 
-         StyleBox[GridBox[{
-            {"a"},
-            {" "}
-           },
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                Offset[0.]}}, "RowsIndexed" -> {}}],
-          FontSize->Rational[39, 4]]}
-       },
-       GridBoxAlignment->{
-        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
-          "RowsIndexed" -> {}},
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.034999999999999996`]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.4]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`\[Omega]1[$CellContext`a],
-     Editable->False], "\[Wedge]", 
-    InterpretationBox[
-     StyleBox[
-      RowBox[{"d", "[", 
-       InterpretationBox[
-        StyleBox[GridBox[{
-           {"\[Omega]2", 
-            StyleBox[GridBox[{
-               {"b", "c"},
-               {" ", " "}
-              },
-              GridBoxSpacings->{"Columns" -> {
-                  Offset[0.], {
-                   Offset[0.034999999999999996`]}, 
-                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                   Offset[0.]}}, "RowsIndexed" -> {}}],
-             FontSize->Rational[39, 4]]}
-          },
-          
-          GridBoxAlignment->{
-           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-          GridBoxSpacings->{"Columns" -> {
-              Offset[0.27999999999999997`], {
-               Offset[0.034999999999999996`]}, 
-              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-              Offset[0.2], {
-               Offset[0.4]}, 
-              Offset[0.2]}, "RowsIndexed" -> {}}],
-         ShowAutoStyles->False,
-         AutoSpacing->False],
-        $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
-        Editable->False], "]"}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`diff[
-      $CellContext`\[Omega]2[$CellContext`b, $CellContext`c]],
-     Editable->False], "\[Wedge]", 
-    InterpretationBox[
-     StyleBox[GridBox[{
-        {"\[Omega]3", 
-         StyleBox[GridBox[{
-            {"d", "e"},
-            {" ", " "}
-           },
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                Offset[0.]}}, "RowsIndexed" -> {}}],
-          FontSize->Rational[39, 4]]}
-       },
-       GridBoxAlignment->{
-        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
-          "RowsIndexed" -> {}},
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.034999999999999996`]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.4]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
-     Editable->False]}]}], "-", 
-  RowBox[{
-   InterpretationBox[
-    StyleBox["A0",
-     ShowAutoStyles->False,
-     AutoSpacing->False],
-    $CellContext`A0[],
-    Editable->False], " ", 
-   RowBox[{
-    InterpretationBox[
-     StyleBox[GridBox[{
-        {"\[Omega]1", 
-         StyleBox[GridBox[{
-            {"a"},
-            {" "}
-           },
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                Offset[0.]}}, "RowsIndexed" -> {}}],
-          FontSize->Rational[39, 4]]}
-       },
-       GridBoxAlignment->{
-        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
-          "RowsIndexed" -> {}},
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.034999999999999996`]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.4]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`\[Omega]1[$CellContext`a],
-     Editable->False], "\[Wedge]", 
-    InterpretationBox[
-     StyleBox[GridBox[{
-        {"\[Omega]2", 
-         StyleBox[GridBox[{
-            {"b", "c"},
-            {" ", " "}
-           },
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                Offset[0.]}}, "RowsIndexed" -> {}}],
-          FontSize->Rational[39, 4]]}
-       },
-       GridBoxAlignment->{
-        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
-          "RowsIndexed" -> {}},
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.034999999999999996`]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.4]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
-     Editable->False], "\[Wedge]", 
-    InterpretationBox[
-     StyleBox[
-      RowBox[{"d", "[", 
-       InterpretationBox[
-        StyleBox[GridBox[{
-           {"\[Omega]3", 
-            StyleBox[GridBox[{
-               {"d", "e"},
-               {" ", " "}
-              },
-              GridBoxSpacings->{"Columns" -> {
-                  Offset[0.], {
-                   Offset[0.034999999999999996`]}, 
-                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                   Offset[0.]}}, "RowsIndexed" -> {}}],
-             FontSize->Rational[39, 4]]}
-          },
-          
-          GridBoxAlignment->{
-           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-          GridBoxSpacings->{"Columns" -> {
-              Offset[0.27999999999999997`], {
-               Offset[0.034999999999999996`]}, 
-              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-              Offset[0.2], {
-               Offset[0.4]}, 
-              Offset[0.2]}, "RowsIndexed" -> {}}],
-         ShowAutoStyles->False,
-         AutoSpacing->False],
-        $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
-        Editable->False], "]"}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`diff[
-      $CellContext`\[Omega]3[$CellContext`d, $CellContext`e]],
-     Editable->False]}]}], "+", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      InterpretationBox[
+       StyleBox[
+        RowBox[{"d", "[", 
+         InterpretationBox[
+          StyleBox[GridBox[{
+             {"\[Omega]1", 
+              StyleBox[GridBox[{
+                 {"a"},
+                 {" "}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+               FontSize->Rational[39, 4]]}
+            },
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.034999999999999996`]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.4]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           ShowAutoStyles->False,
+           AutoSpacing->False],
+          $CellContext`\[Omega]1[$CellContext`a],
+          Editable->False], "]"}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`diff[
+        $CellContext`\[Omega]1[$CellContext`a]],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {"\[Omega]2", 
+           StyleBox[GridBox[{
+              {"b", "c"},
+              {" ", " "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {"\[Omega]3", 
+           StyleBox[GridBox[{
+              {"d", "e"},
+              {" ", " "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
+       Editable->False]}], "-", 
+     RowBox[{
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {"\[Omega]1", 
+           StyleBox[GridBox[{
+              {"a"},
+              {" "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`\[Omega]1[$CellContext`a],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[
+        RowBox[{"d", "[", 
+         InterpretationBox[
+          StyleBox[GridBox[{
+             {"\[Omega]2", 
+              StyleBox[GridBox[{
+                 {"b", "c"},
+                 {" ", " "}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+               FontSize->Rational[39, 4]]}
+            },
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.034999999999999996`]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.4]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           ShowAutoStyles->False,
+           AutoSpacing->False],
+          $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
+          Editable->False], "]"}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`diff[
+        $CellContext`\[Omega]2[$CellContext`b, $CellContext`c]],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {"\[Omega]3", 
+           StyleBox[GridBox[{
+              {"d", "e"},
+              {" ", " "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
+       Editable->False]}], "-", 
+     RowBox[{
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {"\[Omega]1", 
+           StyleBox[GridBox[{
+              {"a"},
+              {" "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`\[Omega]1[$CellContext`a],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {"\[Omega]2", 
+           StyleBox[GridBox[{
+              {"b", "c"},
+              {" ", " "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[
+        RowBox[{"d", "[", 
+         InterpretationBox[
+          StyleBox[GridBox[{
+             {"\[Omega]3", 
+              StyleBox[GridBox[{
+                 {"d", "e"},
+                 {" ", " "}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+               FontSize->Rational[39, 4]]}
+            },
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.034999999999999996`]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.4]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           ShowAutoStyles->False,
+           AutoSpacing->False],
+          $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
+          Editable->False], "]"}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`diff[
+        $CellContext`\[Omega]3[$CellContext`d, $CellContext`e]],
+       Editable->False]}]}], ")"}]}], "+", 
   RowBox[{
    InterpretationBox[
     StyleBox[
@@ -3718,109 +3728,214 @@ Cell[BoxData[
       AutoSpacing->False],
      $CellContext`A0[],
      Editable->False]}], " ", 
-   RowBox[{
-    InterpretationBox[
-     StyleBox[
-      RowBox[{"d", "[", 
-       InterpretationBox[
-        StyleBox[GridBox[{
-           {"\[Omega]1", 
-            StyleBox[GridBox[{
-               {"a"},
-               {" "}
-              },
-              GridBoxSpacings->{"Columns" -> {
-                  Offset[0.], {
-                   Offset[0.034999999999999996`]}, 
-                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                   Offset[0.]}}, "RowsIndexed" -> {}}],
-             FontSize->Rational[39, 4]]}
-          },
-          
-          GridBoxAlignment->{
-           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-          GridBoxSpacings->{"Columns" -> {
-              Offset[0.27999999999999997`], {
-               Offset[0.034999999999999996`]}, 
-              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-              Offset[0.2], {
-               Offset[0.4]}, 
-              Offset[0.2]}, "RowsIndexed" -> {}}],
-         ShowAutoStyles->False,
-         AutoSpacing->False],
-        $CellContext`\[Omega]1[$CellContext`a],
-        Editable->False], "]"}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`diff[
-      $CellContext`\[Omega]1[$CellContext`a]],
-     Editable->False], "\[Wedge]", 
-    InterpretationBox[
-     StyleBox[
-      RowBox[{"d", "[", 
-       InterpretationBox[
-        StyleBox[GridBox[{
-           {"\[Omega]3", 
-            StyleBox[GridBox[{
-               {"d", "e"},
-               {" ", " "}
-              },
-              GridBoxSpacings->{"Columns" -> {
-                  Offset[0.], {
-                   Offset[0.034999999999999996`]}, 
-                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                   Offset[0.]}}, "RowsIndexed" -> {}}],
-             FontSize->Rational[39, 4]]}
-          },
-          
-          GridBoxAlignment->{
-           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-          GridBoxSpacings->{"Columns" -> {
-              Offset[0.27999999999999997`], {
-               Offset[0.034999999999999996`]}, 
-              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-              Offset[0.2], {
-               Offset[0.4]}, 
-              Offset[0.2]}, "RowsIndexed" -> {}}],
-         ShowAutoStyles->False,
-         AutoSpacing->False],
-        $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
-        Editable->False], "]"}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`diff[
-      $CellContext`\[Omega]3[$CellContext`d, $CellContext`e]],
-     Editable->False], "\[Wedge]", 
-    InterpretationBox[
-     StyleBox[GridBox[{
-        {"\[Omega]2", 
-         StyleBox[GridBox[{
-            {"b", "c"},
-            {" ", " "}
-           },
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                Offset[0.]}}, "RowsIndexed" -> {}}],
-          FontSize->Rational[39, 4]]}
-       },
-       GridBoxAlignment->{
-        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
-          "RowsIndexed" -> {}},
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.034999999999999996`]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.4]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
-     Editable->False]}]}], "+", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      InterpretationBox[
+       StyleBox[
+        RowBox[{"d", "[", 
+         InterpretationBox[
+          StyleBox[GridBox[{
+             {"\[Omega]1", 
+              StyleBox[GridBox[{
+                 {"a"},
+                 {" "}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+               FontSize->Rational[39, 4]]}
+            },
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.034999999999999996`]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.4]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           ShowAutoStyles->False,
+           AutoSpacing->False],
+          $CellContext`\[Omega]1[$CellContext`a],
+          Editable->False], "]"}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`diff[
+        $CellContext`\[Omega]1[$CellContext`a]],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[
+        RowBox[{"d", "[", 
+         InterpretationBox[
+          StyleBox[GridBox[{
+             {"\[Omega]3", 
+              StyleBox[GridBox[{
+                 {"d", "e"},
+                 {" ", " "}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+               FontSize->Rational[39, 4]]}
+            },
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.034999999999999996`]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.4]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           ShowAutoStyles->False,
+           AutoSpacing->False],
+          $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
+          Editable->False], "]"}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`diff[
+        $CellContext`\[Omega]3[$CellContext`d, $CellContext`e]],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {"\[Omega]2", 
+           StyleBox[GridBox[{
+              {"b", "c"},
+              {" ", " "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
+       Editable->False]}], "-", 
+     RowBox[{
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {"\[Omega]1", 
+           StyleBox[GridBox[{
+              {"a"},
+              {" "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`\[Omega]1[$CellContext`a],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[
+        RowBox[{"d", "[", 
+         InterpretationBox[
+          StyleBox[GridBox[{
+             {"\[Omega]3", 
+              StyleBox[GridBox[{
+                 {"d", "e"},
+                 {" ", " "}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+               FontSize->Rational[39, 4]]}
+            },
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.034999999999999996`]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.4]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           ShowAutoStyles->False,
+           AutoSpacing->False],
+          $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
+          Editable->False], "]"}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`diff[
+        $CellContext`\[Omega]3[$CellContext`d, $CellContext`e]],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[
+        RowBox[{"d", "[", 
+         InterpretationBox[
+          StyleBox[GridBox[{
+             {"\[Omega]2", 
+              StyleBox[GridBox[{
+                 {"b", "c"},
+                 {" ", " "}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+               FontSize->Rational[39, 4]]}
+            },
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.034999999999999996`]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.4]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           ShowAutoStyles->False,
+           AutoSpacing->False],
+          $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
+          Editable->False], "]"}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`diff[
+        $CellContext`\[Omega]2[$CellContext`b, $CellContext`c]],
+       Editable->False]}]}], ")"}]}], "+", 
   RowBox[{
    InterpretationBox[
     StyleBox["A0",
@@ -3828,109 +3943,214 @@ Cell[BoxData[
      AutoSpacing->False],
     $CellContext`A0[],
     Editable->False], " ", 
-   RowBox[{
-    InterpretationBox[
-     StyleBox[
-      RowBox[{"d", "[", 
-       InterpretationBox[
-        StyleBox[GridBox[{
-           {"\[Omega]1", 
-            StyleBox[GridBox[{
-               {"a"},
-               {" "}
-              },
-              GridBoxSpacings->{"Columns" -> {
-                  Offset[0.], {
-                   Offset[0.034999999999999996`]}, 
-                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                   Offset[0.]}}, "RowsIndexed" -> {}}],
-             FontSize->Rational[39, 4]]}
-          },
-          
-          GridBoxAlignment->{
-           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-          GridBoxSpacings->{"Columns" -> {
-              Offset[0.27999999999999997`], {
-               Offset[0.034999999999999996`]}, 
-              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-              Offset[0.2], {
-               Offset[0.4]}, 
-              Offset[0.2]}, "RowsIndexed" -> {}}],
-         ShowAutoStyles->False,
-         AutoSpacing->False],
-        $CellContext`\[Omega]1[$CellContext`a],
-        Editable->False], "]"}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`diff[
-      $CellContext`\[Omega]1[$CellContext`a]],
-     Editable->False], "\[Wedge]", 
-    InterpretationBox[
-     StyleBox[GridBox[{
-        {"\[Omega]3", 
-         StyleBox[GridBox[{
-            {"d", "e"},
-            {" ", " "}
-           },
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                Offset[0.]}}, "RowsIndexed" -> {}}],
-          FontSize->Rational[39, 4]]}
-       },
-       GridBoxAlignment->{
-        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
-          "RowsIndexed" -> {}},
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.034999999999999996`]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.4]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
-     Editable->False], "\[Wedge]", 
-    InterpretationBox[
-     StyleBox[
-      RowBox[{"d", "[", 
-       InterpretationBox[
-        StyleBox[GridBox[{
-           {"\[Omega]2", 
-            StyleBox[GridBox[{
-               {"b", "c"},
-               {" ", " "}
-              },
-              GridBoxSpacings->{"Columns" -> {
-                  Offset[0.], {
-                   Offset[0.034999999999999996`]}, 
-                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                   Offset[0.]}}, "RowsIndexed" -> {}}],
-             FontSize->Rational[39, 4]]}
-          },
-          
-          GridBoxAlignment->{
-           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-          GridBoxSpacings->{"Columns" -> {
-              Offset[0.27999999999999997`], {
-               Offset[0.034999999999999996`]}, 
-              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-              Offset[0.2], {
-               Offset[0.4]}, 
-              Offset[0.2]}, "RowsIndexed" -> {}}],
-         ShowAutoStyles->False,
-         AutoSpacing->False],
-        $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
-        Editable->False], "]"}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`diff[
-      $CellContext`\[Omega]2[$CellContext`b, $CellContext`c]],
-     Editable->False]}]}], "+", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      InterpretationBox[
+       StyleBox[
+        RowBox[{"d", "[", 
+         InterpretationBox[
+          StyleBox[GridBox[{
+             {"\[Omega]1", 
+              StyleBox[GridBox[{
+                 {"a"},
+                 {" "}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+               FontSize->Rational[39, 4]]}
+            },
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.034999999999999996`]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.4]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           ShowAutoStyles->False,
+           AutoSpacing->False],
+          $CellContext`\[Omega]1[$CellContext`a],
+          Editable->False], "]"}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`diff[
+        $CellContext`\[Omega]1[$CellContext`a]],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {"\[Omega]3", 
+           StyleBox[GridBox[{
+              {"d", "e"},
+              {" ", " "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[
+        RowBox[{"d", "[", 
+         InterpretationBox[
+          StyleBox[GridBox[{
+             {"\[Omega]2", 
+              StyleBox[GridBox[{
+                 {"b", "c"},
+                 {" ", " "}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+               FontSize->Rational[39, 4]]}
+            },
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.034999999999999996`]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.4]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           ShowAutoStyles->False,
+           AutoSpacing->False],
+          $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
+          Editable->False], "]"}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`diff[
+        $CellContext`\[Omega]2[$CellContext`b, $CellContext`c]],
+       Editable->False]}], "-", 
+     RowBox[{
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {"\[Omega]1", 
+           StyleBox[GridBox[{
+              {"a"},
+              {" "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`\[Omega]1[$CellContext`a],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[
+        RowBox[{"d", "[", 
+         InterpretationBox[
+          StyleBox[GridBox[{
+             {"\[Omega]3", 
+              StyleBox[GridBox[{
+                 {"d", "e"},
+                 {" ", " "}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+               FontSize->Rational[39, 4]]}
+            },
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.034999999999999996`]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.4]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           ShowAutoStyles->False,
+           AutoSpacing->False],
+          $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
+          Editable->False], "]"}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`diff[
+        $CellContext`\[Omega]3[$CellContext`d, $CellContext`e]],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[
+        RowBox[{"d", "[", 
+         InterpretationBox[
+          StyleBox[GridBox[{
+             {"\[Omega]2", 
+              StyleBox[GridBox[{
+                 {"b", "c"},
+                 {" ", " "}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+               FontSize->Rational[39, 4]]}
+            },
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.034999999999999996`]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.4]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           ShowAutoStyles->False,
+           AutoSpacing->False],
+          $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
+          Editable->False], "]"}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`diff[
+        $CellContext`\[Omega]2[$CellContext`b, $CellContext`c]],
+       Editable->False]}]}], ")"}]}], "+", 
   RowBox[{
    InterpretationBox[
     StyleBox["A0",
@@ -3938,219 +4158,214 @@ Cell[BoxData[
      AutoSpacing->False],
     $CellContext`A0[],
     Editable->False], " ", 
-   RowBox[{
-    InterpretationBox[
-     StyleBox[
-      RowBox[{"d", "[", 
-       InterpretationBox[
-        StyleBox[GridBox[{
-           {"\[Omega]3", 
-            StyleBox[GridBox[{
-               {"d", "e"},
-               {" ", " "}
-              },
-              GridBoxSpacings->{"Columns" -> {
-                  Offset[0.], {
-                   Offset[0.034999999999999996`]}, 
-                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                   Offset[0.]}}, "RowsIndexed" -> {}}],
-             FontSize->Rational[39, 4]]}
-          },
-          
-          GridBoxAlignment->{
-           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-          GridBoxSpacings->{"Columns" -> {
-              Offset[0.27999999999999997`], {
-               Offset[0.034999999999999996`]}, 
-              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-              Offset[0.2], {
-               Offset[0.4]}, 
-              Offset[0.2]}, "RowsIndexed" -> {}}],
-         ShowAutoStyles->False,
-         AutoSpacing->False],
-        $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
-        Editable->False], "]"}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`diff[
-      $CellContext`\[Omega]3[$CellContext`d, $CellContext`e]],
-     Editable->False], "\[Wedge]", 
-    InterpretationBox[
-     StyleBox[
-      RowBox[{"d", "[", 
-       InterpretationBox[
-        StyleBox[GridBox[{
-           {"\[Omega]1", 
-            StyleBox[GridBox[{
-               {"a"},
-               {" "}
-              },
-              GridBoxSpacings->{"Columns" -> {
-                  Offset[0.], {
-                   Offset[0.034999999999999996`]}, 
-                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                   Offset[0.]}}, "RowsIndexed" -> {}}],
-             FontSize->Rational[39, 4]]}
-          },
-          
-          GridBoxAlignment->{
-           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-          GridBoxSpacings->{"Columns" -> {
-              Offset[0.27999999999999997`], {
-               Offset[0.034999999999999996`]}, 
-              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-              Offset[0.2], {
-               Offset[0.4]}, 
-              Offset[0.2]}, "RowsIndexed" -> {}}],
-         ShowAutoStyles->False,
-         AutoSpacing->False],
-        $CellContext`\[Omega]1[$CellContext`a],
-        Editable->False], "]"}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`diff[
-      $CellContext`\[Omega]1[$CellContext`a]],
-     Editable->False], "\[Wedge]", 
-    InterpretationBox[
-     StyleBox[GridBox[{
-        {"\[Omega]2", 
-         StyleBox[GridBox[{
-            {"b", "c"},
-            {" ", " "}
-           },
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                Offset[0.]}}, "RowsIndexed" -> {}}],
-          FontSize->Rational[39, 4]]}
-       },
-       GridBoxAlignment->{
-        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
-          "RowsIndexed" -> {}},
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.034999999999999996`]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.4]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
-     Editable->False]}]}], "-", 
-  RowBox[{
-   InterpretationBox[
-    StyleBox["A0",
-     ShowAutoStyles->False,
-     AutoSpacing->False],
-    $CellContext`A0[],
-    Editable->False], " ", 
-   RowBox[{
-    InterpretationBox[
-     StyleBox[GridBox[{
-        {"\[Omega]3", 
-         StyleBox[GridBox[{
-            {"d", "e"},
-            {" ", " "}
-           },
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                Offset[0.]}}, "RowsIndexed" -> {}}],
-          FontSize->Rational[39, 4]]}
-       },
-       GridBoxAlignment->{
-        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
-          "RowsIndexed" -> {}},
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.034999999999999996`]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.4]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
-     Editable->False], "\[Wedge]", 
-    InterpretationBox[
-     StyleBox[
-      RowBox[{"d", "[", 
-       InterpretationBox[
-        StyleBox[GridBox[{
-           {"\[Omega]1", 
-            StyleBox[GridBox[{
-               {"a"},
-               {" "}
-              },
-              GridBoxSpacings->{"Columns" -> {
-                  Offset[0.], {
-                   Offset[0.034999999999999996`]}, 
-                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                   Offset[0.]}}, "RowsIndexed" -> {}}],
-             FontSize->Rational[39, 4]]}
-          },
-          
-          GridBoxAlignment->{
-           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-          GridBoxSpacings->{"Columns" -> {
-              Offset[0.27999999999999997`], {
-               Offset[0.034999999999999996`]}, 
-              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-              Offset[0.2], {
-               Offset[0.4]}, 
-              Offset[0.2]}, "RowsIndexed" -> {}}],
-         ShowAutoStyles->False,
-         AutoSpacing->False],
-        $CellContext`\[Omega]1[$CellContext`a],
-        Editable->False], "]"}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`diff[
-      $CellContext`\[Omega]1[$CellContext`a]],
-     Editable->False], "\[Wedge]", 
-    InterpretationBox[
-     StyleBox[
-      RowBox[{"d", "[", 
-       InterpretationBox[
-        StyleBox[GridBox[{
-           {"\[Omega]2", 
-            StyleBox[GridBox[{
-               {"b", "c"},
-               {" ", " "}
-              },
-              GridBoxSpacings->{"Columns" -> {
-                  Offset[0.], {
-                   Offset[0.034999999999999996`]}, 
-                  Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                   Offset[0.]}}, "RowsIndexed" -> {}}],
-             FontSize->Rational[39, 4]]}
-          },
-          
-          GridBoxAlignment->{
-           "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-            "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-          GridBoxSpacings->{"Columns" -> {
-              Offset[0.27999999999999997`], {
-               Offset[0.034999999999999996`]}, 
-              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-              Offset[0.2], {
-               Offset[0.4]}, 
-              Offset[0.2]}, "RowsIndexed" -> {}}],
-         ShowAutoStyles->False,
-         AutoSpacing->False],
-        $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
-        Editable->False], "]"}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`diff[
-      $CellContext`\[Omega]2[$CellContext`b, $CellContext`c]],
-     Editable->False]}]}], "-", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      InterpretationBox[
+       StyleBox[
+        RowBox[{"d", "[", 
+         InterpretationBox[
+          StyleBox[GridBox[{
+             {"\[Omega]3", 
+              StyleBox[GridBox[{
+                 {"d", "e"},
+                 {" ", " "}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+               FontSize->Rational[39, 4]]}
+            },
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.034999999999999996`]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.4]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           ShowAutoStyles->False,
+           AutoSpacing->False],
+          $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
+          Editable->False], "]"}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`diff[
+        $CellContext`\[Omega]3[$CellContext`d, $CellContext`e]],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[
+        RowBox[{"d", "[", 
+         InterpretationBox[
+          StyleBox[GridBox[{
+             {"\[Omega]1", 
+              StyleBox[GridBox[{
+                 {"a"},
+                 {" "}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+               FontSize->Rational[39, 4]]}
+            },
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.034999999999999996`]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.4]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           ShowAutoStyles->False,
+           AutoSpacing->False],
+          $CellContext`\[Omega]1[$CellContext`a],
+          Editable->False], "]"}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`diff[
+        $CellContext`\[Omega]1[$CellContext`a]],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {"\[Omega]2", 
+           StyleBox[GridBox[{
+              {"b", "c"},
+              {" ", " "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
+       Editable->False]}], "-", 
+     RowBox[{
+      InterpretationBox[
+       StyleBox[GridBox[{
+          {"\[Omega]3", 
+           StyleBox[GridBox[{
+              {"d", "e"},
+              {" ", " "}
+             },
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.], {
+                  Offset[0.034999999999999996`]}, 
+                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                  Offset[0.]}}, "RowsIndexed" -> {}}],
+            FontSize->Rational[39, 4]]}
+         },
+         GridBoxAlignment->{
+          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}, "RowsIndexed" -> {}}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`\[Omega]3[$CellContext`d, $CellContext`e],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[
+        RowBox[{"d", "[", 
+         InterpretationBox[
+          StyleBox[GridBox[{
+             {"\[Omega]1", 
+              StyleBox[GridBox[{
+                 {"a"},
+                 {" "}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+               FontSize->Rational[39, 4]]}
+            },
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.034999999999999996`]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.4]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           ShowAutoStyles->False,
+           AutoSpacing->False],
+          $CellContext`\[Omega]1[$CellContext`a],
+          Editable->False], "]"}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`diff[
+        $CellContext`\[Omega]1[$CellContext`a]],
+       Editable->False], "\[Wedge]", 
+      InterpretationBox[
+       StyleBox[
+        RowBox[{"d", "[", 
+         InterpretationBox[
+          StyleBox[GridBox[{
+             {"\[Omega]2", 
+              StyleBox[GridBox[{
+                 {"b", "c"},
+                 {" ", " "}
+                },
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.], {
+                    Offset[0.034999999999999996`]}, 
+                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                    Offset[0.]}}, "RowsIndexed" -> {}}],
+               FontSize->Rational[39, 4]]}
+            },
+            
+            GridBoxAlignment->{
+             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.034999999999999996`]}, 
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[0.4]}, 
+                Offset[0.2]}, "RowsIndexed" -> {}}],
+           ShowAutoStyles->False,
+           AutoSpacing->False],
+          $CellContext`\[Omega]2[$CellContext`b, $CellContext`c],
+          Editable->False], "]"}],
+        ShowAutoStyles->False,
+        AutoSpacing->False],
+       $CellContext`diff[
+        $CellContext`\[Omega]2[$CellContext`b, $CellContext`c]],
+       Editable->False]}]}], ")"}]}], "-", 
   RowBox[{
    InterpretationBox[
     StyleBox[
@@ -25059,7 +25274,6 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
               FontSize->Rational[39, 4]]}
            },
-           
            GridBoxAlignment->{
             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -25277,6 +25491,7 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
               FontSize->Rational[39, 4]]}
            },
+           
            GridBoxAlignment->{
             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -35289,7 +35504,6 @@ $CellContext`metricg],
                     Offset[0.]}}, "RowsIndexed" -> {}}],
               FontSize->Rational[39, 4]]}
            },
-           
            GridBoxAlignment->{
             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -35505,6 +35719,7 @@ $CellContext`metricg],
                     Offset[0.]}}, "RowsIndexed" -> {}}],
               FontSize->Rational[39, 4]]}
            },
+           
            GridBoxAlignment->{
             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -47758,7 +47973,6 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                 FontSize->Rational[39, 4]]}
              },
-             
              GridBoxAlignment->{
               "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -47934,6 +48148,7 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                 FontSize->Rational[39, 4]]}
              },
+             
              GridBoxAlignment->{
               "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                "Rows" -> {{Center}}, "RowsIndexed" -> {}},
