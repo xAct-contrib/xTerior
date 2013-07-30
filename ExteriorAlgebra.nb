@@ -1715,45 +1715,158 @@ Cell[BoxData[
    RowBox[{"diff", "[", 
     RowBox[{"x_", "?", "ConstantQ"}], "]"}], ":=", "0"}], ";"}]], "Input"],
 
+Cell["Leibniz rule:", "Text"],
+
 Cell[BoxData[
  RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"This", " ", "is", " ", "close", " ", "to", " ", "optimal"}], ",",
+     " ", 
+    RowBox[{"and", " ", "still", " ", "easily", " ", "readable"}]}], " ", 
+   "*)"}], "\[IndentingNewLine]", 
   RowBox[{
-   RowBox[{"diff", "[", 
-    RowBox[{"HoldPattern", "@", 
+   RowBox[{
+    RowBox[{"diff", "[", "expr_Wedge", "]"}], ":=", 
+    RowBox[{"With", "[", 
      RowBox[{
-      RowBox[{"(", 
-       RowBox[{"Wedge", "|", "Times"}], ")"}], "[", "args__", "]"}]}], "]"}], 
-   ":=", 
-   RowBox[{"With", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"argl", "=", 
-        RowBox[{"{", "args", "}"}]}], ",", 
-       RowBox[{"n", "=", 
-        RowBox[{"Length", "@", 
-         RowBox[{"{", "args", "}"}]}]}]}], "}"}], ",", "\[IndentingNewLine]", 
-     
-     RowBox[{"Sum", "[", 
-      RowBox[{
+      RowBox[{"{", 
+       RowBox[{"grades", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Grade", "[", 
+           RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
+         RowBox[{"List", "@@", "expr"}]}]}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Sum", "[", "\[IndentingNewLine]", 
        RowBox[{
         RowBox[{
-         RowBox[{"(", 
-          RowBox[{"-", "1"}], ")"}], "^", 
-         RowBox[{"Grade", "[", 
-          RowBox[{
-           RowBox[{"Wedge", "@@", 
-            RowBox[{"Take", "[", 
-             RowBox[{"argl", ",", 
-              RowBox[{"i", "-", "1"}]}], "]"}]}], ",", "Wedge"}], "]"}]}], 
-        " ", 
-        RowBox[{"Wedge", "@@", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"-", "1"}], ")"}], "^", 
+          RowBox[{"Total", "[", 
+           RowBox[{"Take", "[", 
+            RowBox[{"grades", ",", 
+             RowBox[{"i", "-", "1"}]}], "]"}], "]"}]}], " ", 
+         "\[IndentingNewLine]", 
          RowBox[{"MapAt", "[", 
-          RowBox[{"diff", ",", "argl", ",", "i"}], "]"}]}]}], ",", 
-       "\[IndentingNewLine]", 
+          RowBox[{"diff", ",", "expr", ",", "i"}], "]"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{"Length", "[", "expr", "]"}]}], "}"}]}], 
+       "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
+   ";"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "This", " ", "produces", " ", "expanded", " ", "expressions", " ", "and", 
+    " ", "is", " ", "much", " ", "faster", " ", "when", " ", "there", " ", 
+    "are", " ", "many", " ", "scalars"}], " ", "*)"}], "\[IndentingNewLine]", 
+  
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"diff", "[", "expr_Times", "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
        RowBox[{"{", 
-        RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], "]"}]}], 
-  ";"}]], "Input"],
+        RowBox[{
+         RowBox[{"grades", "=", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Grade", "[", 
+             RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
+           RowBox[{"List", "@@", "expr"}]}]}], ",", "pos", ",", "scalar", ",",
+          "form"}], "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"pos", "=", 
+         RowBox[{"Position", "[", 
+          RowBox[{"grades", ",", 
+           RowBox[{"_", "?", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"#", "=!=", "0"}], "&"}], ")"}]}], ",", "1", ",", 
+           RowBox[{"Heads", "\[Rule]", "False"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Which", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Length", "[", "pos", "]"}], ">", "1"}], ",", 
+          "\[IndentingNewLine]", "\t", 
+          RowBox[{"Throw", "[", 
+           RowBox[{"Message", "[", 
+            RowBox[{
+             RowBox[{"diff", "::", "error1"}], ",", 
+             "\"\<Found Times product of nonscalar forms: \>\"", ",", 
+             "expr"}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Length", "[", "pos", "]"}], "===", "1"}], ",", 
+          "\[IndentingNewLine]", "\t", 
+          RowBox[{
+           RowBox[{"pos", "=", 
+            RowBox[{"pos", "[", 
+             RowBox[{"[", 
+              RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", "\t", 
+           RowBox[{"scalar", "=", 
+            RowBox[{"Delete", "[", 
+             RowBox[{"expr", ",", 
+              RowBox[{"{", "pos", "}"}]}], "]"}]}], ";", 
+           "\[IndentingNewLine]", "\t", 
+           RowBox[{"form", "=", 
+            RowBox[{"expr", "[", 
+             RowBox[{"[", "pos", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+           "\t", 
+           RowBox[{
+            RowBox[{"scalar", " ", 
+             RowBox[{"diff", "[", "form", "]"}]}], "+", 
+            RowBox[{"diff0", "[", 
+             RowBox[{"scalar", ",", "form"}], "]"}]}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Length", "[", "pos", "]"}], "===", "0"}], ",", 
+          "\[IndentingNewLine]", "\t", 
+          RowBox[{"diff0", "[", "expr", "]"}]}], "\[IndentingNewLine]", 
+         "]"}]}]}], "\[IndentingNewLine]", "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"diff0", "[", "expr_Times", "]"}], ":=", 
+     RowBox[{"Sum", "[", 
+      RowBox[{
+       RowBox[{"MapAt", "[", 
+        RowBox[{"diff", ",", "expr", ",", "i"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"Length", "[", "expr", "]"}]}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"diff0", "[", 
+      RowBox[{"expr_Times", ",", "form_"}], "]"}], ":=", 
+     RowBox[{"Sum", "[", 
+      RowBox[{
+       RowBox[{"MapAt", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"diff0", "[", 
+           RowBox[{"#", ",", "form"}], "]"}], "&"}], ",", "expr", ",", "i"}], 
+        "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"Length", "[", "expr", "]"}]}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"diff0", "[", 
+      RowBox[{"expr_", ",", "form_"}], "]"}], ":=", 
+     RowBox[{"Wedge", "[", 
+      RowBox[{
+       RowBox[{"diff", "[", "expr", "]"}], ",", "form"}], "]"}]}], 
+    ";"}]}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
