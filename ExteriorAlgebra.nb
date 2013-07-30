@@ -14523,13 +14523,27 @@ this?]\
 
 Cell[BoxData[
  RowBox[{"DefInertHead", "[", 
-  RowBox[{"Hodge", ",", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Hodge", "[", "met", "]"}], ",", "\[IndentingNewLine]", 
    RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
    RowBox[{"ContractThrough", "\[Rule]", 
     RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
    RowBox[{
    "PrintAs", "\[Rule]", "\"\<\!\(\*SubscriptBox[\(*\), \(g\)]\)\>\""}]}], 
   "\[IndentingNewLine]", "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Hodge", "/:", 
+  RowBox[{"PrintAs", "[", 
+   RowBox[{"Hodge", "[", "metric_", "]"}], "]"}], ":=", 
+  TagBox[
+   StyleBox[
+    RowBox[{"\"\<\\!\\(\\*SubscriptBox[\\(*\\), \\(\>\"", "<>", 
+     RowBox[{"PrintAs", "[", "metric", "]"}], "<>", "\"\<\\)]\\)\>\""}],
+    ShowSpecialCharacters->False,
+    ShowStringCharacters->True,
+    NumberMarks->True],
+   FullForm]}]], "Input"],
 
 Cell["\<\
 It needs a second argument, specifying a metric (the formatting should show \
@@ -14557,10 +14571,10 @@ to rethink that option in relation with the products and ScalarsOfProduct.]\
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"Hodge", "[", 
-  RowBox[{
-   RowBox[{"3", 
-    RowBox[{"\[Omega]1", "[", "a", "]"}]}], ",", "g"}], "]"}]], "Input"],
+ RowBox[{
+  RowBox[{"Hodge", "[", "g", "]"}], "[", 
+  RowBox[{"3", 
+   RowBox[{"\[Omega]1", "[", "a", "]"}]}], "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"3", " ", 
@@ -14599,8 +14613,8 @@ Cell[BoxData[
       Editable->False], "]"}],
     ShowAutoStyles->False,
     AutoSpacing->False],
-   $CellContext`Hodge[
-    $CellContext`\[Omega]1[$CellContext`a], $CellContext`g],
+   $CellContext`Hodge[$CellContext`g][
+    $CellContext`\[Omega]1[$CellContext`a]],
    Editable->False]}]], "Output"]
 }, Open  ]],
 
@@ -14614,20 +14628,26 @@ Cell[BoxData[
  RowBox[{"Hodge", "/:", 
   RowBox[{"Grade", "[", 
    RowBox[{
-    RowBox[{"Hodge", "[", 
-     RowBox[{"expr_", ",", "metric_"}], "]"}], ",", "Wedge"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{"Hodge", "[", "metric_", "]"}], "[", "expr_", "]"}], ",", 
+    "Wedge"}], "]"}], ":=", 
   RowBox[{
    RowBox[{"DimOfMetric", "[", "metric", "]"}], "-", 
    RowBox[{"Grade", "[", 
     RowBox[{"expr", ",", "Wedge"}], "]"}]}]}]], "Input"],
 
+Cell["\<\
+Leo: Question: Is the following correct? Why is it only \
+SignatureOfMetric[metric][[2]]? Shouldn\[CloseCurlyQuote]t it depend on the \
+difference between the number of plus and minus?\
+\>", "Text"],
+
 Cell[BoxData[
  RowBox[{
-  RowBox[{"Hodge", "[", 
+  RowBox[{
+   RowBox[{"Hodge", "[", "metric_", "]"}], "@", 
    RowBox[{
-    RowBox[{"Hodge", "[", 
-     RowBox[{"expr_", ",", "metric_"}], "]"}], ",", "metric_"}], "]"}], ":=", 
-  
+    RowBox[{"Hodge", "[", "metric_", "]"}], "[", "expr_", "]"}]}], ":=", 
   RowBox[{
    RowBox[{
     RowBox[{"(", 
@@ -14663,9 +14683,9 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"Hodge", "[", 
-  RowBox[{
-   RowBox[{"\[Omega]1", "[", "a", "]"}], ",", "metricg"}], "]"}]], "Input"],
+ RowBox[{
+  RowBox[{"Hodge", "[", "metricg", "]"}], "[", 
+  RowBox[{"\[Omega]1", "[", "a", "]"}], "]"}]], "Input"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -14702,8 +14722,8 @@ Cell[BoxData[
      Editable->False], "]"}],
    ShowAutoStyles->False,
    AutoSpacing->False],
-  $CellContext`Hodge[
-   $CellContext`\[Omega]1[$CellContext`a], $CellContext`metricg],
+  $CellContext`Hodge[$CellContext`metricg][
+   $CellContext`\[Omega]1[$CellContext`a]],
   Editable->False]], "Output"]
 }, Open  ]],
 
@@ -14718,8 +14738,8 @@ Cell[BoxData["3"], "Output"]
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"Hodge", "[", 
-  RowBox[{"%%", ",", "metricg"}], "]"}]], "Input"],
+ RowBox[{
+  RowBox[{"Hodge", "[", "metricg", "]"}], "[", "%%", "]"}]], "Input"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -14760,74 +14780,487 @@ Cell[BoxData[
  RowBox[{
   RowBox[{
    RowBox[{"ExpandHodgeDual", "[", 
-    RowBox[{"expr_Hodge", ",", "\[Theta]_"}], "]"}], ":=", 
-   RowBox[{"expr", "/.", 
-    RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{"expr_", ",", "\[Theta]_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{
      RowBox[{
-      RowBox[{
-       RowBox[{"Hodge", "[", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"\[Theta]", "[", "a_", "]"}], "\[Wedge]", 
-          RowBox[{"\[Theta]", "[", "b_", "]"}], "\[Wedge]", 
-          RowBox[{"\[Theta]", "[", "c_", "]"}], "\[Wedge]", 
-          RowBox[{"\[Theta]", "[", "d_", "]"}]}], ",", "metricg"}], "]"}], 
-       "\[RightTeeArrow]", 
-       RowBox[{"epsilonmetricg", "[", 
-        RowBox[{"a", ",", "b", ",", "c", ",", "d"}], "]"}]}], ",", 
-      RowBox[{
-       RowBox[{"Hodge", "[", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"\[Theta]", "[", "a_", "]"}], "\[Wedge]", 
-          RowBox[{"\[Theta]", "[", "b_", "]"}], "\[Wedge]", 
-          RowBox[{"\[Theta]", "[", "c_", "]"}]}], ",", "metricg"}], "]"}], 
-       "\[RightTeeArrow]", 
+      RowBox[{"xHold", "[", "expr", "]"}], "/.", 
+      RowBox[{"{", 
        RowBox[{
-        RowBox[{"epsilonmetricg", "[", 
-         RowBox[{"a", ",", "b", ",", "c", ",", 
-          RowBox[{"-", "d"}]}], "]"}], 
-        RowBox[{"\[Theta]", "[", "d", "]"}]}]}], ",", 
-      RowBox[{
-       RowBox[{"Hodge", "[", 
         RowBox[{
+         RowBox[{"Hodge", "[", "met_", "]"}], "@", 
+         RowBox[{"\[Theta]", "[", "a_", "]"}]}], "\[RuleDelayed]", 
+        RowBox[{"xHold", "@", 
          RowBox[{
-          RowBox[{"\[Theta]", "[", "a_", "]"}], "\[Wedge]", 
-          RowBox[{"\[Theta]", "[", "b_", "]"}]}], ",", "metricg"}], "]"}], 
-       "\[RightTeeArrow]", 
-       RowBox[{
-        RowBox[{"1", "/", "2"}], 
-        RowBox[{"epsilonmetricg", "[", 
-         RowBox[{"a", ",", "b", ",", 
-          RowBox[{"-", "c"}], ",", 
-          RowBox[{"-", "d"}]}], "]"}], 
-        RowBox[{
-         RowBox[{"\[Theta]", "[", "c", "]"}], "\[Wedge]", 
-         RowBox[{"\[Theta]", "[", "d", "]"}]}]}]}], ",", 
+          RowBox[{"Hodge", "[", "met", "]"}], "@", 
+          RowBox[{"Wedge", "@", 
+           RowBox[{"\[Theta]", "[", "a", "]"}]}]}]}]}], "}"}]}], "/.", 
+     RowBox[{"{", "\[IndentingNewLine]", 
       RowBox[{
-       RowBox[{"Hodge", "[", 
+       RowBox[{"HoldPattern", "[", 
         RowBox[{
-         RowBox[{"\[Theta]", "[", "a_", "]"}], ",", "metricg"}], "]"}], 
-       "\[RightTeeArrow]", 
+         RowBox[{"Hodge", "[", "met_", "]"}], "[", 
+         RowBox[{"Wedge", "[", 
+          RowBox[{"\[Theta]s", ":", 
+           RowBox[{
+            RowBox[{"\[Theta]", "[", "_", "]"}], ".."}]}], "]"}], "]"}], 
+        "]"}], "\[RuleDelayed]", 
+       RowBox[{"With", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"n", "=", 
+            RowBox[{"Length", "@", 
+             RowBox[{"{", "\[Theta]s", "}"}]}]}], ",", 
+           RowBox[{"d", "=", 
+            RowBox[{"DimOfMetric", "[", "met", "]"}]}], ",", 
+           RowBox[{"inds", "=", 
+            RowBox[{"List", "@@", 
+             RowBox[{"FindIndices", "@", 
+              RowBox[{"Evaluate", "@", 
+               RowBox[{"Wedge", "[", "\[Theta]s", "]"}]}]}]}]}]}], "}"}], ",",
+          "\[IndentingNewLine]", 
+         RowBox[{"Module", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"dummies", "=", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"DummyIn", "@", 
+                RowBox[{"VBundleOfMetric", "@", "met"}]}], ",", 
+               RowBox[{"{", 
+                RowBox[{"d", "-", "n"}], "}"}]}], "]"}]}], "}"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            FractionBox["1", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"d", "-", "n"}], ")"}], "!"}]], 
+            RowBox[{
+             RowBox[{"epsilon", "[", "met", "]"}], "@@", 
+             RowBox[{"Join", "[", 
+              RowBox[{"inds", ",", 
+               RowBox[{"ChangeIndex", "/@", "dummies"}]}], "]"}]}], " ", 
+            RowBox[{"Wedge", "@@", 
+             RowBox[{"(", 
+              RowBox[{"\[Theta]", "/@", "dummies"}], ")"}]}]}]}], 
+          "\[IndentingNewLine]", "]"}]}], "]"}]}], "}"}]}], "/.", 
+    RowBox[{"xHold", "\[Rule]", "Identity"}]}]}], ";"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"ExpandHodgeDual", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Hodge", "[", "metricg", "]"}], "@", 
+    RowBox[{"Wedge", "[", 
+     RowBox[{
+      RowBox[{"\[Theta]", "[", "a", "]"}], ",", 
+      RowBox[{"\[Theta]", "[", "b", "]"}], ",", 
+      RowBox[{"\[Theta]", "[", "c", "]"}], ",", 
+      RowBox[{"\[Theta]", "[", "d", "]"}]}], "]"}]}], ",", "\[Theta]"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ExpandHodgeDual", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Hodge", "[", "metricg", "]"}], "@", 
+    RowBox[{"Wedge", "[", 
+     RowBox[{
+      RowBox[{"\[Theta]", "[", "a", "]"}], ",", 
+      RowBox[{"\[Theta]", "[", "b", "]"}], ",", 
+      RowBox[{"\[Theta]", "[", "c", "]"}]}], "]"}]}], ",", "\[Theta]"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ExpandHodgeDual", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Hodge", "[", "metricg", "]"}], "@", 
+    RowBox[{"Wedge", "[", 
+     RowBox[{
+      RowBox[{"\[Theta]", "[", "a", "]"}], ",", 
+      RowBox[{"\[Theta]", "[", "b", "]"}]}], "]"}]}], ",", "\[Theta]"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ExpandHodgeDual", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Hodge", "[", "metricg", "]"}], "@", 
+    RowBox[{"\[Theta]", "[", "a", "]"}]}], ",", "\[Theta]"}], 
+  "]"}]}], "Input"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[GridBox[{
+     {"\[Eta]", 
+      StyleBox[GridBox[{
+         {"a", "b", "c", "d"},
+         {" ", " ", " ", " "}
+        },
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.], {
+             Offset[0.034999999999999996`]}, 
+            Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+             Offset[0.]}}, "RowsIndexed" -> {}}],
+       FontSize->Rational[39, 4]]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.034999999999999996`]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   ShowAutoStyles->False,
+   AutoSpacing->False],
+  $CellContext`epsilonmetricg[$CellContext`a, $CellContext`b, $CellContext`c, \
+$CellContext`d],
+  Editable->False]], "Output"],
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   StyleBox[GridBox[{
+      {"\[Eta]", 
+       StyleBox[GridBox[{
+          {"a", "b", "c", " "},
+          {" ", " ", " ", "d"}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+              Offset[0.]}}, "RowsIndexed" -> {}}],
+        FontSize->Rational[39, 4]]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.034999999999999996`]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    ShowAutoStyles->False,
+    AutoSpacing->False],
+   $CellContext`epsilonmetricg[$CellContext`a, $CellContext`b, \
+$CellContext`c, -$CellContext`d],
+   Editable->False], " ", 
+  InterpretationBox[
+   StyleBox[GridBox[{
+      {"\[Theta]", 
+       StyleBox[GridBox[{
+          {"d"},
+          {" "}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+              Offset[0.]}}, "RowsIndexed" -> {}}],
+        FontSize->Rational[39, 4]]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.034999999999999996`]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    ShowAutoStyles->False,
+    AutoSpacing->False],
+   $CellContext`\[Theta][$CellContext`d],
+   Editable->False]}]], "Output"],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox["1", "2"], " ", 
+  InterpretationBox[
+   StyleBox[GridBox[{
+      {"\[Eta]", 
+       StyleBox[GridBox[{
+          {"a", "b", " ", " "},
+          {" ", " ", "c", "d"}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+              Offset[0.]}}, "RowsIndexed" -> {}}],
+        FontSize->Rational[39, 4]]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.034999999999999996`]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    ShowAutoStyles->False,
+    AutoSpacing->False],
+   $CellContext`epsilonmetricg[$CellContext`a, $CellContext`b, \
+-$CellContext`c, -$CellContext`d],
+   Editable->False], " ", 
+  RowBox[{
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {"\[Theta]", 
+        StyleBox[GridBox[{
+           {"c"},
+           {" "}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`\[Theta][$CellContext`c],
+    Editable->False], "\[Wedge]", 
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {"\[Theta]", 
+        StyleBox[GridBox[{
+           {"d"},
+           {" "}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`\[Theta][$CellContext`d],
+    Editable->False]}]}]], "Output"],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox["1", "6"], " ", 
+  InterpretationBox[
+   StyleBox[GridBox[{
+      {"\[Eta]", 
+       StyleBox[GridBox[{
+          {"a", " ", " ", " "},
+          {" ", "b", "c", "d"}
+         },
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.], {
+              Offset[0.034999999999999996`]}, 
+             Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+              Offset[0.]}}, "RowsIndexed" -> {}}],
+        FontSize->Rational[39, 4]]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.034999999999999996`]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    ShowAutoStyles->False,
+    AutoSpacing->False],
+   $CellContext`epsilonmetricg[$CellContext`a, -$CellContext`b, \
+-$CellContext`c, -$CellContext`d],
+   Editable->False], " ", 
+  RowBox[{
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {"\[Theta]", 
+        StyleBox[GridBox[{
+           {"b"},
+           {" "}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`\[Theta][$CellContext`b],
+    Editable->False], "\[Wedge]", 
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {"\[Theta]", 
+        StyleBox[GridBox[{
+           {"c"},
+           {" "}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`\[Theta][$CellContext`c],
+    Editable->False], "\[Wedge]", 
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {"\[Theta]", 
+        StyleBox[GridBox[{
+           {"d"},
+           {" "}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`\[Theta][$CellContext`d],
+    Editable->False]}]}]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ExpandHodgeDual", "[", 
+     RowBox[{"expr_Hodge", ",", "\[Theta]_"}], "]"}], ":=", 
+    RowBox[{"expr", "/.", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
        RowBox[{
-        RowBox[{"1", "/", 
-         RowBox[{"3", "!"}]}], 
+        RowBox[{"Hodge", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"\[Theta]", "[", "a_", "]"}], "\[Wedge]", 
+           RowBox[{"\[Theta]", "[", "b_", "]"}], "\[Wedge]", 
+           RowBox[{"\[Theta]", "[", "c_", "]"}], "\[Wedge]", 
+           RowBox[{"\[Theta]", "[", "d_", "]"}]}], ",", "metricg"}], "]"}], 
+        "\[RightTeeArrow]", 
         RowBox[{"epsilonmetricg", "[", 
-         RowBox[{"a", ",", 
-          RowBox[{"-", "b"}], ",", 
-          RowBox[{"-", "c"}], ",", 
-          RowBox[{"-", "d"}]}], "]"}], 
+         RowBox[{"a", ",", "b", ",", "c", ",", "d"}], "]"}]}], ",", 
+       RowBox[{
+        RowBox[{"Hodge", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"\[Theta]", "[", "a_", "]"}], "\[Wedge]", 
+           RowBox[{"\[Theta]", "[", "b_", "]"}], "\[Wedge]", 
+           RowBox[{"\[Theta]", "[", "c_", "]"}]}], ",", "metricg"}], "]"}], 
+        "\[RightTeeArrow]", 
         RowBox[{
-         RowBox[{"\[Theta]", "[", "b", "]"}], "\[Wedge]", 
-         RowBox[{"\[Theta]", "[", "c", "]"}], "\[Wedge]", 
-         RowBox[{"\[Theta]", "[", "d", "]"}]}]}]}]}], "\[IndentingNewLine]", 
-     "}"}]}]}], ";"}]], "Input"],
+         RowBox[{"epsilonmetricg", "[", 
+          RowBox[{"a", ",", "b", ",", "c", ",", 
+           RowBox[{"-", "d"}]}], "]"}], 
+         RowBox[{"\[Theta]", "[", "d", "]"}]}]}], ",", 
+       RowBox[{
+        RowBox[{"Hodge", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"\[Theta]", "[", "a_", "]"}], "\[Wedge]", 
+           RowBox[{"\[Theta]", "[", "b_", "]"}]}], ",", "metricg"}], "]"}], 
+        "\[RightTeeArrow]", 
+        RowBox[{
+         RowBox[{"1", "/", "2"}], 
+         RowBox[{"epsilonmetricg", "[", 
+          RowBox[{"a", ",", "b", ",", 
+           RowBox[{"-", "c"}], ",", 
+           RowBox[{"-", "d"}]}], "]"}], 
+         RowBox[{
+          RowBox[{"\[Theta]", "[", "c", "]"}], "\[Wedge]", 
+          RowBox[{"\[Theta]", "[", "d", "]"}]}]}]}], ",", 
+       RowBox[{
+        RowBox[{"Hodge", "[", 
+         RowBox[{
+          RowBox[{"\[Theta]", "[", "a_", "]"}], ",", "metricg"}], "]"}], 
+        "\[RightTeeArrow]", 
+        RowBox[{
+         RowBox[{"1", "/", 
+          RowBox[{"3", "!"}]}], 
+         RowBox[{"epsilonmetricg", "[", 
+          RowBox[{"a", ",", 
+           RowBox[{"-", "b"}], ",", 
+           RowBox[{"-", "c"}], ",", 
+           RowBox[{"-", "d"}]}], "]"}], 
+         RowBox[{
+          RowBox[{"\[Theta]", "[", "b", "]"}], "\[Wedge]", 
+          RowBox[{"\[Theta]", "[", "c", "]"}], "\[Wedge]", 
+          RowBox[{"\[Theta]", "[", "d", "]"}]}]}]}]}], "\[IndentingNewLine]", 
+      "}"}]}]}], ";"}], "\[IndentingNewLine]", "*)"}]], "Input"],
 
 Cell["And finally we introduce the co-differential:", "Text"],
 
 Cell[BoxData[
  RowBox[{"DefInertHead", "[", 
-  RowBox[{"codiff", ",", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"codiff", "[", "met", "]"}], ",", "\[IndentingNewLine]", 
    RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
    RowBox[{"ContractThrough", "\[Rule]", "delta"}], ",", 
    "\[IndentingNewLine]", 
@@ -14836,14 +15269,28 @@ Cell[BoxData[
     "\"\<\!\(\*SubscriptBox[\(\[Delta]\), \(g\)]\)\>\""}]}], 
   "\[IndentingNewLine]", "]"}]], "Input"],
 
+Cell[BoxData[
+ RowBox[{"codiff", "/:", 
+  RowBox[{"PrintAs", "[", 
+   RowBox[{"codiff", "[", "metric_", "]"}], "]"}], ":=", 
+  TagBox[
+   StyleBox[
+    RowBox[{"\"\<\\!\\(\\*SubscriptBox[\\(\\[Delta]\\), \\(\>\"", "<>", 
+     RowBox[{"PrintAs", "[", "metric", "]"}], "<>", "\"\<\\)]\\)\>\""}],
+    ShowSpecialCharacters->False,
+    ShowStringCharacters->True,
+    NumberMarks->True],
+   FullForm]}]], "Input"],
+
 Cell["It also needs a metric argument:", "Text"],
 
 Cell[BoxData[
  RowBox[{"codiff", "/:", 
   RowBox[{"Grade", "[", 
    RowBox[{
-    RowBox[{"codiff", "[", 
-     RowBox[{"expr_", ",", "metric_"}], "]"}], ",", "Wedge"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{"codiff", "[", "metric_", "]"}], "[", "expr_", "]"}], ",", 
+    "Wedge"}], "]"}], ":=", 
   RowBox[{
    RowBox[{"-", "1"}], "+", 
    RowBox[{"Grade", "[", 
@@ -14859,8 +15306,9 @@ Cell[BoxData[
   RowBox[{"codiffToHodge", "[", "expr_", "]"}], ":=", 
   RowBox[{"expr", "/.", 
    RowBox[{
-    RowBox[{"codiff", "[", 
-     RowBox[{"expr1_", ",", "metric_"}], "]"}], "\[RuleDelayed]", 
+    RowBox[{
+     RowBox[{"codiff", "[", "met_", "]"}], "[", "expr1_", "]"}], 
+    "\[RuleDelayed]", 
     RowBox[{
      RowBox[{
       RowBox[{"(", 
@@ -14868,27 +15316,27 @@ Cell[BoxData[
       RowBox[{"(", 
        RowBox[{
         RowBox[{
-         RowBox[{"DimOfMetric", "[", "metric", "]"}], 
+         RowBox[{"DimOfMetric", "[", "met", "]"}], 
          RowBox[{"Grade", "[", 
           RowBox[{"expr1", ",", "Wedge"}], "]"}]}], "+", 
-        RowBox[{"DimOfMetric", "[", "metric", "]"}], "+", "1", "+", 
+        RowBox[{"DimOfMetric", "[", "met", "]"}], "+", "1", "+", 
         RowBox[{
-         RowBox[{"SignatureOfMetric", "[", "metric", "]"}], "[", 
+         RowBox[{"SignatureOfMetric", "[", "met", "]"}], "[", 
          RowBox[{"[", "2", "]"}], "]"}]}], ")"}]}], 
-     RowBox[{"Hodge", "[", 
-      RowBox[{
-       RowBox[{"diff", "[", 
-        RowBox[{"Hodge", "[", 
-         RowBox[{"expr1", ",", "metric"}], "]"}], "]"}], ",", "metric"}], 
-      "]"}]}]}]}]}]], "Input"],
+     RowBox[{
+      RowBox[{"Hodge", "[", "met", "]"}], "@", 
+      RowBox[{"diff", "@", 
+       RowBox[{
+        RowBox[{"Hodge", "[", "met", "]"}], "@", 
+        "expr1"}]}]}]}]}]}]}]], "Input"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"codiff", "[", 
-  RowBox[{
-   RowBox[{"\[Omega]2", "[", 
-    RowBox[{"a", ",", "b"}], "]"}], ",", "metricg"}], "]"}]], "Input"],
+ RowBox[{
+  RowBox[{"codiff", "[", "metricg", "]"}], "[", 
+  RowBox[{"\[Omega]2", "[", 
+   RowBox[{"a", ",", "b"}], "]"}], "]"}]], "Input"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -14925,9 +15373,8 @@ Cell[BoxData[
      Editable->False], "]"}],
    ShowAutoStyles->False,
    AutoSpacing->False],
-  $CellContext`codiff[
-   $CellContext`\[Omega]2[$CellContext`a, $CellContext`b], \
-$CellContext`metricg],
+  $CellContext`codiff[$CellContext`metricg][
+   $CellContext`\[Omega]2[$CellContext`a, $CellContext`b]],
   Editable->False]], "Output"]
 }, Open  ]],
 
@@ -14980,24 +15427,21 @@ Cell[BoxData[
            Editable->False], "]"}],
          ShowAutoStyles->False,
          AutoSpacing->False],
-        $CellContext`Hodge[
-         $CellContext`\[Omega]2[$CellContext`a, $CellContext`b], \
-$CellContext`metricg],
+        $CellContext`Hodge[$CellContext`metricg][
+         $CellContext`\[Omega]2[$CellContext`a, $CellContext`b]],
         Editable->False], "]"}],
       ShowAutoStyles->False,
       AutoSpacing->False],
      $CellContext`diff[
-      $CellContext`Hodge[
-       $CellContext`\[Omega]2[$CellContext`a, $CellContext`b], \
-$CellContext`metricg]],
+      $CellContext`Hodge[$CellContext`metricg][
+       $CellContext`\[Omega]2[$CellContext`a, $CellContext`b]]],
      Editable->False], "]"}],
    ShowAutoStyles->False,
    AutoSpacing->False],
-  $CellContext`Hodge[
+  $CellContext`Hodge[$CellContext`metricg][
    $CellContext`diff[
-    $CellContext`Hodge[
-     $CellContext`\[Omega]2[$CellContext`a, $CellContext`b], \
-$CellContext`metricg]], $CellContext`metricg],
+    $CellContext`Hodge[$CellContext`metricg][
+     $CellContext`\[Omega]2[$CellContext`a, $CellContext`b]]]],
   Editable->False]], "Output"]
 }, Open  ]]
 }, Closed]],
