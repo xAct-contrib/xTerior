@@ -2043,9 +2043,7 @@ Cell[BoxData[
         "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], ";"}],
     "\[IndentingNewLine]", "*)"}]}]], "Input"],
 
-Cell["\<\
-Still need definition when acting on Times\
-\>", "Text"],
+Cell["Still need definition when acting on Times", "Text"],
 
 Cell[BoxData[
  RowBox[{
@@ -18846,6 +18844,7 @@ Cell[BoxData[
                    Offset[0.]}}, "RowsIndexed" -> {}}],
              FontSize->Rational[39, 4]]}
           },
+          
           GridBoxAlignment->{
            "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
             "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -24689,110 +24688,123 @@ Jose: This part taken from Leo\[CloseCurlyQuote]s notebook.\
 \>", "Text"],
 
 Cell["\<\
-We define the interior product of form with a vector as an inert head.\
+We define the interior product of form with a vector as a derivation of \
+degree -1.\
 \>", "Text"],
 
 Cell[BoxData[
- RowBox[{"DefInertHead", "[", 
-  RowBox[{
-   RowBox[{"Int", "[", "v_", "]"}], ",", "\[IndentingNewLine]", 
-   RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
-   RowBox[{"ContractThrough", "\[Rule]", 
-    RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
-   RowBox[{"PrintAs", "\[Rule]", "\"\<\[Iota]\>\""}]}], "\[IndentingNewLine]",
-   "]"}]], "Input"],
+ RowBox[{
+  RowBox[{"DefGradedDerivation", "[", 
+   RowBox[{
+    RowBox[{"Int", "[", "v_", "]"}], ",", "Wedge", ",", 
+    RowBox[{"-", "1"}], ",", 
+    RowBox[{"PrintAs", "\[Rule]", "\"\<\[Iota]\>\""}]}], "]"}], 
+  ";"}]], "Input"],
 
-Cell[BoxData[{
+Cell[BoxData[
+ RowBox[{"(*", "\[IndentingNewLine]", 
+  RowBox[{"DefInertHead", "[", 
+   RowBox[{
+    RowBox[{"Int", "[", "v_", "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"ContractThrough", "\[Rule]", 
+     RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{"PrintAs", "\[Rule]", "\"\<\[Iota]\>\""}]}], 
+   "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "*)"}]], "Input"],
+
+Cell[BoxData[
  RowBox[{
-  RowBox[{"Int", "/:", 
-   RowBox[{"Grade", "[", 
-    RowBox[{
-     RowBox[{
-      RowBox[{
-       RowBox[{"Verbatim", "[", "Int", "]"}], "[", "v_", "]"}], "[", "form_", 
-      "]"}], ",", "Wedge"}], "]"}], ":=", 
+  RowBox[{"(*", "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"Grade", "[", 
-     RowBox[{"form", ",", "Wedge"}], "]"}], "-", "1"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{
-    RowBox[{"Int", "[", "0", "]"}], "[", "form_", "]"}], ":=", "0"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{
-    RowBox[{"Int", "[", "v_Plus", "]"}], "[", "form_", "]"}], ":=", 
-   RowBox[{
-    RowBox[{
-     RowBox[{
-      RowBox[{"Int", "[", "#", "]"}], "[", "form", "]"}], "&"}], "/@", 
-    "v"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{
-    RowBox[{"Int", "[", "v_", "]"}], "[", 
-    RowBox[{"f_", "?", "ZeroFormQ"}], "]"}], ":=", "0"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{
-    RowBox[{"Int", "[", "v_", "]"}], "[", 
-    RowBox[{
-     RowBox[{"f_", "?", "ZeroFormQ"}], " ", "form_"}], "]"}], ":=", 
-   RowBox[{"f", " ", 
-    RowBox[{
-     RowBox[{"Int", "[", "v", "]"}], "[", "form", "]"}]}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{
-    RowBox[{"Int", "[", 
-     RowBox[{
-      RowBox[{"f_", "?", "ScalarQ"}], " ", "v_"}], "]"}], "[", "form_", "]"}],
-    ":=", 
-   RowBox[{"f", " ", 
-    RowBox[{
-     RowBox[{"Int", "[", "v", "]"}], "[", "form", "]"}]}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{
-    RowBox[{"Int", "[", "v_", "]"}], "[", 
-    RowBox[{"HoldPattern", "@", 
-     RowBox[{"Wedge", "[", "args__", "]"}]}], "]"}], ":=", 
-   RowBox[{"With", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"argl", "=", 
-        RowBox[{"{", "args", "}"}]}], ",", 
-       RowBox[{"n", "=", 
-        RowBox[{"Length", "@", 
-         RowBox[{"{", "args", "}"}]}]}]}], "}"}], ",", "\[IndentingNewLine]", 
-     
-     RowBox[{"Sum", "[", 
+    RowBox[{"Int", "/:", 
+     RowBox[{"Grade", "[", 
       RowBox[{
        RowBox[{
         RowBox[{
-         RowBox[{"(", 
-          RowBox[{"-", "1"}], ")"}], "^", 
-         RowBox[{"Grade", "[", 
+         RowBox[{"Verbatim", "[", "Int", "]"}], "[", "v_", "]"}], "[", 
+        "form_", "]"}], ",", "Wedge"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"Grade", "[", 
+       RowBox[{"form", ",", "Wedge"}], "]"}], "-", "1"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Int", "[", "0", "]"}], "[", "form_", "]"}], ":=", "0"}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Int", "[", "v_Plus", "]"}], "[", "form_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"Int", "[", "#", "]"}], "[", "form", "]"}], "&"}], "/@", 
+      "v"}]}], ";"}], "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Int", "[", "v_", "]"}], "[", 
+      RowBox[{"f_", "?", "ZeroFormQ"}], "]"}], ":=", "0"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Int", "[", "v_", "]"}], "[", 
+      RowBox[{
+       RowBox[{"f_", "?", "ZeroFormQ"}], " ", "form_"}], "]"}], ":=", 
+     RowBox[{"f", " ", 
+      RowBox[{
+       RowBox[{"Int", "[", "v", "]"}], "[", "form", "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Int", "[", 
+       RowBox[{
+        RowBox[{"f_", "?", "ScalarQ"}], " ", "v_"}], "]"}], "[", "form_", 
+      "]"}], ":=", 
+     RowBox[{"f", " ", 
+      RowBox[{
+       RowBox[{"Int", "[", "v", "]"}], "[", "form", "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"Int", "[", "v_", "]"}], "[", 
+       RowBox[{"HoldPattern", "@", 
+        RowBox[{"Wedge", "[", "args__", "]"}]}], "]"}], ":=", 
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"argl", "=", 
+           RowBox[{"{", "args", "}"}]}], ",", 
+          RowBox[{"n", "=", 
+           RowBox[{"Length", "@", 
+            RowBox[{"{", "args", "}"}]}]}]}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Sum", "[", 
+         RowBox[{
           RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"-", "1"}], ")"}], "^", 
+            RowBox[{"Grade", "[", 
+             RowBox[{
+              RowBox[{"Wedge", "@@", 
+               RowBox[{"Take", "[", 
+                RowBox[{"argl", ",", 
+                 RowBox[{"i", "-", "1"}]}], "]"}]}], ",", "Wedge"}], "]"}]}], 
+           " ", 
            RowBox[{"Wedge", "@@", 
-            RowBox[{"Take", "[", 
-             RowBox[{"argl", ",", 
-              RowBox[{"i", "-", "1"}]}], "]"}]}], ",", "Wedge"}], "]"}]}], 
-        " ", 
-        RowBox[{"Wedge", "@@", 
-         RowBox[{"MapAt", "[", 
-          RowBox[{
-           RowBox[{"Int", "[", "v", "]"}], ",", "argl", ",", "i"}], "]"}]}]}],
-        ",", "\[IndentingNewLine]", 
-       RowBox[{"{", 
-        RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], "]"}]}], 
-  ";"}]}], "Input"],
+            RowBox[{"MapAt", "[", 
+             RowBox[{
+              RowBox[{"Int", "[", "v", "]"}], ",", "argl", ",", "i"}], 
+             "]"}]}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], "]"}]}], 
+     ";"}], "\[IndentingNewLine]", "*)"}]}]}]], "Input"],
 
 Cell["\<\
 Canonicalization:
@@ -24800,39 +24812,42 @@ LEO Don\[CloseCurlyQuote]t do this automatically?\
 \>", "Text"],
 
 Cell[BoxData[
- RowBox[{
+ RowBox[{"(*", "\[IndentingNewLine]", 
   RowBox[{
-   RowBox[{"Int", "[", "v2_", "]"}], "[", 
    RowBox[{
-    RowBox[{"Int", "[", "v1_", "]"}], "[", "form_", "]"}], "]"}], ":=", 
-  RowBox[{
-   RowBox[{"-", 
+    RowBox[{"Int", "[", "v2_", "]"}], "[", 
     RowBox[{
-     RowBox[{"Int", "[", "v1", "]"}], "[", 
+     RowBox[{"Int", "[", "v1_", "]"}], "[", "form_", "]"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"-", 
      RowBox[{
-      RowBox[{"Int", "[", "v2", "]"}], "[", "form", "]"}], "]"}]}], "/;", 
-   RowBox[{"OrderedQ", "[", 
-    RowBox[{"{", 
-     RowBox[{"v2", ",", "v1"}], "}"}], "]"}]}]}]], "Input"],
+      RowBox[{"Int", "[", "v1", "]"}], "[", 
+      RowBox[{
+       RowBox[{"Int", "[", "v2", "]"}], "[", "form", "]"}], "]"}]}], "/;", 
+    RowBox[{"OrderedQ", "[", 
+     RowBox[{"{", 
+      RowBox[{"v2", ",", "v1"}], "}"}], "]"}]}]}], "\[IndentingNewLine]", 
+  "*)"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"Int", "/:", 
-  RowBox[{"MakeBoxes", "[", 
-   RowBox[{
+ RowBox[{"(*", "\[IndentingNewLine]", 
+  RowBox[{"Int", "/:", 
+   RowBox[{"MakeBoxes", "[", 
     RowBox[{
-     RowBox[{"Int", "[", "v_", "]"}], "[", "form_", "]"}], ",", 
-    "StandardForm"}], "]"}], ":=", 
-  RowBox[{"RowBox", "[", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"SubscriptBox", "[", 
-      RowBox[{"\"\<\[Iota]\>\"", ",", 
-       RowBox[{"MakeBoxes", "[", 
-        RowBox[{"v", ",", "StandardForm"}], "]"}]}], "]"}], ",", "\"\<[\>\"", 
-     ",", 
-     RowBox[{"MakeBoxes", "[", 
-      RowBox[{"form", ",", "StandardForm"}], "]"}], ",", "\"\<]\>\""}], "}"}],
-    "]"}]}]], "Input"],
+     RowBox[{
+      RowBox[{"Int", "[", "v_", "]"}], "[", "form_", "]"}], ",", 
+     "StandardForm"}], "]"}], ":=", 
+   RowBox[{"RowBox", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"SubscriptBox", "[", 
+       RowBox[{"\"\<\[Iota]\>\"", ",", 
+        RowBox[{"MakeBoxes", "[", 
+         RowBox[{"v", ",", "StandardForm"}], "]"}]}], "]"}], ",", "\"\<[\>\"",
+       ",", 
+      RowBox[{"MakeBoxes", "[", 
+       RowBox[{"form", ",", "StandardForm"}], "]"}], ",", "\"\<]\>\""}], 
+     "}"}], "]"}]}], "\[IndentingNewLine]", "*)"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"DefTensor", "[", 
@@ -24876,6 +24891,7 @@ Cell[BoxData[
                    Offset[0.]}}, "RowsIndexed" -> {}}],
              FontSize->Rational[39, 4]]}
           },
+          
           GridBoxAlignment->{
            "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
             "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -24953,136 +24969,147 @@ Cell[BoxData["4"], "Output"]
 Cell["The Lie derivative is defined in a very similar form:", "Text"],
 
 Cell[BoxData[
- RowBox[{"DefInertHead", "[", 
-  RowBox[{
-   RowBox[{"Lie", "[", "v_", "]"}], ",", "\[IndentingNewLine]", 
-   RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
-   RowBox[{"ContractThrough", "\[Rule]", 
-    RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
-   RowBox[{"PrintAs", "\[Rule]", "\"\<\[ScriptCapitalL]\>\""}]}], 
-  "\[IndentingNewLine]", "]"}]], "Input"],
-
-Cell[BoxData[{
  RowBox[{
-  RowBox[{"Lie", "/:", 
-   RowBox[{"Grade", "[", 
-    RowBox[{
-     RowBox[{
-      RowBox[{"Lie", "[", "v_", "]"}], "[", "form_", "]"}], ",", "Wedge"}], 
-    "]"}], ":=", 
-   RowBox[{"Grade", "[", 
-    RowBox[{"form", ",", "Wedge"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
+  RowBox[{"DefGradedDerivation", "[", 
    RowBox[{
-    RowBox[{"Lie", "[", "0", "]"}], "[", "_", "]"}], ":=", "0"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{
-    RowBox[{"Lie", "[", "v_Plus", "]"}], "[", "form_", "]"}], ":=", 
-   RowBox[{
-    RowBox[{
-     RowBox[{
-      RowBox[{"Lie", "[", "#", "]"}], "[", "form", "]"}], "&"}], "/@", 
-    "v"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{
-    RowBox[{"Lie", "[", 
-     RowBox[{
-      RowBox[{"f_", "?", "ScalarQ"}], " ", "v_"}], "]"}], "[", "form_", "]"}],
-    ":=", 
-   RowBox[{
-    RowBox[{"f", " ", 
-     RowBox[{
-      RowBox[{"Lie", "[", "v", "]"}], "@", "form"}]}], "+", 
-    RowBox[{"Wedge", "[", 
-     RowBox[{
-      RowBox[{"diff", "@", "f"}], ",", 
-      RowBox[{
-       RowBox[{"Int", "[", "v", "]"}], "@", "form"}]}], "]"}]}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{
-    RowBox[{
-     RowBox[{"Lie", "[", "v_", "]"}], "[", 
-     RowBox[{"HoldPattern", "@", 
-      RowBox[{"Wedge", "[", "args__", "]"}]}], "]"}], ":=", 
-    RowBox[{"With", "[", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"argl", "=", 
-         RowBox[{"{", "args", "}"}]}], ",", 
-        RowBox[{"n", "=", 
-         RowBox[{"Length", "@", 
-          RowBox[{"{", "args", "}"}]}]}]}], "}"}], ",", "\[IndentingNewLine]", 
-      RowBox[{"Sum", "[", 
-       RowBox[{
-        RowBox[{
-         RowBox[{
-          RowBox[{"(", 
-           RowBox[{"+", "1"}], ")"}], "^", 
-          RowBox[{"Grade", "[", 
-           RowBox[{
-            RowBox[{"Wedge", "@@", 
-             RowBox[{"Take", "[", 
-              RowBox[{"argl", ",", 
-               RowBox[{"i", "-", "1"}]}], "]"}]}], ",", "Wedge"}], "]"}]}], 
-         " ", 
-         RowBox[{"Wedge", "@@", 
-          RowBox[{"MapAt", "[", 
-           RowBox[{
-            RowBox[{"Lie", "[", "v", "]"}], ",", "argl", ",", "i"}], 
-           "]"}]}]}], ",", "\[IndentingNewLine]", 
-        RowBox[{"{", 
-         RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], "]"}]}], ";"}], 
-  "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
-   RowBox[{"LEO", " ", 
-    RowBox[{"Don", "'"}], "t", " ", "do", " ", "this", " ", "automatically"}],
-    " ", "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"(*", " ", 
-   RowBox[{
-    RowBox[{
-     RowBox[{
-      RowBox[{"Lie", "[", "v_", "]"}], "[", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"Verbatim", "[", "Int", "]"}], "[", 
-        RowBox[{"form_", ",", "v2_"}], "]"}], ",", "v1_"}], "]"}], ":=", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"Int", "[", 
-        RowBox[{"Lie", "[", 
-         RowBox[{"v2", ",", "v1"}], "]"}], "]"}], "[", "form", "]"}], "+", 
-      RowBox[{
-       RowBox[{"Int", "[", "v2", "]"}], "[", 
-       RowBox[{
-        RowBox[{"Lie", "[", "v1", "]"}], "[", "form", "]"}], "]"}]}]}], ";"}],
-    " ", "*)"}]}]}], "Input"],
+    RowBox[{"Lie", "[", "v_", "]"}], ",", "Wedge", ",", "0", ",", 
+    RowBox[{"PrintAs", "\[Rule]", "\"\<\[ScriptCapitalL]\>\""}]}], "]"}], 
+  ";"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"Lie", "/:", 
-  RowBox[{"MakeBoxes", "[", 
+ RowBox[{"(*", "\[IndentingNewLine]", 
+  RowBox[{"DefInertHead", "[", 
+   RowBox[{
+    RowBox[{"Lie", "[", "v_", "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"ContractThrough", "\[Rule]", 
+     RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{"PrintAs", "\[Rule]", "\"\<\[ScriptCapitalL]\>\""}]}], 
+   "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "*)"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Lie", "/:", 
+     RowBox[{"Grade", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Lie", "[", "v_", "]"}], "[", "form_", "]"}], ",", "Wedge"}], 
+      "]"}], ":=", 
+     RowBox[{"Grade", "[", 
+      RowBox[{"form", ",", "Wedge"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Lie", "[", "0", "]"}], "[", "_", "]"}], ":=", "0"}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Lie", "[", "v_Plus", "]"}], "[", "form_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"Lie", "[", "#", "]"}], "[", "form", "]"}], "&"}], "/@", 
+      "v"}]}], ";"}], "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
    RowBox[{
     RowBox[{
-     RowBox[{"Lie", "[", "v_", "]"}], "[", "form_", "]"}], ",", 
-    "StandardForm"}], "]"}], ":=", 
-  RowBox[{"RowBox", "[", 
-   RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Lie", "[", 
+       RowBox[{
+        RowBox[{"f_", "?", "ScalarQ"}], " ", "v_"}], "]"}], "[", "form_", 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{"f", " ", 
+       RowBox[{
+        RowBox[{"Lie", "[", "v", "]"}], "@", "form"}]}], "+", 
+      RowBox[{"Wedge", "[", 
+       RowBox[{
+        RowBox[{"diff", "@", "f"}], ",", 
+        RowBox[{
+         RowBox[{"Int", "[", "v", "]"}], "@", "form"}]}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", "\[IndentingNewLine]", 
     RowBox[{
-     RowBox[{"SubscriptBox", "[", 
-      RowBox[{"\"\<\[ScriptCapitalL]\>\"", ",", 
-       RowBox[{"MakeBoxes", "[", 
-        RowBox[{"v", ",", "StandardForm"}], "]"}]}], "]"}], ",", "\"\<[\>\"", 
-     ",", 
-     RowBox[{"MakeBoxes", "[", 
-      RowBox[{"form", ",", "StandardForm"}], "]"}], ",", "\"\<]\>\""}], "}"}],
-    "]"}]}]], "Input"],
+     RowBox[{
+      RowBox[{
+       RowBox[{"Lie", "[", "v_", "]"}], "[", 
+       RowBox[{"HoldPattern", "@", 
+        RowBox[{"Wedge", "[", "args__", "]"}]}], "]"}], ":=", 
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"argl", "=", 
+           RowBox[{"{", "args", "}"}]}], ",", 
+          RowBox[{"n", "=", 
+           RowBox[{"Length", "@", 
+            RowBox[{"{", "args", "}"}]}]}]}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Sum", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"+", "1"}], ")"}], "^", 
+            RowBox[{"Grade", "[", 
+             RowBox[{
+              RowBox[{"Wedge", "@@", 
+               RowBox[{"Take", "[", 
+                RowBox[{"argl", ",", 
+                 RowBox[{"i", "-", "1"}]}], "]"}]}], ",", "Wedge"}], "]"}]}], 
+           " ", 
+           RowBox[{"Wedge", "@@", 
+            RowBox[{"MapAt", "[", 
+             RowBox[{
+              RowBox[{"Lie", "[", "v", "]"}], ",", "argl", ",", "i"}], 
+             "]"}]}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], "]"}]}], 
+     ";"}], "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"LEO", " ", 
+     RowBox[{"Don", "'"}], "t", " ", "do", " ", "this", " ", 
+     "automatically"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"Lie", "[", "v_", "]"}], "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Verbatim", "[", "Int", "]"}], "[", 
+         RowBox[{"form_", ",", "v2_"}], "]"}], ",", "v1_"}], "]"}], ":=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Int", "[", 
+         RowBox[{"Lie", "[", 
+          RowBox[{"v2", ",", "v1"}], "]"}], "]"}], "[", "form", "]"}], "+", 
+       RowBox[{
+        RowBox[{"Int", "[", "v2", "]"}], "[", 
+        RowBox[{
+         RowBox[{"Lie", "[", "v1", "]"}], "[", "form", "]"}], "]"}]}]}], 
+     ";"}], " ", "*)"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"(*", "\[IndentingNewLine]", 
+  RowBox[{"Lie", "/:", 
+   RowBox[{"MakeBoxes", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Lie", "[", "v_", "]"}], "[", "form_", "]"}], ",", 
+     "StandardForm"}], "]"}], ":=", 
+   RowBox[{"RowBox", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"SubscriptBox", "[", 
+       RowBox[{"\"\<\[ScriptCapitalL]\>\"", ",", 
+        RowBox[{"MakeBoxes", "[", 
+         RowBox[{"v", ",", "StandardForm"}], "]"}]}], "]"}], ",", "\"\<[\>\"",
+       ",", 
+      RowBox[{"MakeBoxes", "[", 
+       RowBox[{"form", ",", "StandardForm"}], "]"}], ",", "\"\<]\>\""}], 
+     "}"}], "]"}]}], "\[IndentingNewLine]", "*)"}]], "Input"],
 
 Cell["\<\
 In the last line we find the Lie derivative of a vector by another vector, a \
@@ -25274,6 +25301,7 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
               FontSize->Rational[39, 4]]}
            },
+           
            GridBoxAlignment->{
             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -28982,7 +29010,8 @@ Cell[BoxData[
          GridBoxSpacings->{"Columns" -> {
              Offset[0.27999999999999997`], {
               Offset[0.034999999999999996`]}, 
-             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> 
+           {
              Offset[0.2], {
               Offset[0.4]}, 
              Offset[0.2]}, "RowsIndexed" -> {}}]}],
@@ -33885,7 +33914,6 @@ $CellContext`metricg],
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                     FontSize->Rational[39, 4]]}
                  },
-                 
                  GridBoxAlignment->{
                   "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                    "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -35504,6 +35532,7 @@ $CellContext`metricg],
                     Offset[0.]}}, "RowsIndexed" -> {}}],
               FontSize->Rational[39, 4]]}
            },
+           
            GridBoxAlignment->{
             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -47973,6 +48002,7 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                 FontSize->Rational[39, 4]]}
              },
+             
              GridBoxAlignment->{
               "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -49599,6 +49629,7 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                    FontSize->Rational[39, 4]]}
                 },
+                
                 GridBoxAlignment->{
                  "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                   "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -55459,7 +55490,6 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                 FontSize->Rational[39, 4]]}
              },
-             
              GridBoxAlignment->{
               "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -55496,6 +55526,7 @@ Cell[BoxData[
                    Offset[0.]}}, "RowsIndexed" -> {}}],
              FontSize->Rational[39, 4]]}
           },
+          
           GridBoxAlignment->{
            "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
             "Rows" -> {{Center}}, "RowsIndexed" -> {}},
