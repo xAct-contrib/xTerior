@@ -25141,7 +25141,9 @@ Cell[BoxData[
        RowBox[{
         RowBox[{"Int", "[", "v", "]"}], "@", 
         RowBox[{"diff", "@", "form"}]}]}]}], "}"}]}]}], ";"}]], "Input"]
-}, Closed]]
+}, Closed]],
+
+Cell["TODO Commuting derivations", "Subsection"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -71594,7 +71596,6 @@ $CellContext`d, -$CellContext`b],
                     Offset[0.]}}, "RowsIndexed" -> {}}],
               FontSize->Rational[39, 4]]}
            },
-           
            GridBoxAlignment->{
             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
