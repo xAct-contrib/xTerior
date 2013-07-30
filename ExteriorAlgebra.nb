@@ -5,9 +5,8 @@ Cell["Exterior algebra and differential forms", "Title"],
 
 Cell["An example of a graded associative product", "Subtitle"],
 
-Cell["\<\
-Alfonso, edited by Jose, June 2013, edited by Leo, July 2013\
-\>", "Subsubtitle"],
+Cell["Alfonso, edited by Jose, June 2013, edited by Leo, July 2013", \
+"Subsubtitle"],
 
 Cell[CellGroupData[{
 
