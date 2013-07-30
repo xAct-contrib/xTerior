@@ -1663,6 +1663,280 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
+Cell["Graded derivations", "Subsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Options", "[", "DefGradedDerivation", "]"}], "=", 
+   RowBox[{"{", 
+    RowBox[{"PrintAs", "\[Rule]", "Identity"}], "}"}]}], ";"}]], "Input"],
+
+Cell["\<\
+There are two nearly identical definition below. Is it possible to combine \
+them into one?\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"DefGradedDerivation", "[", 
+    RowBox[{"der_Symbol", ",", 
+     RowBox[{"prod_", "?", "ProductQ"}], ",", 
+     RowBox[{"dergrade_:", "0"}], ",", "options___"}], "]"}], ":=", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "pa", "}"}], ",", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", "pa", "}"}], "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", "PrintAs", "}"}], "/.", 
+         RowBox[{"CheckOptions", "[", "options", "]"}]}], "/.", 
+        RowBox[{"Options", "[", "DefGradedDerivation", "]"}]}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{
+        "DefInertHead", " ", "will", " ", "take", " ", "care", " ", "of", " ",
+          "scalar"}], "-", 
+        RowBox[{"homogeneity", " ", "and", " ", "linearity"}]}], " ", "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"DefInertHead", "[", 
+       RowBox[{"der", ",", "\[IndentingNewLine]", 
+        RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"ContractThrough", "\[Rule]", 
+         RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"PrintAs", "\[Rule]", "pa"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "Addition", " ", "of", " ", "grades", " ", "in", " ", "algebra"}], " ",
+        "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"der", "/:", 
+       RowBox[{"Grade", "[", 
+        RowBox[{
+         RowBox[{"der", "[", "expr_", "]"}], ",", "prod"}], "]"}], ":=", 
+       RowBox[{
+        RowBox[{"Grade", "[", 
+         RowBox[{"expr", ",", "prod"}], "]"}], "+", "dergrade"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"The", " ", 
+        RowBox[{"(", "graded", ")"}], " ", "Leibniz", " ", "rule"}], " ", 
+       "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"der", "[", "expr_prod", "]"}], ":=", 
+       RowBox[{"With", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"grades", "=", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Grade", "[", 
+              RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
+            RowBox[{"List", "@@", "expr"}]}]}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Sum", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"-", "1"}], ")"}], "^", 
+             RowBox[{"(", 
+              RowBox[{"dergrade", " ", "*", " ", 
+               RowBox[{"Total", "[", 
+                RowBox[{"Take", "[", 
+                 RowBox[{"grades", ",", 
+                  RowBox[{"i", "-", "1"}]}], "]"}], "]"}]}], " ", ")"}]}], 
+            "\[IndentingNewLine]", 
+            RowBox[{"MapAt", "[", 
+             RowBox[{"der", ",", "expr", ",", "i"}], "]"}]}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "1", ",", 
+             RowBox[{"Length", "[", "grades", "]"}]}], "}"}]}], 
+          "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], ";",
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"QUESTION", ":", " ", 
+        RowBox[{
+        "Agreement", " ", "with", " ", "a", " ", "regular", " ", "derivative",
+          " ", "when", " ", "acting", " ", "on", " ", "scalar", " ", 
+         "functions", "??"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"der", "[", 
+        RowBox[{
+         RowBox[{"func_", "?", "ScalarFunctionQ"}], "[", "args__", "]"}], 
+        "]"}], ":=", 
+       RowBox[{"xAct`xTensor`Private`multiD", "[", 
+        RowBox[{"der", ",", 
+         RowBox[{"func", "[", "args", "]"}]}], "]"}]}], ";"}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"DefGradedDerivation", "[", 
+    RowBox[{
+     RowBox[{"der_Symbol", "[", "vec_", "]"}], ",", 
+     RowBox[{"prod_", "?", "ProductQ"}], ",", 
+     RowBox[{"dergrade_:", "0"}], ",", "options___"}], "]"}], ":=", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"pa", ",", "w"}], "}"}], ",", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", "pa", "}"}], "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", "PrintAs", "}"}], "/.", 
+         RowBox[{"CheckOptions", "[", "options", "]"}]}], "/.", 
+        RowBox[{"Options", "[", "DefGradedDerivation", "]"}]}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{
+        "DefInertHead", " ", "will", " ", "take", " ", "care", " ", "of", " ",
+          "scalar"}], "-", 
+        RowBox[{"homogeneity", " ", "and", " ", "linearity"}]}], " ", "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"DefInertHead", "[", 
+       RowBox[{
+        RowBox[{"der", "[", "w", "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"ContractThrough", "\[Rule]", 
+         RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"PrintAs", "\[Rule]", "pa"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "Addition", " ", "of", " ", "grades", " ", "in", " ", "algebra"}], " ",
+        "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"der", "/:", 
+       RowBox[{"Grade", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"der", "[", "v_", "]"}], "[", "expr_", "]"}], ",", "prod"}],
+         "]"}], ":=", 
+       RowBox[{
+        RowBox[{"Grade", "[", 
+         RowBox[{"expr", ",", "prod"}], "]"}], "+", "dergrade"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"The", " ", 
+        RowBox[{"(", "graded", ")"}], " ", "Leibniz", " ", "rule"}], " ", 
+       "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"der", "[", "v_", "]"}], "[", "expr_prod", "]"}], ":=", 
+       RowBox[{"With", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"grades", "=", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Grade", "[", 
+              RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
+            RowBox[{"List", "@@", "expr"}]}]}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Sum", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"-", "1"}], ")"}], "^", 
+             RowBox[{"(", 
+              RowBox[{"dergrade", " ", "*", " ", 
+               RowBox[{"Total", "[", 
+                RowBox[{"Take", "[", 
+                 RowBox[{"grades", ",", 
+                  RowBox[{"i", "-", "1"}]}], "]"}], "]"}]}], " ", ")"}]}], 
+            "\[IndentingNewLine]", 
+            RowBox[{"MapAt", "[", 
+             RowBox[{
+              RowBox[{"der", "[", "v", "]"}], ",", "expr", ",", "i"}], 
+             "]"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "1", ",", 
+             RowBox[{"Length", "[", "grades", "]"}]}], "}"}]}], 
+          "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], ";",
+       "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"QUESTION", ":", " ", 
+        RowBox[{
+        "Agreement", " ", "with", " ", "a", " ", "regular", " ", "derivative",
+          " ", "when", " ", "acting", " ", "on", " ", "scalar", " ", 
+         "functions", "??"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"der", "[", "v_", "]"}], "[", 
+        RowBox[{
+         RowBox[{"func_", "?", "ScalarFunctionQ"}], "[", "args__", "]"}], 
+        "]"}], ":=", 
+       RowBox[{"xAct`xTensor`Private`multiD", "[", 
+        RowBox[{
+         RowBox[{"der", "[", "v", "]"}], ",", 
+         RowBox[{"func", "[", "args", "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"scalar", "-", 
+        RowBox[{
+        "linearity", " ", "in", " ", "the", " ", "vector", " ", "slot", " ", 
+         RowBox[{"(", 
+          RowBox[{"but", " ", "not", " ", 
+           RowBox[{"homogeneity", "!"}]}], " "}]}]}], "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"der", "[", "0", "]"}], "[", "_", "]"}], ":=", "0"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"der", "[", "v_Plus", "]"}], "[", "expr_", "]"}], ":=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"der", "[", "#", "]"}], "[", "expr", "]"}], "&"}], "/@", 
+        "v"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "Subscript", " ", "vector", " ", "argument", " ", "for", " ", 
+        "formatting"}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"pa", "===", "Identity"}], ",", 
+        RowBox[{"pa", "=", 
+         RowBox[{"PrintAs", "[", "der", "]"}]}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"der", "/:", 
+       RowBox[{"MakeBoxes", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"der", "[", "v_", "]"}], "[", "form_", "]"}], ",", 
+         "StandardForm"}], "]"}], ":=", 
+       RowBox[{"RowBox", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"SubscriptBox", "[", 
+           RowBox[{"pa", ",", 
+            RowBox[{"MakeBoxes", "[", 
+             RowBox[{"v", ",", "StandardForm"}], "]"}]}], "]"}], ",", 
+          "\"\<[\>\"", ",", 
+          RowBox[{"MakeBoxes", "[", 
+           RowBox[{"form", ",", "StandardForm"}], "]"}], ",", "\"\<]\>\""}], 
+         "}"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", "]"}]}], 
+  ";"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
 Cell["Exterior differentiation", "Subsection"],
 
 Cell["\<\
