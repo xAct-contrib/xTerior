@@ -59190,9 +59190,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{
-   RowBox[{"Hodge", "[", 
-    RowBox[{"#", ",", "metricg"}], "]"}], "&"}], "/@", "%"}]], "Input"],
+  RowBox[{"Hodge", "[", "metricg", "]"}], "/@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -59231,8 +59229,8 @@ Cell[BoxData[
       Editable->False], "]"}],
     ShowAutoStyles->False,
     AutoSpacing->False],
-   $CellContext`Hodge[
-    $CellContext`\[ScriptCapitalE][-$CellContext`a], $CellContext`metricg],
+   $CellContext`Hodge[$CellContext`metricg][
+    $CellContext`\[ScriptCapitalE][-$CellContext`a]],
    Editable->False], "\[Equal]", 
   RowBox[{
    FractionBox["1", "4"], " ", 
@@ -59264,6 +59262,63 @@ Cell[BoxData[
      AutoSpacing->False],
     $CellContext`epsilonmetricg[-$CellContext`a, -$CellContext`b, \
 -$CellContext`c, -$CellContext`d],
+    Editable->False], " ", 
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {"g", 
+        StyleBox[GridBox[{
+           {"c", "e"},
+           {" ", " "}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`metricg[$CellContext`c, $CellContext`e],
+    Editable->False], " ", 
+   InterpretationBox[
+    StyleBox[GridBox[{
+       {"R", 
+        StyleBox[GridBox[{
+           {" ", " ", " ", "d"},
+           {"f", "g", "e", " "}
+          },
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.], {
+               Offset[0.034999999999999996`]}, 
+              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+               Offset[0.]}}, "RowsIndexed" -> {}}],
+         FontSize->Rational[39, 4]]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.034999999999999996`]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    $CellContext`RiemannCV[-$CellContext`f, -$CellContext`g, -$CellContext`e, \
+$CellContext`d],
     Editable->False], " ", 
    InterpretationBox[
     StyleBox[
@@ -59359,88 +59414,19 @@ Cell[BoxData[
         Editable->False]}], "]"}],
      ShowAutoStyles->False,
      AutoSpacing->False],
-    $CellContext`Hodge[
+    $CellContext`Hodge[$CellContext`metricg][
      Wedge[
       $CellContext`\[Theta][$CellContext`b], 
       $CellContext`\[Theta][$CellContext`f], 
-      $CellContext`\[Theta][$CellContext`g]], $CellContext`metricg],
-    Editable->False], " ", 
-   InterpretationBox[
-    StyleBox[GridBox[{
-       {"g", 
-        StyleBox[GridBox[{
-           {"c", "e"},
-           {" ", " "}
-          },
-          GridBoxSpacings->{"Columns" -> {
-              Offset[0.], {
-               Offset[0.034999999999999996`]}, 
-              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-               Offset[0.]}}, "RowsIndexed" -> {}}],
-         FontSize->Rational[39, 4]]}
-      },
-      GridBoxAlignment->{
-       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
-        "RowsIndexed" -> {}},
-      GridBoxSpacings->{"Columns" -> {
-          Offset[0.27999999999999997`], {
-           Offset[0.034999999999999996`]}, 
-          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-          Offset[0.2], {
-           Offset[0.4]}, 
-          Offset[0.2]}, "RowsIndexed" -> {}}],
-     ShowAutoStyles->False,
-     AutoSpacing->False],
-    $CellContext`metricg[$CellContext`c, $CellContext`e],
-    Editable->False], " ", 
-   InterpretationBox[
-    StyleBox[GridBox[{
-       {"R", 
-        StyleBox[GridBox[{
-           {" ", " ", " ", "d"},
-           {"f", "g", "e", " "}
-          },
-          GridBoxSpacings->{"Columns" -> {
-              Offset[0.], {
-               Offset[0.034999999999999996`]}, 
-              Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-               Offset[0.]}}, "RowsIndexed" -> {}}],
-         FontSize->Rational[39, 4]]}
-      },
-      GridBoxAlignment->{
-       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}}, 
-        "RowsIndexed" -> {}},
-      GridBoxSpacings->{"Columns" -> {
-          Offset[0.27999999999999997`], {
-           Offset[0.034999999999999996`]}, 
-          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-          Offset[0.2], {
-           Offset[0.4]}, 
-          Offset[0.2]}, "RowsIndexed" -> {}}],
-     ShowAutoStyles->False,
-     AutoSpacing->False],
-    $CellContext`RiemannCV[-$CellContext`f, -$CellContext`g, -$CellContext`e, \
-$CellContext`d],
+      $CellContext`\[Theta][$CellContext`g]]],
     Editable->False]}]}]], "Output"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"%", "/.", 
-  RowBox[{"IndexRule", "[", 
-   RowBox[{
-    RowBox[{"Hodge", "[", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"\[Theta]", "[", "b_", "]"}], "\[Wedge]", 
-       RowBox[{"\[Theta]", "[", "e_", "]"}], "\[Wedge]", 
-       RowBox[{"\[Theta]", "[", "f_", "]"}]}], ",", "metricg"}], "]"}], ",", 
-    RowBox[{
-     RowBox[{"epsilonmetricg", "[", 
-      RowBox[{"b", ",", "e", ",", "f", ",", 
-       RowBox[{"-", "h"}]}], "]"}], 
-     RowBox[{"\[Theta]", "[", "h", "]"}]}]}], "]"}]}]], "Input"],
+ RowBox[{"ExpandHodgeDual", "[", 
+  RowBox[{"%", ",", "\[Theta]"}], "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -59479,8 +59465,8 @@ Cell[BoxData[
       Editable->False], "]"}],
     ShowAutoStyles->False,
     AutoSpacing->False],
-   $CellContext`Hodge[
-    $CellContext`\[ScriptCapitalE][-$CellContext`a], $CellContext`metricg],
+   $CellContext`Hodge[$CellContext`metricg][
+    $CellContext`\[ScriptCapitalE][-$CellContext`a]],
    Editable->False], "\[Equal]", 
   RowBox[{
    FractionBox["1", "4"], " ", 
@@ -60127,8 +60113,8 @@ Cell[BoxData[
       Editable->False], "]"}],
     ShowAutoStyles->False,
     AutoSpacing->False],
-   $CellContext`Hodge[
-    $CellContext`\[ScriptCapitalE][-$CellContext`a], $CellContext`metricg],
+   $CellContext`Hodge[$CellContext`metricg][
+    $CellContext`\[ScriptCapitalE][-$CellContext`a]],
    Editable->False], "\[Equal]", 
   RowBox[{
    FractionBox[
@@ -60271,8 +60257,8 @@ Cell[BoxData[
       Editable->False], "]"}],
     ShowAutoStyles->False,
     AutoSpacing->False],
-   $CellContext`Hodge[
-    $CellContext`\[ScriptCapitalE][-$CellContext`a], $CellContext`metricg],
+   $CellContext`Hodge[$CellContext`metricg][
+    $CellContext`\[ScriptCapitalE][-$CellContext`a]],
    Editable->False], "\[Equal]", 
   RowBox[{
    FractionBox[
@@ -60455,8 +60441,8 @@ Cell[BoxData[
       Editable->False], "]"}],
     ShowAutoStyles->False,
     AutoSpacing->False],
-   $CellContext`Hodge[
-    $CellContext`\[ScriptCapitalE][-$CellContext`a], $CellContext`metricg],
+   $CellContext`Hodge[$CellContext`metricg][
+    $CellContext`\[ScriptCapitalE][-$CellContext`a]],
    Editable->False], "\[Equal]", 
   RowBox[{
    RowBox[{"-", 
@@ -60715,9 +60701,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{
-   RowBox[{"Hodge", "[", 
-    RowBox[{"#", ",", "metricg"}], "]"}], "&"}], "/@", "%"}]], "Input"],
+  RowBox[{"Hodge", "[", "metricg", "]"}], "/@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -60764,9 +60748,9 @@ Cell[BoxData[
       Editable->False], "]"}],
     ShowAutoStyles->False,
     AutoSpacing->False],
-   $CellContext`Hodge[
+   $CellContext`Hodge[$CellContext`metricg][
     $CellContext`diff[
-     $CellContext`L[-$CellContext`a]], $CellContext`metricg],
+     $CellContext`L[-$CellContext`a]]],
    Editable->False], "\[Equal]", 
   RowBox[{
    InterpretationBox[
@@ -60803,8 +60787,8 @@ Cell[BoxData[
        Editable->False], "]"}],
      ShowAutoStyles->False,
      AutoSpacing->False],
-    $CellContext`Hodge[
-     $CellContext`\[ScriptCapitalE][-$CellContext`a], $CellContext`metricg],
+    $CellContext`Hodge[$CellContext`metricg][
+     $CellContext`\[ScriptCapitalE][-$CellContext`a]],
     Editable->False], "+", 
    InterpretationBox[
     StyleBox[
@@ -60840,8 +60824,8 @@ Cell[BoxData[
        Editable->False], "]"}],
      ShowAutoStyles->False,
      AutoSpacing->False],
-    $CellContext`Hodge[
-     $CellContext`\[ScriptCapitalS][-$CellContext`a], $CellContext`metricg],
+    $CellContext`Hodge[$CellContext`metricg][
+     $CellContext`\[ScriptCapitalS][-$CellContext`a]],
     Editable->False]}]}]], "Output"]
 }, Open  ]],
 
@@ -60849,9 +60833,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{
-   RowBox[{"codiff", "[", 
-    RowBox[{"#", ",", "metricg"}], "]"}], "&"}], "/@", "%"}]], "Input"],
+  RowBox[{"codiff", "[", "metricg", "]"}], "/@", "%"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -60903,17 +60885,16 @@ Cell[BoxData[
          Editable->False], "]"}],
        ShowAutoStyles->False,
        AutoSpacing->False],
-      $CellContext`Hodge[
+      $CellContext`Hodge[$CellContext`metricg][
        $CellContext`diff[
-        $CellContext`L[-$CellContext`a]], $CellContext`metricg],
+        $CellContext`L[-$CellContext`a]]],
       Editable->False], "]"}],
     ShowAutoStyles->False,
     AutoSpacing->False],
-   $CellContext`codiff[
-    $CellContext`Hodge[
+   $CellContext`codiff[$CellContext`metricg][
+    $CellContext`Hodge[$CellContext`metricg][
      $CellContext`diff[
-      $CellContext`L[-$CellContext`a]], $CellContext`metricg], \
-$CellContext`metricg],
+      $CellContext`L[-$CellContext`a]]]],
    Editable->False], "\[Equal]", 
   RowBox[{
    InterpretationBox[
@@ -60955,15 +60936,14 @@ $CellContext`metricg],
           Editable->False], "]"}],
         ShowAutoStyles->False,
         AutoSpacing->False],
-       $CellContext`Hodge[
-        $CellContext`\[ScriptCapitalE][-$CellContext`a], $CellContext`metricg],
+       $CellContext`Hodge[$CellContext`metricg][
+        $CellContext`\[ScriptCapitalE][-$CellContext`a]],
        Editable->False], "]"}],
      ShowAutoStyles->False,
      AutoSpacing->False],
-    $CellContext`codiff[
-     $CellContext`Hodge[
-      $CellContext`\[ScriptCapitalE][-$CellContext`a], $CellContext`metricg], \
-$CellContext`metricg],
+    $CellContext`codiff[$CellContext`metricg][
+     $CellContext`Hodge[$CellContext`metricg][
+      $CellContext`\[ScriptCapitalE][-$CellContext`a]]],
     Editable->False], "+", 
    InterpretationBox[
     StyleBox[
@@ -61004,15 +60984,14 @@ $CellContext`metricg],
           Editable->False], "]"}],
         ShowAutoStyles->False,
         AutoSpacing->False],
-       $CellContext`Hodge[
-        $CellContext`\[ScriptCapitalS][-$CellContext`a], $CellContext`metricg],
+       $CellContext`Hodge[$CellContext`metricg][
+        $CellContext`\[ScriptCapitalS][-$CellContext`a]],
        Editable->False], "]"}],
      ShowAutoStyles->False,
      AutoSpacing->False],
-    $CellContext`codiff[
-     $CellContext`Hodge[
-      $CellContext`\[ScriptCapitalS][-$CellContext`a], $CellContext`metricg], \
-$CellContext`metricg],
+    $CellContext`codiff[$CellContext`metricg][
+     $CellContext`Hodge[$CellContext`metricg][
+      $CellContext`\[ScriptCapitalS][-$CellContext`a]]],
     Editable->False]}]}]], "Output"]
 }, Open  ]],
 
@@ -61066,15 +61045,14 @@ Cell[BoxData[
           Editable->False], "]"}],
         ShowAutoStyles->False,
         AutoSpacing->False],
-       $CellContext`Hodge[
-        $CellContext`\[ScriptCapitalE][-$CellContext`a], $CellContext`metricg],
+       $CellContext`Hodge[$CellContext`metricg][
+        $CellContext`\[ScriptCapitalE][-$CellContext`a]],
        Editable->False], "]"}],
      ShowAutoStyles->False,
      AutoSpacing->False],
-    $CellContext`codiff[
-     $CellContext`Hodge[
-      $CellContext`\[ScriptCapitalE][-$CellContext`a], $CellContext`metricg], \
-$CellContext`metricg],
+    $CellContext`codiff[$CellContext`metricg][
+     $CellContext`Hodge[$CellContext`metricg][
+      $CellContext`\[ScriptCapitalE][-$CellContext`a]]],
     Editable->False], "+", 
    InterpretationBox[
     StyleBox[
@@ -61115,15 +61093,14 @@ $CellContext`metricg],
           Editable->False], "]"}],
         ShowAutoStyles->False,
         AutoSpacing->False],
-       $CellContext`Hodge[
-        $CellContext`\[ScriptCapitalS][-$CellContext`a], $CellContext`metricg],
+       $CellContext`Hodge[$CellContext`metricg][
+        $CellContext`\[ScriptCapitalS][-$CellContext`a]],
        Editable->False], "]"}],
      ShowAutoStyles->False,
      AutoSpacing->False],
-    $CellContext`codiff[
-     $CellContext`Hodge[
-      $CellContext`\[ScriptCapitalS][-$CellContext`a], $CellContext`metricg], \
-$CellContext`metricg],
+    $CellContext`codiff[$CellContext`metricg][
+     $CellContext`Hodge[$CellContext`metricg][
+      $CellContext`\[ScriptCapitalS][-$CellContext`a]]],
     Editable->False]}]}]], "Output"]
 }, Open  ]],
 
@@ -62212,7 +62189,6 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                    FontSize->Rational[39, 4]]}
                 },
-                
                 GridBoxAlignment->{
                  "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                   "Rows" -> {{Center}}, "RowsIndexed" -> {}},
