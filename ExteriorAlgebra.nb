@@ -25473,19 +25473,20 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"HoldPattern", "[", 
       RowBox[{
-       RowBox[{"Int", "[", "w_", "]"}], "@", 
+       RowBox[{"Int", "[", "v_", "]"}], "@", 
        RowBox[{
-        RowBox[{"Int", "[", "v_", "]"}], "@", "form_"}]}], "]"}], 
+        RowBox[{"Int", "[", "w_", "]"}], "@", "form_"}]}], "]"}], 
      "\[RuleDelayed]", 
      RowBox[{
       RowBox[{"-", 
        RowBox[{
-        RowBox[{"Int", "[", "v", "]"}], "@", 
+        RowBox[{"Int", "[", "w", "]"}], "@", 
         RowBox[{
-         RowBox[{"Int", "[", "w", "]"}], "@", "form"}]}]}], "/;", 
-      RowBox[{"OrderedQ", "[", 
-       RowBox[{"{", 
-        RowBox[{"w", ",", "v"}], "}"}], "]"}]}]}], "\[IndentingNewLine]", 
+         RowBox[{"Int", "[", "v", "]"}], "@", "form"}]}]}], "/;", 
+      RowBox[{"!", 
+       RowBox[{"OrderedQ", "[", 
+        RowBox[{"{", 
+         RowBox[{"v", ",", "w"}], "}"}], "]"}]}]}]}], "\[IndentingNewLine]", 
     "}"}]}], ";"}]], "Input"],
 
 Cell[BoxData[
@@ -25519,9 +25520,10 @@ Cell[BoxData[
             RowBox[{"Bracket", "[", 
              RowBox[{"v", ",", "w"}], "]"}], "[", "a", "]"}], "]"}], "@", 
           "form"}]}]}], "]"}], "/;", 
-      RowBox[{"OrderedQ", "[", 
-       RowBox[{"{", 
-        RowBox[{"w", ",", "v"}], "}"}], "]"}]}]}], "\[IndentingNewLine]", 
+      RowBox[{"!", 
+       RowBox[{"OrderedQ", "[", 
+        RowBox[{"{", 
+         RowBox[{"v", ",", "w"}], "}"}], "]"}]}]}]}], "\[IndentingNewLine]", 
     "}"}]}], ";"}]], "Input"],
 
 Cell["\<\
