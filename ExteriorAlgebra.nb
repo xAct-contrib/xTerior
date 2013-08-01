@@ -16,8 +16,8 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
-  "2013", ",", "7", ",", "30", ",", "22", ",", "0", ",", 
-   "57.101188`8.509220117523984"}], "}"}]], "Output"]
+  "2013", ",", "7", ",", "31", ",", "22", ",", "49", ",", 
+   "7.02923`7.599482741137322"}], "}"}]], "Output"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -94,215 +94,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{
     "a", ",", "b", ",", "c", ",", "d", ",", "e", ",", "f", ",", "g", ",", 
-     "h"}], "}"}]}], "]"}]], "Input"],
-
-Cell[CellGroupData[{
-
-Cell["My overloaded DefInertHead", "Subsubsection"],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"Unprotect", "[", "DefInertHead", "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"DefInertHead", "[", 
-    RowBox[{
-     RowBox[{"ih", ":", 
-      RowBox[{"head_", "[", "args___", "]"}]}], ",", "options___"}], "]"}], ":=", 
-   RowBox[{"Catch", "@", 
-    RowBox[{"Module", "[", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{
-       "lin", ",", "cthrough", ",", "master", ",", "pa", ",", "pns", ",", 
-        "info", ",", "x", ",", "y"}], "}"}], ",", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"{", 
-         RowBox[{
-         "lin", ",", "cthrough", ",", "master", ",", "pa", ",", "pns", ",", 
-          "info"}], "}"}], "=", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{
-           "LinearQ", ",", "ContractThrough", ",", "Master", ",", "PrintAs", 
-            ",", "ProtectNewSymbol", ",", "DefInfo"}], "}"}], "/.", 
-          RowBox[{"CheckOptions", "[", "options", "]"}]}], "/.", 
-         RowBox[{"Options", "[", "DefInertHead", "]"}]}]}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"(*", " ", "Validate", " ", "*)"}], "\[IndentingNewLine]", 
-       RowBox[{"ValidateSymbol", "[", "head", "]"}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"ValidateSymbolInSession", "[", "head", "]"}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"(*", " ", "Register", " ", "*)"}], "\[IndentingNewLine]", 
-       RowBox[{"xAct`xTensor`Private`MakeDefInfo", "[", 
-        RowBox[{"DefInertHead", ",", "head", ",", "info"}], "]"}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"MakexTensions", "[", 
-        RowBox[{
-        "DefInertHead", ",", "\"\<Beginning\>\"", ",", "ih", ",", "options"}],
-         "]"}], ";", "\[IndentingNewLine]", 
-       RowBox[{"AppendToUnevaluated", "[", 
-        RowBox[{"$InertHeads", ",", "head"}], "]"}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"InertHeadQ", "[", 
-         RowBox[{"head", "[", "___", "]"}], "]"}], "^=", "True"}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"DefInfo", "[", "head", "]"}], "^=", "info"}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"DefInfo", "[", 
-         RowBox[{"head", "[", "___", "]"}], "]"}], "^=", "info"}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"xAct`xTensor`Private`SetPrintAs", "[", 
-        RowBox[{"ih", ",", 
-         RowBox[{"xAct`xTensor`Private`PrintAsString", "[", 
-          RowBox[{"ih", ",", "pa"}], "]"}]}], "]"}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"xAct`xTensor`Private`SymbolRelations", "[", 
-        RowBox[{"head", ",", "master", ",", 
-         RowBox[{"{", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
-       RowBox[{"(*", " ", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"Metric", " ", "/", " ", "projector"}], " ", "/", " ", 
-          "delta"}], " ", "contraction"}], " ", "*)"}], "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"xTagSet", "[", 
-          RowBox[{
-           RowBox[{"{", 
-            RowBox[{"head", ",", 
-             RowBox[{"ContractThroughQ", "[", 
-              RowBox[{"head", ",", "#"}], "]"}]}], "}"}], ",", "True"}], 
-          "]"}], "&"}], "/@", 
-        RowBox[{"Flatten", "[", 
-         RowBox[{"{", "cthrough", "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
-       
-       RowBox[{"(*", " ", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"Linearity", ".", " ", "Only"}], " ", "with", " ", 
-          "respect", " ", "to", " ", "constants"}], ",", " ", 
-         RowBox[{"not", " ", "general", " ", "scalar", " ", "fields"}]}], " ",
-         "*)"}], "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"LinearQ", "[", 
-         RowBox[{"head", "[", "___", "]"}], "]"}], "^=", "lin"}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"If", "[", 
-        RowBox[{"lin", ",", "\[IndentingNewLine]", 
-         RowBox[{
-          RowBox[{
-           RowBox[{
-            RowBox[{"head", "[", "argz___", "]"}], "[", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"x_", "?", "ConstantQ"}], " ", "y_"}], ",", "z___"}], 
-            "]"}], ":=", 
-           RowBox[{"x", " ", 
-            RowBox[{
-             RowBox[{"head", "[", "argz", "]"}], "[", 
-             RowBox[{"y", ",", "z"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"head", "[", "argz___", "]"}], "[", 
-            RowBox[{"expr_Plus", ",", "z___"}], "]"}], ":=", 
-           RowBox[{
-            RowBox[{
-             RowBox[{
-              RowBox[{"head", "[", "argz", "]"}], "[", 
-              RowBox[{"#", ",", "z"}], "]"}], "&"}], "/@", "expr"}]}], ";", 
-          "\[IndentingNewLine]", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"head", "[", "argz___", "]"}], "[", 
-            RowBox[{"expr_SeriesData", ",", "z___"}], "]"}], ":=", 
-           RowBox[{"xAct`xTensor`Private`SeriesDataMap", "[", 
-            RowBox[{
-             RowBox[{
-              RowBox[{
-               RowBox[{"head", "[", "argz", "]"}], "[", 
-               RowBox[{"#", ",", "z"}], "]"}], "&"}], ",", "expr"}], "]"}]}], 
-          ";", "\[IndentingNewLine]", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"head", "[", "argz___", "]"}], "[", 
-            RowBox[{"0", ",", "z___"}], "]"}], ":=", "0"}]}]}], " ", "]"}], 
-       ";", "\[IndentingNewLine]", 
-       RowBox[{"MakexTensions", "[", 
-        RowBox[{
-        "DefInertHead", ",", "\"\<End\>\"", ",", "ih", ",", "options"}], 
-        "]"}], ";", "\[IndentingNewLine]", 
-       RowBox[{"(*", " ", "Protect", " ", "*)"}], "\[IndentingNewLine]", 
-       RowBox[{"If", "[", 
-        RowBox[{"pns", ",", 
-         RowBox[{"Protect", "[", "head", "]"}]}], "]"}], ";"}]}], 
-     "\[IndentingNewLine]", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Protect", "[", "DefInertHead", "]"}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Unprotect", "[", "UndefInertHead", "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"UndefInertHead", "[", 
-    RowBox[{"ih_Symbol", "[", "args___", "]"}], "]"}], ":=", 
-   RowBox[{"Catch", "@", 
-    RowBox[{"With", "[", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"servants", "=", 
-        RowBox[{"ServantsOf", "[", "ih", "]"}]}], "}"}], ",", 
-      "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"If", "[", 
-        RowBox[{
-         RowBox[{"!", 
-          RowBox[{"InertHeadQ", "[", 
-           RowBox[{"ih", "[", "args", "]"}], "]"}]}], ",", 
-         RowBox[{"Throw", "@", 
-          RowBox[{"Message", "[", 
-           RowBox[{
-            RowBox[{"UndefInertHead", "::", "unknown"}], ",", 
-            "\"\<inert head\>\"", ",", "ih"}], "]"}]}]}], "]"}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"xAct`xTensor`Private`CheckRemoveSymbol", "[", "ih", "]"}], 
-       ";", "\[IndentingNewLine]", 
-       RowBox[{"MakexTensions", "[", 
-        RowBox[{"UndefInertHead", ",", "\"\<Beginning\>\"", ",", 
-         RowBox[{"ih", "[", "args", "]"}]}], "]"}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"xUpSet", "[", 
-        RowBox[{
-         RowBox[{"ServantsOf", "[", "ih", "]"}], ",", 
-         RowBox[{"{", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
-       RowBox[{"xAct`xTensor`Private`DropFromHosts", "[", "ih", "]"}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"Undef", "/@", 
-        RowBox[{"Reverse", "[", "servants", "]"}]}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"$InertHeads", "=", 
-        RowBox[{"DeleteCases", "[", 
-         RowBox[{"$InertHeads", ",", "ih"}], "]"}]}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"MakexTensions", "[", 
-        RowBox[{"UndefInertHead", ",", "\"\<End\>\"", ",", 
-         RowBox[{"ih", "[", "args", "]"}]}], "]"}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"xAct`xTensor`Private`MakeUndefInfo", "[", 
-        RowBox[{"UndefInertHead", ",", "ih"}], "]"}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"xAct`xTensor`Private`RemoveSymbol", "[", "ih", "]"}], ";"}]}],
-      "\[IndentingNewLine]", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Protect", "[", "UndefInertHead", "]"}], ";"}]}], "Input"]
-}, Closed]]
+     "h"}], "}"}]}], "]"}]], "Input"]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1672,283 +1464,209 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"PrintAs", "\[Rule]", "Identity"}], "}"}]}], ";"}]], "Input"],
 
-Cell["\<\
-There are two nearly identical definition below. Is it possible to combine \
-them into one?\
-\>", "Text"],
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"GradeOfDerivation", "[", 
+    RowBox[{
+     RowBox[{"head_", "[", "v_", "]"}], ",", "prod_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"GradeOfDerivation", "[", 
+     RowBox[{"head", ",", "prod"}], "]"}], "+", 
+    RowBox[{"Grade", "[", 
+     RowBox[{"v", ",", "prod"}], "]"}]}]}], ";"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{
    RowBox[{"DefGradedDerivation", "[", 
-    RowBox[{"der_Symbol", ",", 
+    RowBox[{"der_", ",", 
      RowBox[{"prod_", "?", "ProductQ"}], ",", 
-     RowBox[{"dergrade_:", "0"}], ",", "options___"}], "]"}], ":=", 
-   "\[IndentingNewLine]", 
-   RowBox[{"Module", "[", 
-    RowBox[{
-     RowBox[{"{", "pa", "}"}], ",", "\[IndentingNewLine]", 
-     "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"{", "pa", "}"}], "=", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"{", "PrintAs", "}"}], "/.", 
-         RowBox[{"CheckOptions", "[", "options", "]"}]}], "/.", 
-        RowBox[{"Options", "[", "DefGradedDerivation", "]"}]}]}], ";", 
-      "\[IndentingNewLine]", "\[IndentingNewLine]", 
-      RowBox[{"(*", " ", 
-       RowBox[{
-        RowBox[{
-        "DefInertHead", " ", "will", " ", "take", " ", "care", " ", "of", " ",
-          "scalar"}], "-", 
-        RowBox[{"homogeneity", " ", "and", " ", "linearity"}]}], " ", "*)"}], 
-      "\[IndentingNewLine]", 
-      RowBox[{"DefInertHead", "[", 
-       RowBox[{"der", ",", "\[IndentingNewLine]", 
-        RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
-        RowBox[{"ContractThrough", "\[Rule]", 
-         RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
-        RowBox[{"PrintAs", "\[Rule]", "pa"}]}], "]"}], ";", 
-      "\[IndentingNewLine]", "\[IndentingNewLine]", 
-      RowBox[{"(*", " ", 
-       RowBox[{
-       "Addition", " ", "of", " ", "grades", " ", "in", " ", "algebra"}], " ",
-        "*)"}], "\[IndentingNewLine]", 
-      RowBox[{"der", "/:", 
-       RowBox[{"GradeOfDerivation", "[", 
-        RowBox[{"der", ",", "prod"}], "]"}], ":=", "dergrade"}], ";", 
-      "\[IndentingNewLine]", 
-      RowBox[{"der", "/:", 
-       RowBox[{"Grade", "[", 
-        RowBox[{
-         RowBox[{"der", "[", "expr_", "]"}], ",", "prod"}], "]"}], ":=", 
-       RowBox[{
-        RowBox[{"Grade", "[", 
-         RowBox[{"expr", ",", "prod"}], "]"}], "+", "dergrade"}]}], ";", 
-      "\[IndentingNewLine]", "\[IndentingNewLine]", 
-      RowBox[{"(*", " ", 
-       RowBox[{"The", " ", 
-        RowBox[{"(", "graded", ")"}], " ", "Leibniz", " ", "rule"}], " ", 
-       "*)"}], "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"der", "[", "expr_prod", "]"}], ":=", 
-       RowBox[{"With", "[", 
-        RowBox[{
-         RowBox[{"{", 
-          RowBox[{"grades", "=", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"Grade", "[", 
-              RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
-            RowBox[{"List", "@@", "expr"}]}]}], "}"}], ",", 
-         "\[IndentingNewLine]", 
-         RowBox[{"Sum", "[", "\[IndentingNewLine]", 
-          RowBox[{
-           RowBox[{
-            RowBox[{
-             RowBox[{"(", 
-              RowBox[{"-", "1"}], ")"}], "^", 
-             RowBox[{"(", 
-              RowBox[{"dergrade", " ", "*", " ", 
-               RowBox[{"Total", "[", 
-                RowBox[{"Take", "[", 
-                 RowBox[{"grades", ",", 
-                  RowBox[{"i", "-", "1"}]}], "]"}], "]"}]}], " ", ")"}]}], 
-            "\[IndentingNewLine]", 
-            RowBox[{"MapAt", "[", 
-             RowBox[{"der", ",", "expr", ",", "i"}], "]"}]}], ",", 
-           "\[IndentingNewLine]", 
-           RowBox[{"{", 
-            RowBox[{"i", ",", "1", ",", 
-             RowBox[{"Length", "[", "grades", "]"}]}], "}"}]}], 
-          "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], ";",
-       "\[IndentingNewLine]", "\[IndentingNewLine]", 
-      RowBox[{"(*", " ", 
-       RowBox[{"QUESTION", ":", " ", 
-        RowBox[{
-        "Agreement", " ", "with", " ", "a", " ", "regular", " ", "derivative",
-          " ", "when", " ", "acting", " ", "on", " ", "scalar", " ", 
-         "functions", "??"}]}], " ", "*)"}], "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"der", "[", 
-        RowBox[{
-         RowBox[{"func_", "?", "ScalarFunctionQ"}], "[", "args__", "]"}], 
-        "]"}], ":=", 
-       RowBox[{"xAct`xTensor`Private`multiD", "[", 
-        RowBox[{"der", ",", 
-         RowBox[{"func", "[", "args", "]"}]}], "]"}]}], ";"}]}], 
-    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"DefGradedDerivation", "[", 
-    RowBox[{
-     RowBox[{"der_Symbol", "[", "vec_", "]"}], ",", 
-     RowBox[{"prod_", "?", "ProductQ"}], ",", 
-     RowBox[{"dergrade_:", "0"}], ",", "options___"}], "]"}], ":=", 
-   "\[IndentingNewLine]", 
-   RowBox[{"Module", "[", 
+     RowBox[{"dergrade_:", "0"}], ",", 
+     RowBox[{"options___", "?", "OptionQ"}]}], "]"}], ":=", 
+   RowBox[{"With", "[", 
     RowBox[{
      RowBox[{"{", 
-      RowBox[{"pa", ",", "w"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"head", "=", 
+       RowBox[{"SubHead", "[", "der", "]"}]}], "}"}], ",", 
      "\[IndentingNewLine]", 
-     RowBox[{
+     RowBox[{"Module", "[", 
       RowBox[{
-       RowBox[{"{", "pa", "}"}], "=", 
+       RowBox[{"{", "pa", "}"}], ",", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
        RowBox[{
         RowBox[{
-         RowBox[{"{", "PrintAs", "}"}], "/.", 
-         RowBox[{"CheckOptions", "[", "options", "]"}]}], "/.", 
-        RowBox[{"Options", "[", "DefGradedDerivation", "]"}]}]}], ";", 
-      "\[IndentingNewLine]", "\[IndentingNewLine]", 
-      RowBox[{"(*", " ", 
-       RowBox[{
-        RowBox[{
-        "DefInertHead", " ", "will", " ", "take", " ", "care", " ", "of", " ",
-          "scalar"}], "-", 
-        RowBox[{"homogeneity", " ", "and", " ", "linearity"}]}], " ", "*)"}], 
-      "\[IndentingNewLine]", 
-      RowBox[{"DefInertHead", "[", 
-       RowBox[{
-        RowBox[{"der", "[", "w", "]"}], ",", "\[IndentingNewLine]", 
-        RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
-        RowBox[{"ContractThrough", "\[Rule]", 
-         RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
-        RowBox[{"PrintAs", "\[Rule]", "pa"}]}], "]"}], ";", 
-      "\[IndentingNewLine]", "\[IndentingNewLine]", 
-      RowBox[{"(*", " ", 
-       RowBox[{
-       "Addition", " ", "of", " ", "grades", " ", "in", " ", "algebra"}], " ",
-        "*)"}], "\[IndentingNewLine]", 
-      RowBox[{"der", "/:", 
-       RowBox[{"GradeOfDerivation", "[", 
-        RowBox[{"der", ",", "prod"}], "]"}], ":=", "dergrade"}], ";", 
-      "\[IndentingNewLine]", 
-      RowBox[{"der", "/:", 
-       RowBox[{"GradeOfDerivation", "[", 
-        RowBox[{
-         RowBox[{"der", "[", "_", "]"}], ",", "prod"}], "]"}], ":=", 
-       "dergrade"}], ";", " ", 
-      RowBox[{"(*", " ", 
-       RowBox[{"Need", " ", "this", " ", 
-        RowBox[{"too", "?"}]}], " ", "*)"}], "\[IndentingNewLine]", 
-      RowBox[{"der", "/:", 
-       RowBox[{"Grade", "[", 
-        RowBox[{
+         RowBox[{"{", "pa", "}"}], "=", 
          RowBox[{
-          RowBox[{"der", "[", "v_", "]"}], "[", "expr_", "]"}], ",", "prod"}],
-         "]"}], ":=", 
-       RowBox[{
-        RowBox[{"Grade", "[", 
-         RowBox[{"expr", ",", "prod"}], "]"}], "+", "dergrade"}]}], ";", 
-      "\[IndentingNewLine]", "\[IndentingNewLine]", 
-      RowBox[{"(*", " ", 
-       RowBox[{"The", " ", 
-        RowBox[{"(", "graded", ")"}], " ", "Leibniz", " ", "rule"}], " ", 
-       "*)"}], "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"der", "[", "v_", "]"}], "[", "expr_prod", "]"}], ":=", 
-       RowBox[{"With", "[", 
-        RowBox[{
-         RowBox[{"{", 
-          RowBox[{"grades", "=", 
-           RowBox[{
+          RowBox[{
+           RowBox[{"{", "PrintAs", "}"}], "/.", 
+           RowBox[{"CheckOptions", "[", "options", "]"}]}], "/.", 
+          RowBox[{"Options", "[", "DefGradedDerivation", "]"}]}]}], ";", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+          RowBox[{
+          "DefInertHead", " ", "will", " ", "take", " ", "care", " ", "of", 
+           " ", "scalar"}], "-", 
+          RowBox[{"homogeneity", " ", "and", " ", "linearity"}]}], " ", 
+         "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"DefInertHead", "[", 
+         RowBox[{"der", ",", "\[IndentingNewLine]", 
+          RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+          
+          RowBox[{"ContractThrough", "\[Rule]", 
+           RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"PrintAs", "\[Rule]", "pa"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+         "Other", " ", "properties", " ", "of", " ", "a", " ", "derivation"}],
+          " ", "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"MakeDerivation", "[", 
+         RowBox[{"head", ",", "der", ",", 
+          RowBox[{"NoPattern", "[", "der", "]"}], ",", "prod", ",", 
+          "dergrade"}], "]"}], ";", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{"Nonatomic", " ", "derivation"}], " ", "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"der", "=!=", "head"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"(*", " ", 
+           RowBox[{"scalar", "-", 
             RowBox[{
-             RowBox[{"Grade", "[", 
-              RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
-            RowBox[{"List", "@@", "expr"}]}]}], "}"}], ",", 
-         "\[IndentingNewLine]", 
-         RowBox[{"Sum", "[", "\[IndentingNewLine]", 
+            "linearity", " ", "in", " ", "the", " ", "vector", " ", "slot", 
+             " ", 
+             RowBox[{"(", 
+              RowBox[{"but", " ", "not", " ", 
+               RowBox[{"homogeneity", "!"}]}], " "}]}]}], "*)"}], 
+          "\[IndentingNewLine]", 
           RowBox[{
            RowBox[{
             RowBox[{
-             RowBox[{"(", 
-              RowBox[{"-", "1"}], ")"}], "^", 
-             RowBox[{"(", 
-              RowBox[{"dergrade", " ", "*", " ", 
-               RowBox[{"Total", "[", 
-                RowBox[{"Take", "[", 
-                 RowBox[{"grades", ",", 
-                  RowBox[{"i", "-", "1"}]}], "]"}], "]"}]}], " ", ")"}]}], 
-            "\[IndentingNewLine]", 
-            RowBox[{"MapAt", "[", 
+             RowBox[{"head", "[", "0", "]"}], "[", "_", "]"}], ":=", "0"}], 
+           ";", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"head", "[", "v_Plus", "]"}], "[", "expr_", "]"}], ":=", 
+            
+            RowBox[{
              RowBox[{
-              RowBox[{"der", "[", "v", "]"}], ",", "expr", ",", "i"}], 
-             "]"}]}], ",", "\[IndentingNewLine]", 
-           RowBox[{"{", 
-            RowBox[{"i", ",", "1", ",", 
-             RowBox[{"Length", "[", "grades", "]"}]}], "}"}]}], 
-          "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], ";",
-       "\[IndentingNewLine]", 
-      RowBox[{"(*", " ", 
-       RowBox[{"QUESTION", ":", " ", 
-        RowBox[{
-        "Agreement", " ", "with", " ", "a", " ", "regular", " ", "derivative",
-          " ", "when", " ", "acting", " ", "on", " ", "scalar", " ", 
-         "functions", "??"}]}], " ", "*)"}], "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"der", "[", "v_", "]"}], "[", 
-        RowBox[{
-         RowBox[{"func_", "?", "ScalarFunctionQ"}], "[", "args__", "]"}], 
-        "]"}], ":=", 
-       RowBox[{"xAct`xTensor`Private`multiD", "[", 
-        RowBox[{
-         RowBox[{"der", "[", "v", "]"}], ",", 
-         RowBox[{"func", "[", "args", "]"}]}], "]"}]}], ";", 
-      "\[IndentingNewLine]", "\[IndentingNewLine]", 
-      RowBox[{"(*", " ", 
-       RowBox[{"scalar", "-", 
-        RowBox[{
-        "linearity", " ", "in", " ", "the", " ", "vector", " ", "slot", " ", 
-         RowBox[{"(", 
-          RowBox[{"but", " ", "not", " ", 
-           RowBox[{"homogeneity", "!"}]}], " "}]}]}], "*)"}], 
-      "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"der", "[", "0", "]"}], "[", "_", "]"}], ":=", "0"}], ";", 
-      "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"der", "[", "v_Plus", "]"}], "[", "expr_", "]"}], ":=", 
-       RowBox[{
-        RowBox[{
-         RowBox[{
-          RowBox[{"der", "[", "#", "]"}], "[", "expr", "]"}], "&"}], "/@", 
-        "v"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
-      RowBox[{"(*", " ", 
-       RowBox[{
-       "Subscript", " ", "vector", " ", "argument", " ", "for", " ", 
-        "formatting"}], " ", "*)"}], "\[IndentingNewLine]", 
-      RowBox[{"If", "[", 
-       RowBox[{
-        RowBox[{"pa", "===", "Identity"}], ",", 
-        RowBox[{"pa", "=", 
-         RowBox[{"PrintAs", "[", "der", "]"}]}]}], "]"}], ";", 
-      "\[IndentingNewLine]", 
-      RowBox[{"der", "/:", 
-       RowBox[{"MakeBoxes", "[", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"der", "[", "v_", "]"}], "[", "form_", "]"}], ",", 
-         "StandardForm"}], "]"}], ":=", 
-       RowBox[{"RowBox", "[", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"SubscriptBox", "[", 
-           RowBox[{"pa", ",", 
+              RowBox[{
+               RowBox[{"head", "[", "#", "]"}], "[", "expr", "]"}], "&"}], "/@",
+              "v"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+            "Subscript", " ", "vector", " ", "argument", " ", "for", " ", 
+             "formatting"}], " ", "*)"}], "\[IndentingNewLine]", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"pa", "===", "Identity"}], ",", 
+             RowBox[{"pa", "=", 
+              RowBox[{"PrintAs", "[", "head", "]"}]}]}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"der", "/:", 
             RowBox[{"MakeBoxes", "[", 
-             RowBox[{"v", ",", "StandardForm"}], "]"}]}], "]"}], ",", 
-          "\"\<[\>\"", ",", 
-          RowBox[{"MakeBoxes", "[", 
-           RowBox[{"form", ",", "StandardForm"}], "]"}], ",", "\"\<]\>\""}], 
-         "}"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", "]"}]}], 
-  ";"}]], "Input"]
+             RowBox[{
+              RowBox[{
+               RowBox[{"head", "[", "v_", "]"}], "[", "form_", "]"}], ",", 
+              "StandardForm"}], "]"}], ":=", 
+            RowBox[{"RowBox", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"SubscriptBox", "[", 
+                RowBox[{"pa", ",", 
+                 RowBox[{"MakeBoxes", "[", 
+                  RowBox[{"v", ",", "StandardForm"}], "]"}]}], "]"}], ",", 
+               "\"\<[\>\"", ",", 
+               RowBox[{"MakeBoxes", "[", 
+                RowBox[{"form", ",", "StandardForm"}], "]"}], ",", 
+               "\"\<]\>\""}], "}"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", 
+         "]"}]}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+    "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"MakeDerivation", "[", 
+    RowBox[{
+    "head_", ",", "derL_", ",", "derR_", ",", "prod_", ",", "dergrade_"}], 
+    "]"}], ":=", 
+   RowBox[{"(", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Addition", " ", "of", " ", "grades", " ", "in", " ", "algebra"}], " ", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"head", "/:", 
+      RowBox[{"GradeOfDerivation", "[", 
+       RowBox[{"head", ",", "prod"}], "]"}], ":=", "dergrade"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"head", "/:", 
+      RowBox[{"Grade", "[", 
+       RowBox[{
+        RowBox[{"derL", "[", "expr_", "]"}], ",", "prod"}], "]"}], ":=", 
+      RowBox[{
+       RowBox[{"Grade", "[", 
+        RowBox[{"expr", ",", "prod"}], "]"}], "+", 
+       RowBox[{"GradeOfDerivation", "[", 
+        RowBox[{"derR", ",", "prod"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+     
+     RowBox[{"(*", " ", 
+      RowBox[{"The", " ", 
+       RowBox[{"(", "graded", ")"}], " ", "Leibniz", " ", "rule"}], " ", 
+      "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"derL", "[", "expr_prod", "]"}], ":=", 
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"grades", "=", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Grade", "[", 
+             RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
+           RowBox[{"List", "@@", "expr"}]}]}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Sum", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"-", "1"}], ")"}], "^", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"GradeOfDerivation", "[", 
+               RowBox[{"derR", ",", "prod"}], "]"}], " ", "*", " ", 
+              RowBox[{"Total", "[", 
+               RowBox[{"Take", "[", 
+                RowBox[{"grades", ",", 
+                 RowBox[{"i", "-", "1"}]}], "]"}], "]"}]}], " ", ")"}]}], 
+           "\[IndentingNewLine]", 
+           RowBox[{"MapAt", "[", 
+            RowBox[{"derR", ",", "expr", ",", "i"}], "]"}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", 
+            RowBox[{"Length", "[", "grades", "]"}]}], "}"}]}], 
+         "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"QUESTION", ":", " ", 
+       RowBox[{
+       "Agreement", " ", "with", " ", "a", " ", "regular", " ", "derivative", 
+        " ", "when", " ", "acting", " ", "on", " ", "scalar", " ", 
+        "functions", "??"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"derL", "[", 
+       RowBox[{
+        RowBox[{"func_", "?", "ScalarFunctionQ"}], "[", "args__", "]"}], 
+       "]"}], ":=", 
+      RowBox[{"xAct`xTensor`Private`multiD", "[", 
+       RowBox[{"derR", ",", 
+        RowBox[{"func", "[", "args", "]"}]}], "]"}]}], ";"}], 
+    "\[IndentingNewLine]", ")"}]}], ";"}]], "Input"]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1964,11 +1682,7 @@ though in this notebook we create only one differential operator.\
 Cell["\<\
 [Jose: The user can define separated structures with different names, but \
 perhaps some predefined objects should be defined in DefTensor/DefVBundle, \
-perhaps with a dedicated command/option DefFormStructure.]
-
-[Jose: Following Alfonso, we define the exterior derivative as an inert-head, \
-though there could be some nicer way of defining something that has \
-derivative properties.]\
+perhaps with a dedicated command/option DefFormStructure.]\
 \>", "Text"],
 
 Cell[BoxData[
@@ -1977,27 +1691,6 @@ Cell[BoxData[
    RowBox[{"diff", ",", "Wedge", ",", 
     RowBox[{"+", "1"}], ",", 
     RowBox[{"PrintAs", "\[Rule]", "\"\<d\>\""}]}], "]"}], ";"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"(*", "\[IndentingNewLine]", 
-  RowBox[{"DefInertHead", "[", 
-   RowBox[{"diff", ",", "\[IndentingNewLine]", 
-    RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
-    RowBox[{"ContractThrough", "\[Rule]", 
-     RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
-    RowBox[{"PrintAs", "\[Rule]", "\"\<d\>\""}]}], "\[IndentingNewLine]", 
-   "]"}], "\[IndentingNewLine]", "*)"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"(*", "\[IndentingNewLine]", 
-  RowBox[{"diff", "/:", 
-   RowBox[{"Grade", "[", 
-    RowBox[{
-     RowBox[{"diff", "[", "expr_", "]"}], ",", "Wedge"}], "]"}], ":=", 
-   RowBox[{"1", "+", 
-    RowBox[{"Grade", "[", 
-     RowBox[{"expr", ",", "Wedge"}], "]"}]}]}], "\[IndentingNewLine]", 
-  "*)"}]], "Input"],
 
 Cell[CellGroupData[{
 
@@ -2015,51 +1708,7 @@ Cell[BoxData[
    RowBox[{"diff", "[", 
     RowBox[{"x_", "?", "ConstantQ"}], "]"}], ":=", "0"}], ";"}]], "Input"],
 
-Cell["Leibniz rule:", "Text"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"(*", " ", 
-   RowBox[{
-    RowBox[{"This", " ", "is", " ", "close", " ", "to", " ", "optimal"}], ",",
-     " ", 
-    RowBox[{"and", " ", "still", " ", "easily", " ", "readable"}]}], " ", 
-   "*)"}], "\[IndentingNewLine]", 
-  RowBox[{"(*", "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"diff", "[", "expr_Wedge", "]"}], ":=", 
-     RowBox[{"With", "[", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"grades", "=", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"Grade", "[", 
-            RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
-          RowBox[{"List", "@@", "expr"}]}]}], "}"}], ",", 
-       "\[IndentingNewLine]", 
-       RowBox[{"Sum", "[", "\[IndentingNewLine]", 
-        RowBox[{
-         RowBox[{
-          RowBox[{
-           RowBox[{"(", 
-            RowBox[{"-", "1"}], ")"}], "^", 
-           RowBox[{"Total", "[", 
-            RowBox[{"Take", "[", 
-             RowBox[{"grades", ",", 
-              RowBox[{"i", "-", "1"}]}], "]"}], "]"}]}], " ", 
-          "\[IndentingNewLine]", 
-          RowBox[{"MapAt", "[", 
-           RowBox[{"diff", ",", "expr", ",", "i"}], "]"}]}], ",", 
-         "\[IndentingNewLine]", 
-         RowBox[{"{", 
-          RowBox[{"i", ",", "1", ",", 
-           RowBox[{"Length", "[", "expr", "]"}]}], "}"}]}], 
-        "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], ";"}],
-    "\[IndentingNewLine]", "*)"}]}]], "Input"],
-
-Cell["Still need definition when acting on Times", "Text"],
+Cell["We still need definition when acting on Times", "Text"],
 
 Cell[BoxData[
  RowBox[{
@@ -2174,19 +1823,6 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"diff0", "[", "expr_", "]"}], ":=", 
      RowBox[{"diff", "[", "expr", "]"}]}], ";"}]}]}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"(*", "\[IndentingNewLine]", 
-  RowBox[{
-   RowBox[{
-    RowBox[{"diff", "[", 
-     RowBox[{
-      RowBox[{"func_", "?", "ScalarFunctionQ"}], "[", "args__", "]"}], "]"}], 
-    ":=", 
-    RowBox[{"xAct`xTensor`Private`multiD", "[", 
-     RowBox[{"diff", ",", 
-      RowBox[{"func", "[", "args", "]"}]}], "]"}]}], ";"}], 
-  "\[IndentingNewLine]", "*)"}]], "Input"],
 
 Cell["The exterior derivative applied twice is zero:", "Text"],
 
@@ -14533,14 +14169,14 @@ requires the presence of a metric.\
 \>", "Text"],
 
 Cell["\<\
-[Jose: Again, we define Hodge using an inert head. Can we do better than \
-this?]\
+[Jose: The metric needs to be a pattern. That\[CloseCurlyQuote]s essential. \
+Otherwise Hodge[metric] would work only for the specified metric.]\
 \>", "Text"],
 
 Cell[BoxData[
  RowBox[{"DefInertHead", "[", 
   RowBox[{
-   RowBox[{"Hodge", "[", "met", "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Hodge", "[", "metric_", "]"}], ",", "\[IndentingNewLine]", 
    RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
    RowBox[{"ContractThrough", "\[Rule]", 
     RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
@@ -14548,23 +14184,26 @@ Cell[BoxData[
    "PrintAs", "\[Rule]", "\"\<\!\(\*SubscriptBox[\(*\), \(g\)]\)\>\""}]}], 
   "\[IndentingNewLine]", "]"}]], "Input"],
 
-Cell[BoxData[
- RowBox[{"Hodge", "/:", 
-  RowBox[{"PrintAs", "[", 
-   RowBox[{"Hodge", "[", "metric_", "]"}], "]"}], ":=", 
-  TagBox[
-   StyleBox[
-    RowBox[{"\"\<\\!\\(\\*SubscriptBox[\\(*\\), \\(\>\"", "<>", 
-     RowBox[{"PrintAs", "[", "metric", "]"}], "<>", "\"\<\\)]\\)\>\""}],
-    ShowSpecialCharacters->False,
-    ShowStringCharacters->True,
-    NumberMarks->True],
-   FullForm]}]], "Input"],
-
 Cell["\<\
-It needs a second argument, specifying a metric (the formatting should show \
-that metric)\
+TODO: We need some way to pass the met argument to the formatting system. \
+[Jose: I\[CloseCurlyQuote]m not sure how to do it. The options mechanism \
+seems too limited for that. I comment out next line to see whether the given \
+PrintAs string works.]\
 \>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"Hodge", "/:", 
+   RowBox[{"PrintAs", "[", 
+    RowBox[{"Hodge", "[", "metric_", "]"}], "]"}], ":=", 
+   TagBox[
+    StyleBox[
+     RowBox[{"\"\<\\!\\(\\*SubscriptBox[\\(*\\), \\(\>\"", "<>", 
+      RowBox[{"PrintAs", "[", "metric", "]"}], "<>", "\"\<\\)]\\)\>\""}],
+     ShowSpecialCharacters->False,
+     ShowStringCharacters->True,
+     NumberMarks->True],
+    FullForm]}], "*)"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -14655,7 +14294,9 @@ Cell[BoxData[
 Cell["\<\
 Leo: Question: Is the following correct? Why is it only \
 SignatureOfMetric[metric][[2]]? Shouldn\[CloseCurlyQuote]t it depend on the \
-difference between the number of plus and minus?\
+difference between the number of plus and minus?
+Jose: Yes, I think it is correct. Only the number of minus signs matter. I \
+was originally confused as well.\
 \>", "Text"],
 
 Cell[BoxData[
@@ -14861,7 +14502,147 @@ Cell[BoxData[
              RowBox[{"(", 
               RowBox[{"\[Theta]", "/@", "dummies"}], ")"}]}]}]}], 
           "\[IndentingNewLine]", "]"}]}], "]"}]}], "}"}]}], "/.", 
-    RowBox[{"xHold", "\[Rule]", "Identity"}]}]}], ";"}]], "Input"],
+    RowBox[{"xHold", "\[Rule]", "Identity"}]}]}], ";"}]], "Input",
+ Evaluatable->False],
+
+Cell["\<\
+[Jose: Well... That was a bit too complicated. Let me rewrite it. Note that \
+Table[X, {n}] recomputes X n times, while ConstantArray[X, n] first computes \
+X and then reproduces it n times. Note also that if you have Wedge[\[Theta]s] \
+in the LHS then Evaluate[Wedge[\[Theta]s]] on the RHS will force all Wedge \
+checks again. You can just take the expression from the LHS and put it inside \
+FindIndices. No Evaluate needed. Note how I name the whole Wedge expression \
+and not the sequence inside.]\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ExpandHodgeDual", "[", 
+    RowBox[{"expr_", ",", "\[Theta]_"}], "]"}], ":=", 
+   RowBox[{"expr", "/.", 
+    RowBox[{
+     RowBox[{"HoldPattern", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Hodge", "[", "met_", "]"}], "[", 
+        RowBox[{"form", ":", 
+         RowBox[{"Wedge", "[", 
+          RowBox[{
+           RowBox[{"\[Theta]", "[", "_", "]"}], ".."}], "]"}]}], "]"}], "|", 
+       RowBox[{"form", ":", 
+        RowBox[{
+         RowBox[{"Hodge", "[", "met_", "]"}], "[", 
+         RowBox[{"\[Theta]", "[", "_", "]"}], "]"}]}]}], "]"}], 
+     "\[RuleDelayed]", 
+     RowBox[{"With", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"dim", "=", 
+          RowBox[{"DimOfMetric", "[", "met", "]"}]}], ",", 
+         RowBox[{"n", "=", 
+          RowBox[{"Length", "[", "form", "]"}]}], ",", 
+         RowBox[{"inds", "=", 
+          RowBox[{"Sequence", "@@@", 
+           RowBox[{"List", "@@", "form"}]}]}]}], "}"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"With", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"dummies", "=", 
+           RowBox[{"DummyIn", "/@", 
+            RowBox[{"ConstantArray", "[", 
+             RowBox[{
+              RowBox[{"VBundleOfMetric", "[", "met", "]"}], ",", 
+              RowBox[{"dim", "-", "n"}]}], "]"}]}]}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"1", "/", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"dim", "-", "n"}], ")"}], "!"}]}], 
+          RowBox[{
+           RowBox[{"epsilon", "[", "met", "]"}], "@@", 
+           RowBox[{"Join", "[", 
+            RowBox[{"inds", ",", 
+             RowBox[{"ChangeIndex", "/@", "dummies"}]}], "]"}]}], 
+          RowBox[{"Wedge", "@@", 
+           RowBox[{"(", 
+            RowBox[{"\[Theta]", "/@", "dummies"}], ")"}]}]}]}], 
+        "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}]}]}], 
+  ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"(*", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ExpandHodgeDual", "[", 
+     RowBox[{"expr_Hodge", ",", "\[Theta]_"}], "]"}], ":=", 
+    RowBox[{"expr", "/.", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Hodge", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"\[Theta]", "[", "a_", "]"}], "\[Wedge]", 
+           RowBox[{"\[Theta]", "[", "b_", "]"}], "\[Wedge]", 
+           RowBox[{"\[Theta]", "[", "c_", "]"}], "\[Wedge]", 
+           RowBox[{"\[Theta]", "[", "d_", "]"}]}], ",", "metricg"}], "]"}], 
+        "\[RightTeeArrow]", 
+        RowBox[{"epsilonmetricg", "[", 
+         RowBox[{"a", ",", "b", ",", "c", ",", "d"}], "]"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Hodge", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"\[Theta]", "[", "a_", "]"}], "\[Wedge]", 
+           RowBox[{"\[Theta]", "[", "b_", "]"}], "\[Wedge]", 
+           RowBox[{"\[Theta]", "[", "c_", "]"}]}], ",", "metricg"}], "]"}], 
+        "\[RightTeeArrow]", 
+        RowBox[{
+         RowBox[{"epsilonmetricg", "[", 
+          RowBox[{"a", ",", "b", ",", "c", ",", 
+           RowBox[{"-", "d"}]}], "]"}], 
+         RowBox[{"\[Theta]", "[", "d", "]"}]}]}], ",", "\[IndentingNewLine]", 
+       
+       RowBox[{
+        RowBox[{"Hodge", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"\[Theta]", "[", "a_", "]"}], "\[Wedge]", 
+           RowBox[{"\[Theta]", "[", "b_", "]"}]}], ",", "metricg"}], "]"}], 
+        "\[RightTeeArrow]", 
+        RowBox[{
+         RowBox[{"1", "/", "2"}], 
+         RowBox[{"epsilonmetricg", "[", 
+          RowBox[{"a", ",", "b", ",", 
+           RowBox[{"-", "c"}], ",", 
+           RowBox[{"-", "d"}]}], "]"}], 
+         RowBox[{
+          RowBox[{"\[Theta]", "[", "c", "]"}], "\[Wedge]", 
+          RowBox[{"\[Theta]", "[", "d", "]"}]}]}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Hodge", "[", 
+         RowBox[{
+          RowBox[{"\[Theta]", "[", "a_", "]"}], ",", "metricg"}], "]"}], 
+        "\[RightTeeArrow]", 
+        RowBox[{
+         RowBox[{"1", "/", 
+          RowBox[{"3", "!"}]}], 
+         RowBox[{"epsilonmetricg", "[", 
+          RowBox[{"a", ",", 
+           RowBox[{"-", "b"}], ",", 
+           RowBox[{"-", "c"}], ",", 
+           RowBox[{"-", "d"}]}], "]"}], 
+         RowBox[{
+          RowBox[{"\[Theta]", "[", "b", "]"}], "\[Wedge]", 
+          RowBox[{"\[Theta]", "[", "c", "]"}], "\[Wedge]", 
+          RowBox[{"\[Theta]", "[", "d", "]"}]}]}]}]}], "\[IndentingNewLine]", 
+      "}"}]}]}], ";"}], "\[IndentingNewLine]", "*)"}]], "Input"],
 
 Cell[CellGroupData[{
 
@@ -15203,80 +14984,12 @@ Cell[BoxData[
     Editable->False]}]}]], "Output"]
 }, Open  ]],
 
-Cell[BoxData[
- RowBox[{"(*", "\[IndentingNewLine]", 
-  RowBox[{
-   RowBox[{
-    RowBox[{"ExpandHodgeDual", "[", 
-     RowBox[{"expr_Hodge", ",", "\[Theta]_"}], "]"}], ":=", 
-    RowBox[{"expr", "/.", 
-     RowBox[{"{", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"Hodge", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"\[Theta]", "[", "a_", "]"}], "\[Wedge]", 
-           RowBox[{"\[Theta]", "[", "b_", "]"}], "\[Wedge]", 
-           RowBox[{"\[Theta]", "[", "c_", "]"}], "\[Wedge]", 
-           RowBox[{"\[Theta]", "[", "d_", "]"}]}], ",", "metricg"}], "]"}], 
-        "\[RightTeeArrow]", 
-        RowBox[{"epsilonmetricg", "[", 
-         RowBox[{"a", ",", "b", ",", "c", ",", "d"}], "]"}]}], ",", 
-       RowBox[{
-        RowBox[{"Hodge", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"\[Theta]", "[", "a_", "]"}], "\[Wedge]", 
-           RowBox[{"\[Theta]", "[", "b_", "]"}], "\[Wedge]", 
-           RowBox[{"\[Theta]", "[", "c_", "]"}]}], ",", "metricg"}], "]"}], 
-        "\[RightTeeArrow]", 
-        RowBox[{
-         RowBox[{"epsilonmetricg", "[", 
-          RowBox[{"a", ",", "b", ",", "c", ",", 
-           RowBox[{"-", "d"}]}], "]"}], 
-         RowBox[{"\[Theta]", "[", "d", "]"}]}]}], ",", 
-       RowBox[{
-        RowBox[{"Hodge", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"\[Theta]", "[", "a_", "]"}], "\[Wedge]", 
-           RowBox[{"\[Theta]", "[", "b_", "]"}]}], ",", "metricg"}], "]"}], 
-        "\[RightTeeArrow]", 
-        RowBox[{
-         RowBox[{"1", "/", "2"}], 
-         RowBox[{"epsilonmetricg", "[", 
-          RowBox[{"a", ",", "b", ",", 
-           RowBox[{"-", "c"}], ",", 
-           RowBox[{"-", "d"}]}], "]"}], 
-         RowBox[{
-          RowBox[{"\[Theta]", "[", "c", "]"}], "\[Wedge]", 
-          RowBox[{"\[Theta]", "[", "d", "]"}]}]}]}], ",", 
-       RowBox[{
-        RowBox[{"Hodge", "[", 
-         RowBox[{
-          RowBox[{"\[Theta]", "[", "a_", "]"}], ",", "metricg"}], "]"}], 
-        "\[RightTeeArrow]", 
-        RowBox[{
-         RowBox[{"1", "/", 
-          RowBox[{"3", "!"}]}], 
-         RowBox[{"epsilonmetricg", "[", 
-          RowBox[{"a", ",", 
-           RowBox[{"-", "b"}], ",", 
-           RowBox[{"-", "c"}], ",", 
-           RowBox[{"-", "d"}]}], "]"}], 
-         RowBox[{
-          RowBox[{"\[Theta]", "[", "b", "]"}], "\[Wedge]", 
-          RowBox[{"\[Theta]", "[", "c", "]"}], "\[Wedge]", 
-          RowBox[{"\[Theta]", "[", "d", "]"}]}]}]}]}], "\[IndentingNewLine]", 
-      "}"}]}]}], ";"}], "\[IndentingNewLine]", "*)"}]], "Input"],
-
 Cell["And finally we introduce the co-differential:", "Text"],
 
 Cell[BoxData[
  RowBox[{"DefInertHead", "[", 
   RowBox[{
-   RowBox[{"codiff", "[", "met", "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"codiff", "[", "metric_", "]"}], ",", "\[IndentingNewLine]", 
    RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
    RowBox[{"ContractThrough", "\[Rule]", "delta"}], ",", 
    "\[IndentingNewLine]", 
@@ -15286,19 +14999,18 @@ Cell[BoxData[
   "\[IndentingNewLine]", "]"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"codiff", "/:", 
-  RowBox[{"PrintAs", "[", 
-   RowBox[{"codiff", "[", "metric_", "]"}], "]"}], ":=", 
-  TagBox[
-   StyleBox[
-    RowBox[{"\"\<\\!\\(\\*SubscriptBox[\\(\\[Delta]\\), \\(\>\"", "<>", 
-     RowBox[{"PrintAs", "[", "metric", "]"}], "<>", "\"\<\\)]\\)\>\""}],
-    ShowSpecialCharacters->False,
-    ShowStringCharacters->True,
-    NumberMarks->True],
-   FullForm]}]], "Input"],
-
-Cell["It also needs a metric argument:", "Text"],
+ RowBox[{"(*", 
+  RowBox[{"codiff", "/:", 
+   RowBox[{"PrintAs", "[", 
+    RowBox[{"codiff", "[", "metric_", "]"}], "]"}], ":=", 
+   TagBox[
+    StyleBox[
+     RowBox[{"\"\<\\!\\(\\*SubscriptBox[\\(\\[Delta]\\), \\(\>\"", "<>", 
+      RowBox[{"PrintAs", "[", "metric", "]"}], "<>", "\"\<\\)]\\)\>\""}],
+     ShowSpecialCharacters->False,
+     ShowStringCharacters->True,
+     NumberMarks->True],
+    FullForm]}], "*)"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"codiff", "/:", 
@@ -15317,7 +15029,8 @@ The co-differential is defined in terms of the exterior derivative and the \
 Hodge dual:
 Leo: Question: Same as before, why is it only SignatureOfMetric[metric][[2]]? \
 Shouldn\[CloseCurlyQuote]t it depend on the difference between the number of \
-plus and minus?\
+plus and minus?
+Jose: I think it is correct.\
 \>", "Text"],
 
 Cell[BoxData[
@@ -17960,7 +17673,8 @@ Cell[BoxData[
   RowBox[{"Antisymmetric", "[", 
    RowBox[{
     RowBox[{"{", 
-     RowBox[{"1", ",", "2"}], "}"}], ",", "Cycles"}], "]"}]}]], "Input"],
+     RowBox[{"1", ",", "2"}], "}"}], ",", "xAct`xPerm`Cycles"}], 
+   "]"}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"StrongGenSet", "[", 
@@ -25615,17 +25329,19 @@ Cell[CellGroupData[{
 
 Cell["Commuting derivations", "Subsection"],
 
+Cell["Jose: this is brilliant!", "Text"],
+
 Cell[TextData[{
  "There are 6 equations in all for the (super-)commutators of the three \
-derivations (also the negations of these three equations).\nIt is easy to \
+derivations (also the negations of these three equations). It is easy to \
 write them down. The LHS\[CloseCurlyQuote]s are just super-commutators of two \
-derivation, in whatever order you want.\nThe sign is + just for [odd,odd] so \
+derivations, in whatever order you want. The sign is + just for [odd,odd] so \
 that\[CloseCurlyQuote]s for [d,d], [\[Iota],\[Iota]], and [\[Iota],d]. Then \
-the RHS is itself a single derivation, with the degree being\nthe sum of \
+the RHS is itself a single derivation, with the degree being the sum of \
 degrees from the LHS. If there is only one vector argument, it\
-\[CloseCurlyQuote]s clear what the RHS should be. When there are two\nvector \
+\[CloseCurlyQuote]s clear what the RHS should be. When there are two vector \
 arguments, then the vector on the RHS is the Lie bracket of the two from the \
-LHS, in the order that they came on the LHS. \nThe equations are:\n1. ",
+LHS, in the order that they came on the LHS.\n \nThe equations are:\n1. ",
  Cell[BoxData[
   FormBox[
    RowBox[{
@@ -25688,7 +25404,9 @@ LHS, in the order that they came on the LHS. \nThe equations are:\n1. ",
     RowBox[{
      RowBox[{
       SubscriptBox["\[ScriptCapitalL]", "v"], "d"}], "-", 
-     SubscriptBox["d\[ScriptCapitalL]", "v"]}], "=", "0"}], TraditionalForm]]],
+     RowBox[{"d", " ", 
+      SubscriptBox["\[ScriptCapitalL]", "v"]}]}], "=", "0"}], 
+   TraditionalForm]]],
  " (\[OpenCurlyDoubleQuote]Cartan\[CloseCurlyQuote]s magic formula\
 \[CloseCurlyDoubleQuote])"
 }], "Text"],
@@ -25698,6 +25416,12 @@ Cell["\<\
 2, 3. Maybe have this sorted automatically? Any canonical order for v,w \
 imposes a canonical order on the derivations.
 4, 5, 6\[LongDash]write rules to go in either direction.\
+\>", "Text"],
+
+Cell["\<\
+[Jose: It is better to have this type of rule with a check !OrderedQ[...] \
+because if the two vectors are equal then you may run into infinite \
+recursion. Change it.]\
 \>", "Text"],
 
 Cell[BoxData[
@@ -25712,15 +25436,14 @@ Cell[BoxData[
   RowBox[{
    RowBox[{"SortDerivationsRule", "[", 
     RowBox[{"Int", ",", "Int"}], "]"}], ":=", 
-   RowBox[{"{", 
+   RowBox[{"{", "\[IndentingNewLine]", 
     RowBox[{
-     RowBox[{
+     RowBox[{"HoldPattern", "[", 
       RowBox[{
-       RowBox[{"Verbatim", "[", "Int", "]"}], "[", "w_", "]"}], "@", 
-      RowBox[{
+       RowBox[{"Int", "[", "w_", "]"}], "@", 
        RowBox[{
-        RowBox[{"Verbatim", "[", "Int", "]"}], "[", "v_", "]"}], "@", 
-       "form_"}]}], ":>", 
+        RowBox[{"Int", "[", "v_", "]"}], "@", "form_"}]}], "]"}], 
+     "\[RuleDelayed]", 
      RowBox[{
       RowBox[{"-", 
        RowBox[{
@@ -25729,167 +25452,182 @@ Cell[BoxData[
          RowBox[{"Int", "[", "w", "]"}], "@", "form"}]}]}], "/;", 
       RowBox[{"OrderedQ", "[", 
        RowBox[{"{", 
-        RowBox[{"w", ",", "v"}], "}"}], "]"}]}]}], "}"}]}], ";"}]], "Input"],
+        RowBox[{"w", ",", "v"}], "}"}], "]"}]}]}], "\[IndentingNewLine]", 
+    "}"}]}], ";"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"SortDerivationsRule", "[", 
-   RowBox[{"Lie", ",", "Lie"}], "]"}], ":=", 
-  RowBox[{"{", 
-   RowBox[{
+  RowBox[{
+   RowBox[{"SortDerivationsRule", "[", 
+    RowBox[{"Lie", ",", "Lie"}], "]"}], ":=", 
+   RowBox[{"{", "\[IndentingNewLine]", 
     RowBox[{
-     RowBox[{"Lie", "[", "v_", "]"}], "@", 
-     RowBox[{
-      RowBox[{"Lie", "[", "w_", "]"}], "@", "form_"}]}], "\[RuleDelayed]", 
-    RowBox[{
-     RowBox[{"Module", "[", 
+     RowBox[{"HoldPattern", "[", 
       RowBox[{
-       RowBox[{"{", 
-        RowBox[{"a", "=", 
-         RowBox[{"DummyAs", "@", 
-          RowBox[{"First", "@", 
-           RowBox[{"FindFreeIndices", "[", "v", "]"}]}]}]}], "}"}], ",", 
-       "\[IndentingNewLine]", 
+       RowBox[{"Lie", "[", "v_", "]"}], "@", 
        RowBox[{
+        RowBox[{"Lie", "[", "w_", "]"}], "@", "form_"}]}], "]"}], 
+     "\[RuleDelayed]", 
+     RowBox[{
+      RowBox[{"Module", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"a", "=", 
+          RowBox[{"First", "@", 
+           RowBox[{"FindFreeIndices", "[", "v", "]"}]}]}], "}"}], ",", 
         RowBox[{
-         RowBox[{"Lie", "[", "w", "]"}], "@", 
          RowBox[{
-          RowBox[{"Lie", "[", "v", "]"}], "@", "form"}]}], "+", 
-        RowBox[{
-         RowBox[{"Lie", "[", 
+          RowBox[{"Lie", "[", "w", "]"}], "@", 
           RowBox[{
-           RowBox[{"Bracket", "[", 
-            RowBox[{"v", ",", "w"}], "]"}], "[", "a", "]"}], "]"}], "@", 
-         "form"}]}]}], "]"}], "/;", 
-     RowBox[{"OrderedQ", "[", 
-      RowBox[{"{", 
-       RowBox[{"w", ",", "v"}], "}"}], "]"}]}]}], "}"}]}]], "Input"],
+           RowBox[{"Lie", "[", "v", "]"}], "@", "form"}]}], "+", 
+         RowBox[{
+          RowBox[{"Lie", "[", 
+           RowBox[{
+            RowBox[{"Bracket", "[", 
+             RowBox[{"v", ",", "w"}], "]"}], "[", "a", "]"}], "]"}], "@", 
+          "form"}]}]}], "]"}], "/;", 
+      RowBox[{"OrderedQ", "[", 
+       RowBox[{"{", 
+        RowBox[{"w", ",", "v"}], "}"}], "]"}]}]}], "\[IndentingNewLine]", 
+    "}"}]}], ";"}]], "Input"],
 
 Cell["\<\
 Below, SortDerivationsRule[d1,d2][expr] changes instances of d2\[CenterDot]d1 \
-into d1\[CenterDot]d2.\
+into d1\[CenterDot]d2. There is no need to check orderings.\
 \>", "Text"],
 
 Cell[BoxData[{
  RowBox[{
-  RowBox[{"SortDerivationsRule", "[", 
-   RowBox[{"Int", ",", "Lie"}], "]"}], ":=", 
-  RowBox[{"{", 
-   RowBox[{
+  RowBox[{
+   RowBox[{"SortDerivationsRule", "[", 
+    RowBox[{"Int", ",", "Lie"}], "]"}], ":=", 
+   RowBox[{"{", "\[IndentingNewLine]", 
     RowBox[{
-     RowBox[{"Lie", "[", "w_", "]"}], "@", 
-     RowBox[{
+     RowBox[{"HoldPattern", "[", 
       RowBox[{
-       RowBox[{"Verbatim", "[", "Int", "]"}], "[", "v_", "]"}], "@", 
-      "form_"}]}], "\[RuleDelayed]", 
-    RowBox[{"Module", "[", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"a", "=", 
-        RowBox[{"DummyAs", "@", 
+       RowBox[{"Lie", "[", "w_", "]"}], "@", 
+       RowBox[{
+        RowBox[{"Int", "[", "v_", "]"}], "@", "form_"}]}], "]"}], 
+     "\[RuleDelayed]", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"a", "=", 
          RowBox[{"First", "@", 
-          RowBox[{"FindFreeIndices", "[", "w", "]"}]}]}]}], "}"}], ",", 
-      "\[IndentingNewLine]", 
-      RowBox[{
+          RowBox[{"FindFreeIndices", "[", "w", "]"}]}]}], "}"}], ",", 
        RowBox[{
-        RowBox[{"Int", "[", "v", "]"}], "@", 
         RowBox[{
-         RowBox[{"Lie", "[", "w", "]"}], "@", "form"}]}], "+", 
-       RowBox[{
-        RowBox[{"Int", "[", 
+         RowBox[{"Int", "[", "v", "]"}], "@", 
          RowBox[{
-          RowBox[{"Bracket", "[", 
-           RowBox[{"w", ",", "v"}], "]"}], "[", "a", "]"}], "]"}], "@", 
-        "form"}]}]}], "]"}]}], "}"}]}], "\[IndentingNewLine]", 
+          RowBox[{"Lie", "[", "w", "]"}], "@", "form"}]}], "+", 
+        RowBox[{
+         RowBox[{"Int", "[", 
+          RowBox[{
+           RowBox[{"Bracket", "[", 
+            RowBox[{"w", ",", "v"}], "]"}], "[", "a", "]"}], "]"}], "@", 
+         "form"}]}]}], "]"}]}], "\[IndentingNewLine]", "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"SortDerivationsRule", "[", 
-   RowBox[{"Lie", ",", "Int"}], "]"}], ":=", 
-  RowBox[{"{", 
-   RowBox[{
+  RowBox[{
+   RowBox[{"SortDerivationsRule", "[", 
+    RowBox[{"Lie", ",", "Int"}], "]"}], ":=", 
+   RowBox[{"{", "\[IndentingNewLine]", 
     RowBox[{
-     RowBox[{
-      RowBox[{"Verbatim", "[", "Int", "]"}], "[", "v_", "]"}], "@", 
-     RowBox[{
-      RowBox[{"Lie", "[", "w_", "]"}], "@", "form_"}]}], "\[RuleDelayed]", 
-    RowBox[{"Module", "[", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"a", "=", 
-        RowBox[{"DummyAs", "@", 
-         RowBox[{"First", "@", 
-          RowBox[{"FindFreeIndices", "[", "w", "]"}]}]}]}], "}"}], ",", 
-      "\[IndentingNewLine]", 
+     RowBox[{"HoldPattern", "[", 
       RowBox[{
+       RowBox[{"Int", "[", "v_", "]"}], "@", 
        RowBox[{
-        RowBox[{"Lie", "[", "w", "]"}], "@", 
+        RowBox[{"Lie", "[", "w_", "]"}], "@", "form_"}]}], "]"}], 
+     "\[RuleDelayed]", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"a", "=", 
+         RowBox[{"First", "@", 
+          RowBox[{"FindFreeIndices", "[", "w", "]"}]}]}], "}"}], ",", 
+       RowBox[{
         RowBox[{
-         RowBox[{"Int", "[", "v", "]"}], "@", "form"}]}], "+", 
-       RowBox[{
-        RowBox[{"Int", "[", 
+         RowBox[{"Lie", "[", "w", "]"}], "@", 
          RowBox[{
-          RowBox[{"Bracket", "[", 
-           RowBox[{"v", ",", "w"}], "]"}], "[", "a", "]"}], "]"}], "@", 
-        "form"}]}]}], "]"}]}], "}"}]}]}], "Input"],
+          RowBox[{"Int", "[", "v", "]"}], "@", "form"}]}], "+", 
+        RowBox[{
+         RowBox[{"Int", "[", 
+          RowBox[{
+           RowBox[{"Bracket", "[", 
+            RowBox[{"v", ",", "w"}], "]"}], "[", "a", "]"}], "]"}], "@", 
+         "form"}]}]}], "]"}]}], "\[IndentingNewLine]", "}"}]}], 
+  ";"}]}], "Input"],
 
 Cell[BoxData[{
  RowBox[{
-  RowBox[{"SortDerivationsRule", "[", 
-   RowBox[{"Int", ",", "diff"}], "]"}], ":=", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"diff", "@", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"Verbatim", "[", "Int", "]"}], "[", "v_", "]"}], "@", 
-      "form_"}]}], "\[RuleDelayed]", 
+  RowBox[{
+   RowBox[{"SortDerivationsRule", "[", 
+    RowBox[{"Int", ",", "diff"}], "]"}], ":=", 
+   RowBox[{"{", "\[IndentingNewLine]", 
     RowBox[{
-     RowBox[{"-", 
-      RowBox[{
-       RowBox[{"Int", "[", "v", "]"}], "@", 
-       RowBox[{"diff", "@", "form"}]}]}], "+", 
-     RowBox[{
-      RowBox[{"Lie", "[", "v", "]"}], "@", "form"}]}]}], 
-   "}"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"SortDerivationsRule", "[", 
-   RowBox[{"diff", ",", "Int"}], "]"}], ":=", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{
-     RowBox[{
-      RowBox[{"Verbatim", "[", "Int", "]"}], "[", "v_", "]"}], "@", 
-     RowBox[{"diff", "@", "form_"}]}], "\[RuleDelayed]", 
-    RowBox[{
-     RowBox[{"-", 
+     RowBox[{"HoldPattern", "[", 
       RowBox[{"diff", "@", 
        RowBox[{
-        RowBox[{"Int", "[", "v", "]"}], "@", "form"}]}]}], "+", 
+        RowBox[{
+         RowBox[{"Verbatim", "[", "Int", "]"}], "[", "v_", "]"}], "@", 
+        "form_"}]}], "]"}], "\[RuleDelayed]", 
      RowBox[{
-      RowBox[{"Lie", "[", "v", "]"}], "@", "form"}]}]}], "}"}]}]}], "Input"],
+      RowBox[{"-", 
+       RowBox[{
+        RowBox[{"Int", "[", "v", "]"}], "@", 
+        RowBox[{"diff", "@", "form"}]}]}], "+", 
+      RowBox[{
+       RowBox[{"Lie", "[", "v", "]"}], "@", "form"}]}]}], 
+    "\[IndentingNewLine]", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SortDerivationsRule", "[", 
+    RowBox[{"diff", ",", "Int"}], "]"}], ":=", 
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"HoldPattern", "[", 
+      RowBox[{
+       RowBox[{"Int", "[", "v_", "]"}], "@", 
+       RowBox[{"diff", "@", "form_"}]}], "]"}], "\[RuleDelayed]", 
+     RowBox[{
+      RowBox[{"-", 
+       RowBox[{"diff", "@", 
+        RowBox[{
+         RowBox[{"Int", "[", "v", "]"}], "@", "form"}]}]}], "+", 
+      RowBox[{
+       RowBox[{"Lie", "[", "v", "]"}], "@", "form"}]}]}], 
+    "\[IndentingNewLine]", "}"}]}], ";"}]}], "Input"],
 
 Cell[BoxData[{
  RowBox[{
-  RowBox[{"SortDerivationsRule", "[", 
-   RowBox[{"Lie", ",", "diff"}], "]"}], ":=", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"diff", "@", 
-     RowBox[{
-      RowBox[{"Lie", "[", "v_", "]"}], "@", "form_"}]}], "\[RuleDelayed]", 
+  RowBox[{
+   RowBox[{"SortDerivationsRule", "[", 
+    RowBox[{"Lie", ",", "diff"}], "]"}], ":=", 
+   RowBox[{"{", "\[IndentingNewLine]", 
     RowBox[{
-     RowBox[{"Lie", "[", "v", "]"}], "@", 
-     RowBox[{"diff", "@", "form"}]}]}], "}"}]}], "\[IndentingNewLine]", 
+     RowBox[{"HoldPattern", "[", 
+      RowBox[{"diff", "@", 
+       RowBox[{
+        RowBox[{"Lie", "[", "v_", "]"}], "@", "form_"}]}], "]"}], 
+     "\[RuleDelayed]", 
+     RowBox[{
+      RowBox[{"Lie", "[", "v", "]"}], "@", 
+      RowBox[{"diff", "@", "form"}]}]}], "\[IndentingNewLine]", "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"SortDerivationsRule", "[", 
-   RowBox[{"diff", ",", "Lie"}], "]"}], ":=", 
-  RowBox[{"{", 
-   RowBox[{
+  RowBox[{
+   RowBox[{"SortDerivationsRule", "[", 
+    RowBox[{"diff", ",", "Lie"}], "]"}], ":=", 
+   RowBox[{"{", "\[IndentingNewLine]", 
     RowBox[{
-     RowBox[{"Lie", "[", "v_", "]"}], "@", 
-     RowBox[{"diff", "@", "form_"}]}], "\[RuleDelayed]", 
-    RowBox[{"diff", "@", 
-     RowBox[{
-      RowBox[{"Lie", "[", "v", "]"}], "@", "form"}]}]}], "}"}]}]}], "Input"],
+     RowBox[{"HoldPattern", "[", 
+      RowBox[{
+       RowBox[{"Lie", "[", "v_", "]"}], "@", 
+       RowBox[{"diff", "@", "form_"}]}], "]"}], "\[RuleDelayed]", 
+     RowBox[{"diff", "@", 
+      RowBox[{
+       RowBox[{"Lie", "[", "v", "]"}], "@", "form"}]}]}], 
+    "\[IndentingNewLine]", "}"}]}], ";"}]}], "Input"],
 
 Cell["\<\
 Now we choose a default left-to-right order that we want derivations to have. \
@@ -25913,79 +25651,81 @@ Cell[BoxData[{
    RowBox[{"expr", ",", "$DerivationSortOrder"}], 
    "]"}]}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"SortDerivations", "[", 
-   RowBox[{"expr_", ",", "order_List"}], "]"}], ":=", 
-  RowBox[{"Module", "[", 
-   RowBox[{
-    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
-    RowBox[{"(*", " ", 
-     RowBox[{
-     "Make", " ", "sure", " ", "that", " ", "order", " ", "is", " ", "some", 
-      " ", "permutation", " ", "of", " ", "$Derivations"}], " ", "*)"}], 
-    "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"SortDerivations", "[", 
+    RowBox[{"expr_", ",", "order_List"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
     RowBox[{
-     RowBox[{"If", "[", 
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
       RowBox[{
-       RowBox[{
-        RowBox[{"Sort", "@", "order"}], "=!=", 
-        RowBox[{"Sort", "@", "$Derivations"}]}], ",", 
-       RowBox[{
-        RowBox[{"Throw", "@", 
-         RowBox[{"Message", "[", 
-          RowBox[{
-           RowBox[{"SortDerivations", "::", "invalid"}], ",", "\"\<order\>\"",
-            ",", "order"}], "]"}]}], ";"}]}], "]"}], ";", 
-     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      "Make", " ", "sure", " ", "that", " ", "order", " ", "is", " ", "some", 
+       " ", "permutation", " ", "of", " ", "$Derivations"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
      RowBox[{
-      RowBox[{"expr", "//.", 
-       RowBox[{"Join", "@@", 
-        RowBox[{"Table", "[", 
-         RowBox[{
-          RowBox[{"Join", "@@", 
-           RowBox[{"(", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"SortDerivationsRule", "[", 
-               RowBox[{
-                RowBox[{"order", "[", 
-                 RowBox[{"[", "i", "]"}], "]"}], ",", "#"}], "]"}], "&"}], "/@", 
-             RowBox[{"Drop", "[", 
-              RowBox[{"order", ",", "i"}], "]"}]}], ")"}]}], ",", 
-          RowBox[{"{", 
-           RowBox[{"i", ",", "1", ",", 
-            RowBox[{
-             RowBox[{"Length", "@", "order"}], "-", "1"}]}], "}"}]}], 
-         "]"}]}]}], "//.", 
-      RowBox[{"Join", "@@", 
-       RowBox[{"(", 
+      RowBox[{"If", "[", 
+       RowBox[{
         RowBox[{
+         RowBox[{"Sort", "@", "order"}], "=!=", 
+         RowBox[{"Sort", "@", "$Derivations"}]}], ",", 
+        RowBox[{
+         RowBox[{"Throw", "@", 
+          RowBox[{"Message", "[", 
+           RowBox[{
+            RowBox[{"SortDerivations", "::", "invalid"}], ",", 
+            "\"\<order\>\"", ",", "order"}], "]"}]}], ";"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"expr", "//.", 
+        RowBox[{"Join", "@@", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"Join", "@@", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"SortDerivationsRule", "[", 
+                RowBox[{
+                 RowBox[{"order", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], ",", "#"}], "]"}], "&"}], "/@", 
+              RowBox[{"Drop", "[", 
+               RowBox[{"order", ",", "i"}], "]"}]}], ")"}]}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "1", ",", 
+             RowBox[{
+              RowBox[{"Length", "@", "order"}], "-", "1"}]}], "}"}]}], 
+          "]"}]}]}], "//.", 
+       RowBox[{"Join", "@@", 
+        RowBox[{"(", 
          RowBox[{
-          RowBox[{"SortDerivationsRule", "[", 
-           RowBox[{"#", ",", "#"}], "]"}], "&"}], "/@", "order"}], 
-        ")"}]}]}]}]}], "\[IndentingNewLine]", "]"}]}]}], "Input"],
+          RowBox[{
+           RowBox[{"SortDerivationsRule", "[", 
+            RowBox[{"#", ",", "#"}], "]"}], "&"}], "/@", "order"}], 
+         ")"}]}]}]}]}], "\[IndentingNewLine]", "]"}]}], ";"}]}], "Input"],
 
 Cell["Test this a bit", "Text"],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{
-   RowBox[{"GradCompBrak", "[", 
-    RowBox[{"a_", ",", "b_"}], "]"}], "[", "arg_", "]"}], ":=", 
-  RowBox[{
-   RowBox[{"a", "@", 
-    RowBox[{"b", "@", "arg"}]}], "-", 
    RowBox[{
+    RowBox[{"GradCompBrak", "[", 
+     RowBox[{"a_", ",", "b_"}], "]"}], "[", "arg_", "]"}], ":=", 
+   RowBox[{
+    RowBox[{"a", "@", 
+     RowBox[{"b", "@", "arg"}]}], "-", 
     RowBox[{
-     RowBox[{"(", 
-      RowBox[{"-", "1"}], ")"}], "^", 
-     RowBox[{"(", 
-      RowBox[{
-       RowBox[{"GradeOfDerivation", "[", 
-        RowBox[{"a", ",", "Wedge"}], "]"}], 
-       RowBox[{"GradeOfDerivation", "[", 
-        RowBox[{"b", ",", "Wedge"}], "]"}]}], ")"}]}], " ", 
-    RowBox[{"b", "@", 
-     RowBox[{"a", "@", "arg"}]}]}]}]}]], "Input"],
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"-", "1"}], ")"}], "^", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"GradeOfDerivation", "[", 
+         RowBox[{"a", ",", "Wedge"}], "]"}], 
+        RowBox[{"GradeOfDerivation", "[", 
+         RowBox[{"b", ",", "Wedge"}], "]"}]}], ")"}]}], " ", 
+     RowBox[{"b", "@", 
+      RowBox[{"a", "@", "arg"}]}]}]}]}], ";"}]], "Input"],
 
 Cell[BoxData[{
  RowBox[{"DefTensor", "[", 
@@ -25998,15 +25738,13 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{"v3", "[", "a", "]"}], ",", "M4"}], "]"}]}], "Input"],
 
-Cell["\<\
-Reproduce the 6 original formulas\
-\>", "Text"],
+Cell["Reproduce the 6 original formulas", "Text"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[{
  RowBox[{
-  RowBox[{"{", 
+  RowBox[{"{", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"GradCompBrak", "[", 
@@ -26047,7 +25785,8 @@ Cell[BoxData[{
       RowBox[{"diff", ",", 
        RowBox[{"Lie", "[", 
         RowBox[{"v1", "[", "a", "]"}], "]"}]}], "]"}], "@", 
-     RowBox[{"A3", "[", "]"}]}]}], "}"}], ";"}], "\[IndentingNewLine]", 
+     RowBox[{"A3", "[", "]"}]}]}], "\[IndentingNewLine]", "}"}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{
@@ -26396,7 +26135,7 @@ Cell[BoxData[
                     Offset[0.4]}, 
                    Offset[0.2]}, "RowsIndexed" -> {}}], "]"}], 
              StyleBox[GridBox[{
-                {"h$2526"},
+                {"a"},
                 {" "}
                },
                GridBoxSpacings->{"Columns" -> {
@@ -26421,7 +26160,7 @@ Cell[BoxData[
           AutoSpacing->False],
          xAct`xTensor`Bracket[
           $CellContext`v1[$CellContext`a], 
-          $CellContext`v2[$CellContext`a]][$CellContext`h$2526],
+          $CellContext`v2[$CellContext`a]][$CellContext`a],
          Editable->False]], "[", 
        InterpretationBox[
         StyleBox["A3",
@@ -26625,7 +26364,7 @@ Cell[BoxData[
                     Offset[0.4]}, 
                    Offset[0.2]}, "RowsIndexed" -> {}}], "]"}], 
              StyleBox[GridBox[{
-                {"h$2529"},
+                {"a"},
                 {" "}
                },
                GridBoxSpacings->{"Columns" -> {
@@ -26650,7 +26389,7 @@ Cell[BoxData[
           AutoSpacing->False],
          xAct`xTensor`Bracket[
           $CellContext`v1[$CellContext`a], 
-          $CellContext`v2[$CellContext`a]][$CellContext`h$2529],
+          $CellContext`v2[$CellContext`a]][$CellContext`a],
          Editable->False]], "[", 
        InterpretationBox[
         StyleBox["A3",
@@ -26899,8 +26638,7 @@ Cell[TextData[{
  Cell[BoxData[
   FormBox[
    RowBox[{"[", 
-    RowBox[{"x", ",", "\[CenterDot]"}], "]"}], TraditionalForm]],
-  FormatType->"TraditionalForm"],
+    RowBox[{"x", ",", "\[CenterDot]"}], "]"}], TraditionalForm]]],
  " to be a derivation of degree |x|, yielding\n",
  Cell[BoxData[
   FormBox[
@@ -26922,67 +26660,66 @@ Cell[TextData[{
         RowBox[{"x", "||", "y"}], "|"}]], "[", 
       RowBox[{"y", ",", 
        RowBox[{"[", 
-        RowBox[{"x", ",", "z"}], "]"}]}], "]"}]}]}], TraditionalForm]],
-  FormatType->"TraditionalForm"]
+        RowBox[{"x", ",", "z"}], "]"}]}], "]"}]}]}], TraditionalForm]]]
 }], "Text"],
 
 Cell[BoxData[
- RowBox[{"GradCompBrak", "/:", 
-  RowBox[{"GradeOfDerivation", "[", 
+ RowBox[{
+  RowBox[{"GradCompBrak", "/:", 
+   RowBox[{"GradeOfDerivation", "[", 
+    RowBox[{
+     RowBox[{"GradCompBrak", "[", 
+      RowBox[{"a_", ",", "b_"}], "]"}], ",", "Wedge"}], "]"}], ":=", 
    RowBox[{
-    RowBox[{"GradCompBrak", "[", 
-     RowBox[{"a_", ",", "b_"}], "]"}], ",", "Wedge"}], "]"}], ":=", 
-  RowBox[{
-   RowBox[{"GradeOfDerivation", "[", 
-    RowBox[{"a", ",", "Wedge"}], "]"}], "+", 
-   RowBox[{"GradeOfDerivation", "[", 
-    RowBox[{"b", ",", "Wedge"}], "]"}]}]}]], "Input"],
+    RowBox[{"GradeOfDerivation", "[", 
+     RowBox[{"a", ",", "Wedge"}], "]"}], "+", 
+    RowBox[{"GradeOfDerivation", "[", 
+     RowBox[{"b", ",", "Wedge"}], "]"}]}]}], ";"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{
-   RowBox[{"JacobiTest", "[", 
-    RowBox[{"x_", ",", "y_", ",", "z_"}], "]"}], "[", "arg_", "]"}], ":=", 
-  RowBox[{"With", "[", 
    RowBox[{
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"br", "=", "GradCompBrak"}], ",", 
-      RowBox[{"gr", "=", 
-       RowBox[{
-        RowBox[{"GradeOfDerivation", "[", 
-         RowBox[{"#", ",", "Wedge"}], "]"}], "&"}]}]}], "}"}], ",", 
-    "\[IndentingNewLine]", 
+    RowBox[{"JacobiTest", "[", 
+     RowBox[{"x_", ",", "y_", ",", "z_"}], "]"}], "[", "arg_", "]"}], ":=", 
+   RowBox[{"With", "[", 
     RowBox[{
-     RowBox[{
-      RowBox[{"br", "[", 
-       RowBox[{"x", ",", 
-        RowBox[{"br", "[", 
-         RowBox[{"y", ",", "z"}], "]"}]}], "]"}], "[", "arg", "]"}], "==", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"br", "=", "GradCompBrak"}], ",", 
+       RowBox[{"gr", "=", 
+        RowBox[{
+         RowBox[{"GradeOfDerivation", "[", 
+          RowBox[{"#", ",", "Wedge"}], "]"}], "&"}]}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
      RowBox[{
       RowBox[{
        RowBox[{"br", "[", 
-        RowBox[{
+        RowBox[{"x", ",", 
          RowBox[{"br", "[", 
-          RowBox[{"x", ",", "y"}], "]"}], ",", "z"}], "]"}], "[", "arg", 
-       "]"}], "+", 
+          RowBox[{"y", ",", "z"}], "]"}]}], "]"}], "[", "arg", "]"}], "==", 
       RowBox[{
-       SuperscriptBox[
-        RowBox[{"(", 
-         RowBox[{"-", "1"}], ")"}], 
-        RowBox[{
-         RowBox[{"gr", "@", "x"}], " ", 
-         RowBox[{"gr", "@", "y"}]}]], 
        RowBox[{
         RowBox[{"br", "[", 
-         RowBox[{"y", ",", 
+         RowBox[{
           RowBox[{"br", "[", 
-           RowBox[{"x", ",", "z"}], "]"}]}], "]"}], "[", "arg", "]"}]}]}]}]}],
-    "]"}]}]], "Input"],
+           RowBox[{"x", ",", "y"}], "]"}], ",", "z"}], "]"}], "[", "arg", 
+        "]"}], "+", 
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{"-", "1"}], ")"}], 
+         RowBox[{
+          RowBox[{"gr", "@", "x"}], " ", 
+          RowBox[{"gr", "@", "y"}]}]], 
+        RowBox[{
+         RowBox[{"br", "[", 
+          RowBox[{"y", ",", 
+           RowBox[{"br", "[", 
+            RowBox[{"x", ",", "z"}], "]"}]}], "]"}], "[", "arg", 
+         "]"}]}]}]}]}], "\[IndentingNewLine]", "]"}]}], ";"}]], "Input"],
 
-Cell["\<\
-Actually no sorting is needed to show these identities.\
-\>", "Text"],
+Cell["Actually no sorting is needed to show these identities.", "Text"],
 
 Cell[CellGroupData[{
 
@@ -27563,7 +27300,6 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                 FontSize->Rational[39, 4]]}
              },
-             
              GridBoxAlignment->{
               "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -27993,9 +27729,7 @@ Cell[BoxData[
      Editable->False], "]"}]}], "}"}]], "Output"]
 }, Open  ]],
 
-Cell["\<\
-Check that all the derivations end up in the expected order\
-\>", "Text"],
+Cell["Check that all the derivations end up in the expected order", "Text"],
 
 Cell[CellGroupData[{
 
@@ -28201,7 +27935,7 @@ Cell[BoxData[
                 Offset[0.4]}, 
                Offset[0.2]}, "RowsIndexed" -> {}}], "]"}], 
          StyleBox[GridBox[{
-            {"h$2536"},
+            {"a"},
             {" "}
            },
            GridBoxSpacings->{"Columns" -> {
@@ -28225,7 +27959,7 @@ Cell[BoxData[
       AutoSpacing->False],
      xAct`xTensor`Bracket[
       $CellContext`v1[$CellContext`a], 
-      $CellContext`v2[$CellContext`a]][$CellContext`h$2536],
+      $CellContext`v2[$CellContext`a]][$CellContext`a],
      Editable->False]], "[", 
    RowBox[{
     SubscriptBox["\[Iota]", 
@@ -28374,7 +28108,7 @@ Cell[BoxData[
                 Offset[0.4]}, 
                Offset[0.2]}, "RowsIndexed" -> {}}], "]"}], 
          StyleBox[GridBox[{
-            {"h$2538"},
+            {"a"},
             {" "}
            },
            GridBoxSpacings->{"Columns" -> {
@@ -28400,8 +28134,7 @@ Cell[BoxData[
       $CellContext`v3[$CellContext`a], 
       xAct`xTensor`Bracket[
        $CellContext`v1[$CellContext`a], 
-       $CellContext`v2[$CellContext`a]][$CellContext`a]][$CellContext`h$2538],
-     
+       $CellContext`v2[$CellContext`a]][$CellContext`a]][$CellContext`a],
      Editable->False]], "[", 
    InterpretationBox[
     StyleBox["A3",
@@ -28694,7 +28427,7 @@ Cell[BoxData[
                  Offset[0.4]}, 
                 Offset[0.2]}, "RowsIndexed" -> {}}], "]"}], 
           StyleBox[GridBox[{
-             {"h$2540"},
+             {"a"},
              {" "}
             },
             GridBoxSpacings->{"Columns" -> {
@@ -28719,7 +28452,7 @@ Cell[BoxData[
        AutoSpacing->False],
       xAct`xTensor`Bracket[
        $CellContext`v1[$CellContext`a], 
-       $CellContext`v3[$CellContext`a]][$CellContext`h$2540],
+       $CellContext`v3[$CellContext`a]][$CellContext`a],
       Editable->False]], "[", 
     InterpretationBox[
      StyleBox["A3",
@@ -28907,7 +28640,7 @@ Cell[BoxData[
                  Offset[0.4]}, 
                 Offset[0.2]}, "RowsIndexed" -> {}}], "]"}], 
           StyleBox[GridBox[{
-             {"h$2536"},
+             {"a"},
              {" "}
             },
             GridBoxSpacings->{"Columns" -> {
@@ -28932,7 +28665,7 @@ Cell[BoxData[
        AutoSpacing->False],
       xAct`xTensor`Bracket[
        $CellContext`v1[$CellContext`a], 
-       $CellContext`v2[$CellContext`a]][$CellContext`h$2536],
+       $CellContext`v2[$CellContext`a]][$CellContext`a],
       Editable->False]], "[", 
     InterpretationBox[
      StyleBox["A3",
@@ -29116,7 +28849,7 @@ Cell[BoxData[
                    Offset[0.4]}, 
                   Offset[0.2]}, "RowsIndexed" -> {}}], "]"}], 
             StyleBox[GridBox[{
-               {"h$2544"},
+               {"a"},
                {" "}
               },
               GridBoxSpacings->{"Columns" -> {
@@ -29141,7 +28874,7 @@ Cell[BoxData[
          AutoSpacing->False],
         xAct`xTensor`Bracket[
          $CellContext`v2[$CellContext`a], 
-         $CellContext`v3[$CellContext`a]][$CellContext`h$2544],
+         $CellContext`v3[$CellContext`a]][$CellContext`a],
         Editable->False]], "[", 
       RowBox[{
        SubscriptBox["\[Iota]", 
@@ -29186,7 +28919,7 @@ Cell[BoxData[
     $CellContext`Int[
      xAct`xTensor`Bracket[
       $CellContext`v2[$CellContext`a], 
-      $CellContext`v3[$CellContext`a]][$CellContext`h$2544]][
+      $CellContext`v3[$CellContext`a]][$CellContext`a]][
      $CellContext`Int[
       $CellContext`v1[$CellContext`a]][
       $CellContext`A3[]]]],
@@ -29252,7 +28985,7 @@ Cell[BoxData[
                    Offset[0.4]}, 
                   Offset[0.2]}, "RowsIndexed" -> {}}], "]"}], 
             StyleBox[GridBox[{
-               {"h$2547"},
+               {"a"},
                {" "}
               },
               GridBoxSpacings->{"Columns" -> {
@@ -29277,7 +29010,7 @@ Cell[BoxData[
          AutoSpacing->False],
         xAct`xTensor`Bracket[
          $CellContext`v1[$CellContext`a], 
-         $CellContext`v2[$CellContext`a]][$CellContext`h$2547],
+         $CellContext`v2[$CellContext`a]][$CellContext`a],
         Editable->False]], "[", 
       RowBox[{
        SubscriptBox["\[Iota]", 
@@ -29322,7 +29055,7 @@ Cell[BoxData[
     $CellContext`Int[
      xAct`xTensor`Bracket[
       $CellContext`v1[$CellContext`a], 
-      $CellContext`v2[$CellContext`a]][$CellContext`h$2547]][
+      $CellContext`v2[$CellContext`a]][$CellContext`a]][
      $CellContext`Int[
       $CellContext`v3[$CellContext`a]][
       $CellContext`A3[]]]],
@@ -29460,7 +29193,8 @@ Cell[BoxData[{
      RowBox[{"diff", "@", 
       RowBox[{"A3", "[", "]"}]}]}]}]}]}], "\[IndentingNewLine]", 
  RowBox[{"SortDerivations", "@", "%"}], "\[IndentingNewLine]", 
- RowBox[{"SortDerivations", "@", "%"}]}], "Input"],
+ RowBox[{"%", "===", 
+  RowBox[{"SortDerivations", "@", "%"}]}]}], "Input"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -29689,7 +29423,7 @@ Cell[BoxData[
                 Offset[0.4]}, 
                Offset[0.2]}, "RowsIndexed" -> {}}], "]"}], 
          StyleBox[GridBox[{
-            {"h$2552"},
+            {"a"},
             {" "}
            },
            GridBoxSpacings->{"Columns" -> {
@@ -29715,8 +29449,7 @@ Cell[BoxData[
       $CellContext`v3[$CellContext`a], 
       xAct`xTensor`Bracket[
        $CellContext`v1[$CellContext`a], 
-       $CellContext`v2[$CellContext`a]][$CellContext`a]][$CellContext`h$2552],
-     
+       $CellContext`v2[$CellContext`a]][$CellContext`a]][$CellContext`a],
      Editable->False]], "[", 
    InterpretationBox[
     StyleBox[
@@ -29920,7 +29653,7 @@ Cell[BoxData[
                  Offset[0.4]}, 
                 Offset[0.2]}, "RowsIndexed" -> {}}], "]"}], 
           StyleBox[GridBox[{
-             {"h$2554"},
+             {"a"},
              {" "}
             },
             GridBoxSpacings->{"Columns" -> {
@@ -29945,7 +29678,7 @@ Cell[BoxData[
        AutoSpacing->False],
       xAct`xTensor`Bracket[
        $CellContext`v1[$CellContext`a], 
-       $CellContext`v3[$CellContext`a]][$CellContext`h$2554],
+       $CellContext`v3[$CellContext`a]][$CellContext`a],
       Editable->False]], "[", 
     InterpretationBox[
      StyleBox[
@@ -30149,7 +29882,7 @@ Cell[BoxData[
                  Offset[0.4]}, 
                 Offset[0.2]}, "RowsIndexed" -> {}}], "]"}], 
           StyleBox[GridBox[{
-             {"h$2550"},
+             {"a"},
              {" "}
             },
             GridBoxSpacings->{"Columns" -> {
@@ -30174,7 +29907,7 @@ Cell[BoxData[
        AutoSpacing->False],
       xAct`xTensor`Bracket[
        $CellContext`v1[$CellContext`a], 
-       $CellContext`v2[$CellContext`a]][$CellContext`h$2550],
+       $CellContext`v2[$CellContext`a]][$CellContext`a],
       Editable->False]], "[", 
     InterpretationBox[
      StyleBox[
@@ -30191,611 +29924,7 @@ Cell[BoxData[
       $CellContext`A3[]],
      Editable->False], "]"}], "]"}]}]], "Output"],
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   SubscriptBox["\[Iota]", 
-    InterpretationBox[
-     StyleBox[GridBox[{
-        {
-         RowBox[{"[", GridBox[{
-            {"v3", 
-             StyleBox[GridBox[{
-                {"a"},
-                {" "}
-               },
-               GridBoxSpacings->{"Columns" -> {
-                   Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                   Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-              FontSize->Rational[39, 4]]}
-           },
-           
-           GridBoxAlignment->{
-            "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-             "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.27999999999999997`], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-               Offset[0.2], {
-                Offset[0.4]}, 
-               Offset[0.2]}, "RowsIndexed" -> {}}], ",", GridBox[{
-            {
-             RowBox[{"[", GridBox[{
-                {"v1", 
-                 StyleBox[GridBox[{
-                    {"a"},
-                    {" "}
-                   },
-                   GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-                  FontSize->Rational[39, 4]]}
-               },
-               
-               GridBoxAlignment->{
-                "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-                 "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-               GridBoxSpacings->{"Columns" -> {
-                   Offset[0.27999999999999997`], {
-                    Offset[0.034999999999999996`]}, 
-                   Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-                 "Rows" -> {
-                   Offset[0.2], {
-                    Offset[0.4]}, 
-                   Offset[0.2]}, "RowsIndexed" -> {}}], ",", GridBox[{
-                {"v2", 
-                 StyleBox[GridBox[{
-                    {"a"},
-                    {" "}
-                   },
-                   GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-                  FontSize->Rational[39, 4]]}
-               },
-               
-               GridBoxAlignment->{
-                "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-                 "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-               GridBoxSpacings->{"Columns" -> {
-                   Offset[0.27999999999999997`], {
-                    Offset[0.034999999999999996`]}, 
-                   Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-                 "Rows" -> {
-                   Offset[0.2], {
-                    Offset[0.4]}, 
-                   Offset[0.2]}, "RowsIndexed" -> {}}], "]"}], 
-             StyleBox[GridBox[{
-                {"a"},
-                {" "}
-               },
-               GridBoxSpacings->{"Columns" -> {
-                   Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                   Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-              FontSize->Rational[39, 4]]}
-           },
-           
-           GridBoxAlignment->{
-            "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-             "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.27999999999999997`], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-               Offset[0.2], {
-                Offset[0.4]}, 
-               Offset[0.2]}, "RowsIndexed" -> {}}], "]"}], 
-         StyleBox[GridBox[{
-            {"h$2552"},
-            {" "}
-           },
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                Offset[0.]}}, "RowsIndexed" -> {}}],
-          FontSize->Rational[39, 4]]}
-       },
-       GridBoxAlignment->{
-        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
-          "RowsIndexed" -> {}},
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.034999999999999996`]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.4]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     xAct`xTensor`Bracket[
-      $CellContext`v3[$CellContext`a], 
-      xAct`xTensor`Bracket[
-       $CellContext`v1[$CellContext`a], 
-       $CellContext`v2[$CellContext`a]][$CellContext`a]][$CellContext`h$2552],
-     
-     Editable->False]], "[", 
-   InterpretationBox[
-    StyleBox[
-     RowBox[{"d", "[", 
-      InterpretationBox[
-       StyleBox["A3",
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`A3[],
-       Editable->False], "]"}],
-     ShowAutoStyles->False,
-     AutoSpacing->False],
-    $CellContext`diff[
-     $CellContext`A3[]],
-    Editable->False], "]"}], "+", 
-  RowBox[{
-   SubscriptBox["\[ScriptCapitalL]", 
-    InterpretationBox[
-     StyleBox[GridBox[{
-        {"v1", 
-         StyleBox[GridBox[{
-            {"a"},
-            {" "}
-           },
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                Offset[0.]}}, "RowsIndexed" -> {}}],
-          FontSize->Rational[39, 4]]}
-       },
-       GridBoxAlignment->{
-        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
-          "RowsIndexed" -> {}},
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.034999999999999996`]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.4]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`v1[$CellContext`a],
-     Editable->False]], "[", 
-   RowBox[{
-    SubscriptBox["\[ScriptCapitalL]", 
-     InterpretationBox[
-      StyleBox[GridBox[{
-         {"v2", 
-          StyleBox[GridBox[{
-             {"a"},
-             {" "}
-            },
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                 Offset[0.]}}, "RowsIndexed" -> {}}],
-           FontSize->Rational[39, 4]]}
-        },
-        GridBoxAlignment->{
-         "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-          "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-        GridBoxSpacings->{"Columns" -> {
-            Offset[0.27999999999999997`], {
-             Offset[0.034999999999999996`]}, 
-            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-          "Rows" -> {
-            Offset[0.2], {
-             Offset[0.4]}, 
-            Offset[0.2]}, "RowsIndexed" -> {}}],
-       ShowAutoStyles->False,
-       AutoSpacing->False],
-      $CellContext`v2[$CellContext`a],
-      Editable->False]], "[", 
-    RowBox[{
-     SubscriptBox["\[Iota]", 
-      InterpretationBox[
-       StyleBox[GridBox[{
-          {"v3", 
-           StyleBox[GridBox[{
-              {"a"},
-              {" "}
-             },
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                  Offset[0.]}}, "RowsIndexed" -> {}}],
-            FontSize->Rational[39, 4]]}
-         },
-         GridBoxAlignment->{
-          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-         GridBoxSpacings->{"Columns" -> {
-             Offset[0.27999999999999997`], {
-              Offset[0.034999999999999996`]}, 
-             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-             Offset[0.2], {
-              Offset[0.4]}, 
-             Offset[0.2]}, "RowsIndexed" -> {}}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`v3[$CellContext`a],
-       Editable->False]], "[", 
-     InterpretationBox[
-      StyleBox[
-       RowBox[{"d", "[", 
-        InterpretationBox[
-         StyleBox["A3",
-          ShowAutoStyles->False,
-          AutoSpacing->False],
-         $CellContext`A3[],
-         Editable->False], "]"}],
-       ShowAutoStyles->False,
-       AutoSpacing->False],
-      $CellContext`diff[
-       $CellContext`A3[]],
-      Editable->False], "]"}], "]"}], "]"}], "-", 
-  RowBox[{
-   SubscriptBox["\[ScriptCapitalL]", 
-    InterpretationBox[
-     StyleBox[GridBox[{
-        {"v2", 
-         StyleBox[GridBox[{
-            {"a"},
-            {" "}
-           },
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                Offset[0.]}}, "RowsIndexed" -> {}}],
-          FontSize->Rational[39, 4]]}
-       },
-       GridBoxAlignment->{
-        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
-          "RowsIndexed" -> {}},
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.034999999999999996`]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.4]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`v2[$CellContext`a],
-     Editable->False]], "[", 
-   RowBox[{
-    SubscriptBox["\[Iota]", 
-     InterpretationBox[
-      StyleBox[GridBox[{
-         {
-          RowBox[{"[", GridBox[{
-             {"v1", 
-              StyleBox[GridBox[{
-                 {"a"},
-                 {" "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}], ",", GridBox[{
-             {"v3", 
-              StyleBox[GridBox[{
-                 {"a"},
-                 {" "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}], "]"}], 
-          StyleBox[GridBox[{
-             {"h$2554"},
-             {" "}
-            },
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                 Offset[0.]}}, "RowsIndexed" -> {}}],
-           FontSize->Rational[39, 4]]}
-        },
-        GridBoxAlignment->{
-         "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-          "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-        GridBoxSpacings->{"Columns" -> {
-            Offset[0.27999999999999997`], {
-             Offset[0.034999999999999996`]}, 
-            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-          "Rows" -> {
-            Offset[0.2], {
-             Offset[0.4]}, 
-            Offset[0.2]}, "RowsIndexed" -> {}}],
-       ShowAutoStyles->False,
-       AutoSpacing->False],
-      xAct`xTensor`Bracket[
-       $CellContext`v1[$CellContext`a], 
-       $CellContext`v3[$CellContext`a]][$CellContext`h$2554],
-      Editable->False]], "[", 
-    InterpretationBox[
-     StyleBox[
-      RowBox[{"d", "[", 
-       InterpretationBox[
-        StyleBox["A3",
-         ShowAutoStyles->False,
-         AutoSpacing->False],
-        $CellContext`A3[],
-        Editable->False], "]"}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`diff[
-      $CellContext`A3[]],
-     Editable->False], "]"}], "]"}], "-", 
-  RowBox[{
-   SubscriptBox["\[ScriptCapitalL]", 
-    InterpretationBox[
-     StyleBox[GridBox[{
-        {"v2", 
-         StyleBox[GridBox[{
-            {"a"},
-            {" "}
-           },
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                Offset[0.]}}, "RowsIndexed" -> {}}],
-          FontSize->Rational[39, 4]]}
-       },
-       GridBoxAlignment->{
-        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
-          "RowsIndexed" -> {}},
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.034999999999999996`]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.4]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`v2[$CellContext`a],
-     Editable->False]], "[", 
-   RowBox[{
-    SubscriptBox["\[ScriptCapitalL]", 
-     InterpretationBox[
-      StyleBox[GridBox[{
-         {"v3", 
-          StyleBox[GridBox[{
-             {"a"},
-             {" "}
-            },
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                 Offset[0.]}}, "RowsIndexed" -> {}}],
-           FontSize->Rational[39, 4]]}
-        },
-        GridBoxAlignment->{
-         "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-          "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-        GridBoxSpacings->{"Columns" -> {
-            Offset[0.27999999999999997`], {
-             Offset[0.034999999999999996`]}, 
-            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-          "Rows" -> {
-            Offset[0.2], {
-             Offset[0.4]}, 
-            Offset[0.2]}, "RowsIndexed" -> {}}],
-       ShowAutoStyles->False,
-       AutoSpacing->False],
-      $CellContext`v3[$CellContext`a],
-      Editable->False]], "[", 
-    RowBox[{
-     SubscriptBox["\[Iota]", 
-      InterpretationBox[
-       StyleBox[GridBox[{
-          {"v1", 
-           StyleBox[GridBox[{
-              {"a"},
-              {" "}
-             },
-             GridBoxSpacings->{"Columns" -> {
-                 Offset[0.], {
-                  Offset[0.034999999999999996`]}, 
-                 Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                  Offset[0.]}}, "RowsIndexed" -> {}}],
-            FontSize->Rational[39, 4]]}
-         },
-         GridBoxAlignment->{
-          "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-           "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-         GridBoxSpacings->{"Columns" -> {
-             Offset[0.27999999999999997`], {
-              Offset[0.034999999999999996`]}, 
-             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-             Offset[0.2], {
-              Offset[0.4]}, 
-             Offset[0.2]}, "RowsIndexed" -> {}}],
-        ShowAutoStyles->False,
-        AutoSpacing->False],
-       $CellContext`v1[$CellContext`a],
-       Editable->False]], "[", 
-     InterpretationBox[
-      StyleBox[
-       RowBox[{"d", "[", 
-        InterpretationBox[
-         StyleBox["A3",
-          ShowAutoStyles->False,
-          AutoSpacing->False],
-         $CellContext`A3[],
-         Editable->False], "]"}],
-       ShowAutoStyles->False,
-       AutoSpacing->False],
-      $CellContext`diff[
-       $CellContext`A3[]],
-      Editable->False], "]"}], "]"}], "]"}], "-", 
-  RowBox[{
-   SubscriptBox["\[ScriptCapitalL]", 
-    InterpretationBox[
-     StyleBox[GridBox[{
-        {"v3", 
-         StyleBox[GridBox[{
-            {"a"},
-            {" "}
-           },
-           GridBoxSpacings->{"Columns" -> {
-               Offset[0.], {
-                Offset[0.034999999999999996`]}, 
-               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                Offset[0.]}}, "RowsIndexed" -> {}}],
-          FontSize->Rational[39, 4]]}
-       },
-       GridBoxAlignment->{
-        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
-          "RowsIndexed" -> {}},
-       GridBoxSpacings->{"Columns" -> {
-           Offset[0.27999999999999997`], {
-            Offset[0.034999999999999996`]}, 
-           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-           Offset[0.2], {
-            Offset[0.4]}, 
-           Offset[0.2]}, "RowsIndexed" -> {}}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`v3[$CellContext`a],
-     Editable->False]], "[", 
-   RowBox[{
-    SubscriptBox["\[Iota]", 
-     InterpretationBox[
-      StyleBox[GridBox[{
-         {
-          RowBox[{"[", GridBox[{
-             {"v1", 
-              StyleBox[GridBox[{
-                 {"a"},
-                 {" "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}], ",", GridBox[{
-             {"v2", 
-              StyleBox[GridBox[{
-                 {"a"},
-                 {" "}
-                },
-                GridBoxSpacings->{"Columns" -> {
-                    Offset[0.], {
-                    Offset[0.034999999999999996`]}, 
-                    Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                    Offset[0.]}}, "RowsIndexed" -> {}}],
-               FontSize->Rational[39, 4]]}
-            },
-            
-            GridBoxAlignment->{
-             "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-              "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.27999999999999997`], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-                Offset[0.2], {
-                 Offset[0.4]}, 
-                Offset[0.2]}, "RowsIndexed" -> {}}], "]"}], 
-          StyleBox[GridBox[{
-             {"h$2550"},
-             {" "}
-            },
-            GridBoxSpacings->{"Columns" -> {
-                Offset[0.], {
-                 Offset[0.034999999999999996`]}, 
-                Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
-                 Offset[0.]}}, "RowsIndexed" -> {}}],
-           FontSize->Rational[39, 4]]}
-        },
-        GridBoxAlignment->{
-         "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
-          "Rows" -> {{Center}}, "RowsIndexed" -> {}},
-        GridBoxSpacings->{"Columns" -> {
-            Offset[0.27999999999999997`], {
-             Offset[0.034999999999999996`]}, 
-            Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
-          "Rows" -> {
-            Offset[0.2], {
-             Offset[0.4]}, 
-            Offset[0.2]}, "RowsIndexed" -> {}}],
-       ShowAutoStyles->False,
-       AutoSpacing->False],
-      xAct`xTensor`Bracket[
-       $CellContext`v1[$CellContext`a], 
-       $CellContext`v2[$CellContext`a]][$CellContext`h$2550],
-      Editable->False]], "[", 
-    InterpretationBox[
-     StyleBox[
-      RowBox[{"d", "[", 
-       InterpretationBox[
-        StyleBox["A3",
-         ShowAutoStyles->False,
-         AutoSpacing->False],
-        $CellContext`A3[],
-        Editable->False], "]"}],
-      ShowAutoStyles->False,
-      AutoSpacing->False],
-     $CellContext`diff[
-      $CellContext`A3[]],
-     Editable->False], "]"}], "]"}]}]], "Output"]
+Cell[BoxData["True"], "Output"]
 }, Open  ]]
 }, Closed]]
 }, Open  ]],
@@ -50927,7 +50056,9 @@ Cell[BoxData[
 }, Open  ]],
 
 Cell["\<\
-LEO: Shouldn\[CloseCurlyQuote]t the RHS of the rule below contain \[Phi][]?\
+LEO: Shouldn\[CloseCurlyQuote]t the RHS of the rule below contain \[Phi][]?
+Jose: Good catch. I\[CloseCurlyQuote]d say yes, but I\[CloseCurlyQuote]ll let \
+Alfonso address this.\
 \>", "Text"],
 
 Cell[CellGroupData[{
@@ -53554,7 +52685,6 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                    FontSize->Rational[39, 4]]}
                 },
-                
                 GridBoxAlignment->{
                  "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                   "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -55755,8 +54885,7 @@ Cell[BoxData[
           GridBoxSpacings->{"Columns" -> {
               Offset[0.27999999999999997`], {
                Offset[0.034999999999999996`]}, 
-              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> 
-            {
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
               Offset[0.2], {
                Offset[0.4]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}],
@@ -58918,6 +58047,7 @@ Cell[BoxData[
                    Offset[0.]}}, "RowsIndexed" -> {}}],
              FontSize->Rational[39, 4]]}
           },
+          
           GridBoxAlignment->{
            "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
             "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -60997,7 +60127,6 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                 FontSize->Rational[39, 4]]}
              },
-             
              GridBoxAlignment->{
               "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -102304,11 +101433,11 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Applied \"\>", "\[InvisibleSpace]", "Simplify", 
    "\[InvisibleSpace]", "\<\" in \"\>", "\[InvisibleSpace]", 
-   "0.0000629999999999999999019881236073104`1.8199404627332056", 
+   "0.00006200000000000000270009709035790024`1.8129916027778779", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Applied ", Simplify, " in ", 
-   0.0000629999999999999999019881236073104`1.8199404627332056, " seconds"],
+   0.00006200000000000000270009709035790024`1.8129916027778779, " seconds"],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -102323,9 +101452,9 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"      Computed cache value in \"\>", "\[InvisibleSpace]", 
-   "0.000053`2.175820863096762", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
+   "0.000063`2.2508855429495522", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
-  "      Computed cache value in ", 0.000053`2.175820863096762, " seconds"],
+  "      Computed cache value in ", 0.000063`2.2508855429495522, " seconds"],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -102338,12 +101467,12 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Stored in \"\>", "\[InvisibleSpace]", 
-   "0.00023599999999999999016758733816345739`2.3935119162497305", 
+   "0.00028800000000000000729624693995845064`2.4799924010388548", 
    "\[InvisibleSpace]", "\<\" seconds and \"\>", "\[InvisibleSpace]", "256", 
    "\[InvisibleSpace]", "\<\" bytes\"\>"}],
   SequenceForm[
   "    Stored in ", 
-   0.00023599999999999999016758733816345739`2.3935119162497305, 
+   0.00028800000000000000729624693995845064`2.4799924010388548, 
    " seconds and ", 256, " bytes"],
   Editable->False]], "Print"]
 }, Open  ]]
@@ -114924,8 +114053,8 @@ Cell[BoxData[
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1274, 740},
-WindowMargins->{{73, Automatic}, {48, Automatic}},
+WindowSize->{1015, 765},
+WindowMargins->{{118, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
