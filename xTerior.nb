@@ -3,9 +3,7 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[TextData[StyleBox["xTerior (provisional name)",
  FontSlant->"Italic",
- FontColor->RGBColor[1, 0, 0]]], "Title",
- CellChangeTimes->{{3.424432795274125*^9, 3.424432798147224*^9}, {
-  3.5880890317410583`*^9, 3.588089047165916*^9}}],
+ FontColor->RGBColor[1, 0, 0]]], "Title"],
 
 Cell[TextData[{
  StyleBox["Exterior Calculus for ",
@@ -13,9 +11,7 @@ Cell[TextData[{
  StyleBox["xAct",
   FontSlant->"Italic",
   FontColor->RGBColor[0, 0, 1]]
-}], "Subtitle",
- CellChangeTimes->{{3.432628764630637*^9, 3.432628770497842*^9}, {
-  3.5880890506852627`*^9, 3.588089064204239*^9}}],
+}], "Subtitle"],
 
 Cell[TextData[{
  StyleBox["Alfonso Garc\[IAcute]a-Parrado G\[OAcute]mez-Lobo\n",
@@ -37,10 +33,7 @@ http://groups.google.com/group/xAct\n",
  StyleBox["https://github.com/xAct-contrib",
   FontFamily->"Bitstream Vera Sans",
   FontSize->14]
-}], "Subsubtitle",
- CellChangeTimes->{{3.5880891152114353`*^9, 3.588089143465521*^9}, {
-  3.5880891786017113`*^9, 3.588089231903595*^9}, {3.588089434841715*^9, 
-  3.58808943713879*^9}}],
+}], "Subsubtitle"],
 
 Cell[TextData[{
  StyleBox["xTerior",
@@ -61,25 +54,21 @@ can be downloaded from ",
   ButtonData->{
     URL["http://www.xact.es"], None},
   ButtonNote->"http://www.xact.es"]
-}], "Text",
- CellChangeTimes->{{3.58808963129074*^9, 3.588089679036098*^9}}],
+}], "Text"],
 
 Cell[TextData[StyleBox["Alfonso: is the version 0.8.5 OK ?",
- FontWeight->"Bold"]], "Text",
- CellChangeTimes->{{3.588090262416398*^9, 3.588090280150689*^9}}],
+ FontWeight->"Bold"]], "Text"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"DateList", "[", "]"}]], "Input",
- CellChangeTimes->{{3.461421019166093*^9, 3.461421020263547*^9}}],
+ RowBox[{"DateList", "[", "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
   "2013", ",", "9", ",", "13", ",", "22", ",", "23", ",", 
-   "37.786737`8.329914369951018"}], "}"}]], "Output",
- CellChangeTimes->{3.58809621779405*^9}]
+   "37.786737`8.329914369951018"}], "}"}]], "Output"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -97,16 +86,13 @@ Cell[BoxData[{
    RowBox[{"\"\<0.8.5\>\"", ",", 
     RowBox[{"{", 
      RowBox[{"2013", ",", "7", ",", "1"}], "}"}]}], "}"}]}]}], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.5880899098593283`*^9, 3.588089910214053*^9}, {
-  3.588090237103983*^9, 3.588090244158421*^9}}],
+ InitializationCell->True],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"\<\"0.8.5\"\>", ",", 
    RowBox[{"{", 
-    RowBox[{"2013", ",", "7", ",", "1"}], "}"}]}], "}"}]], "Output",
- CellChangeTimes->{3.588096219534298*^9}]
+    RowBox[{"2013", ",", "7", ",", "1"}], "}"}]}], "}"}]], "Output"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -189,9 +175,7 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"MA", " ", "02111"}], "-", "1307"}], ",", " ", 
     RowBox[{"USA", "."}]}], " ", "\[IndentingNewLine]", "*)"}]}]], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.58809033012983*^9, 3.588090366242457*^9}, {
-  3.58809074511334*^9, 3.588090749304158*^9}}]
+ InitializationCell->True]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -235,9 +219,7 @@ exterior covariant derivative.
 \>", "Input",
  PageWidth->PaperWidth,
  CellMargins->{{60, -272}, {Inherited, Inherited}},
- InitializationCell->True,
- CellChangeTimes->{{3.588090424074232*^9, 3.588090573109075*^9}, {
-  3.588090604933325*^9, 3.5880907910068893`*^9}}]
+ InitializationCell->True]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -266,9 +248,7 @@ Cell[BoxData[
     "\[IndentingNewLine]", 
     RowBox[{"Clear", "/@", "xAct`xTerior`Private`xTeriorSymbols"}], ";"}]}], 
   "\[IndentingNewLine]", "]"}]], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.588095642684577*^9, 3.588095744544484*^9}, {
-  3.588095847600205*^9, 3.588095881907583*^9}}],
+ InitializationCell->True],
 
 Cell[BoxData[
  RowBox[{
@@ -280,17 +260,13 @@ Cell[BoxData[
     RowBox[{
     "xAct`xCore`Private`$LastPackage", "=", "\"\<xAct`xTerior`\>\""}]}], 
    "]"}], ";"}]], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.4232371765761337`*^9, 3.4232371975315447`*^9}, {
-  3.588095912031353*^9, 3.588095914631442*^9}}],
+ InitializationCell->True],
 
 Cell[CellGroupData[{
 
-Cell[BoxData["xAct`xCore`Private`$LastPackage"], "Input",
- CellChangeTimes->{{3.423237204071299*^9, 3.423237206170257*^9}}],
+Cell[BoxData["xAct`xCore`Private`$LastPackage"], "Input"],
 
-Cell[BoxData["\<\"xAct`xTerior`\"\>"], "Output",
- CellChangeTimes->{3.588096257366724*^9}]
+Cell[BoxData["\<\"xAct`xTerior`\"\>"], "Output"]
 }, Open  ]],
 
 Cell[TextData[{
@@ -309,8 +285,7 @@ Cell[TextData[{
  ": ",
  StyleBox["Alfonso: do we need xCoba ?",
   FontWeight->"Bold"]
-}], "Text",
- CellChangeTimes->{{3.588096285999014*^9, 3.588096295453238*^9}}],
+}], "Text"],
 
 Cell[CellGroupData[{
 
@@ -321,14 +296,12 @@ Cell[BoxData[
     RowBox[{
     "\"\<xAct`xTensor`\>\"", ",", "\"\<xAct`xPerm`\>\"", ",", 
      "\"\<xAct`xCore`\>\""}], "}"}]}], "]"}]], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.588095926182599*^9, 3.5880959286876287`*^9}}],
+ InitializationCell->True],
 
 Cell[CellGroupData[{
 
 Cell[BoxData["\<\"------------------------------------------------------------\
-\"\>"], "Print",
- CellChangeTimes->{3.58809630095212*^9}],
+\"\>"], "Print"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -338,22 +311,17 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"2013", ",", "7", ",", "1"}], "}"}]}],
   SequenceForm["Package xAct`xPerm`  version ", "1.2.1", ", ", {2013, 7, 1}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.588096300953957*^9}],
+  Editable->False]], "Print"],
 
 Cell[BoxData["\<\"CopyRight (C) 2003-2013, Jose M. Martin-Garcia, under the \
-General Public License.\"\>"], "Print",
- CellChangeTimes->{3.588096300955463*^9}],
+General Public License.\"\>"], "Print"],
 
-Cell[BoxData["\<\"Connecting to external linux executable...\"\>"], "Print",
- CellChangeTimes->{3.588096301017426*^9}],
+Cell[BoxData["\<\"Connecting to external linux executable...\"\>"], "Print"],
 
-Cell[BoxData["\<\"Connection established.\"\>"], "Print",
- CellChangeTimes->{3.588096301022037*^9}],
+Cell[BoxData["\<\"Connection established.\"\>"], "Print"],
 
 Cell[BoxData["\<\"------------------------------------------------------------\
-\"\>"], "Print",
- CellChangeTimes->{3.5880963010232477`*^9}],
+\"\>"], "Print"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -363,16 +331,13 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"2013", ",", "9", ",", "1"}], "}"}]}],
   SequenceForm["Package xAct`xTensor`  version ", "1.1.0", ", ", {2013, 9, 1}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.5880963010246143`*^9}],
+  Editable->False]], "Print"],
 
 Cell[BoxData["\<\"CopyRight (C) 2002-2013, Jose M. Martin-Garcia, under the \
-General Public License.\"\>"], "Print",
- CellChangeTimes->{3.588096301026024*^9}]
+General Public License.\"\>"], "Print"]
 }, Open  ]],
 
-Cell[BoxData["\<\"xAct`xTerior`\"\>"], "Output",
- CellChangeTimes->{3.58809630116464*^9}]
+Cell[BoxData["\<\"xAct`xTerior`\"\>"], "Output"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -392,8 +357,7 @@ Cell[BoxData[
       RowBox[{"General", "::", "versions"}], ",", "\"\<xTensor\>\"", ",", 
       "xAct`xTensor`$Version", ",", "xAct`xTerior`$xTensorVersionExpected"}], 
      "]"}]}]}], "]"}]], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.588096004744513*^9, 3.588096034134907*^9}}],
+ InitializationCell->True],
 
 Cell[CellGroupData[{
 
@@ -412,14 +376,12 @@ Cell[BoxData[{
   "Print", "[", 
    "\"\<CopyRight (C) 2013, Alfonso Garcia-Parrado Gomez-Lobo and Leo Stein, \
 under the General Public License.\>\"", "]"}], ";"}]}], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.588096043026366*^9, 3.5880960856046267`*^9}}],
+ InitializationCell->True],
 
 Cell[CellGroupData[{
 
 Cell[BoxData["\<\"------------------------------------------------------------\
-\"\>"], "Print",
- CellChangeTimes->{3.588096331374819*^9}],
+\"\>"], "Print"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -429,12 +391,10 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"2013", ",", "7", ",", "1"}], "}"}]}],
   SequenceForm["Package xAct`xTerior`  version ", "0.8.5", ", ", {2013, 7, 1}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.5880963314365883`*^9}],
+  Editable->False]], "Print"],
 
 Cell[BoxData["\<\"CopyRight (C) 2013, Alfonso Garcia-Parrado Gomez-Lobo and \
-Leo Stein, under the General Public License.\"\>"], "Print",
- CellChangeTimes->{3.588096331440796*^9}]
+Leo Stein, under the General Public License.\"\>"], "Print"]
 }, Open  ]]
 }, Open  ]],
 
@@ -442,8 +402,7 @@ Cell["\<\
 We specify the context xAct`xTerior` to avoid overriding the Disclaimer of \
 the other packages. However we need to turn off the message General:shdw \
 temporarily:\
-\>", "Text",
- CellChangeTimes->{{3.588096113474468*^9, 3.588096116234211*^9}}],
+\>", "Text"],
 
 Cell[BoxData[{
  RowBox[{"Off", "[", 
@@ -472,8 +431,7 @@ PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE \
 POSSIBILITY OF SUCH DAMAGES.\>\"", "]"}]}], "\[IndentingNewLine]", 
  RowBox[{"On", "[", 
   RowBox[{"General", "::", "shdw"}], "]"}]}], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.5880961234292593`*^9, 3.588096125985347*^9}}],
+ InitializationCell->True],
 
 Cell[TextData[{
  "If ",
@@ -481,8 +439,7 @@ Cell[TextData[{
   FontSlant->"Italic"],
  " is not being called from other package then write this GPL short \
 disclaimer:"
-}], "Text",
- CellChangeTimes->{{3.5880961486414137`*^9, 3.588096151105011*^9}}],
+}], "Text"],
 
 Cell[CellGroupData[{
 
@@ -505,33 +462,26 @@ under certain conditions. See the General Public License for details.\>\"",
      "]"}], ";", "\[IndentingNewLine]", 
     RowBox[{"Print", "[", "xAct`xCore`Private`bars", "]"}]}]}], 
   "]"}]], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.4232372878945827`*^9, 3.423237289581603*^9}, {
-  3.423283390363858*^9, 3.4232834081506033`*^9}, {3.588096156347703*^9, 
-  3.5880961587805643`*^9}}],
+ InitializationCell->True],
 
 Cell[CellGroupData[{
 
 Cell[BoxData["\<\"------------------------------------------------------------\
-\"\>"], "Print",
- CellChangeTimes->{3.588096346456345*^9}],
+\"\>"], "Print"],
 
 Cell[BoxData["\<\"These packages come with ABSOLUTELY NO WARRANTY; for \
 details type Disclaimer[]. This is free software, and you are welcome to \
 redistribute it under certain conditions. See the General Public License for \
-details.\"\>"], "Print",
- CellChangeTimes->{3.58809634654585*^9}],
+details.\"\>"], "Print"],
 
 Cell[BoxData["\<\"------------------------------------------------------------\
-\"\>"], "Print",
- CellChangeTimes->{3.588096346547867*^9}]
+\"\>"], "Print"]
 }, Open  ]]
 }, Open  ]],
 
 Cell["\<\
 Note that symbols in the Global` context cannot be accessed right now.\
-\>", "Text",
- CellChangeTimes->{3.423568541839567*^9}],
+\>", "Text"],
 
 Cell[CellGroupData[{
 
@@ -541,28 +491,23 @@ Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"\<\"xAct`xTerior`\"\>", ",", "\<\"xAct`xTensor`\"\>", 
    ",", "\<\"xAct`xPerm`\"\>", ",", "\<\"xAct`xCore`\"\>", 
-   ",", "\<\"System`\"\>"}], "}"}]], "Output",
- CellChangeTimes->{3.588096354971938*^9}]
+   ",", "\<\"System`\"\>"}], "}"}]], "Output"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData["$Context"], "Input"],
 
-Cell[BoxData["\<\"xAct`xTerior`\"\>"], "Output",
- CellChangeTimes->{3.588096356857692*^9}]
+Cell[BoxData["\<\"xAct`xTerior`\"\>"], "Output"]
 }, Open  ]],
 
-Cell["Established connection to external executable?", "Text",
- CellChangeTimes->{{3.419152978029696*^9, 3.419152995868268*^9}}],
+Cell["Established connection to external executable?", "Text"],
 
 Cell[CellGroupData[{
 
-Cell[BoxData["$xpermQ"], "Input",
- CellChangeTimes->{{3.419152970981339*^9, 3.4191529720352583`*^9}}],
+Cell[BoxData["$xpermQ"], "Input"],
 
-Cell[BoxData["True"], "Output",
- CellChangeTimes->{3.5880963591523247`*^9}]
+Cell[BoxData["True"], "Output"]
 }, Open  ]],
 
 Cell[TextData[{
@@ -570,17 +515,14 @@ Cell[TextData[{
  StyleBox["xTensor",
   FontSlant->"Italic"],
  " used here :\n      ??"
-}], "Text",
- CellChangeTimes->{{3.588096372674109*^9, 3.588096374330537*^9}}]
+}], "Text"]
 }, Closed]],
 
 Cell[CellGroupData[{
 
-Cell["1.4. Non-standard setup", "Subsubsection",
- CellChangeTimes->{{3.4259903997539062`*^9, 3.425990420166374*^9}}],
+Cell["1.4. Non-standard setup", "Subsubsection"],
 
-Cell["Screen all dollar indices:", "Text",
- CellChangeTimes->{3.4232298843102837`*^9}],
+Cell["Screen all dollar indices:", "Text"],
 
 Cell[BoxData[
  RowBox[{
@@ -623,9 +565,7 @@ Cell["1.5. Usage messages", "Subsubsection"],
 
 Cell[TextData[StyleBox["Alfonso: we need to agree on the names and syntax of \
 the commands introduced here",
- FontWeight->"Bold"]], "Text",
- CellChangeTimes->{{3.588149946316338*^9, 3.5881499687151117`*^9}, {
-  3.58851374329869*^9, 3.5885137470814857`*^9}}],
+ FontWeight->"Bold"]], "Text"],
 
 Cell[BoxData[
  RowBox[{
@@ -816,39 +756,7 @@ this way it is possible to expand the exterior derivative of a co-frame, a \
 torsion 2-form and the curvature 2-form. If covd is the Levi-Civita \
 connection of a metric, then the exterior derivatives of that metric and its \
 volume element are expanded too.\>\""}], ";"}]}]}]], "Input",
- InitializationCell->True,
- CellChangeTimes->{{3.588149577985012*^9, 3.588149689974948*^9}, {
-   3.5881498266096354`*^9, 3.588149883758215*^9}, {3.588150060177342*^9, 
-   3.588150178589875*^9}, {3.5881502112054863`*^9, 3.588150299823503*^9}, {
-   3.588150345731572*^9, 3.5881504039972973`*^9}, {3.5881504398823843`*^9, 
-   3.588150473951433*^9}, {3.588150624213667*^9, 3.5881507807325706`*^9}, {
-   3.588150878234565*^9, 3.5881509095479603`*^9}, {3.588150977994767*^9, 
-   3.588150988277727*^9}, {3.588151036042097*^9, 3.5881510828394203`*^9}, {
-   3.588151201678296*^9, 3.588151287837343*^9}, {3.5881513529258633`*^9, 
-   3.588151377222926*^9}, {3.5881514470048027`*^9, 3.588151492975445*^9}, {
-   3.588151532334797*^9, 3.588151570119647*^9}, {3.588151639525502*^9, 
-   3.5881517698474703`*^9}, {3.588179926812628*^9, 3.588180033927031*^9}, {
-   3.588180306358878*^9, 3.5881803864608107`*^9}, {3.588182315291032*^9, 
-   3.5881824206857157`*^9}, {3.588182567913028*^9, 3.588182651337101*^9}, {
-   3.588182772591344*^9, 3.588182784072835*^9}, {3.5881828798845453`*^9, 
-   3.588182921304385*^9}, {3.588183005541396*^9, 3.588183048281139*^9}, {
-   3.588183113951414*^9, 3.588183115755967*^9}, {3.588183290840334*^9, 
-   3.5881834764861107`*^9}, {3.588183656633399*^9, 3.588183687725028*^9}, {
-   3.588184060375881*^9, 3.588184100356655*^9}, {3.588184151233601*^9, 
-   3.588184183381095*^9}, 3.588510867268965*^9, {3.5885118086920223`*^9, 
-   3.588511916285486*^9}, {3.588511958058776*^9, 3.588512129639524*^9}, {
-   3.588512200589695*^9, 3.5885123290812883`*^9}, {3.588512375988801*^9, 
-   3.5885124043005533`*^9}, {3.588512686517688*^9, 3.588512707824366*^9}, {
-   3.588512776381935*^9, 3.588512877191601*^9}, {3.588512965240983*^9, 
-   3.588512978614534*^9}, {3.5885130238376713`*^9, 3.58851303903786*^9}, {
-   3.588513082807686*^9, 3.5885131463491573`*^9}, {3.588513179149619*^9, 
-   3.58851320214349*^9}, {3.5885132534342813`*^9, 3.588513315510726*^9}, {
-   3.588513384381198*^9, 3.588513432070622*^9}, {3.588513810881975*^9, 
-   3.588513813707774*^9}, {3.588513877370984*^9, 3.5885138776681147`*^9}, {
-   3.588514130824489*^9, 3.588514205101698*^9}, {3.5885143228633842`*^9, 
-   3.588514363305292*^9}, {3.58851448261335*^9, 3.588514613784461*^9}, {
-   3.588514694003255*^9, 3.5885147044738503`*^9}, {3.588514748270421*^9, 
-   3.588514841772457*^9}, {3.588514873929183*^9, 3.588514891911179*^9}}]
+ InitializationCell->True]
 }, Open  ]]
 }, Open  ]],
 
@@ -4743,7 +4651,6 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                FontSize->Rational[39, 4]]}
             },
-            
             GridBoxAlignment->{
              "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
               "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -6087,7 +5994,8 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{
     RowBox[{"Hodge", "[", "metricg", "]"}], "@", 
-    RowBox[{"\[Theta]", "[", "a", "]"}]}], ",", "\[Theta]"}], "]"}]}], "Input"],
+    RowBox[{"\[Theta]", "[", "a", "]"}]}], ",", "\[Theta]"}], 
+  "]"}]}], "Input"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -6916,8 +6824,7 @@ But now all of the above code should be specialized for PD? ",
 covariant derivative represent different notions and therefore I would keep \
 different symbols for each of them (see section usage messages).",
   FontWeight->"Bold"]
-}], "Text",
- CellChangeTimes->{{3.588150526540559*^9, 3.588150601273306*^9}}],
+}], "Text"],
 
 Cell[BoxData[
  RowBox[{
@@ -8913,7 +8820,6 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                     FontSize->Rational[39, 4]]}
                   },
-                  
                   GridBoxAlignment->{
                    "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                     "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -10953,7 +10859,6 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                     FontSize->Rational[39, 4]]}
                   },
-                  
                   GridBoxAlignment->{
                    "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                     "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -14332,3 +14237,4 @@ FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
 2013)",
 StyleDefinitions->"Default.nb"
 ]
+
