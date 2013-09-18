@@ -22,9 +22,9 @@ Cell[TextData[{
  StyleBox["Universidade do Minho, Portugal",
   FontSize->14],
  "\n\n",
- StyleBox["Leo Stein\n",
+ StyleBox["Leo C. Stein\n",
   FontSize->18],
- StyleBox["your e-mail & your address",
+ StyleBox["leo.stein@gmail.com\nCornell University, NY",
   FontSize->14],
  "\n\n",
  StyleBox["(c) 2006-2013, under GPL\n\nhttp://www.xAct.es/\n\
@@ -124,8 +124,9 @@ Cell[BoxData[
      RowBox[{"(", "C", ")"}], " ", "2013", " ", "Alfonso", " ", "Garcia"}], 
     "-", 
     RowBox[{"Parrado", " ", "Gomez"}], "-", 
-    RowBox[{"Lobo", " ", "and", " ", "Leo", " ", "Stein"}]}], " ", "*)"}], 
-  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"Lobo", " ", "and", " ", "Leo", " ", 
+     RowBox[{"C", ".", " ", "Stein"}]}]}], " ", "*)"}], "\[IndentingNewLine]",
+   "\[IndentingNewLine]", 
   RowBox[{"(*", " ", 
    RowBox[{
     RowBox[{
@@ -176,7 +177,7 @@ Cell[BoxData[
      RowBox[{"MA", " ", "02111"}], "-", "1307"}], ",", " ", 
     RowBox[{"USA", "."}]}], " ", "\[IndentingNewLine]", "*)"}]}]], "Input",
  InitializationCell->True]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -185,7 +186,7 @@ Cell["1.2. Info package", "Subsubsection"],
 Cell["\<\
 (* :Title: xTerior *)
 
-(* :Author: Alfonso Garcia-Parrado Gomez-Lobo and Leo Stein *)
+(* :Author: Alfonso Garcia-Parrado Gomez-Lobo and Leo C. Stein *)
 
 (* :Summary: exterior calculus in Differential Geometry *)
 
@@ -202,7 +203,7 @@ exterior covariant derivative.
 
 (* :Package Version: 0.8.5 *)
 
-(* :Copyright: Alfonso Garcia-Parrado Gomez-Lobo and Leo Stein (2013) *)
+(* :Copyright: Alfonso Garcia-Parrado Gomez-Lobo and Leo C. Stein (2013) *)
 
 (* :History: See xTerior.History *)
 
@@ -374,8 +375,8 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
   "Print", "[", 
-   "\"\<CopyRight (C) 2013, Alfonso Garcia-Parrado Gomez-Lobo and Leo Stein, \
-under the General Public License.\>\"", "]"}], ";"}]}], "Input",
+   "\"\<CopyRight (C) 2013, Alfonso Garcia-Parrado Gomez-Lobo and Leo C. \
+Stein, under the General Public License.\>\"", "]"}], ";"}]}], "Input",
  InitializationCell->True],
 
 Cell[CellGroupData[{
