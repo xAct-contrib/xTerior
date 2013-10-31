@@ -135,26 +135,30 @@ Cell[CellGroupData[{
 
 Cell["1.0. TODO list", "Subsubsection"],
 
-Cell["\<\
-TODO : 
--Check conventions in the definition of the connection 1-form.
--Check conventions in the definition of the curvature 2-form.
--There are expressions in which ExtDiff has a second argument (a covariant \
-derivative). I think that the best is just to remove the second argument.
--In the definition of the connection forms there are no checks about the \
+Cell[TextData[{
+ "TODO : \n-Check conventions in the definition of the connection 1-form.\n\
+-Check conventions in the definition of the curvature 2-form.\n-There are \
+expressions in which ExtDiff has a second argument (a covariant derivative). \
+I think that the best is just to remove the second argument. ",
+ StyleBox["Alfonso: I think that this is now fixed.",
+  FontWeight->"Bold"],
+ "\n-In the definition of the connection forms there are no checks about the \
 manifolds in which the covariant derivatives are defined and they may well be \
-defined in different tangent bundles.
--I think that the syntax of the connection form should be 
-ConnectionForm[CovD,Sequence@@VBundlesOfCovD@CovD][a,-b]
--Remove message \[OpenCurlyDoubleQuote]ManifoldOfCovD[PD] has been used\
-\[CloseCurlyDoubleQuote].\
-\>", "Text",
+defined in different tangent bundles.\n-I think that the syntax of the \
+connection form should be \n\
+ConnectionForm[CovD,Sequence@@VBundlesOfCovD@CovD][a,-b]\n-Remove message \
+\[OpenCurlyDoubleQuote]ManifoldOfCovD[PD] has been used\
+\[CloseCurlyDoubleQuote].\n-ContractBasis and ToBasis commute with the \
+exterior derivative. Implement it."
+}], "Text",
  CellChangeTimes->{{3.58962434353786*^9, 3.5896243621435013`*^9}, {
    3.589625932564287*^9, 3.589625938467601*^9}, {3.589626007315003*^9, 
    3.589626062858141*^9}, {3.589736695940971*^9, 3.589736716828698*^9}, {
    3.589811350830736*^9, 3.589811351630862*^9}, {3.5898113833913393`*^9, 
    3.589811399830463*^9}, {3.590406806192675*^9, 3.59040686555721*^9}, {
-   3.591864888543589*^9, 3.5918649282681093`*^9}, 3.5918649837078114`*^9}]
+   3.591864888543589*^9, 3.5918649282681093`*^9}, 3.5918649837078114`*^9, {
+   3.5921199930501337`*^9, 3.592120065387992*^9}, {3.592243259961852*^9, 
+   3.592243311148838*^9}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -359,9 +363,11 @@ Cell[BoxData[
   RowBox[{"\"\<xAct`xTerior`\>\"", ",", 
    RowBox[{"{", 
     RowBox[{
-    "\"\<xAct`xTensor`\>\"", ",", "\"\<xAct`xPerm`\>\"", ",", 
-     "\"\<xAct`xCore`\>\""}], "}"}]}], "]"}]], "Input",
- InitializationCell->True],
+    "\"\<xAct`xCoba`\>\"", ",", "\"\<xAct`xTensor`\>\"", ",", 
+     "\"\<xAct`xPerm`\>\"", ",", "\"\<xAct`xCore`\>\""}], "}"}]}], 
+  "]"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.592120086338678*^9, 3.5921200969198513`*^9}}],
 
 Cell[BoxData["\<\"------------------------------------------------------------\
 \"\>"], "Print",
@@ -1270,12 +1276,14 @@ manifold)\>\""}], ";"}], "\[IndentingNewLine]",
    RowBox[{
     RowBox[{
      RowBox[{"ExpandExtDiff", "::", "usage"}], "=", 
-     "\"\<ExpandExtDiff[expr,covd], expands all the instances of the ExtDiff \
+     "\"\<ExpandExtDiff[expr,covd] expands all the instances of the ExtDiff \
 using the Cartan structure equations for the connection arising from covd. In \
 this way it is possible to expand the exterior derivative of a co-frame, a \
 torsion 2-form and the curvature 2-form. If covd is the Levi-Civita \
 connection of a metric, then the exterior derivatives of that metric and its \
-volume element are expanded too.\>\""}], ";"}], "\[IndentingNewLine]", 
+volume element are expanded too. ExpandExtDiff[expr,PD,mani] expands all \
+instances of the exterior derivative in terms of partial derivatives defined \
+in the manifold mani.\>\""}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{"Alfonso", ":", " ", 
      RowBox[{
@@ -1301,7 +1309,8 @@ volume element are expanded too.\>\""}], ";"}], "\[IndentingNewLine]",
    3.589722047539974*^9}, {3.5897221523391027`*^9, 3.589722279175913*^9}, {
    3.5897226113799267`*^9, 3.589722667428423*^9}, {3.590756071159204*^9, 
    3.590756093977977*^9}, {3.5909102398253727`*^9, 3.590910317758397*^9}, {
-   3.590910395460455*^9, 3.590910401696148*^9}}]
+   3.590910395460455*^9, 3.590910401696148*^9}, {3.592160643604466*^9, 
+   3.592160954977991*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -2305,6 +2314,25 @@ Cell[BoxData[
  CellChangeTimes->{{3.589437723337833*^9, 3.589437750291328*^9}, {
   3.589437933463608*^9, 3.589437960840479*^9}, {3.5894401672279*^9, 
   3.589440169806541*^9}}],
+
+Cell["\<\
+Alfonso: There\[CloseCurlyQuote]s a problem with the code above if you \
+compute the exterior derivative of Cos[\[CapitalTheta]] d[\[CurlyPhi]] Sin[\
+\[CapitalTheta]]. The problem appears to be solved by adding the line\
+\>", "Text",
+ CellChangeTimes->{{3.592238923081835*^9, 3.592238987551518*^9}, {
+  3.5922391311112223`*^9, 3.592239190875093*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ExtDiff", "[", 
+    RowBox[{"expr_", ",", "rest_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"ExtDiff", "[", "expr", "]"}], "\[Wedge]", "rest"}]}], 
+  ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.592238919044271*^9, 3.5922389190458612`*^9}}],
 
 Cell["The exterior derivative applied twice is zero:", "Text"],
 
@@ -3675,7 +3703,7 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"SlotsOfTensor", "[", 
-    RowBox[{"CurvatureForm", "[", 
+    RowBox[{"RiemannForm", "[", 
      RowBox[{"cd_", "?", "CovDQ"}], "]"}], "]"}], "^:=", 
    RowBox[{"{", 
     RowBox[{
@@ -3759,7 +3787,7 @@ Cell[BoxData[{
   3.589623574605853*^9, 3.589623698974785*^9}, {3.589623800533996*^9, 
   3.5896238454474163`*^9}, {3.589736573667643*^9, 3.589736577259015*^9}, {
   3.5897366260241756`*^9, 3.5897366739331207`*^9}, {3.589736759217723*^9, 
-  3.589736961458108*^9}}],
+  3.589736961458108*^9}, {3.592115293364396*^9, 3.592115298806422*^9}}],
 
 Cell["\<\
 Automatic replacement of the curvature form if the covariant derivative \
@@ -4548,8 +4576,55 @@ metric and its volume element are expanded too.\"\>",
  CellTags->"Info3590737094-4074131"]
 }, Open  ]],
 
-Cell["We encode the Cartan equations in a set of rules.", "Text",
- CellChangeTimes->{{3.590753516836018*^9, 3.5907535593023357`*^9}}],
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Exterior", " ", "derivative", " ", "when", " ", "covd", " ", "is", " ", 
+    "PD"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ExpandExtDiff", "[", 
+     RowBox[{"expr_", ",", "PD", ",", 
+      RowBox[{"mani_", "?", "ManifoldQ"}]}], "]"}], ":=", 
+    RowBox[{"(", 
+     RowBox[{"expr", "/.", 
+      RowBox[{
+       RowBox[{"ExtDiff", "@", "expr1_"}], ":>", 
+       RowBox[{
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"a", "=", 
+            RowBox[{"DummyIn", "@", 
+             RowBox[{"Tangent", "@", "mani"}]}]}], "}"}], ",", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"dx", "[", "mani", "]"}], "[", "a", "]"}], 
+           RowBox[{
+            RowBox[{"PD", "[", 
+             RowBox[{"-", "a"}], "]"}], "@", "expr1"}]}]}], " ", "]"}], "/;", 
+        
+        RowBox[{
+         RowBox[{"Deg", "@", "expr1"}], "===", "0"}]}]}]}], ")"}]}], 
+   ";"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.592158056469448*^9, 3.592158090115263*^9}, {
+   3.592158172648075*^9, 3.592158201858789*^9}, {3.5921583039134493`*^9, 
+   3.59215831381513*^9}, {3.592158425078869*^9, 3.592158465817266*^9}, {
+   3.592158510663706*^9, 3.592158623374753*^9}, {3.592158662704172*^9, 
+   3.592158668887506*^9}, {3.592158717584671*^9, 3.592158766932238*^9}, 
+   3.592159392158627*^9, {3.592159550975595*^9, 3.592159773524478*^9}, {
+   3.592160378896377*^9, 3.592160437731079*^9}, 3.592160477151293*^9, {
+   3.592198662721889*^9, 3.5921986873402233`*^9}, 3.592200407732535*^9}],
+
+Cell["\<\
+We encode the Cartan equations in a set of rules. We also encode the action \
+of the exterior derivative on a function whose arguments are scalars of a \
+coordinate chart.\
+\>", "Text",
+ CellChangeTimes->{{3.590753516836018*^9, 3.5907535593023357`*^9}, {
+  3.592136028523625*^9, 3.592136056893262*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -4859,7 +4934,44 @@ Cell[BoxData[
            RowBox[{
             RowBox[{"epsilon", "[", 
              RowBox[{"MetricOfCovD", "[", "covd", "]"}], "]"}], "[", "inds", 
-            "]"}], "]"}]}]}], "]"}]}], "}"}]}], ")"}]}], ";"}]], "Input",
+            "]"}], "]"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "Exterior", " ", "derivative", " ", "when", " ", "covd", " ", "is", 
+         " ", "the", " ", "parallel", " ", "derivative", " ", "of", " ", "a", 
+         " ", "coordinate", " ", "chart"}], " ", "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"HoldPattern", "@", 
+         RowBox[{"ExtDiff", "@", 
+          RowBox[{"expr1_", "?", "ScalarQ"}]}]}], "\[RuleDelayed]", 
+        RowBox[{
+         RowBox[{"Inner", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"covd", "[", 
+               RowBox[{"{", 
+                RowBox[{"#1", ",", 
+                 RowBox[{"-", 
+                  RowBox[{"BasisOfCovD", "@", "covd"}]}]}], "}"}], "]"}], "@",
+               "expr1"}], " ", 
+             RowBox[{"ExtDiff", "@", "#2"}]}], "&"}], ",", 
+           RowBox[{"CNumbersOf", "[", 
+            RowBox[{
+             RowBox[{"BasisOfCovD", "@", "covd"}], ",", 
+             RowBox[{"VBundleOfBasis", "@", 
+              RowBox[{"BasisOfCovD", "@", "covd"}]}]}], "]"}], ",", 
+           RowBox[{"ScalarsOfChart", "@", 
+            RowBox[{"BasisOfCovD", "@", "covd"}]}], ",", "Plus"}], "]"}], "/;", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Deg", "@", "expr1"}], "===", "0"}], "&&", 
+           RowBox[{
+            RowBox[{"BasisOfCovD", "@", "covd"}], "=!=", "Null"}]}], 
+          ")"}]}]}]}], "}"}]}], ")"}]}], ";"}]], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.590396644110107*^9, 3.590396675728018*^9}, {
    3.590396770499909*^9, 3.5903968096259823`*^9}, 3.590396873679914*^9, {
@@ -4912,7 +5024,10 @@ Cell[BoxData[
    3.590743153753963*^9, 3.590743156286378*^9}, {3.590743508587661*^9, 
    3.590743525855497*^9}, {3.5907436540191517`*^9, 3.590743664095792*^9}, {
    3.590744383947913*^9, 3.5907444297598457`*^9}, {3.591856688959052*^9, 
-   3.591856694447473*^9}, {3.591857398711666*^9, 3.5918574242922077`*^9}}]
+   3.591856694447473*^9}, {3.591857398711666*^9, 3.5918574242922077`*^9}, {
+   3.5921357726608047`*^9, 3.5921358164872313`*^9}, {3.59213586604653*^9, 
+   3.592135976921629*^9}, 3.5921367024693003`*^9, {3.5922236090816507`*^9, 
+   3.5922236412833242`*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -6353,7 +6468,7 @@ Cell[BoxData[{
 },
 CellGrouping->Manual,
 WindowSize->{1274, 613},
-WindowMargins->{{0, Automatic}, {Automatic, 38}},
+WindowMargins->{{Automatic, 301}, {Automatic, 144}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 Magnification->1.5,
