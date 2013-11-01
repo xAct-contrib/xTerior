@@ -1,0 +1,42 @@
+--------------------------------------------------------------------
+2013 
+
+Moved code from the notebook xTeriorAlgebra.nb to the notebook
+xTerior.nb which contains the code of the package. The following 
+are the main differences between the code which was written in 
+the notebook xTeriorAlgebra.nb and what has been put in the notebook
+xTerior.nb
+
+-The notation for the exterior derivative is ExtDiff[form]. ExtDiff should
+be independent from any covariant derivative, as the exterior derivative
+only requires the differential structure for its definition.
+
+-The notation for the exterior covariant derivative is 
+ExtCovDiff[form,covd]. ExtCovDiff[expr] is automatically transformed into
+ExtCovDiff[expr,PD]
+
+-Connection forms: The notation for the connection 1-form is 
+ConnectionForm[CovD,VBundle][a,-b]. The connection isn't regarded as the 
+difference between two connections as it represents a connection in 
+a principal bundle. If VBundle=TangentBundle then one has the automatic 
+transformation
+
+ConnectionForm[covd,TangentBundle]->ChristoffelForm[covd]
+
+In addition we set ConnectionForm[PD,VBundle]=0, ChristoffelForm[PD]=0.
+The user cannot change the index layout of the connection forms
+
+-Curvature forms: The notation for the curvature 2-form is 
+CurvatureForm[covd,VBundle][a,-b]. If VBundle=TangentBundle then we
+have the automatic rule
+CurvatureForm[covd,TangentBundle][a,-b]=RiemannForm[covd][a,-b].
+The index layout cannot be changed by the user.
+
+-Added the command ExpandExtDiff whose syntax is ExpandExtDiff[expr,covd]
+This command handles the Cartan eqs. and the expansion of the exterior 
+derivative in a coordinate chart.
+
+-The notation for the co-differential is CoDiff. The codifferential has been
+made independent from any covariant derivative because we don't need a 
+covariant derivative to define the co-differential. This affects the 
+last lines of the code of FormVarD.
