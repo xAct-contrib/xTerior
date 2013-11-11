@@ -369,6 +369,8 @@ Cell[BoxData[
  InitializationCell->True,
  CellChangeTimes->{{3.592120086338678*^9, 3.5921200969198513`*^9}}],
 
+Cell[CellGroupData[{
+
 Cell[BoxData["\<\"------------------------------------------------------------\
 \"\>"], "Print",
  CellChangeTimes->{
@@ -539,7 +541,8 @@ General Public License.\"\>"], "Print",
    3.590910429225058*^9, 3.590910640789668*^9, 3.5909112574257*^9, 
    3.5909124156355247`*^9, 3.590919255666567*^9, 3.591029200945794*^9, 
    3.59107295571959*^9, 3.591177831892791*^9, 3.591541104943244*^9, 
-   3.591807801833239*^9, {3.591807851510127*^9, 3.591807878421039*^9}}],
+   3.591807801833239*^9, {3.591807851510127*^9, 3.591807878421039*^9}}]
+}, Open  ]],
 
 Cell[BoxData["\<\"xAct`xTerior`\"\>"], "Output",
  CellChangeTimes->{
@@ -614,6 +617,8 @@ Cell[BoxData[{
    "\"\<CopyRight (C) 2013, Alfonso Garcia-Parrado Gomez-Lobo and Leo C. \
 Stein, under the General Public License.\>\"", "]"}], ";"}]}], "Input",
  InitializationCell->True],
+
+Cell[CellGroupData[{
 
 Cell[BoxData["\<\"------------------------------------------------------------\
 \"\>"], "Print",
@@ -729,6 +734,7 @@ Leo C. Stein, under the General Public License.\"\>"], "Print",
    3.591029201467918*^9, 3.591072956185184*^9, 3.5911778323720818`*^9, 
    3.591541105330639*^9, 3.591807802327506*^9, {3.591807852254537*^9, 
    3.5918078790891037`*^9}}]
+}, Open  ]]
 }, Open  ]],
 
 Cell["\<\
@@ -796,6 +802,8 @@ under certain conditions. See the General Public License for details.\>\"",
     RowBox[{"Print", "[", "xAct`xCore`Private`bars", "]"}]}]}], 
   "]"}]], "Input",
  InitializationCell->True],
+
+Cell[CellGroupData[{
 
 Cell[BoxData["\<\"------------------------------------------------------------\
 \"\>"], "Print",
@@ -906,6 +914,7 @@ Cell[BoxData["\<\"------------------------------------------------------------\
    3.591029201585627*^9, 3.591072956231592*^9, 3.591177832444358*^9, 
    3.591541105369686*^9, 3.591807802368986*^9, {3.591807852296536*^9, 
    3.591807879120514*^9}}]
+}, Open  ]]
 }, Open  ]],
 
 Cell["\<\
@@ -1254,6 +1263,27 @@ tangent bundle of a manifold\>\""}], ";"}], "\[IndentingNewLine]",
      "\"\<RiemannForm[cd] is the curvature 2-form associated to the covariant \
 derivative cd which is a covariant derivative in the frame bundle of a \
 manifold\>\""}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Transformation", " ", "of", " ", "the", " ", "connection", " ", "for", 
+     " ", "to", " ", "the", " ", "connection", " ", "tensor"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ConnectionFormToTensor", "::", "usage"}], "=", 
+     "\"\<ConnectionFormToTensor[expr,covd,frame] transforms all instances of \
+the connection form into the (A)Christoffel tensor which relates the \
+covariant derivative defining the connection form and covd. The variable \
+frame can take the value of either Coframe or dx. If the (A)Christoffel \
+tensor does not exist it is created automatically.\>\""}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"CurvatureFormToTensor", "::", "usage"}], "=", 
+     "\"\<CurvatureFormToTensor[expr,frame] transforms all the instances of \
+the curvature form into the related Riemann or FRiemann tensor, inserting the \
+corresponding frame (either Coframe or dx).\>\""}], ";"}], 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"ChangeCurvatureForm", "::", "usage"}], "=", 
@@ -1310,7 +1340,13 @@ in the manifold mani.\>\""}], ";"}], "\[IndentingNewLine]",
    3.5897226113799267`*^9, 3.589722667428423*^9}, {3.590756071159204*^9, 
    3.590756093977977*^9}, {3.5909102398253727`*^9, 3.590910317758397*^9}, {
    3.590910395460455*^9, 3.590910401696148*^9}, {3.592160643604466*^9, 
-   3.592160954977991*^9}}]
+   3.592160954977991*^9}, {3.592936213700653*^9, 3.5929362491045218`*^9}, {
+   3.59293628494031*^9, 3.592936290740075*^9}, {3.5929364266596527`*^9, 
+   3.592936451510304*^9}, {3.5929365518392973`*^9, 3.592936552046164*^9}, {
+   3.592936600886606*^9, 3.5929366395077753`*^9}, {3.5929378203301897`*^9, 
+   3.592937840210558*^9}, {3.593091553361124*^9, 3.593091659064828*^9}, {
+   3.593091874025323*^9, 3.593091971143461*^9}, {3.593092086015252*^9, 
+   3.593092134056528*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -2341,7 +2377,32 @@ Cell[BoxData[
   RowBox[{"ExtDiff", "[", 
    RowBox[{"ExtDiff", "[", "expr_", "]"}], "]"}], ":=", "0"}]], "Input",
  InitializationCell->True,
- CellChangeTimes->{{3.589438121134224*^9, 3.58943812940057*^9}}]
+ CellChangeTimes->{{3.589438121134224*^9, 3.58943812940057*^9}}],
+
+Cell["\<\
+Automatic contraction of products of basis objects and the exterior \
+derivative. These kind of expressions arise after the application of ToBasis \
+to an expression containing the exterior derivative.\
+\>", "Text",
+ CellChangeTimes->{{3.5927461083092003`*^9, 3.592746120158114*^9}, {
+  3.592747255772661*^9, 3.5927473074600058`*^9}, {3.592747359523057*^9, 
+  3.5927473753882847`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ExtDiff", "/:", 
+   RowBox[{"basis_Basis", " ", 
+    RowBox[{"ExtDiff", "[", "expr_", "]"}]}], ":=", 
+   RowBox[{"ExtDiff", "[", 
+    RowBox[{"ContractBasis", "[", 
+     RowBox[{
+      RowBox[{"basis", " ", "expr"}], ",", "AIndex"}], "]"}], "]"}]}], 
+  ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.592746153446164*^9, 3.5927461560397863`*^9}, {
+   3.592746216519528*^9, 3.592746338711318*^9}, {3.592746485093725*^9, 
+   3.592746510875966*^9}, {3.592746855941771*^9, 3.592746861181068*^9}, 
+   3.5927474040639877`*^9}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -3560,12 +3621,11 @@ Cell[BoxData[{
   3.590486936039913*^9, 3.590486952475772*^9}}],
 
 Cell["\<\
-Finally PD is regarded as the trivial connection in a principal bundle. Hence\
-\
+PD is regarded as the trivial connection in a principal bundle. Hence\
 \>", "Text",
  CellChangeTimes->{{3.5899078745727882`*^9, 3.589907886997259*^9}, {
   3.589908563786191*^9, 3.589908592681241*^9}, {3.589908656983718*^9, 
-  3.5899086654093647`*^9}}],
+  3.5899086654093647`*^9}, {3.592760569124309*^9, 3.592760570090828*^9}}],
 
 Cell[BoxData[{
  RowBox[{
@@ -3579,7 +3639,187 @@ Cell[BoxData[{
   ";"}]}], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.589908677998024*^9, 3.589908693194957*^9}, {
-  3.589909007536978*^9, 3.589909012697495*^9}}]
+  3.589909007536978*^9, 3.589909012697495*^9}}],
+
+Cell["\<\
+Transformation of the connection form into the connection tensor plus \
+co-frame.\
+\>", "Text",
+ CellChangeTimes->{{3.5927605878461523`*^9, 3.59276065636799*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ConnectionFormToTensor", "[", 
+    RowBox[{"expr_", ",", "covd_", ",", 
+     RowBox[{"frame", ":", 
+      RowBox[{"(", 
+       RowBox[{"Coframe", "|", "dx"}], ")"}]}]}], "]"}], ":=", 
+   RowBox[{"expr", "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"ChristoffelForm", "[", "cd1_", "]"}], "[", "inds__", "]"}], ":>", 
+       RowBox[{
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"a", "=", 
+            RowBox[{"DummyIn", "@", 
+             RowBox[{"First", "@", 
+              RowBox[{"VBundlesOfCovD", "@", "covd"}]}]}]}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"xTensorQ", "@", 
+               RowBox[{"GiveSymbol", "[", 
+                RowBox[{"Christoffel", ",", "cd1", ",", "covd"}], "]"}]}], "===",
+               "False"}], ",", 
+             RowBox[{"DefTensor", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"GiveSymbol", "[", 
+                 RowBox[{"Christoffel", ",", "cd1", ",", "covd"}], "]"}], "[", 
+                RowBox[{"inds", ",", 
+                 RowBox[{"-", "a"}]}], "]"}], ",", 
+               RowBox[{"ManifoldOfCovD", "@", "covd"}]}], "]"}]}], "]"}], ";",
+            "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"GiveSymbol", "[", 
+              RowBox[{"Christoffel", ",", "cd1", ",", "covd"}], "]"}], "[", 
+             RowBox[{"inds", ",", 
+              RowBox[{"-", "a"}]}], "]"}], 
+            RowBox[{
+             RowBox[{"frame", "[", 
+              RowBox[{"ManifoldOfCovD", "@", "covd"}], "]"}], "[", "a", 
+             "]"}]}]}]}], "]"}], "/;", 
+        RowBox[{"covd", "=!=", "PD"}]}]}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"ConnectionForm", "[", 
+         RowBox[{"cd1_", ",", "vbundle_"}], "]"}], "[", "inds__", "]"}], 
+       "\[RuleDelayed]", 
+       RowBox[{
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"a", "=", 
+            RowBox[{"DummyIn", "@", 
+             RowBox[{"Tangent", "@", 
+              RowBox[{"BaseOfVBundle", "@", "vbundle"}]}]}]}], "}"}], ",", 
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"xTensorQ", "@", 
+               RowBox[{"GiveSymbol", "[", 
+                RowBox[{"AChristoffel", ",", "covd", ",", "cd1"}], "]"}]}], "===",
+               "False"}], ",", 
+             RowBox[{"DefTensor", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"GiveSymbol", "[", 
+                 RowBox[{"AChristoffel", ",", "covd", ",", "cd1"}], "]"}], 
+                "[", 
+                RowBox[{"inds", ",", 
+                 RowBox[{"-", "a"}]}], "]"}], ",", 
+               RowBox[{"BaseOfVBundle", "@", "vbundle"}]}], "]"}]}], "]"}], 
+           ";", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"GiveSymbol", "[", 
+              RowBox[{"AChristoffel", ",", "covd", ",", "cd1"}], "]"}], "[", 
+             RowBox[{"inds", ",", 
+              RowBox[{"-", "a"}]}], "]"}], 
+            RowBox[{
+             RowBox[{"frame", "[", 
+              RowBox[{"BaseOfVBundle", "@", "vbundle"}], "]"}], "[", "a", 
+             "]"}]}]}]}], "]"}], "/;", 
+        RowBox[{"covd", "=!=", "PD"}]}]}]}], "}"}]}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.592760659989112*^9, 3.592760731478651*^9}, 
+   3.592760773451819*^9, {3.592760820512384*^9, 3.592760833115171*^9}, {
+   3.592760948845265*^9, 3.592760986102234*^9}, 3.592761155817731*^9, {
+   3.592761473303218*^9, 3.5927616127682343`*^9}, {3.592761734641519*^9, 
+   3.592761898588339*^9}, {3.5927621498075657`*^9, 3.5927621898189507`*^9}, {
+   3.592762231912314*^9, 3.592762279500581*^9}, {3.592762311304256*^9, 
+   3.592762396833746*^9}, {3.5927624347754498`*^9, 3.5927625013036537`*^9}, {
+   3.5927631304351187`*^9, 3.5927631446430492`*^9}, {3.592763251364019*^9, 
+   3.592763347808134*^9}, {3.592938429370121*^9, 3.592938430890705*^9}, {
+   3.592938630125942*^9, 3.592938631235485*^9}, {3.59308699261056*^9, 
+   3.593087135298931*^9}, {3.593087188408725*^9, 3.593087193826581*^9}, {
+   3.5930872519618073`*^9, 3.5930872568904343`*^9}, {3.5930873132106237`*^9, 
+   3.593087363577084*^9}, {3.5930874121534243`*^9, 3.593087506975738*^9}, {
+   3.59308753942402*^9, 3.593087576435972*^9}}],
+
+Cell["\<\
+If the covariant derivative is PD then the code takes the following simpler \
+form:\
+\>", "Text",
+ CellChangeTimes->{{3.593153962751338*^9, 3.593153986998577*^9}, {
+  3.5931540181268873`*^9, 3.5931540187103453`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ConnectionFormToTensor", "[", 
+   RowBox[{"expr_", ",", "PD", ",", 
+    RowBox[{"frame", ":", 
+     RowBox[{"(", 
+      RowBox[{"Coframe", "|", "dx"}], ")"}]}]}], "]"}], ":=", 
+  RowBox[{"expr", "/.", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"ChristoffelForm", "[", "cd1_", "]"}], "[", "inds__", "]"}], ":>", 
+      RowBox[{"Module", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"a", "=", 
+          RowBox[{"DummyIn", "@", 
+           RowBox[{"First", "@", 
+            RowBox[{"VBundlesOfCovD", "@", "cd1"}]}]}]}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"GiveSymbol", "[", 
+           RowBox[{"Christoffel", ",", "cd1"}], "]"}], "[", 
+          RowBox[{"inds", ",", 
+           RowBox[{"-", "a"}]}], "]"}], 
+         RowBox[{
+          RowBox[{"frame", "[", 
+           RowBox[{"ManifoldOfCovD", "@", "cd1"}], "]"}], "[", "a", "]"}]}]}],
+        "]"}]}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"ConnectionForm", "[", "cd1_", "]"}], "[", "inds__", "]"}], ":>", 
+      RowBox[{"Module", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"a", "=", 
+          RowBox[{"DummyIn", "@", 
+           RowBox[{"First", "@", 
+            RowBox[{"VBundlesOfCovD", "@", "cd1"}]}]}]}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"GiveSymbol", "[", 
+           RowBox[{"AChristoffel", ",", "cd1"}], "]"}], "[", 
+          RowBox[{"inds", ",", 
+           RowBox[{"-", "a"}]}], "]"}], 
+         RowBox[{
+          RowBox[{"frame", "[", 
+           RowBox[{"ManifoldOfCovD", "@", "cd1"}], "]"}], "[", "a", "]"}]}]}],
+        "]"}]}]}], "}"}]}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.593153213146277*^9, 3.5931532250931873`*^9}, {
+   3.593153278138609*^9, 3.593153278538636*^9}, 3.593153580449086*^9, {
+   3.5931536609712877`*^9, 3.593153713842132*^9}, {3.593153895539278*^9, 
+   3.593153933421541*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -3816,7 +4056,119 @@ Cell[BoxData[{
  InitializationCell->True,
  CellChangeTimes->{{3.5897374799212523`*^9, 3.589737536854355*^9}, {
   3.5897375825220203`*^9, 3.5897376079312887`*^9}, {3.590487863366686*^9, 
-  3.5904878933761253`*^9}}]
+  3.5904878933761253`*^9}}],
+
+Cell["\<\
+Transformation of the Curvature form into the curvature tensor plus co-frame. \
+Check conventions.\
+\>", "Text",
+ CellChangeTimes->{{3.593093272531743*^9, 3.5930933021304817`*^9}, {
+  3.593162239735594*^9, 3.593162245727285*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CurvatureFormToTensor", "[", 
+   RowBox[{"expr_", ",", 
+    RowBox[{"frame", ":", 
+     RowBox[{"(", 
+      RowBox[{"Coframe", "|", "dx"}], ")"}]}]}], "]"}], ":=", 
+  RowBox[{"expr", "/.", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"HoldPattern", "@", 
+       RowBox[{
+        RowBox[{"CurvatureForm", "[", 
+         RowBox[{"cd1_", ",", 
+          RowBox[{"vbundle1_", "?", "VBundleQ"}]}], "]"}], "[", "inds__", 
+        "]"}]}], ":>", 
+      RowBox[{"Module", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"a", "=", 
+           RowBox[{"DummyIn", "@", 
+            RowBox[{"First", "@", 
+             RowBox[{"VBundlesOfCovD", "@", "cd1"}]}]}]}], ",", 
+          RowBox[{"b", "=", 
+           RowBox[{"DummyIn", "@", 
+            RowBox[{"First", "@", 
+             RowBox[{"VBundlesOfCovD", "@", "cd1"}]}]}]}]}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"1", "/", "2"}], 
+         RowBox[{
+          RowBox[{"GiveSymbol", "[", 
+           RowBox[{"FRiemann", ",", "cd1"}], "]"}], "[", 
+          RowBox[{
+           RowBox[{"-", "a"}], ",", 
+           RowBox[{"-", "b"}], ",", 
+           RowBox[{"Sequence", "@@", 
+            RowBox[{"Reverse", "@", 
+             RowBox[{"List", "@", "inds"}]}]}]}], "]"}], 
+         RowBox[{"Wedge", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"frame", "[", 
+             RowBox[{"ManifoldOfCovD", "@", "cd1"}], "]"}], "[", "a", "]"}], 
+           ",", 
+           RowBox[{
+            RowBox[{"frame", "[", 
+             RowBox[{"ManifoldOfCovD", "@", "cd1"}], "]"}], "[", "b", "]"}]}],
+           "]"}]}]}], "]"}]}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"RiemannForm", "[", "cd1_", "]"}], "[", "inds__", "]"}], ":>", 
+      
+      RowBox[{"Module", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"a", "=", 
+           RowBox[{"DummyIn", "@", 
+            RowBox[{"First", "@", 
+             RowBox[{"VBundlesOfCovD", "@", "cd1"}]}]}]}], ",", 
+          RowBox[{"b", "=", 
+           RowBox[{"DummyIn", "@", 
+            RowBox[{"First", "@", 
+             RowBox[{"VBundlesOfCovD", "@", "cd1"}]}]}]}]}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"-", "$RiemannSign"}], " ", 
+         RowBox[{"1", "/", "2"}], 
+         RowBox[{
+          RowBox[{"GiveSymbol", "[", 
+           RowBox[{"Riemann", ",", "cd1"}], "]"}], "[", 
+          RowBox[{
+           RowBox[{"-", "a"}], ",", 
+           RowBox[{"-", "b"}], ",", 
+           RowBox[{"Sequence", "@@", 
+            RowBox[{"Reverse", "@", 
+             RowBox[{"List", "@", "inds"}]}]}]}], "]"}], 
+         RowBox[{"Wedge", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"frame", "[", 
+             RowBox[{"ManifoldOfCovD", "@", "cd1"}], "]"}], "[", "a", "]"}], 
+           ",", 
+           RowBox[{
+            RowBox[{"frame", "[", 
+             RowBox[{"ManifoldOfCovD", "@", "cd1"}], "]"}], "[", "b", "]"}]}],
+           "]"}]}]}], "]"}]}]}], "}"}]}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.593092167005352*^9, 3.593092200105712*^9}, {
+   3.593092329047698*^9, 3.593092369532001*^9}, {3.593092430494499*^9, 
+   3.593092443800976*^9}, {3.593092477865139*^9, 3.593092539075501*^9}, {
+   3.593092664385372*^9, 3.593092686894741*^9}, {3.5930927337451897`*^9, 
+   3.593092738995508*^9}, {3.5930931433031588`*^9, 3.593093228254393*^9}, {
+   3.5930934835708437`*^9, 3.5930935275217323`*^9}, {3.593151411225621*^9, 
+   3.593151413854979*^9}, 3.593151581487352*^9, {3.593151742634767*^9, 
+   3.5931517582864857`*^9}, {3.5931519729266233`*^9, 3.593152015349186*^9}, {
+   3.593152185717474*^9, 3.593152194713829*^9}, 3.5931548415575237`*^9, {
+   3.5931549116998167`*^9, 3.593154922561112*^9}, 3.593155205214283*^9, {
+   3.59315537046563*^9, 3.593155385056322*^9}, {3.593155611849353*^9, 
+   3.593155615058058*^9}, {3.5931611626466208`*^9, 3.593161184544445*^9}, 
+   3.593161284270794*^9, {3.59316217002419*^9, 3.59316217559352*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -6466,9 +6818,8 @@ Cell[BoxData[{
 }, Open  ]]
 }, Open  ]]
 },
-CellGrouping->Manual,
 WindowSize->{1274, 613},
-WindowMargins->{{Automatic, 301}, {Automatic, 144}},
+WindowMargins->{{0, Automatic}, {Automatic, 51}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 Magnification->1.5,

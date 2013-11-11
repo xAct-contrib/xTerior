@@ -29,6 +29,7 @@ The user cannot change the index layout of the connection forms
 -Curvature forms: The notation for the curvature 2-form is 
 CurvatureForm[covd,VBundle][a,-b]. If VBundle=TangentBundle then we
 have the automatic rule
+
 CurvatureForm[covd,TangentBundle][a,-b]=RiemannForm[covd][a,-b].
 The index layout cannot be changed by the user.
 
@@ -40,3 +41,12 @@ derivative in a coordinate chart.
 made independent from any covariant derivative because we don't need a 
 covariant derivative to define the co-differential. This affects the 
 last lines of the code of FormVarD.
+
+
+6 Nov. 2013: added automatic contraction of basis elements in their product with 
+             the exterior derivative.
+
+10 Nov. 2013: added ConnectionFormToTensor and CurvatureFormToTensor.
+
+             
+             
