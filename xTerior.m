@@ -119,7 +119,7 @@ ExtCovDiff::usage="ExtCovDiff[form,covd] represents the exterior covariant deriv
 ChangeExtCovDiff::usage="ChangeExtCovDiff[expr,cd1,cd2] expresses the exterior covariant derivative taken with respect to the connection defined by the covariant derivative cd1 in terms of the exterior covariant derivative taken with respect to the connection defined by the covariant derivative cd2";
 (* Hodge dual *)
 Hodge::usage="Hodge[metric][expr] is the Hodge dual of expr defined with respect to metric";
-ExpandHodgeDual::usage="ExpandHodgeDual[expr,Coframe[mani],g] expands out all the Hodge duals defined with respect to the metric g of the exterior powers of Coframe[mani]. If the manifold tag mani is dropped, then all the instances of Coframe are expanded.";
+ExpandHodgeDual::usage="ExpandHodgeDual[expr,Coframe[mani],g] expands out all the Hodge duals of the exterior powers of Coframe[mani], defined with respect to the metric g. If the manifold tag mani is dropped, then all the instances of Coframe are expanded.";
 (* Co-differential *)
 CoDiff::usage="CoDiff[metric][form] is the co-differential of form computed with respect to metric";
 (* Expansion of the co-differential *)
@@ -434,7 +434,7 @@ GiveSymbol[AChristoffel,covd,cd1][inds,-a]frame[BaseOfVBundle@vbundle][a]]/;covd
 
 
 ConnectionFormToTensor[expr_,PD,frame:(Coframe|dx)]:=expr/.{ChristoffelForm[cd1_][inds__]:>Module[{a=DummyIn@First@VBundlesOfCovD@cd1},
-GiveSymbol[Christoffel,cd1][inds,-a]frame[ManifoldOfCovD@cd1][a]],ConnectionForm[cd1_][inds__]:>Module[{a=DummyIn@First@VBundlesOfCovD@cd1},
+GiveSymbol[Christoffel,cd1][inds,-a]frame[ManifoldOfCovD@cd1][a]],ConnectionForm[cd1__][inds__]:>Module[{a=DummyIn@First@VBundlesOfCovD@cd1},
 GiveSymbol[AChristoffel,cd1][inds,-a]frame[ManifoldOfCovD@cd1][a]]}
 
 
