@@ -48,5 +48,10 @@ last lines of the code of FormVarD.
 
 10 Nov. 2013: added ConnectionFormToTensor and CurvatureFormToTensor.
 
-             
+1 Dec. 2013: -added ?CovDQ in the definition of ConnectionForm and ChristoffelForm 
+             as non-atomic tensors (section 3.1).
+            -Changed the on-line help of Connection form and ChristoffelForm to adapt them to
+             their new syntax.
+            -Added the covariant derivative to the list of HostsOf ConnectionForm, ChristoffelForm, 
+             RiemannForm, CurvatureForm. 
              

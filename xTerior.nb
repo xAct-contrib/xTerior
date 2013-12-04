@@ -746,12 +746,12 @@ mani.\>\""}], ";"}], "\[IndentingNewLine]",
    RowBox[{
     RowBox[{
      RowBox[{"ConnectionForm", "::", "usage"}], "=", 
-     "\"\<ConnectionForm[cd1,cd2,vbundle] represents the difference between \
-the connection 1-forms associated to the covariant derivatives cd1 and cd2, \
-both defined in the bundle vbundle. If vbundle is the tangent bundle of a \
-differentiable manifold then ConnectionForm is automatically replaced by \
-ChristoffelForm. Also ConnectionForm[cd1,vbundle] is automatically replaced \
-by ConnectionForm[cd1,PD,vbundle]\>\""}], ";"}], "\[IndentingNewLine]", 
+     "\"\<ConnectionForm[cd,vbundle] represents the connection 1-form \
+associated to the covariant derivatives cd defined in the bundle vbundle. If \
+vbundle is the tangent bundle of a differentiable manifold then \
+ConnectionForm is automatically replaced by ChristoffelForm (see the on-line \
+help of ChristoffelForm for further details).\>\""}], ";"}], 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
      RowBox[{"The", " ", "curvature", " ", "2"}], "-", "form"}], " ", "*)"}], 
@@ -772,9 +772,9 @@ RiemannForm\>\""}], ";"}], "\[IndentingNewLine]",
    RowBox[{
     RowBox[{
      RowBox[{"ChristoffelForm", "::", "usage"}], "=", 
-     "\"\<ChristoffelForm[cd1,cd2] is the difference between the connection \
-1-forms associated to cd1 and cd2 which are both covariant derivatives in the \
-tangent bundle of a manifold\>\""}], ";"}], "\[IndentingNewLine]", 
+     "\"\<ChristoffelForm[cd] is the connection 1-form associated to the \
+covariant derivative cd which is a covariant derivatives in the tangent \
+bundle of a manifold\>\""}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
      RowBox[{"Curvature", " ", "2"}], "-", 
@@ -849,7 +849,7 @@ in the manifold mani.\>\""}], ";"}], "\[IndentingNewLine]",
      "\"\<ZeroFormQ[expr] returns True if the degree of expr is zero\>\""}], 
     ";"}]}]}]], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -1620,22 +1620,34 @@ Cell[BoxData[
    RowBox[{"ExtDiff", "[", "expr_", "]"}], "]"}], ":=", "0"}]], "Input",
  InitializationCell->True],
 
-Cell["\<\
-Automatic contraction of products of basis objects and the exterior \
+Cell[TextData[{
+ "Automatic contraction of products of basis objects and the exterior \
 derivative. These kind of expressions arise after the application of ToBasis \
-to an expression containing the exterior derivative.\
-\>", "Text"],
+to an expression containing the exterior derivative. ",
+ StyleBox["Alfonso: I\[CloseCurlyQuote]m not sure this works . . .",
+  FontWeight->"Bold"]
+}], "Text"],
 
-Cell[BoxData[
+Cell[BoxData[{
  RowBox[{
-  RowBox[{"ExtDiff", "/:", 
-   RowBox[{"basis_Basis", " ", 
-    RowBox[{"ExtDiff", "[", "expr_", "]"}]}], ":=", 
-   RowBox[{"ExtDiff", "[", 
+  RowBox[{"Unprotect", "@", "ContractBasis"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HoldPattern", "@", 
     RowBox[{"ContractBasis", "[", 
      RowBox[{
-      RowBox[{"basis", " ", "expr"}], ",", "AIndex"}], "]"}], "]"}]}], 
-  ";"}]], "Input",
+      RowBox[{"basis_Basis", " ", 
+       RowBox[{"ExtDiff", "[", "expr_", "]"}]}], ",", "args_"}], "]"}]}], ":=", 
+   RowBox[{
+    RowBox[{"ExtDiff", "[", 
+     RowBox[{"ContractBasis", "[", 
+      RowBox[{
+       RowBox[{"basis", " ", "expr"}], ",", "args"}], "]"}], "]"}], "-", 
+    RowBox[{"expr", " ", 
+     RowBox[{"ExtDiff", "[", "basis", "]"}]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Protect", "@", "ContractBasis"}], ";"}]}], "Input",
  InitializationCell->True]
 }, Closed]],
 
@@ -2167,6 +2179,39 @@ Cell[BoxData[
    RowBox[{
     RowBox[{"CoDiff", "[", "metric_", "]"}], "@", "expr_"}]}], ":=", 
   "0"}]], "Input",
+ InitializationCell->True],
+
+Cell[TextData[{
+ "Automatic contraction of products of basis objects and the co-differential. \
+These kind of expressions arise after the application of ToBasis to an \
+expression containing the co-differential. ",
+ StyleBox["Alfonso: I\[CloseCurlyQuote]m not sure this works ...",
+  FontWeight->"Bold"]
+}], "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Unprotect", "@", "ContractBasis"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ContractBasis", "[", 
+    RowBox[{
+     RowBox[{"basis_Basis", " ", 
+      RowBox[{
+       RowBox[{"CoDiff", "[", "metric_", "]"}], "[", "expr_", "]"}]}], ",", 
+     "args_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"CoDiff", "[", "metric", "]"}], "[", 
+     RowBox[{"ContractBasis", "[", 
+      RowBox[{
+       RowBox[{"basis", " ", "expr"}], ",", "args"}], "]"}], "]"}], "-", 
+    RowBox[{"expr", " ", 
+     RowBox[{
+      RowBox[{"CoDiff", "[", "metric", "]"}], "[", "basis", "]"}]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Protect", "@", "ContractBasis"}], ";"}]}], "Input",
  InitializationCell->True]
 }, Closed]]
 }, Open  ]],
@@ -2416,18 +2461,24 @@ ConnectionForm[CD,VB][A,-B]\n\nThis notation has been implemented in this \
 notebook."
 }], "Text"],
 
-Cell["\<\
-First, making these nonatomic-head tensors. We start by the general \
-connection form. \
-\>", "Text"],
+Cell[TextData[{
+ "First, making these nonatomic-head tensors. We start by the general \
+connection form. ",
+ StyleBox["Alfonso: what happens with the MastersOf a non-atomic symbol ? \
+Given that a non-atomic tensor cannot be undefined I guess that it makes no \
+sense to ask about its Masters,  right ?  Also I guess that it cannot be \
+Servant of anything either.",
+  FontWeight->"Bold"]
+}], "Text"],
 
 Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"xTensorQ", "[", 
     RowBox[{"ConnectionForm", "[", 
-     RowBox[{"_", ",", "_"}], "]"}], "]"}], "^=", "True"}], 
-  ";"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"cd_", "?", "CovDQ"}], ",", "_"}], "]"}], "]"}], "^=", "True"}],
+   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"SlotsOfTensor", "[", 
@@ -2485,17 +2536,21 @@ Cell[BoxData[{
     RowBox[{"HostsOf", "[", 
      RowBox[{"ConnectionForm", "[", 
       RowBox[{"cd1_", ",", "vb_"}], "]"}], "]"}], "^:=", 
-    RowBox[{"Union", "@@", 
-     RowBox[{"HostsOf", "/@", 
-      RowBox[{"{", 
-       RowBox[{"cd1", ",", "vb"}], "}"}]}]}]}], ";"}], 
+    RowBox[{"Join", "[", 
+     RowBox[{
+      RowBox[{"{", "cd1", "}"}], ",", 
+      RowBox[{"Union", "@@", 
+       RowBox[{"HostsOf", "/@", 
+        RowBox[{"{", 
+         RowBox[{"cd1", ",", "vb"}], "}"}]}]}]}], "]"}]}], ";"}], 
   RowBox[{"(*", " ", 
    RowBox[{"Should", " ", "we", " ", "put", " ", 
     RowBox[{"Union", "@@", 
      RowBox[{"HostsOf", "/@", 
       RowBox[{"{", 
        RowBox[{"cd1", ",", "vb"}], "}"}]}]}], " ", 
-    RowBox[{"here", "?", " ", "I"}], " ", "think", " ", "so"}], " ", 
+    RowBox[{"here", "?", " ", "Yes"}], " ", "but", " ", "we", " ", "need", 
+    " ", "to", " ", "add", " ", "cd1", " ", "itself"}], " ", 
    "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
@@ -2507,8 +2562,8 @@ Cell[BoxData[{
   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"PrintAs", "[", "ConnectionForm", "]"}], "^=", "\"\<A\>\""}], 
-  ";"}], "\[IndentingNewLine]", 
+   RowBox[{"PrintAs", "[", "ConnectionForm", "]"}], "^=", "\"\<A\>\""}], ";"}]
+  , "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"PrintAs", "[", 
@@ -2579,7 +2634,8 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"xTensorQ", "[", 
-    RowBox[{"ChristoffelForm", "[", "_", "]"}], "]"}], "^=", "True"}], 
+    RowBox[{"ChristoffelForm", "[", 
+     RowBox[{"cd1_", "?", "CovDQ"}], "]"}], "]"}], "^=", "True"}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
@@ -2636,16 +2692,21 @@ Cell[BoxData[{
    RowBox[{
     RowBox[{"HostsOf", "[", 
      RowBox[{"ChristoffelForm", "[", "cd1_", "]"}], "]"}], "^:=", 
-    RowBox[{"Union", "@@", 
-     RowBox[{"HostsOf", "/@", 
-      RowBox[{"{", "cd1", "}"}]}]}]}], ";"}], 
+    RowBox[{"Join", "[", 
+     RowBox[{
+      RowBox[{"{", "cd1", "}"}], ",", 
+      RowBox[{"Union", "@@", 
+       RowBox[{"HostsOf", "/@", 
+        RowBox[{"{", "cd1", "}"}]}]}]}], "]"}]}], ";"}], 
   RowBox[{"(*", " ", 
-   RowBox[{"Should", " ", "we", " ", "put", " ", 
-    RowBox[{"Union", "@@", 
-     RowBox[{"HostsOf", "/@", 
-      RowBox[{"{", 
-       RowBox[{"cd1", ",", "cd2", ",", "vb"}], "}"}]}]}], " ", 
-    RowBox[{"here", "?", " ", "I"}], " ", "think", " ", "so"}], " ", 
+   RowBox[{
+    RowBox[{"Should", " ", "we", " ", "put", " ", 
+     RowBox[{"Union", "@@", 
+      RowBox[{"HostsOf", "/@", 
+       RowBox[{"{", 
+        RowBox[{"cd1", ",", "cd2", ",", "vb"}], "}"}]}]}], " ", 
+     RowBox[{"here", "?", " ", "Yes"}]}], ",", " ", 
+    RowBox[{"but", " ", "addint", " ", "also", " ", "cd1"}]}], " ", 
    "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
@@ -2887,7 +2948,7 @@ Cell[BoxData[
            RowBox[{"ManifoldOfCovD", "@", "cd1"}], "]"}], "[", "a", "]"}]}]}],
         "]"}]}]}], "}"}]}]}]], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -2958,17 +3019,22 @@ Cell[BoxData[{
     RowBox[{"HostsOf", "[", 
      RowBox[{"CurvatureForm", "[", 
       RowBox[{"cd_", ",", "vb_"}], "]"}], "]"}], "^:=", 
-    RowBox[{"Union", "@@", 
-     RowBox[{"HostsOf", "/@", 
-      RowBox[{"{", 
-       RowBox[{"cd", ",", "vb"}], "}"}]}]}]}], ";"}], 
+    RowBox[{"Join", "[", 
+     RowBox[{
+      RowBox[{"{", "cd", "}"}], ",", 
+      RowBox[{"Union", "@@", 
+       RowBox[{"HostsOf", "/@", 
+        RowBox[{"{", 
+         RowBox[{"cd", ",", "vb"}], "}"}]}]}]}], "]"}]}], ";"}], 
   RowBox[{"(*", " ", 
    RowBox[{"Should", " ", "we", " ", "put", " ", 
     RowBox[{"Union", "@@", 
      RowBox[{"HostsOf", "/@", 
       RowBox[{"{", 
        RowBox[{"cd", ",", "vb"}], "}"}]}]}], " ", 
-    RowBox[{"here", "?", " ", "Yes"}]}], "*)"}]}], "\[IndentingNewLine]", 
+    RowBox[{"here", "?", " ", "Yes"}], " ", "but", " ", "we", " ", "need", 
+    " ", "to", " ", "add", " ", "cd", " ", "itself"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{
@@ -3053,16 +3119,21 @@ Cell[BoxData[{
    RowBox[{
     RowBox[{"HostsOf", "[", 
      RowBox[{"RiemannForm", "[", "cd_", "]"}], "]"}], "^:=", 
-    RowBox[{"Union", "@@", 
-     RowBox[{"HostsOf", "/@", 
-      RowBox[{"{", "cd", "}"}]}]}]}], ";"}], 
+    RowBox[{"Join", "[", 
+     RowBox[{
+      RowBox[{"{", "cd", "}"}], ",", 
+      RowBox[{"Union", "@@", 
+       RowBox[{"HostsOf", "/@", 
+        RowBox[{"{", "cd", "}"}]}]}]}], "]"}]}], ";"}], 
   RowBox[{"(*", " ", 
    RowBox[{"Should", " ", "we", " ", "put", " ", 
     RowBox[{"Union", "@@", 
      RowBox[{"HostsOf", "/@", 
       RowBox[{"{", 
        RowBox[{"cd", ",", "vb"}], "}"}]}]}], " ", 
-    RowBox[{"here", "?", " ", "Yes"}]}], "*)"}]}], "\[IndentingNewLine]", 
+    RowBox[{"here", "?", " ", "Yes"}], " ", "but", " ", "we", " ", "need", 
+    " ", "to", " ", "add", " ", "cd", " ", "itself"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{
@@ -5707,7 +5778,7 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1274, 613},
-WindowMargins->{{Automatic, 294}, {109, Automatic}},
+WindowMargins->{{165, Automatic}, {Automatic, 151}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,

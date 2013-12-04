@@ -139,11 +139,11 @@ FormVarD::usage="..";
 Coframe::usage="Coframe[mani] is the set of canonical 1-forms defined in the frame bundle arising from the manifold mani";
 dx::usage="dx[mani] represents a holonomic co-frame in the manifold mani.";
 (* The connection 1-form *)
-ConnectionForm::usage="ConnectionForm[cd1,cd2,vbundle] represents the difference between the connection 1-forms associated to the covariant derivatives cd1 and cd2, both defined in the bundle vbundle. If vbundle is the tangent bundle of a differentiable manifold then ConnectionForm is automatically replaced by ChristoffelForm. Also ConnectionForm[cd1,vbundle] is automatically replaced by ConnectionForm[cd1,PD,vbundle]";
+ConnectionForm::usage="ConnectionForm[cd,vbundle] represents the connection 1-form associated to the covariant derivatives cd defined in the bundle vbundle. If vbundle is the tangent bundle of a differentiable manifold then ConnectionForm is automatically replaced by ChristoffelForm (see the on-line help of ChristoffelForm for further details).";
 (* The curvature 2-form *)
 CurvatureForm::usage="CurvatureForm[cd,vbundle] represents the curvature 2-form associated to the covariant derivative cd. If vbundle is the tangent bundle of a differentiable manifold then CurvatureForm is replaced by RiemannForm";
 (* Connection 2-form for a connection in a frame bundle*)
-ChristoffelForm::usage="ChristoffelForm[cd1,cd2] is the difference between the connection 1-forms associated to cd1 and cd2 which are both covariant derivatives in the tangent bundle of a manifold";
+ChristoffelForm::usage="ChristoffelForm[cd] is the connection 1-form associated to the covariant derivative cd which is a covariant derivatives in the tangent bundle of a manifold";
 (* Curvature 2-form for a connection in a frame bundle *)
 RiemannForm::usage="RiemannForm[cd] is the curvature 2-form associated to the covariant derivative cd which is a covariant derivative in the frame bundle of a manifold";
 (* Transformation of the connection for to the connection tensor *)
@@ -280,7 +280,9 @@ ExtDiff[expr_,rest_]:=ExtDiff[expr]\[Wedge]rest;
 ExtDiff[ExtDiff[expr_]]:=0
 
 
-ExtDiff/:basis_Basis ExtDiff[expr_]:=ExtDiff[ContractBasis[basis expr,AIndex]];
+Unprotect@ContractBasis;
+HoldPattern@ContractBasis[basis_Basis ExtDiff[expr_],args_]:=ExtDiff[ContractBasis[basis expr,args]]-expr ExtDiff[basis];
+Protect@ContractBasis;
 
 
 xTensorQ@Coframe[mani_?ManifoldQ]^=True;
@@ -356,6 +358,11 @@ CoDiffToExtDiff[expr_]:=expr//.CoDiff[met_][expr1_]:>(-1)^(DimOfMetric[met]Grade
 CoDiff[metric_]@CoDiff[metric_]@expr_:=0
 
 
+Unprotect@ContractBasis;
+ContractBasis[basis_Basis CoDiff[metric_][expr_],args_]:=CoDiff[metric][ContractBasis[basis expr,args]]-expr CoDiff[metric][basis];
+Protect@ContractBasis;
+
+
 DefGradedDerivation[ExtCovDiff,Wedge,+1,PrintAs->"d"];
 
 
@@ -387,7 +394,7 @@ extcovdiff0[expr_]:=ExtDiff[expr];
 ExtCovDiff[expr_]:=ExtCovDiff[expr,PD]
 
 
-xTensorQ[ConnectionForm[_,_]]^=True;
+xTensorQ[ConnectionForm[cd_?CovDQ,_]]^=True;
 SlotsOfTensor[ConnectionForm[_,vb_?VBundleQ]]^:={vb,-vb};
 ConnectionForm/:GradeOfTensor[ConnectionForm[_,_],Wedge]=1;
 SymmetryGroupOfTensor[ConnectionForm[_,_]]^=StrongGenSet[{},GenSet[]];
@@ -395,7 +402,7 @@ SymmetryGroupOfTensor[ConnectionForm[_,_]]^=StrongGenSet[{},GenSet[]];
 Dagger[ConnectionForm[cd1_,vb_]]^:=ConnectionForm[cd1,Dagger@vb];
 DefInfo[ConnectionForm[_,_]]^={"nonsymmetric Connection 1-form",""};
 DependenciesOfTensor[ConnectionForm[cd1_,_]]^:=Union@@DependenciesOfCovD/@{cd1};
-HostsOf[ConnectionForm[cd1_,vb_]]^:=Union@@HostsOf/@{cd1,vb};(* Should we put Union@@HostsOf/@{cd1,vb} here? I think so *)
+HostsOf[ConnectionForm[cd1_,vb_]]^:=Join[{cd1},Union@@HostsOf/@{cd1,vb}];(* Should we put Union@@HostsOf/@{cd1,vb} here? Yes but we need to add cd1 itself *)
 TensorID[ConnectionForm[_,_]]^={};
 
 PrintAs[ConnectionForm]^="A";
@@ -403,7 +410,7 @@ PrintAs[ConnectionForm[cd1_,_]]^:=PrintAs[ConnectionForm]<>"["<>Last@SymbolOfCov
 PrintAs[ConnectionForm[PD,_]]^:=PrintAs[ConnectionForm];
 
 
-xTensorQ[ChristoffelForm[_]]^=True;
+xTensorQ[ChristoffelForm[cd1_?CovDQ]]^=True;
 SlotsOfTensor[ChristoffelForm[cd1_?CovDQ]]^:={Tangent@ManifoldOfCovD@cd1,-Tangent@ManifoldOfCovD@cd1};
 ChristoffelForm/:GradeOfTensor[ChristoffelForm[_],Wedge]=1;
 SymmetryGroupOfTensor[ChristoffelForm[_]]^=StrongGenSet[{},GenSet[]];
@@ -411,7 +418,7 @@ SymmetryGroupOfTensor[ChristoffelForm[_]]^=StrongGenSet[{},GenSet[]];
 Dagger[ChristoffelForm[cd1_]]^:=ChristoffelForm[cd1];
 DefInfo[ChristoffelForm[_]]^={"nonsymmetric frame bundle Connection 1-form",""};
 DependenciesOfTensor[ChristoffelForm[cd1_]]^:=Union@@DependenciesOfCovD/@{cd1};
-HostsOf[ChristoffelForm[cd1_]]^:=Union@@HostsOf/@{cd1};(* Should we put Union@@HostsOf/@{cd1,cd2,vb} here? I think so *)
+HostsOf[ChristoffelForm[cd1_]]^:=Join[{cd1},Union@@HostsOf/@{cd1}];(* Should we put Union@@HostsOf/@{cd1,cd2,vb} here? Yes, but addint also cd1 *)
 TensorID[ChristoffelForm[_]]^={};
 
 PrintAs[ChristoffelForm]^="\[CapitalGamma]";
@@ -446,7 +453,7 @@ SymmetryGroupOfTensor[CurvatureForm[_,_]]^=StrongGenSet[{},GenSet[]];
 Dagger[CurvatureForm[cd_,vb_]]^:=CurvatureForm[cd,Dagger@vb];
 DefInfo[CurvatureForm[_,_]]^={"Curvature 2-form",""};
 DependenciesOfTensor[CurvatureForm[cd_,_]]^:=DependenciesOfCovD[cd];
-HostsOf[CurvatureForm[cd_,vb_]]^:=Union@@HostsOf/@{cd,vb};(* Should we put Union@@HostsOf/@{cd,vb} here? Yes*)
+HostsOf[CurvatureForm[cd_,vb_]]^:=Join[{cd},Union@@HostsOf/@{cd,vb}];(* Should we put Union@@HostsOf/@{cd,vb} here? Yes but we need to add cd itself *)
 TensorID[CurvatureForm[_,_]]^={};
 
 PrintAs[CurvatureForm]^="F";
@@ -461,7 +468,7 @@ SymmetryGroupOfTensor[RiemannForm[_]]^=StrongGenSet[{},GenSet[]];
 Dagger[RiemannForm[cd_]]^:=RiemannForm[cd];
 DefInfo[RiemannForm[_]]^={"Curvature 2-form in the frame bundle",""};
 DependenciesOfTensor[RiemannForm[cd_]]^:=DependenciesOfCovD[cd];
-HostsOf[RiemannForm[cd_]]^:=Union@@HostsOf/@{cd};(* Should we put Union@@HostsOf/@{cd,vb} here? Yes*)
+HostsOf[RiemannForm[cd_]]^:=Join[{cd},Union@@HostsOf/@{cd}];(* Should we put Union@@HostsOf/@{cd,vb} here? Yes but we need to add cd itself *)
 TensorID[RiemannForm[_]]^={};
 
 PrintAs[RiemannForm]^="R";
