@@ -280,9 +280,7 @@ ExtDiff[expr_,rest_]:=ExtDiff[expr]\[Wedge]rest;
 ExtDiff[ExtDiff[expr_]]:=0
 
 
-Unprotect@ContractBasis;
-HoldPattern@ContractBasis[basis_Basis ExtDiff[expr_],args_]:=ExtDiff[ContractBasis[basis expr,args]]-expr ExtDiff[basis];
-Protect@ContractBasis;
+ExtDiff[_Basis]:=0;
 
 
 xTensorQ@Coframe[mani_?ManifoldQ]^=True;
@@ -329,17 +327,23 @@ Hodge/:Grade[Hodge[metric_][expr_],Wedge]:=DimOfMetric[metric]-Grade[expr,Wedge]
 Hodge[metric_]@Hodge[metric_][expr_]:=(-1)^(Grade[expr,Wedge](DimOfMetric[metric]-1)+SignatureOfMetric[metric][[2]])expr
 
 
-ExpandHodgeDual[expr_,(coframe:(Coframe|dx))[mani_?ManifoldQ],met_]:=expr/.HoldPattern[Hodge[met][form:Wedge[coframe[mani][_]..]]|form:Hodge[met][coframe[mani][_]]]:>With[{dim=DimOfMetric[met],n=Length[form],inds=Sequence@@@List@@form},
+(* Expand dual of differentials of coordinate elements *)
+ExpandHodgeDual[expr_,dx[mani_?ManifoldQ],met_]:=ExpandHodgeDual1[(expr/.Reverse/@Flatten[List@@TensorValues@dx[mani]]),dx[mani],met];
+(* Expand of the wedge product of canonical 1-forms *)
+ExpandHodgeDual[expr_,(coframe:(Coframe|dx))[mani_?ManifoldQ],met_]:=ExpandHodgeDual1[expr,coframe[mani],met];
+
+
+ExpandHodgeDual1[expr_,(coframe:(Coframe|dx))[mani_?ManifoldQ],met_]:=expr/.HoldPattern[Hodge[met][form:Wedge[coframe[mani][_]..]]|form:Hodge[met][coframe[mani][_]]]:>With[{dim=DimOfMetric[met],n=Length[form],inds=Sequence@@@List@@form},
 With[{dummies=DummyIn/@ConstantArray[VBundleOfMetric[met],dim-n]},
 1/(dim-n)!epsilon[met]@@Join[inds,ChangeIndex/@dummies]Wedge@@(coframe[mani]/@dummies)
 ]
 ];
 
 
-ExpandHodgeDual[expr_,Coframe,met_]:=Fold[ExpandHodgeDual[#1,Coframe[#2],met]&,expr,$Manifolds];
+ExpandHodgeDual1[expr_,Coframe,met_]:=Fold[ExpandHodgeDual1[#1,Coframe[#2],met]&,expr,$Manifolds];
 
 
-ExpandHodgeDual[expr_,dx,met_]:=Fold[ExpandHodgeDual[#1,dx[#2],met]&,expr,$Manifolds];
+ExpandHodgeDual1[expr_,dx,met_]:=Fold[ExpandHodgeDual1[#1,dx[#2],met]&,expr,$Manifolds];
 
 
 DefInertHead[CoDiff[metric_],

@@ -54,4 +54,10 @@ last lines of the code of FormVarD.
              their new syntax.
             -Added the covariant derivative to the list of HostsOf ConnectionForm, ChristoffelForm, 
              RiemannForm, CurvatureForm. 
+10 Dec. 2013: -added the condition that the exterior derivative of Basis objects is zero. 
+             Suppressed addition of 6th Nov.
+             
+11 Dec. 2013: -Enlarged the code of ExpandHodgeDual to admit exterior powers
+             of coordinates.
+             
              
