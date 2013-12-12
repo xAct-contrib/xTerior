@@ -568,7 +568,7 @@ ExpandExtDiff[expr_,PD,mani_?ManifoldQ]:=(expr/.ExtDiff@expr1_:>Module[{a=DummyI
 
 ExpandExtDiff[expr_,covd_]:=(expr/.
 (* Exterior derivative of the coframe *)
-{HoldPattern[ExtDiff@Coframe[mani_][ind_]]:>Module[{a=DummyIn@VBundleOfIndex@ind},If[ManifoldOfCovD@covd===mani,-ConnectionForm[covd,VBundleOfIndex@ind][ind,-a]\[Wedge]Coframe[mani][a]+TorsionForm[covd][ind],-ConnectionForm[covd,VBundleOfIndex@ind][ind,-a]\[Wedge]Coframe[mani][a]]],
+{HoldPattern[ExtDiff@Coframe[mani_][ind_]]:>Module[{a=DummyIn@VBundleOfIndex@ind},If[TorsionQ@covd,-ConnectionForm[covd,VBundleOfIndex@ind][ind,-a]\[Wedge]Coframe[mani][a]+TorsionForm[covd][ind],-ConnectionForm[covd,VBundleOfIndex@ind][ind,-a]\[Wedge]Coframe[mani][a]]],
 (* Exterior derivative of the connection *)
 HoldPattern[ExtDiff[(connection:(ConnectionForm|ChristoffelForm))[covd,vbundle_:Tangent@ManifoldOfCovD@covd][a1_,-a2_]]]:>Module[{a=DummyIn@VBundleOfIndex@a1},CurvatureForm[covd,vbundle][a1,-a2]-connection[covd,vbundle][a1,-a]\[Wedge]connection[covd,vbundle][a,-a2]],
 (* Exterior derivative of the torsion *)

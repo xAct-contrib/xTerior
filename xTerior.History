@@ -60,4 +60,6 @@ last lines of the code of FormVarD.
 11 Dec. 2013: -Enlarged the code of ExpandHodgeDual to admit exterior powers
              of coordinates.
              
+12 Dec. 2013: Fixed bug in ExpandExtDiff.
+             
              
