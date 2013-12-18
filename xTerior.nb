@@ -547,11 +547,6 @@ Cell[BoxData[
   RowBox[{"$PrePrint", "=", "ScreenDollarIndices"}], ";"}]], "Input",
  InitializationCell->True],
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{"$DefInfoQ", "=", "False"}], ";"}]], "Input",
- InitializationCell->True],
-
 Cell["\<\
 Timings will be shown if they are above 1 Second (Only for this notebook; \
 this is not included in the package):\
@@ -602,8 +597,8 @@ Cell[BoxData[
    RowBox[{
     RowBox[{
      RowBox[{"DefDifferentialForm", "::", "usage"}], "=", 
-     "\"\<DefDifferentialForm[form[inds], mani, Deg->deg] defines a tensor \
-valued differential form of degree deg on the manifold mani\>\""}], ";"}], 
+     "\"\<DefDifferentialForm[form[inds], mani, Deg] defines a tensor valued \
+differential form of degree deg on the manifold mani\>\""}], ";"}], 
    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
@@ -964,7 +959,9 @@ Cell[BoxData[
         RowBox[{
          RowBox[{"Grade", "[", 
           RowBox[{"#", ",", "Wedge"}], "]"}], ",", "0"}], "]"}], "&"}], 
-      ")"}]}]}], "\[IndentingNewLine]", "]"}], ";"}]], "Input",
+      ")"}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{"DefInfo", "\[Rule]", "Null"}]}], "\[IndentingNewLine]", "]"}], 
+  ";"}]], "Input",
  InitializationCell->True],
 
 Cell[TextData[{
@@ -1114,8 +1111,7 @@ Cell[BoxData[
  RowBox[{
   RowBox[{
    RowBox[{"DefDifferentialForm", "[", 
-    RowBox[{"form_", ",", "mani_", ",", 
-     RowBox[{"Deg", "\[Rule]", "deg_"}], ",", 
+    RowBox[{"form_", ",", "mani_", ",", "deg_", ",", 
      RowBox[{"options___", "?", "OptionQ"}]}], "]"}], ":=", 
    "\[IndentingNewLine]", 
    RowBox[{"DefTensor", "[", 
@@ -1130,8 +1126,7 @@ Cell[BoxData[
  RowBox[{
   RowBox[{
    RowBox[{"DefDifferentialForm", "[", 
-    RowBox[{"form_", ",", "mani_", ",", "sym_", ",", 
-     RowBox[{"Deg", "\[Rule]", "deg_"}], ",", 
+    RowBox[{"form_", ",", "mani_", ",", "deg_", ",", "sym_", ",", 
      RowBox[{"options___", "?", "OptionQ"}]}], "]"}], ":=", 
    "\[IndentingNewLine]", 
    RowBox[{"DefTensor", "[", 
@@ -1140,6 +1135,13 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{"Wedge", "\[Rule]", "deg"}], "}"}]}], ",", "options"}], 
     "]"}]}], ";"}]], "Input",
+ InitializationCell->True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Options", "@", "DefDifferentialForm"}], ":=", 
+   RowBox[{"Options", "@", "DefTensor"}]}], ";"}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
@@ -1153,7 +1155,7 @@ Cell[BoxData[
    RowBox[{"DefDifferentialForm", ",", "UndefDifferentialForm"}], "]"}], 
   ";"}]], "Input",
  InitializationCell->True]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1248,7 +1250,8 @@ Cell[BoxData[
           
           RowBox[{"ContractThrough", "\[Rule]", 
            RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
-          RowBox[{"PrintAs", "\[Rule]", "pa"}]}], "]"}], ";", 
+          RowBox[{"PrintAs", "\[Rule]", "pa"}], ",", 
+          RowBox[{"DefInfo", "\[Rule]", "Null"}]}], "]"}], ";", 
         "\[IndentingNewLine]", "\[IndentingNewLine]", 
         RowBox[{"(*", " ", 
          RowBox[{
@@ -1860,7 +1863,9 @@ Cell[BoxData[
        RowBox[{"PrintAs", "[", "metric", "]"}], "<>", "\"\<\\)]\\)\>\""}],
       ShowSpecialCharacters->False,
       ShowStringCharacters->True,
-      NumberMarks->True], "]"}]}]}], "\[IndentingNewLine]", "]"}]], "Input",
+      NumberMarks->True], "]"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"DefInfo", "\[Rule]", "Null"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
@@ -2104,24 +2109,29 @@ Cell["2.7 The co-differential", "Subsubsection"],
 Cell["\<\
 We introduce the co-differential. Alfonso: I have dropped the dependency on a \
 covariant derivative, because the co-differential does not require a \
-covariant derivative to be defined.\
+covariant derivative to be defined. Alfonso, However, as pointed out by Leo \
+one can still define the co-differential using an exterior covariant \
+derivative.\
 \>", "Text"],
 
 Cell[BoxData[
- RowBox[{"DefInertHead", "[", 
-  RowBox[{
-   RowBox[{"CoDiff", "[", "metric_", "]"}], ",", "\[IndentingNewLine]", 
-   RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
-   RowBox[{"ContractThrough", "\[Rule]", "delta"}], ",", 
-   "\[IndentingNewLine]", 
-   RowBox[{"PrintAs", "\[Rule]", 
-    RowBox[{"Hold", "[", 
-     StyleBox[
-      RowBox[{"\"\<\\!\\(\\*SubscriptBox[\\(\\[Delta]\\), \\(\>\"", "<>", 
-       RowBox[{"PrintAs", "[", "metric", "]"}], "<>", "\"\<\\)]\\)\>\""}],
-      ShowSpecialCharacters->False,
-      ShowStringCharacters->True,
-      NumberMarks->True], "]"}]}]}], "\[IndentingNewLine]", "]"}]], "Input",
+ RowBox[{
+  RowBox[{"DefInertHead", "[", 
+   RowBox[{
+    RowBox[{"CoDiff", "[", "metric_", "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"ContractThrough", "\[Rule]", "delta"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"PrintAs", "\[Rule]", 
+     RowBox[{"Hold", "[", 
+      StyleBox[
+       RowBox[{"\"\<\\!\\(\\*SubscriptBox[\\(\\[Delta]\\), \\(\>\"", "<>", 
+        RowBox[{"PrintAs", "[", "metric", "]"}], "<>", "\"\<\\)]\\)\>\""}],
+       ShowSpecialCharacters->False,
+       ShowStringCharacters->True,
+       NumberMarks->True], "]"}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{"DefInfo", "\[Rule]", "Null"}]}], "\[IndentingNewLine]", "]"}], 
+  ";"}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
@@ -4439,7 +4449,7 @@ Cell[BoxData[
             RowBox[{"BasisOfCovD", "@", "covd"}], "=!=", "Null"}]}], 
           ")"}]}]}]}], "}"}]}], ")"}]}], ";"}]], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -5834,7 +5844,7 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1274, 613},
-WindowMargins->{{265, Automatic}, {173, Automatic}},
+WindowMargins->{{225, Automatic}, {55, Automatic}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,

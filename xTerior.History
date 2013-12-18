@@ -61,5 +61,9 @@ last lines of the code of FormVarD.
              of coordinates.
              
 12 Dec. 2013: Fixed bug in ExpandExtDiff.
+
+18 Dec. 2013: Suppressed $DefInfoQ in section 1.4. Added DefInfo->Null in a number of Def commands.
+              Deg is now an argument of DefDifferentialForm and not an option. 
+
              
              

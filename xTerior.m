@@ -103,11 +103,8 @@ Print[xAct`xCore`Private`bars]]
 $PrePrint=ScreenDollarIndices;
 
 
-$DefInfoQ=False;
-
-
 (* Definition and undefinition of a differential form (just a wrapper for DefTensor with the option GradeOfTensor\[Rule]{Wedge})*)
-DefDifferentialForm::usage="DefDifferentialForm[form[inds], mani, Deg->deg] defines a tensor valued differential form of degree deg on the manifold mani";
+DefDifferentialForm::usage="DefDifferentialForm[form[inds], mani, Deg] defines a tensor valued differential form of degree deg on the manifold mani";
 UndefDifferentialForm::usage="UndefDifferentialForm[form] undefines the differential form form";
 (* Grade of a differential form *)
 Deg::usage="Deg[form] returns the grade of a differential form";
@@ -169,19 +166,23 @@ AssociativeProductQ->True,
 CommutativityOfProduct->"SuperCommutative",
 GradedProductQ->True,
 IdentityElementOfProduct->1,
-ScalarsOfProduct->(SameQ[Grade[#,Wedge],0]&)
+ScalarsOfProduct->(SameQ[Grade[#,Wedge],0]&),
+DefInfo->Null
 ];
 
 
 Deg[expr_]:=Grade[expr,Wedge];
 
 
-DefDifferentialForm[form_,mani_,Deg->deg_,options___?OptionQ]:=
+DefDifferentialForm[form_,mani_,deg_,options___?OptionQ]:=
 DefTensor[form,mani,GradeOfTensor->{Wedge->deg},options];
 
 
-DefDifferentialForm[form_,mani_,sym_,Deg->deg_,options___?OptionQ]:=
+DefDifferentialForm[form_,mani_,deg_,sym_,options___?OptionQ]:=
 DefTensor[form,mani,sym,GradeOfTensor->{Wedge->deg},options];
+
+
+Options@DefDifferentialForm:=Options@DefTensor;
 
 
 UndefDifferentialForm:=UndefTensor;
@@ -207,7 +208,7 @@ Module[{pa},
 DefInertHead[der,
 LinearQ->True,
 ContractThrough->{delta},
-PrintAs->pa];
+PrintAs->pa,DefInfo->Null];
 
 (* Other properties of a derivation *)
 MakeDerivation[head,der,NoPattern[der],prod,dergrade];
@@ -311,7 +312,8 @@ ExtDiff[dx[mani_?ManifoldQ][ind_]]:=0;
 DefInertHead[Hodge[metric_],
 LinearQ->True,
 ContractThrough->{delta},
-PrintAs->Hold["\!\(\*SubscriptBox[\(*\), \("<>PrintAs[metric]<>"\)]\)"]
+PrintAs->Hold["\!\(\*SubscriptBox[\(*\), \("<>PrintAs[metric]<>"\)]\)"],
+DefInfo->Null
 ]
 
 
@@ -349,8 +351,9 @@ ExpandHodgeDual1[expr_,dx,met_]:=Fold[ExpandHodgeDual1[#1,dx[#2],met]&,expr,$Man
 DefInertHead[CoDiff[metric_],
 LinearQ->True,
 ContractThrough->delta,
-PrintAs->Hold["\!\(\*SubscriptBox[\(\[Delta]\), \("<>PrintAs[metric]<>"\)]\)"]
-]
+PrintAs->Hold["\!\(\*SubscriptBox[\(\[Delta]\), \("<>PrintAs[metric]<>"\)]\)"],
+DefInfo->Null
+];
 
 
 CoDiff/:Grade[CoDiff[metric_][expr_,___],Wedge]:=-1+Grade[expr,Wedge]
