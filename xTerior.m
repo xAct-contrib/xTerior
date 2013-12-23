@@ -104,8 +104,8 @@ $PrePrint=ScreenDollarIndices;
 
 
 (* Definition and undefinition of a differential form (just a wrapper for DefTensor with the option GradeOfTensor\[Rule]{Wedge})*)
-DefDifferentialForm::usage="DefDifferentialForm[form[inds], mani, Deg] defines a tensor valued differential form of degree deg on the manifold mani";
-UndefDifferentialForm::usage="UndefDifferentialForm[form] undefines the differential form form";
+DefDiffForm::usage="DefDiffForm[form[inds], mani, Deg] defines a tensor valued differential form of degree deg on the manifold mani";
+UndefDiffForm::usage="UndefDiffForm[form] undefines the differential form form";
 (* Grade of a differential form *)
 Deg::usage="Deg[form] returns the grade of a differential form";
 (* Exterior derivative *)
@@ -118,9 +118,9 @@ ChangeExtCovDiff::usage="ChangeExtCovDiff[expr,cd1,cd2] expresses the exterior c
 Hodge::usage="Hodge[metric][expr] is the Hodge dual of expr defined with respect to metric";
 ExpandHodgeDual::usage="ExpandHodgeDual[expr,Coframe[mani],g] expands out all the Hodge duals of the exterior powers of Coframe[mani], defined with respect to the metric g. If the manifold tag mani is dropped, then all the instances of Coframe are expanded.";
 (* Co-differential *)
-CoDiff::usage="CoDiff[metric][form] is the co-differential of form computed with respect to metric";
+Codiff::usage="Codiff[metric][form] is the co-differential of form computed with respect to metric";
 (* Expansion of the co-differential *)
-CoDiffToDiff::usage="CoDiffToDiff[expr] replaces all the instances of the co-differential in expr by their expansion in terms of the exterior derivative.";
+CodiffToDiff::usage="CodiffToDiff[expr] replaces all the instances of the co-differential in expr by their expansion in terms of the exterior derivative.";
 (* Interior contraction *)
 Int::usage="Int[v][form] is the interior contraction of form with the vector (rank 1-tensor) v";
 (* Lie derivative on forms *)
@@ -174,21 +174,21 @@ DefInfo->Null
 Deg[expr_]:=Grade[expr,Wedge];
 
 
-DefDifferentialForm[form_,mani_,deg_,options___?OptionQ]:=
+DefDiffForm[form_,mani_,deg_,options___?OptionQ]:=
 DefTensor[form,mani,GradeOfTensor->{Wedge->deg},options];
 
 
-DefDifferentialForm[form_,mani_,deg_,sym_,options___?OptionQ]:=
+DefDiffForm[form_,mani_,deg_,sym_,options___?OptionQ]:=
 DefTensor[form,mani,sym,GradeOfTensor->{Wedge->deg},options];
 
 
-Options@DefDifferentialForm:=Options@DefTensor;
+Options@DefDiffForm:=Options@DefTensor;
 
 
-UndefDifferentialForm:=UndefTensor;
+UndefDiffForm:=UndefTensor;
 
 
-Protect[DefDifferentialForm,UndefDifferentialForm];
+Protect[DefDiffForm,UndefDiffForm];
 
 
 Options[DefGradedDerivation]={
@@ -352,7 +352,7 @@ ExpandHodgeDual1[expr_,Coframe,met_]:=Fold[ExpandHodgeDual1[#1,Coframe[#2],met]&
 ExpandHodgeDual1[expr_,dx,met_]:=Fold[ExpandHodgeDual1[#1,dx[#2],met]&,expr,$Manifolds];
 
 
-DefInertHead[CoDiff[metric_],
+DefInertHead[Codiff[metric_],
 LinearQ->True,
 ContractThrough->delta,
 PrintAs->Hold["\!\(\*SubscriptBox[\(\[Delta]\), \("<>PrintAs[metric]<>"\)]\)"],
@@ -360,17 +360,17 @@ DefInfo->Null
 ];
 
 
-CoDiff/:Grade[CoDiff[metric_][expr_,___],Wedge]:=-1+Grade[expr,Wedge]
+Codiff/:Grade[Codiff[metric_][expr_,___],Wedge]:=-1+Grade[expr,Wedge]
 
 
-CoDiffToDiff[expr_]:=expr//.CoDiff[met_][expr1_]:>(-1)^(DimOfMetric[met]Grade[expr1,Wedge]+DimOfMetric[met]+1+SignatureOfMetric[met][[2]])Hodge[met]@Diff[Hodge[met]@expr1]
+CodiffToDiff[expr_]:=expr//.Codiff[met_][expr1_]:>(-1)^(DimOfMetric[met]Grade[expr1,Wedge]+DimOfMetric[met]+1+SignatureOfMetric[met][[2]])Hodge[met]@Diff[Hodge[met]@expr1]
 
 
-CoDiff[metric_]@CoDiff[metric_]@expr_:=0
+Codiff[metric_]@Codiff[metric_]@expr_:=0
 
 
 Unprotect@ContractBasis;
-ContractBasis[basis_Basis CoDiff[metric_][expr_],args_]:=CoDiff[metric][ContractBasis[basis expr,args]]-expr CoDiff[metric][basis];
+ContractBasis[basis_Basis Codiff[metric_][expr_],args_]:=Codiff[metric][ContractBasis[basis expr,args]]-expr Codiff[metric][basis];
 Protect@ContractBasis;
 
 
@@ -677,9 +677,9 @@ FormVarD[form1_[inds1___],met_][form2_?xTensorQ[inds2___],rest_]:=0/;!ImplicitTe
 FormVarD[form_,met_][Hodge[met_][expr_],rest_]:=With[{k=Grade[expr,Wedge],n=DimOfMetric@met},
 (-1)^(k(n-k))FormVarD[form,met][expr,Hodge[met]@rest]];
 (* diff \[Rule] Replaced by Diff to adjust to the new notation. Dropped cd *)
-FormVarD[form_,met_][Diff[expr_],rest_]:=FormVarD[form,met][expr,Hodge[met]@CoDiff[met][InvHodge[met]@rest]];
-(* codiff \[Rule] Replaced by CoDiff to adjust to the new notation. Dropped cd and replaced ExtCovDiff by Diff *)
-FormVarD[form_,met_][CoDiff[met_][expr_],rest_]:=FormVarD[form,met][expr,Hodge[met]@Diff[InvHodge[met]@rest]];
+FormVarD[form_,met_][Diff[expr_],rest_]:=FormVarD[form,met][expr,Hodge[met]@Codiff[met][InvHodge[met]@rest]];
+(* codiff \[Rule] Replaced by Codiff to adjust to the new notation. Dropped cd and replaced ExtCovDiff by Diff *)
+FormVarD[form_,met_][Codiff[met_][expr_],rest_]:=FormVarD[form,met][expr,Hodge[met]@Diff[InvHodge[met]@rest]];
 
 
 End[];

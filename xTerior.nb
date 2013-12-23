@@ -596,15 +596,15 @@ Cell[BoxData[
   RowBox[{
    RowBox[{
     RowBox[{
-     RowBox[{"DefDifferentialForm", "::", "usage"}], "=", 
-     "\"\<DefDifferentialForm[form[inds], mani, Deg] defines a tensor valued \
+     RowBox[{"DefDiffForm", "::", "usage"}], "=", 
+     "\"\<DefDiffForm[form[inds], mani, Deg] defines a tensor valued \
 differential form of degree deg on the manifold mani\>\""}], ";"}], 
    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
-     RowBox[{"UndefDifferentialForm", "::", "usage"}], "=", 
-     "\"\<UndefDifferentialForm[form] undefines the differential form \
-form\>\""}], ";"}], "\[IndentingNewLine]", 
+     RowBox[{"UndefDiffForm", "::", "usage"}], "=", 
+     "\"\<UndefDiffForm[form] undefines the differential form form\>\""}], 
+    ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{"Grade", " ", "of", " ", "a", " ", "differential", " ", "form"}], 
     " ", "*)"}], "\[IndentingNewLine]", 
@@ -660,8 +660,8 @@ Coframe are expanded.\>\""}], ";"}], "\[IndentingNewLine]",
     RowBox[{"Co", "-", "differential"}], " ", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
-     RowBox[{"CoDiff", "::", "usage"}], "=", 
-     "\"\<CoDiff[metric][form] is the co-differential of form computed with \
+     RowBox[{"Codiff", "::", "usage"}], "=", 
+     "\"\<Codiff[metric][form] is the co-differential of form computed with \
 respect to metric\>\""}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
@@ -669,8 +669,8 @@ respect to metric\>\""}], ";"}], "\[IndentingNewLine]",
      "differential"}], " ", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
-     RowBox[{"CoDiffToDiff", "::", "usage"}], "=", 
-     "\"\<CoDiffToDiff[expr] replaces all the instances of the \
+     RowBox[{"CodiffToDiff", "::", "usage"}], "=", 
+     "\"\<CodiffToDiff[expr] replaces all the instances of the \
 co-differential in expr by their expansion in terms of the exterior \
 derivative.\>\""}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
@@ -1098,7 +1098,7 @@ with the appropriate options\
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"?", "DefDifferentialForm"}]], "Input"],
+ RowBox[{"?", "DefDiffForm"}]], "Input"],
 
 Cell[BoxData[
  StyleBox["\<\"DefDifferentialForm[form[inds], mani, Deg->deg] defines a \
@@ -1110,7 +1110,7 @@ tensor valued differential form of degree deg on the manifold mani\"\>",
 Cell[BoxData[
  RowBox[{
   RowBox[{
-   RowBox[{"DefDifferentialForm", "[", 
+   RowBox[{"DefDiffForm", "[", 
     RowBox[{"form_", ",", "mani_", ",", "deg_", ",", 
      RowBox[{"options___", "?", "OptionQ"}]}], "]"}], ":=", 
    "\[IndentingNewLine]", 
@@ -1125,7 +1125,7 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   RowBox[{
-   RowBox[{"DefDifferentialForm", "[", 
+   RowBox[{"DefDiffForm", "[", 
     RowBox[{"form_", ",", "mani_", ",", "deg_", ",", "sym_", ",", 
      RowBox[{"options___", "?", "OptionQ"}]}], "]"}], ":=", 
    "\[IndentingNewLine]", 
@@ -1140,20 +1140,19 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   RowBox[{
-   RowBox[{"Options", "@", "DefDifferentialForm"}], ":=", 
+   RowBox[{"Options", "@", "DefDiffForm"}], ":=", 
    RowBox[{"Options", "@", "DefTensor"}]}], ";"}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"UndefDifferentialForm", ":=", "UndefTensor"}], ";"}]], "Input",
+  RowBox[{"UndefDiffForm", ":=", "UndefTensor"}], ";"}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{"Protect", "[", 
-   RowBox[{"DefDifferentialForm", ",", "UndefDifferentialForm"}], "]"}], 
-  ";"}]], "Input",
+   RowBox[{"DefDiffForm", ",", "UndefDiffForm"}], "]"}], ";"}]], "Input",
  InitializationCell->True]
 }, Closed]],
 
@@ -1714,7 +1713,7 @@ Cell[BoxData[{
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Protect", "@", "ContractBasis"}], ";"}]}], "Input"]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -1873,7 +1872,7 @@ Cell[BoxData[
       RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "[", "ind_", "]"}], "]"}], ":=",
     "0"}], ";"}]], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -2169,7 +2168,7 @@ Cell[BoxData[
  RowBox[{
   RowBox[{"DefInertHead", "[", 
    RowBox[{
-    RowBox[{"CoDiff", "[", "metric_", "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Codiff", "[", "metric_", "]"}], ",", "\[IndentingNewLine]", 
     RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
     RowBox[{"ContractThrough", "\[Rule]", "delta"}], ",", 
     "\[IndentingNewLine]", 
@@ -2186,11 +2185,11 @@ Cell[BoxData[
  InitializationCell->True],
 
 Cell[BoxData[
- RowBox[{"CoDiff", "/:", 
+ RowBox[{"Codiff", "/:", 
   RowBox[{"Grade", "[", 
    RowBox[{
     RowBox[{
-     RowBox[{"CoDiff", "[", "metric_", "]"}], "[", 
+     RowBox[{"Codiff", "[", "metric_", "]"}], "[", 
      RowBox[{"expr_", ",", "___"}], "]"}], ",", "Wedge"}], "]"}], ":=", 
   RowBox[{
    RowBox[{"-", "1"}], "+", 
@@ -2200,38 +2199,38 @@ Cell[BoxData[
 
 Cell[BoxData[{
  RowBox[{
-  RowBox[{"CoDiff", "/:", 
+  RowBox[{"Codiff", "/:", 
    RowBox[{"MakeBoxes", "[", 
     RowBox[{
      RowBox[{
-      RowBox[{"CoDiff", "[", "metric_", "]"}], "[", 
+      RowBox[{"Codiff", "[", "metric_", "]"}], "[", 
       RowBox[{"form_", ",", 
        RowBox[{"PD", "?", "CovDQ"}]}], "]"}], ",", "StandardForm"}], "]"}], ":=", 
    RowBox[{"xAct`xTensor`Private`interpretbox", "[", 
     RowBox[{
      RowBox[{
-      RowBox[{"CoDiff", "[", "metric", "]"}], "[", 
+      RowBox[{"Codiff", "[", "metric", "]"}], "[", 
       RowBox[{"form", ",", "PD"}], "]"}], ",", 
      RowBox[{"RowBox", "[", 
       RowBox[{"{", 
        RowBox[{
         RowBox[{"PrintAs", "[", 
-         RowBox[{"CoDiff", "[", "metric", "]"}], "]"}], ",", "\"\<[\>\"", ",", 
+         RowBox[{"Codiff", "[", "metric", "]"}], "]"}], ",", "\"\<[\>\"", ",", 
         RowBox[{"MakeBoxes", "[", 
          RowBox[{"form", ",", "StandardForm"}], "]"}], ",", "\"\<]\>\""}], 
        "}"}], "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"CoDiff", "/:", 
+  RowBox[{"Codiff", "/:", 
    RowBox[{"MakeBoxes", "[", 
     RowBox[{
      RowBox[{
-      RowBox[{"CoDiff", "[", "metric_", "]"}], "[", 
+      RowBox[{"Codiff", "[", "metric_", "]"}], "[", 
       RowBox[{"form_", ",", 
        RowBox[{"cd_", "?", "CovDQ"}]}], "]"}], ",", "StandardForm"}], "]"}], ":=", 
    RowBox[{"xAct`xTensor`Private`interpretbox", "[", 
     RowBox[{
      RowBox[{
-      RowBox[{"CoDiff", "[", "metric", "]"}], "[", 
+      RowBox[{"Codiff", "[", "metric", "]"}], "[", 
       RowBox[{"form", ",", "cd"}], "]"}], ",", 
      RowBox[{"RowBox", "[", 
       RowBox[{"{", 
@@ -2239,7 +2238,7 @@ Cell[BoxData[{
         RowBox[{"SuperscriptBox", "[", 
          RowBox[{
           RowBox[{"PrintAs", "[", 
-           RowBox[{"CoDiff", "[", "metric", "]"}], "]"}], ",", 
+           RowBox[{"Codiff", "[", "metric", "]"}], "]"}], ",", 
           RowBox[{"Last", "@", 
            RowBox[{"SymbolOfCovD", "[", "cd", "]"}]}]}], "]"}], ",", 
         "\"\<[\>\"", ",", 
@@ -2260,11 +2259,11 @@ Alfonso: dropped dependency on a covariant derivative.\
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"CoDiffToDiff", "[", "expr_", "]"}], ":=", 
+  RowBox[{"CodiffToDiff", "[", "expr_", "]"}], ":=", 
   RowBox[{"expr", "//.", 
    RowBox[{
     RowBox[{
-     RowBox[{"CoDiff", "[", "met_", "]"}], "[", "expr1_", "]"}], 
+     RowBox[{"Codiff", "[", "met_", "]"}], "[", "expr1_", "]"}], 
     "\[RuleDelayed]", 
     RowBox[{
      RowBox[{
@@ -2293,9 +2292,9 @@ Cell["Leo: For convenience we program this identity:", "Text"],
 Cell[BoxData[
  RowBox[{
   RowBox[{
-   RowBox[{"CoDiff", "[", "metric_", "]"}], "@", 
+   RowBox[{"Codiff", "[", "metric_", "]"}], "@", 
    RowBox[{
-    RowBox[{"CoDiff", "[", "metric_", "]"}], "@", "expr_"}]}], ":=", 
+    RowBox[{"Codiff", "[", "metric_", "]"}], "@", "expr_"}]}], ":=", 
   "0"}]], "Input",
  InitializationCell->True],
 
@@ -2316,22 +2315,22 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"basis_Basis", " ", 
       RowBox[{
-       RowBox[{"CoDiff", "[", "metric_", "]"}], "[", "expr_", "]"}]}], ",", 
+       RowBox[{"Codiff", "[", "metric_", "]"}], "[", "expr_", "]"}]}], ",", 
      "args_"}], "]"}], ":=", 
    RowBox[{
     RowBox[{
-     RowBox[{"CoDiff", "[", "metric", "]"}], "[", 
+     RowBox[{"Codiff", "[", "metric", "]"}], "[", 
      RowBox[{"ContractBasis", "[", 
       RowBox[{
        RowBox[{"basis", " ", "expr"}], ",", "args"}], "]"}], "]"}], "-", 
     RowBox[{"expr", " ", 
      RowBox[{
-      RowBox[{"CoDiff", "[", "metric", "]"}], "[", "basis", "]"}]}]}]}], 
+      RowBox[{"Codiff", "[", "metric", "]"}], "[", "basis", "]"}]}]}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Protect", "@", "ContractBasis"}], ";"}]}], "Input",
  InitializationCell->True]
-}, Open  ]]
+}, Closed]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -2548,7 +2547,7 @@ Cell[BoxData[
   RowBox[{"ExtCovDiff", "[", "expr_", "]"}], ":=", 
   RowBox[{"ExtCovDiff", "[", 
    RowBox[{"expr", ",", "PD"}], "]"}]}]], "Input"]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -4093,7 +4092,7 @@ Cell[BoxData[
     RowBox[{"expr_", ",", 
      RowBox[{"cd_", "?", "CovDQ"}]}], "]"}], ":=", 
    RowBox[{"Diff", "[", "expr", "]"}]}], ";"}]], "Input"]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -4501,7 +4500,7 @@ Cell[BoxData[
             RowBox[{"BasisOfCovD", "@", "covd"}], "=!=", "Null"}]}], 
           ")"}]}]}]}], "}"}]}], ")"}]}], ";"}]], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -4635,7 +4634,7 @@ Cell[BoxData[
         RowBox[{"Int", "[", "v", "]"}], "@", 
         RowBox[{"Diff", "@", "form"}]}]}]}], "}"}]}]}], ";"}]], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -5054,7 +5053,7 @@ Cell[BoxData[{
             RowBox[{"#", ",", "#"}], "]"}], "&"}], "/@", "order"}], 
          ")"}]}]}]}]}], "\[IndentingNewLine]", "]"}]}], ";"}]}], "Input",
  InitializationCell->True]
-}, Open  ]]
+}, Closed]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -5834,14 +5833,14 @@ Cell[BoxData[
        RowBox[{
         RowBox[{"Hodge", "[", "met", "]"}], "@", 
         RowBox[{
-         RowBox[{"CoDiff", "[", "met", "]"}], "[", 
+         RowBox[{"Codiff", "[", "met", "]"}], "[", 
          RowBox[{
           RowBox[{"InvHodge", "[", "met", "]"}], "@", "rest"}], "]"}]}]}], 
       "]"}]}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{"codiff", " ", "\[Rule]", " ", 
      RowBox[{
-     "Replaced", " ", "by", " ", "CoDiff", " ", "to", " ", "adjust", " ", 
+     "Replaced", " ", "by", " ", "Codiff", " ", "to", " ", "adjust", " ", 
       "to", " ", "the", " ", "new", " ", 
       RowBox[{"notation", ".", " ", "Dropped"}], " ", "cd", " ", "and", " ", 
       "replaced", " ", "ExtCovDiff", " ", "by", " ", "Diff"}]}], " ", "*)"}], 
@@ -5853,7 +5852,7 @@ Cell[BoxData[
        RowBox[{"form_", ",", "met_"}], "]"}], "[", 
       RowBox[{
        RowBox[{
-        RowBox[{"CoDiff", "[", "met_", "]"}], "[", "expr_", "]"}], ",", 
+        RowBox[{"Codiff", "[", "met_", "]"}], "[", "expr_", "]"}], ",", 
        "rest_"}], "]"}], ":=", 
      RowBox[{
       RowBox[{"FormVarD", "[", 
@@ -5877,7 +5876,7 @@ Cell[BoxData[
 differential form form\"\>", "MSG"]], "Print", "PrintUsage",
  CellTags->"Info3591085799-1403269"]
 }, Open  ]]
-}, Open  ]]
+}, Closed]]
 }, Open  ]],
 
 Cell[CellGroupData[{
