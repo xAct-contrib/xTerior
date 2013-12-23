@@ -68,3 +68,5 @@ last lines of the code of FormVarD.
              
 22 Dec. 2013: Suppressed symbol ExtCovDiff. Now everything is done through ExtDiff and a second
               argument is added to it to represent the exterior covariant derivative.
+
+23 Dec. 2013: Changed name ExtDiff by Diff.
