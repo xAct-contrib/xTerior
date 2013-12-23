@@ -66,4 +66,5 @@ last lines of the code of FormVarD.
               Deg is now an argument of DefDifferentialForm and not an option. 
 
              
-             
+22 Dec. 2013: Suppressed symbol ExtCovDiff. Now everything is done through ExtDiff and a second
+              argument is added to it to represent the exterior covariant derivative.

@@ -103,7 +103,7 @@ Print[xAct`xCore`Private`bars]]
 $PrePrint=ScreenDollarIndices;
 
 
-(* Definition and undefinition of a differential form (just a wrapper for DefTensor with the option GradeOfTensor\[Rule]{Wedge})*)
+(* Definition and undefinition of a differential form (just a wrapper for DefTensor with the option GradeOfTensor->{Wedge})*)
 DefDifferentialForm::usage="DefDifferentialForm[form[inds], mani, Deg] defines a tensor valued differential form of degree deg on the manifold mani";
 UndefDifferentialForm::usage="UndefDifferentialForm[form] undefines the differential form form";
 (* Grade of a differential form *)
@@ -251,6 +251,10 @@ head/:DependenciesOfInertHead[derL]:=DependenciesOf[First[derR]]
 DefGradedDerivation[ExtDiff,Wedge,+1,PrintAs->"d"];
 
 
+ExtDiff/:MakeBoxes[ExtDiff[form_,PD?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[ExtDiff[form,PD],RowBox[{PrintAs[ExtDiff],"[",MakeBoxes[form,StandardForm],"]"}]];
+ExtDiff/:MakeBoxes[ExtDiff[form_,cd_?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[ExtDiff[form,cd],RowBox[{SuperscriptBox[PrintAs[ExtDiff],Last@SymbolOfCovD[cd]],"[",MakeBoxes[form,StandardForm],"]"}]];
+
+
 ExtDiff[x_?ConstantQ,rest___]:=0;
 
 
@@ -275,7 +279,7 @@ diff0[expr_,form_]:=Wedge[ExtDiff[expr],form];
 diff0[expr_]:=ExtDiff[expr];
 
 
-ExtDiff[expr_,rest_]:=ExtDiff[expr]\[Wedge]rest;
+ExtDiff[expr_,rest_?(Composition[Not,CovDQ])]:=ExtDiff[expr]\[Wedge]rest;
 
 
 ExtDiff[ExtDiff[expr_]]:=0
@@ -368,37 +372,6 @@ CoDiff[metric_]@CoDiff[metric_]@expr_:=0
 Unprotect@ContractBasis;
 ContractBasis[basis_Basis CoDiff[metric_][expr_],args_]:=CoDiff[metric][ContractBasis[basis expr,args]]-expr CoDiff[metric][basis];
 Protect@ContractBasis;
-
-
-DefGradedDerivation[ExtCovDiff,Wedge,+1,PrintAs->"d"];
-
-
-ExtCovDiff/:MakeBoxes[ExtCovDiff[form_,PD?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[ExtCovDiff[form,PD],RowBox[{PrintAs[ExtDiff],"[",MakeBoxes[form,StandardForm],"]"}]];
-ExtCovDiff/:MakeBoxes[ExtCovDiff[form_,cd_?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[ExtCovDiff[form,cd],RowBox[{SuperscriptBox[PrintAs[ExtDiff],Last@SymbolOfCovD[cd]],"[",MakeBoxes[form,StandardForm],"]"}]];
-
-
-(* This produces expanded expressions and is much faster when there are many scalars *)
-ExtCovDiff[expr_Times,rest___]:=Module[{grades=Grade[#,Wedge]&/@List@@expr,pos,scalar,form},
-pos=Position[grades,_?(#=!=0&),1,Heads->False];
-Which[
-Length[pos]>1,
-	Throw[Message[ExtCovDiff::error1,"Found Times product of nonscalar forms: ",expr]],
-Length[pos]===1,
-	pos=pos[[1,1]];
-	scalar=Delete[expr,{pos}];
-	form=expr[[pos]];
-	scalar ExtCovDiff[form,rest]+extcovdiff0[scalar,form],
-Length[pos]===0,
-	extcovdiff0[expr]
-]
-];
-extcovdiff0[expr_Times]:=Sum[MapAt[ExtDiff,expr,i],{i,1,Length[expr]}];
-extcovdiff0[expr_Times,form_]:=Sum[MapAt[ExtDiff[#,form]&,expr,i],{i,1,Length[expr]}];
-extcovdiff0[expr_,form_]:=Wedge[ExtDiff[expr],form];
-extcovdiff0[expr_]:=ExtDiff[expr];
-
-
-ExtCovDiff[expr_]:=ExtCovDiff[expr,PD]
 
 
 xTensorQ[ConnectionForm[cd_?CovDQ,_]]^=True;
@@ -511,16 +484,16 @@ ConnectionForm[cd1_,cd2_,vbundle_][inds__]:=ConnectionForm[cd1,vbundle][inds]-Co
 
 
 ChangeExtCovDiff[expr_,cd_?CovDQ,cd_]:=expr;
-ChangeExtCovDiff[expr_,cd1_?CovDQ,cd2_:PD]:=expr/.HoldPattern[ExtCovDiff[expr1_,cd1]]:>
+ChangeExtCovDiff[expr_,cd1_?CovDQ,cd2_:PD]:=expr/.HoldPattern[ExtDiff[expr1_,cd1]]:>
 makeChangeExtD[ChangeExtCovDiff[expr1,cd1,cd2],cd1,cd2];
 
 ChangeExtCovDiff[expr_,list_List,covd2_:PD]:=Fold[ChangeExtCovDiff[#1,#2,covd2]&,expr,list];
-ChangeExtCovDiff[expr_,x_,_:PD]:=Throw@Message[ChangeExtD::unknown,"covariant derivative",x];
+ChangeExtCovDiff[expr_,x_,_:PD]:=Throw@Message[ChangeExtCovDiff::unknown,"covariant derivative",x];
 ChangeExtCovDiff[expr_]:=ChangeExtCovDiff[expr,$CovDs];
 
 
 makeChangeExtD[expr_,cd1_,cd2_]:=With[{vbs=Apply[Union,VBundlesOfCovD/@DeleteCases[{cd1,cd2},PD]]},
-ExtCovDiff[expr,cd2]+Plus@@Map[addAChr1[expr,cd1,cd2],xAct`xTensor`Private`selecton[Select[FindFreeIndices@expr,AIndexQ],vbs]]//ReduceAChr1
+ExtDiff[expr,cd2]+Plus@@Map[addAChr1[expr,cd1,cd2],xAct`xTensor`Private`selecton[Select[FindFreeIndices@expr,AIndexQ],vbs]]//ReduceAChr1
 ];
 
 
@@ -532,10 +505,10 @@ ReduceAChr1[expr_]:=expr//.{ConnectionForm[cd1_,cd2_,vb_][a_,b_]:>ConnectionForm
 ConnectionForm[cd1_,cd2_,vb_][a_,b_]:>ConnectionForm[PD,cd2,vb][a,b]/;(cd1=!=PD&&FreeQ[VBundlesOfCovD@cd1,vb])}
 
 
-ExtCovDiff[ExtCovDiff[expr_,PD],PD]:=0
+ExtDiff[ExtDiff[expr_,PD],PD]:=0
 
 
-ExtCovDiff[ExtCovDiff[expr_,cd_],cd_]:=
+HoldPattern@ExtDiff[HoldPattern[ExtDiff[expr_,cd_]],cd_]:=
 Plus@@Map[addFRiem2[expr,cd],xAct`xTensor`Private`selecton[Select[FindFreeIndices@expr,AIndexQ],VBundlesOfCovD@cd]];
 
 
@@ -558,11 +531,8 @@ ChangeCurvatureForm[expr_]:=ChangeCurvatureForm[expr,$CovDs];
 
 
 changeCurvatureFormRules[cd2_,cd1_]:={CurvatureForm[cd2,vb_?VBundleQ][a_,b_]:>
-With[{c=DummyIn@vb,A1=ConnectionForm[cd2,cd1,vb]},CurvatureForm[cd1,vb][a,b]+ExtCovDiff[A1[a,b],cd1]+Wedge[A1[a,-c],A1[c,b]]],RiemannForm[cd2][a_,b_]:>
-With[{c=DummyIn@Tangent@ManifoldOfCovD@cd2,A1=ChristoffelForm[cd2,cd1]},RiemannForm[cd1][a,b]+ExtCovDiff[A1[a,b],cd1]+Wedge[A1[a,-c],A1[c,b]]]};
-
-
-ExtDiff[expr_,cd_?CovDQ]:=ExtDiff[expr];
+With[{c=DummyIn@vb,A1=ConnectionForm[cd2,cd1,vb]},CurvatureForm[cd1,vb][a,b]+ExtDiff[A1[a,b],cd1]+Wedge[A1[a,-c],A1[c,b]]],RiemannForm[cd2][a_,b_]:>
+With[{c=DummyIn@Tangent@ManifoldOfCovD@cd2,A1=ChristoffelForm[cd2,cd1]},RiemannForm[cd1][a,b]+ExtDiff[A1[a,b],cd1]+Wedge[A1[a,-c],A1[c,b]]]};
 
 
 (* Exterior derivative when covd is PD *)
@@ -706,9 +676,9 @@ FormVarD[form1_[inds1___],met_][form2_?xTensorQ[inds2___],rest_]:=0/;!ImplicitTe
 (* Hodge identity *)
 FormVarD[form_,met_][Hodge[met_][expr_],rest_]:=With[{k=Grade[expr,Wedge],n=DimOfMetric@met},
 (-1)^(k(n-k))FormVarD[form,met][expr,Hodge[met]@rest]];
-(* diff \[Rule] Replaced by ExtDiff to adjust to the new notation. Dropped cd *)
+(* diff -> Replaced by ExtDiff to adjust to the new notation. Dropped cd *)
 FormVarD[form_,met_][ExtDiff[expr_],rest_]:=FormVarD[form,met][expr,Hodge[met]@CoDiff[met][InvHodge[met]@rest]];
-(* codiff \[Rule] Replaced by CoDiff to adjust to the new notation. Dropped cd and replaced ExtCovDiff by ExtDiff *)
+(* codiff -> Replaced by CoDiff to adjust to the new notation. Dropped cd and replaced ExtCovDiff by ExtDiff *)
 FormVarD[form_,met_][CoDiff[met_][expr_],rest_]:=FormVarD[form,met][expr,Hodge[met]@ExtDiff[InvHodge[met]@rest]];
 
 

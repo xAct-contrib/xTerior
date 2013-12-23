@@ -1,7 +1,7 @@
 Notebook[{
 
 Cell[CellGroupData[{
-Cell[TextData[StyleBox["xTerior (provisional name)",
+Cell[TextData[StyleBox["xTerior",
  FontSlant->"Italic",
  FontColor->RGBColor[1, 0, 0]]], "Title"],
 
@@ -1155,7 +1155,7 @@ Cell[BoxData[
    RowBox[{"DefDifferentialForm", ",", "UndefDifferentialForm"}], "]"}], 
   ";"}]], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -1475,6 +1475,52 @@ Cell[BoxData[
     RowBox[{"PrintAs", "\[Rule]", "\"\<d\>\""}]}], "]"}], ";"}]], "Input",
  InitializationCell->True],
 
+Cell["Superscript formatting for covariant exterior derivatives", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ExtDiff", "/:", 
+   RowBox[{"MakeBoxes", "[", 
+    RowBox[{
+     RowBox[{"ExtDiff", "[", 
+      RowBox[{"form_", ",", 
+       RowBox[{"PD", "?", "CovDQ"}]}], "]"}], ",", "StandardForm"}], "]"}], ":=", 
+   RowBox[{"xAct`xTensor`Private`interpretbox", "[", 
+    RowBox[{
+     RowBox[{"ExtDiff", "[", 
+      RowBox[{"form", ",", "PD"}], "]"}], ",", 
+     RowBox[{"RowBox", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"PrintAs", "[", "ExtDiff", "]"}], ",", "\"\<[\>\"", ",", 
+        RowBox[{"MakeBoxes", "[", 
+         RowBox[{"form", ",", "StandardForm"}], "]"}], ",", "\"\<]\>\""}], 
+       "}"}], "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ExtDiff", "/:", 
+   RowBox[{"MakeBoxes", "[", 
+    RowBox[{
+     RowBox[{"ExtDiff", "[", 
+      RowBox[{"form_", ",", 
+       RowBox[{"cd_", "?", "CovDQ"}]}], "]"}], ",", "StandardForm"}], "]"}], ":=", 
+   RowBox[{"xAct`xTensor`Private`interpretbox", "[", 
+    RowBox[{
+     RowBox[{"ExtDiff", "[", 
+      RowBox[{"form", ",", "cd"}], "]"}], ",", 
+     RowBox[{"RowBox", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"SuperscriptBox", "[", 
+         RowBox[{
+          RowBox[{"PrintAs", "[", "ExtDiff", "]"}], ",", 
+          RowBox[{"Last", "@", 
+           RowBox[{"SymbolOfCovD", "[", "cd", "]"}]}]}], "]"}], ",", 
+        "\"\<[\>\"", ",", 
+        RowBox[{"MakeBoxes", "[", 
+         RowBox[{"form", ",", "StandardForm"}], "]"}], ",", "\"\<]\>\""}], 
+       "}"}], "]"}]}], "]"}]}], ";"}]}], "Input",
+ InitializationCell->True],
+
 Cell[BoxData[
  RowBox[{
   RowBox[{
@@ -1613,7 +1659,11 @@ Cell[BoxData[
  RowBox[{
   RowBox[{
    RowBox[{"ExtDiff", "[", 
-    RowBox[{"expr_", ",", "rest_"}], "]"}], ":=", 
+    RowBox[{"expr_", ",", 
+     RowBox[{"rest_", "?", 
+      RowBox[{"(", 
+       RowBox[{"Composition", "[", 
+        RowBox[{"Not", ",", "CovDQ"}], "]"}], ")"}]}]}], "]"}], ":=", 
    RowBox[{
     RowBox[{"ExtDiff", "[", "expr", "]"}], "\[Wedge]", "rest"}]}], 
   ";"}]], "Input",
@@ -1639,7 +1689,8 @@ Cell[TextData[{
  "Automatic contraction of products of basis objects and the exterior \
 derivative. These kind of expressions arise after the application of ToBasis \
 to an expression containing the exterior derivative. ",
- StyleBox["Alfonso: I\[CloseCurlyQuote]m not sure this works . . .",
+ StyleBox["Alfonso: I\[CloseCurlyQuote]m not sure this works . For that \
+reason it is now deactivated",
   FontWeight->"Bold"]
 }], "Text"],
 
@@ -2290,7 +2341,11 @@ Cell["3. Graded derivations", "Subsection",
 
 Cell[CellGroupData[{
 
-Cell["3.1 Covariant exterior derivative", "Subsubsection"],
+Cell[TextData[{
+ "3.1 Exterior covariant derivative ",
+ StyleBox["(this is now deactivated)",
+  FontColor->RGBColor[1, 0, 0]]
+}], "Subsubsection"],
 
 Cell["\<\
 For the moment we use a head for the exterior covariant derivative which is \
@@ -2314,8 +2369,7 @@ Cell[BoxData[
   RowBox[{"DefGradedDerivation", "[", 
    RowBox[{"ExtCovDiff", ",", "Wedge", ",", 
     RowBox[{"+", "1"}], ",", 
-    RowBox[{"PrintAs", "\[Rule]", "\"\<d\>\""}]}], "]"}], ";"}]], "Input",
- InitializationCell->True],
+    RowBox[{"PrintAs", "\[Rule]", "\"\<d\>\""}]}], "]"}], ";"}]], "Input"],
 
 Cell["Superscript formatting for covariant exterior derivatives", "Text"],
 
@@ -2360,8 +2414,7 @@ Cell[BoxData[{
         "\"\<[\>\"", ",", 
         RowBox[{"MakeBoxes", "[", 
          RowBox[{"form", ",", "StandardForm"}], "]"}], ",", "\"\<]\>\""}], 
-       "}"}], "]"}]}], "]"}]}], ";"}]}], "Input",
- InitializationCell->True],
+       "}"}], "]"}]}], "]"}]}], ";"}]}], "Input"],
 
 Cell["We still need definition when acting on Times", "Text"],
 
@@ -2479,8 +2532,7 @@ Cell[BoxData[
    RowBox[{
     RowBox[{
      RowBox[{"extcovdiff0", "[", "expr_", "]"}], ":=", 
-     RowBox[{"ExtDiff", "[", "expr", "]"}]}], ";"}]}]}]], "Input",
- InitializationCell->True],
+     RowBox[{"ExtDiff", "[", "expr", "]"}]}], ";"}]}]}]], "Input"],
 
 Cell["\<\
 Automatically add PD (this is the origin of the affine space of connections).
@@ -2495,8 +2547,7 @@ Cell[BoxData[
  RowBox[{
   RowBox[{"ExtCovDiff", "[", "expr_", "]"}], ":=", 
   RowBox[{"ExtCovDiff", "[", 
-   RowBox[{"expr", ",", "PD"}], "]"}]}]], "Input",
- InitializationCell->True]
+   RowBox[{"expr", ",", "PD"}], "]"}]}]], "Input"]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -3537,7 +3588,7 @@ Cell[BoxData[{
     RowBox[{"expr", "/.", 
      RowBox[{
       RowBox[{"HoldPattern", "[", 
-       RowBox[{"ExtCovDiff", "[", 
+       RowBox[{"ExtDiff", "[", 
         RowBox[{"expr1_", ",", "cd1"}], "]"}], "]"}], "\[RuleDelayed]", 
       "\[IndentingNewLine]", 
       RowBox[{"makeChangeExtD", "[", 
@@ -3565,7 +3616,7 @@ Cell[BoxData[{
    RowBox[{"Throw", "@", 
     RowBox[{"Message", "[", 
      RowBox[{
-      RowBox[{"ChangeExtD", "::", "unknown"}], ",", 
+      RowBox[{"ChangeExtCovDiff", "::", "unknown"}], ",", 
       "\"\<covariant derivative\>\"", ",", "x"}], "]"}]}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
@@ -3594,7 +3645,7 @@ Cell[BoxData[
         "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
      RowBox[{
       RowBox[{
-       RowBox[{"ExtCovDiff", "[", 
+       RowBox[{"ExtDiff", "[", 
         RowBox[{"expr", ",", "cd2"}], "]"}], "+", 
        RowBox[{"Plus", "@@", 
         RowBox[{"Map", "[", 
@@ -3790,9 +3841,9 @@ for -VB)"
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"ExtCovDiff", "[", 
+  RowBox[{"ExtDiff", "[", 
    RowBox[{
-    RowBox[{"ExtCovDiff", "[", 
+    RowBox[{"ExtDiff", "[", 
      RowBox[{"expr_", ",", "PD"}], "]"}], ",", "PD"}], "]"}], ":=", 
   "0"}]], "Input",
  InitializationCell->True],
@@ -3800,11 +3851,13 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   RowBox[{
-   RowBox[{"ExtCovDiff", "[", 
-    RowBox[{
-     RowBox[{"ExtCovDiff", "[", 
-      RowBox[{"expr_", ",", "cd_"}], "]"}], ",", "cd_"}], "]"}], ":=", 
-   "\[IndentingNewLine]", 
+   RowBox[{"HoldPattern", "@", 
+    RowBox[{"ExtDiff", "[", 
+     RowBox[{
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"ExtDiff", "[", 
+        RowBox[{"expr_", ",", "cd_"}], "]"}], "]"}], ",", "cd_"}], "]"}]}], ":=",
+    "\[IndentingNewLine]", 
    RowBox[{"Plus", "@@", 
     RowBox[{"Map", "[", 
      RowBox[{
@@ -3981,7 +4034,7 @@ Cell[BoxData[
           RowBox[{"CurvatureForm", "[", 
            RowBox[{"cd1", ",", "vb"}], "]"}], "[", 
           RowBox[{"a", ",", "b"}], "]"}], "+", 
-         RowBox[{"ExtCovDiff", "[", 
+         RowBox[{"ExtDiff", "[", 
           RowBox[{
            RowBox[{"A1", "[", 
             RowBox[{"a", ",", "b"}], "]"}], ",", "cd1"}], "]"}], "+", 
@@ -4012,7 +4065,7 @@ Cell[BoxData[
          RowBox[{
           RowBox[{"RiemannForm", "[", "cd1", "]"}], "[", 
           RowBox[{"a", ",", "b"}], "]"}], "+", 
-         RowBox[{"ExtCovDiff", "[", 
+         RowBox[{"ExtDiff", "[", 
           RowBox[{
            RowBox[{"A1", "[", 
             RowBox[{"a", ",", "b"}], "]"}], ",", "cd1"}], "]"}], "+", 
@@ -4039,8 +4092,7 @@ Cell[BoxData[
    RowBox[{"ExtDiff", "[", 
     RowBox[{"expr_", ",", 
      RowBox[{"cd_", "?", "CovDQ"}]}], "]"}], ":=", 
-   RowBox[{"ExtDiff", "[", "expr", "]"}]}], ";"}]], "Input",
- InitializationCell->True]
+   RowBox[{"ExtDiff", "[", "expr", "]"}]}], ";"}]], "Input"]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -5844,12 +5896,12 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1274, 613},
-WindowMargins->{{225, Automatic}, {55, Automatic}},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
 Magnification->1.5,
-FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (November 20, 2012)",
 StyleDefinitions->"Default.nb"
 ]
 
