@@ -108,15 +108,14 @@ DefDiffForm::usage="DefDiffForm[form[inds], mani, Deg] defines a tensor valued d
 UndefDiffForm::usage="UndefDiffForm[form] undefines the differential form form";
 (* Grade of a differential form *)
 Deg::usage="Deg[form] returns the grade of a differential form";
-(* Exterior derivative *)
-Diff::usage="Diff[form] computes the exterior derivative of the differential form form";
-(* Exterior covariant derivative *)
-ExtCovDiff::usage="ExtCovDiff[form,covd] represents the exterior covariant derivative of the differential form form with respect to the covariant derivative covd";
+DFormQ::usage="DFormQ[expr] returns True if expr has been registered as a differential form. This happens automatically when using DefDiffForm.";
+(* Exterior derivative and exterior covariant derivative *)
+Diff::usage="Diff[form] computes the exterior derivative of form. Diff[form,covd] computes the exterior covariant derivative of form with respect to the covariant derivative covd.";
 (* Computation of the exterior covariant derivative *)
 ChangeExtCovDiff::usage="ChangeExtCovDiff[expr,cd1,cd2] expresses the exterior covariant derivative taken with respect to the connection defined by the covariant derivative cd1 in terms of the exterior covariant derivative taken with respect to the connection defined by the covariant derivative cd2";
 (* Hodge dual *)
 Hodge::usage="Hodge[metric][expr] is the Hodge dual of expr defined with respect to metric";
-ExpandHodgeDual::usage="ExpandHodgeDual[expr,Coframe[mani],g] expands out all the Hodge duals of the exterior powers of Coframe[mani], defined with respect to the metric g. If the manifold tag mani is dropped, then all the instances of Coframe are expanded.";
+ExpandHodgeDual::usage="ExpandHodgeDual[expr,Coframe[mani],g] expands out all the Hodge duals of the exterior powers of Coframe[mani], defined with respect to the metric g. If the manifold tag mani is dropped, then all the instances of Coframe are expanded. The Coframe label can be replaced by dx if we are using the holonomic coframe.";
 (* Co-differential *)
 Codiff::usage="Codiff[metric][form] is the co-differential of form computed with respect to metric";
 (* Expansion of the co-differential *)
@@ -124,14 +123,14 @@ CodiffToDiff::usage="CodiffToDiff[expr] replaces all the instances of the co-dif
 (* Interior contraction *)
 Int::usage="Int[v][form] is the interior contraction of form with the vector (rank 1-tensor) v";
 (* Lie derivative on forms *)
-Lie::usage="Lie[v][form] is the Lie derivative of form with respect to the vector (rank 1-tensor) v.";
+Lie::usage="Lie[v][form] is the Cartan Lie derivative of form with respect to the vector (rank 1-tensor) v. Lie[v][form,covd] is the Cartan Lie derivative with respect to the covariant derivative covd.";
 (* Cartan formula for Lie derivatives *)
-LieToDiff::usage="LieToDiff[expr] replaces the Lie derivative of all the differential forms in expr by their expansion obtained by means of the Cartan formula";
+LieToDiff::usage="LieToDiff[expr] replaces the Cartan Lie derivative of all the differential forms in expr by their expansion obtained by means of the Cartan formula";
 (* Put derivations into canonical order *)
 SortDerivations::usage="SortDerivations[expr] brings expr into a new expression where all the derivations (exterior derivative, Lie derivative and interior contraction) are written in a canonical order. The default left-to-right order is defined by the variable $DerivationSortOrder";
 $DerivationSortOrder::usage="$DerivationSortOrder is a global variable which encodes the default ordering of the three derivatives Int, LieD and Diff. The default is {LieD,Int,Diff}";
 (* Variational derivative on forms *)
-FormVarD::usage="..";
+FormVarD::usage="FormVarD[form,metric][expr] computes the variational derivative of expr, which must be a n-form with n the manifold dimension, with respect to form. In the computation, exterior derivatives are transformed into co-differentials taken with respect of metric.";
 (* Canonical forms on the frame bundle *)
 Coframe::usage="Coframe[mani] is the set of canonical 1-forms defined in the frame bundle arising from the manifold mani";
 dx::usage="dx[mani] represents a holonomic co-frame in the manifold mani.";
@@ -151,7 +150,7 @@ ChangeCurvatureForm::usage="ChangeCurvatureForm[curvature,cd1,cd2] writes the cu
 TorsionForm::usage="TorsionForm[cd] represents the torsion 2-form arising from the covariant derivative cd (cd must be defined on the tangent bundle of a manifold)";
 (* Cartan structure equations *)
 ExpandDiff::usage="ExpandDiff[expr,covd] expands all the instances of the Diff using the Cartan structure equations for the connection arising from covd. In this way it is possible to expand the exterior derivative of a co-frame, a torsion 2-form and the curvature 2-form. If covd is the Levi-Civita connection of a metric, then the exterior derivatives of that metric and its volume element are expanded too. ExpandDiff[expr,PD,mani] expands all instances of the exterior derivative in terms of partial derivatives defined in the manifold mani.";
-(* Alfonso: I would call this ZeroDegreeFormQ *)
+(* Zero forms *)
 ZeroFormQ::usage="ZeroFormQ[expr] returns True if the degree of expr is zero";
 
 
@@ -175,11 +174,13 @@ Deg[expr_]:=Grade[expr,Wedge];
 
 
 DefDiffForm[form_,mani_,deg_,options___?OptionQ]:=
-DefTensor[form,mani,GradeOfTensor->{Wedge->deg},options];
+(DefTensor[form,mani,GradeOfTensor->{Wedge->deg},options];
+DFormQ@form^=True;)
 
 
 DefDiffForm[form_,mani_,deg_,sym_,options___?OptionQ]:=
-DefTensor[form,mani,sym,GradeOfTensor->{Wedge->deg},options];
+(DefTensor[form,mani,sym,GradeOfTensor->{Wedge->deg},options];
+DFormQ@form^=True;)
 
 
 Options@DefDiffForm:=Options@DefTensor;
@@ -189,6 +190,18 @@ UndefDiffForm:=UndefTensor;
 
 
 Protect[DefDiffForm,UndefDiffForm];
+
+
+DFormQ@expr_Plus:=And@@(DFormQ/@List@@expr);
+
+
+DFormQ@expr_Times:=And@@(DFormQ/@List@@expr);
+
+
+DFormQ@expr_Wedge:=And@@(DFormQ/@List@@expr);
+
+
+DFormQ@expr_Equal:=DFormQ/@expr;
 
 
 Options[DefGradedDerivation]={
@@ -288,6 +301,9 @@ Diff[Diff[expr_]]:=0
 Diff[_Basis]:=0;
 
 
+DFormQ@Diff[expr_]:=DFormQ@expr;
+
+
 xTensorQ@Coframe[mani_?ManifoldQ]^=True;
 SlotsOfTensor[Coframe[mani_?ManifoldQ]]^:={Tangent@mani};
 Coframe/:GradeOfTensor[Coframe[mani_?ManifoldQ],Wedge]=1;
@@ -297,6 +313,7 @@ DependenciesOfTensor[Coframe[mani_?ManifoldQ]]^:={mani};
 HostsOf[Coframe[mani_?ManifoldQ]]^={};
 TensorID[Coframe[mani_?ManifoldQ]]^={};
 PrintAs[Coframe[mani_?ManifoldQ]]^="\[Theta]";
+DFormQ[Coframe[mani_?ManifoldQ][ind_]]^=True;
 
 
 xTensorQ@dx[mani_?ManifoldQ]^=True;
@@ -308,6 +325,7 @@ DependenciesOfTensor[dx[mani_?ManifoldQ]]^:={mani};
 HostsOf[dx[mani_?ManifoldQ]]^={};
 TensorID[dx[mani_?ManifoldQ]]^={};
 PrintAs[dx[mani_?ManifoldQ]]^="dx";
+DFormQ[dx[mani_?ManifoldQ][ind_]]^=True;
 
 
 Diff[dx[mani_?ManifoldQ][ind_]]:=0;
@@ -352,6 +370,9 @@ ExpandHodgeDual1[expr_,Coframe,met_]:=Fold[ExpandHodgeDual1[#1,Coframe[#2],met]&
 ExpandHodgeDual1[expr_,dx,met_]:=Fold[ExpandHodgeDual1[#1,dx[#2],met]&,expr,$Manifolds];
 
 
+DFormQ[Hodge[metric_][expr_]]:=DFormQ@expr;
+
+
 DefInertHead[Codiff[metric_],
 LinearQ->True,
 ContractThrough->delta,
@@ -374,6 +395,9 @@ ContractBasis[basis_Basis Codiff[metric_][expr_],args_]:=Codiff[metric][Contract
 Protect@ContractBasis;
 
 
+DFormQ[Codiff[metric_][expr_]]:=DFormQ@expr;
+
+
 xTensorQ[ConnectionForm[cd_?CovDQ,_]]^=True;
 SlotsOfTensor[ConnectionForm[_,vb_?VBundleQ]]^:={vb,-vb};
 ConnectionForm/:GradeOfTensor[ConnectionForm[_,_],Wedge]=1;
@@ -384,6 +408,7 @@ DefInfo[ConnectionForm[_,_]]^={"nonsymmetric Connection 1-form",""};
 DependenciesOfTensor[ConnectionForm[cd1_,_]]^:=Union@@DependenciesOfCovD/@{cd1};
 HostsOf[ConnectionForm[cd1_,vb_]]^:=Join[{cd1},Union@@HostsOf/@{cd1,vb}];(* Should we put Union@@HostsOf/@{cd1,vb} here? Yes but we need to add cd1 itself *)
 TensorID[ConnectionForm[_,_]]^={};
+DFormQ[ConnectionForm[cd1_,vb_][inds__]]^=True;
 
 PrintAs[ConnectionForm]^="A";
 PrintAs[ConnectionForm[cd1_,_]]^:=PrintAs[ConnectionForm]<>"["<>Last@SymbolOfCovD[cd1]<>"]";
@@ -400,6 +425,7 @@ DefInfo[ChristoffelForm[_]]^={"nonsymmetric frame bundle Connection 1-form",""};
 DependenciesOfTensor[ChristoffelForm[cd1_]]^:=Union@@DependenciesOfCovD/@{cd1};
 HostsOf[ChristoffelForm[cd1_]]^:=Join[{cd1},Union@@HostsOf/@{cd1}];(* Should we put Union@@HostsOf/@{cd1,cd2,vb} here? Yes, but addint also cd1 *)
 TensorID[ChristoffelForm[_]]^={};
+DFormQ[ChristoffelForm[cd1_][inds__]]^=True;
 
 PrintAs[ChristoffelForm]^="\[CapitalGamma]";
 PrintAs[ChristoffelForm[cd1_]]^:=PrintAs[ChristoffelForm]<>"["<>Last@SymbolOfCovD[cd1]<>"]";
@@ -435,6 +461,7 @@ DefInfo[CurvatureForm[_,_]]^={"Curvature 2-form",""};
 DependenciesOfTensor[CurvatureForm[cd_,_]]^:=DependenciesOfCovD[cd];
 HostsOf[CurvatureForm[cd_,vb_]]^:=Join[{cd},Union@@HostsOf/@{cd,vb}];(* Should we put Union@@HostsOf/@{cd,vb} here? Yes but we need to add cd itself *)
 TensorID[CurvatureForm[_,_]]^={};
+DFormQ[CurvatureForm[_,_][__]]^=True;
 
 PrintAs[CurvatureForm]^="F";
 PrintAs[CurvatureForm[cd_,_]]^:=PrintAs[CurvatureForm]<>"["<>Last@SymbolOfCovD[cd]<>"]";
@@ -450,6 +477,7 @@ DefInfo[RiemannForm[_]]^={"Curvature 2-form in the frame bundle",""};
 DependenciesOfTensor[RiemannForm[cd_]]^:=DependenciesOfCovD[cd];
 HostsOf[RiemannForm[cd_]]^:=Join[{cd},Union@@HostsOf/@{cd}];(* Should we put Union@@HostsOf/@{cd,vb} here? Yes but we need to add cd itself *)
 TensorID[RiemannForm[_]]^={};
+DFormQ[RiemannForm[_][__]]^=True;
 
 PrintAs[RiemannForm]^="R";
 PrintAs[RiemannForm[cd_]]^:=PrintAs[RiemannForm]<>"["<>Last@SymbolOfCovD[cd]<>"]";
@@ -474,6 +502,7 @@ DefInfo[TorsionForm[_]]^={"Torsion 2-form",""};
 DependenciesOfTensor[TorsionForm[cd_]]^:=DependenciesOfCovD[cd];
 HostsOf[TorsionForm[cd_]]^:=HostsOf@cd;(* Should we put HostsOf@cd here? OK*)
 TensorID[TorsionForm[_]]^={};
+DFormQ[TorsionForm[_][__]]^=True;
 
 
 PrintAs[TorsionForm]^="\[GothicCapitalT]";
@@ -569,10 +598,49 @@ Int[f_?ScalarQ v_][form_]:=f Int[v][form];
 DefGradedDerivation[Lie[v_],Wedge,0,PrintAs->"\[ScriptCapitalL]"];
 
 
+DFormQ@LieD[v_]@expr_:=DFormQ@expr;
+
+
+DFormQ@Lie[_][expr_,_]:=DFormQ@expr;
+
+
+Lie/:MakeBoxes[Lie[v_][form_,PD?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Lie[v][form,PD],RowBox[{SubscriptBox["\[ScriptCapitalL]",MakeBoxes[v,StandardForm]],"[",MakeBoxes[form,StandardForm],"]"}]];
+Lie/:MakeBoxes[Lie[v_][form_,cd_?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Lie[v][form,cd],RowBox[{SubsuperscriptBox["\[ScriptCapitalL]",MakeBoxes[v,StandardForm],Last@SymbolOfCovD[cd]],"[",MakeBoxes[form,StandardForm],"]"}]];
+
+
 Lie[f_?ScalarQ v_][form_]:=f Lie[v]@form+Wedge[Diff@f,Int[v]@form];
 
 
-LieToDiff[expr_]:=expr/.{Lie[v_][form_]:>Diff@Int[v]@form+Int[v]@Diff@form};
+(* This produces expanded expressions and is much faster when there are many scalars *)
+Lie[v_][expr_Times,rest___]:=Module[{grades=Grade[#,Wedge]&/@List@@expr,pos,scalar,form},
+pos=Position[grades,_?(#=!=0&),1,Heads->False];
+Which[
+Length[pos]>1,
+	Throw[Message[Diff::error1,"Found Times product of nonscalar forms: ",expr]],
+Length[pos]===1,
+	pos=pos[[1,1]];
+	scalar=Delete[expr,{pos}];
+	form=expr[[pos]];
+	scalar Lie[v][form,rest]+lie0[v][scalar,form],
+Length[pos]===0,
+	lie0[v][expr]
+]
+];
+lie0[v_][expr_Times]:=Sum[MapAt[Lie[v],expr,i],{i,1,Length[expr]}];
+lie0[v_][expr_Times,form_]:=Sum[MapAt[Lie[v][#,form]&,expr,i],{i,1,Length[expr]}];
+lie0[v_][expr_,form_]:=Wedge[Lie[v][expr],form];
+lie0[v_][expr_]:=Lie[v][expr];
+
+
+LieToDiff[expr_]:=expr/.{Lie[v_][form_]:>Diff@Int[v]@form+Int[v]@Diff@form,Lie[v_][form_,covd_?CovDQ]:>Diff[Int[v]@form,covd]+Int[v]@Diff[form,covd]};
+
+
+LieDForm[v_[ind_],covd_?CovDQ]@ten_:=If[DFormQ@ten,Module[{a=DummyIn@VBundleOfIndex@ind},LieD[v[ind],covd]@ten+Lie[v[ind]][ten,covd]-v[a]covd[-a]@ten]];
+
+
+Unprotect@LieDToCovD;
+LieDToCovD[expr_,covd_:PD]:=If[DFormQ@expr,expr//.LieD[vector_]:>LieDForm[vector,covd],expr//.LieD[vector_]:>LieD[vector,covd]];
+Protect@LieDToCovD;
 
 
 SortDerivationsRule[Diff,Diff]={};
@@ -584,31 +652,31 @@ HoldPattern[Int[v_]@Int[w_]@form_]:>-Int[w]@Int[v]@form/;!OrderedQ[{v,w}]
 
 
 SortDerivationsRule[Lie,Lie]={
-HoldPattern[Lie[v_]@Lie[w_]@form_]:>Module[{a=First@FindFreeIndices[v]},Lie[w]@Lie[v]@form+Lie[Bracket[v,w][a]]@form]/;!OrderedQ[{v,w}]
+HoldPattern[Lie[v_]@Lie[w_]@form_]:>Module[{a=First@FindFreeIndices[v]},Lie[w]@Lie[v]@form+Lie[Bracket[v,w][a]]@form]/;!OrderedQ[{v,w}],HoldPattern[Lie[v_][Lie[w_][form_,covd_?CovDQ],covd_?CovDQ]]:>Module[{a=First@FindFreeIndices[v]},Lie[w][Lie[v][form,covd],covd]+Lie[Bracket[v,w][a]][form,covd]]/;!OrderedQ[{v,w}]
 };
 
 
 SortDerivationsRule[Int,Lie]={
-HoldPattern[Lie[w_]@Int[v_]@form_]:>Module[{a=First@FindFreeIndices[w]},Int[v]@Lie[w]@form+Int[Bracket[w,v][a]]@form]
+HoldPattern[Lie[w_]@Int[v_]@form_]:>Module[{a=First@FindFreeIndices[w]},Int[v]@Lie[w]@form+Int[Bracket[w,v][a]]@form],HoldPattern[Lie[w_][Int[v_]@form_,covd_?CovDQ]]:>Module[{a=First@FindFreeIndices[w]},Int[v]@Lie[w][form,covd]+Int[Bracket[w,v][a]]@form]
 };
 SortDerivationsRule[Lie,Int]={
-HoldPattern[Int[v_]@Lie[w_]@form_]:>Module[{a=First@FindFreeIndices[w]},Lie[w]@Int[v]@form+Int[Bracket[v,w][a]]@form]
+HoldPattern[Int[v_]@Lie[w_]@form_]:>Module[{a=First@FindFreeIndices[w]},Lie[w]@Int[v]@form+Int[Bracket[v,w][a]]@form],HoldPattern[Int[v_]@Lie[w_][form_,covd_?CovDQ]]:>Module[{a=First@FindFreeIndices[w]},Lie[w][Int[v]@form,covd]+Int[Bracket[v,w][a]]@form]
 };
 
 
 SortDerivationsRule[Int,Diff]={
-HoldPattern[Diff[Int[v_]@form_]]:>-Int[v]@Diff@form+Lie[v]@form
+HoldPattern[Diff[Int[v_]@form_]]:>-Int[v]@Diff@form+Lie[v]@form,HoldPattern[Diff[Int[v_]@form_,covd_?CovDQ]]:>-Int[v]@Diff[form,covd]+Lie[v][form,covd]
 };
 SortDerivationsRule[Diff,Int]={
-HoldPattern[Int[v_]@Diff[form_]]:>-Diff@Int[v]@form+Lie[v]@form
+HoldPattern[Int[v_]@Diff[form_,covd_?CovDQ]]:>-Diff[Int[v]@form,covd]+Lie[v][form,covd]
 };
 
 
 SortDerivationsRule[Lie,Diff]={
-HoldPattern[Diff[Lie[v_]@form_]]:>Lie[v]@Diff@form
+HoldPattern[Diff[Lie[v_]@form_]]:>Lie[v]@Diff@form,HoldPattern[Diff[Lie[v_][form_,covd_?CovDQ],covd_?CovDQ]]:>Lie[v][Diff[form,covd],covd]
 };
 SortDerivationsRule[Diff,Lie]={
-HoldPattern[Lie[v_]@Diff[form_]]:>Diff@Lie[v]@form
+HoldPattern[Lie[v_]@Diff[form_]]:>Diff@Lie[v]@form,HoldPattern[Lie[v_][Diff[form_,covd_?CovDQ],covd_?CovDQ]]:>Diff[Lie[v][form,covd],covd]
 };
 
 

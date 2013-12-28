@@ -76,3 +76,11 @@ last lines of the code of FormVarD.
               contain now just Codiff.
               
               Changed names DefDifferentialForm by DefDiffForm and UndefDifferentialForm by UndefDiffForm.
+              
+27 Dec. 2013: Added second argument to Lie representing a covariant derivative. LieDToCovD now trasforms Lie derivatives
+              of tensor valued differential forms into expressions containing the operator Lie.
+              
+              Added DFormQ.
+              
+28 Dec. 2013: Adapted usage messages to the name changes mentioned above. 
+             
