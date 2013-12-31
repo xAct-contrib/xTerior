@@ -175,12 +175,12 @@ Deg[expr_]:=Grade[expr,Wedge];
 
 DefDiffForm[form_,mani_,deg_,options___?OptionQ]:=
 (DefTensor[form,mani,GradeOfTensor->{Wedge->deg},options];
-DFormQ@form^=True;)
+DFormQ[Head[form][___]]^=True;)
 
 
 DefDiffForm[form_,mani_,deg_,sym_,options___?OptionQ]:=
 (DefTensor[form,mani,sym,GradeOfTensor->{Wedge->deg},options];
-DFormQ@form^=True;)
+DFormQ[Head[form][___]]^=True;)
 
 
 Options@DefDiffForm:=Options@DefTensor;
@@ -595,7 +595,7 @@ Int[v_][f_?ZeroFormQ form_]:=f Int[v][form];
 Int[f_?ScalarQ v_][form_]:=f Int[v][form];
 
 
-DefGradedDerivation[Lie[v_],Wedge,0,PrintAs->"\[ScriptCapitalL]"];
+DefGradedDerivation[Lie[v_],Wedge,0,PrintAs->"L"];
 
 
 DFormQ@LieD[v_]@expr_:=DFormQ@expr;
@@ -604,8 +604,8 @@ DFormQ@LieD[v_]@expr_:=DFormQ@expr;
 DFormQ@Lie[_][expr_,_]:=DFormQ@expr;
 
 
-Lie/:MakeBoxes[Lie[v_][form_,PD?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Lie[v][form,PD],RowBox[{SubscriptBox["\[ScriptCapitalL]",MakeBoxes[v,StandardForm]],"[",MakeBoxes[form,StandardForm],"]"}]];
-Lie/:MakeBoxes[Lie[v_][form_,cd_?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Lie[v][form,cd],RowBox[{SubsuperscriptBox["\[ScriptCapitalL]",MakeBoxes[v,StandardForm],Last@SymbolOfCovD[cd]],"[",MakeBoxes[form,StandardForm],"]"}]];
+Lie/:MakeBoxes[Lie[v_][form_,PD?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Lie[v][form,PD],RowBox[{SubscriptBox["L",MakeBoxes[v,StandardForm]],"[",MakeBoxes[form,StandardForm],"]"}]];
+Lie/:MakeBoxes[Lie[v_][form_,cd_?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Lie[v][form,cd],RowBox[{SubsuperscriptBox["L",MakeBoxes[v,StandardForm],Last@SymbolOfCovD[cd]],"[",MakeBoxes[form,StandardForm],"]"}]];
 
 
 Lie[f_?ScalarQ v_][form_]:=f Lie[v]@form+Wedge[Diff@f,Int[v]@form];
@@ -630,6 +630,11 @@ lie0[v_][expr_Times]:=Sum[MapAt[Lie[v],expr,i],{i,1,Length[expr]}];
 lie0[v_][expr_Times,form_]:=Sum[MapAt[Lie[v][#,form]&,expr,i],{i,1,Length[expr]}];
 lie0[v_][expr_,form_]:=Wedge[Lie[v][expr],form];
 lie0[v_][expr_]:=Lie[v][expr];
+
+
+Unprotect@LieD;
+LieD[v_]@expr_Wedge:=(Lie[v]@expr/.Lie->LieD);
+Protect@LieD;
 
 
 LieToDiff[expr_]:=expr/.{Lie[v_][form_]:>Diff@Int[v]@form+Int[v]@Diff@form,Lie[v_][form_,covd_?CovDQ]:>Diff[Int[v]@form,covd]+Int[v]@Diff[form,covd]};
@@ -667,7 +672,7 @@ HoldPattern[Int[v_]@Lie[w_]@form_]:>Module[{a=First@FindFreeIndices[w]},Lie[w]@I
 SortDerivationsRule[Int,Diff]={
 HoldPattern[Diff[Int[v_]@form_]]:>-Int[v]@Diff@form+Lie[v]@form,HoldPattern[Diff[Int[v_]@form_,covd_?CovDQ]]:>-Int[v]@Diff[form,covd]+Lie[v][form,covd]
 };
-SortDerivationsRule[Diff,Int]={
+SortDerivationsRule[Diff,Int]={HoldPattern[Int[v_]@Diff[form_]]:>-Diff[Int[v]@form]+Lie[v][form],
 HoldPattern[Int[v_]@Diff[form_,covd_?CovDQ]]:>-Diff[Int[v]@form,covd]+Lie[v][form,covd]
 };
 

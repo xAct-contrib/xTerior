@@ -1124,7 +1124,10 @@ Cell[BoxData[
         RowBox[{"Wedge", "\[Rule]", "deg"}], "}"}]}], ",", "options"}], "]"}],
      ";", "\[IndentingNewLine]", 
     RowBox[{
-     RowBox[{"DFormQ", "@", "form"}], "^=", "True"}], ";"}], ")"}]}]], "Input",
+     RowBox[{"DFormQ", "[", 
+      RowBox[{
+       RowBox[{"Head", "[", "form", "]"}], "[", "___", "]"}], "]"}], "^=", 
+     "True"}], ";"}], ")"}]}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
@@ -1142,7 +1145,10 @@ Cell[BoxData[
         RowBox[{"Wedge", "\[Rule]", "deg"}], "}"}]}], ",", "options"}], "]"}],
      ";", "\[IndentingNewLine]", 
     RowBox[{
-     RowBox[{"DFormQ", "@", "form"}], "^=", "True"}], ";"}], ")"}]}]], "Input",
+     RowBox[{"DFormQ", "[", 
+      RowBox[{
+       RowBox[{"Head", "[", "form", "]"}], "[", "___", "]"}], "]"}], "^=", 
+     "True"}], ";"}], ")"}]}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
@@ -1211,7 +1217,7 @@ Cell[BoxData[
    RowBox[{"DFormQ", "/@", "expr"}]}], ";"}]], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.597136585670034*^9, 3.597136608985752*^9}}]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -2484,8 +2490,7 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"ExtCovDiff", "[", 
       RowBox[{"form_", ",", 
-       RowBox[{"PD", "?", "CovDQ"}]}], "]"}], ",", "StandardForm"}], "]"}], ":=", \
-
+       RowBox[{"PD", "?", "CovDQ"}]}], "]"}], ",", "StandardForm"}], "]"}], ":=", 
    RowBox[{"xAct`xTensor`Private`interpretbox", "[", 
     RowBox[{
      RowBox[{"ExtCovDiff", "[", 
@@ -4720,8 +4725,7 @@ Cell[BoxData[
   RowBox[{"DefGradedDerivation", "[", 
    RowBox[{
     RowBox[{"Lie", "[", "v_", "]"}], ",", "Wedge", ",", "0", ",", 
-    RowBox[{"PrintAs", "\[Rule]", "\"\<\[ScriptCapitalL]\>\""}]}], "]"}], 
-  ";"}]], "Input",
+    RowBox[{"PrintAs", "\[Rule]", "\"\<L\>\""}]}], "]"}], ";"}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
@@ -4768,7 +4772,7 @@ Cell[BoxData[{
       RowBox[{"{", 
        RowBox[{
         RowBox[{"SubscriptBox", "[", 
-         RowBox[{"\"\<\[ScriptCapitalL]\>\"", ",", 
+         RowBox[{"\"\<L\>\"", ",", 
           RowBox[{"MakeBoxes", "[", 
            RowBox[{"v", ",", "StandardForm"}], "]"}]}], "]"}], ",", 
         "\"\<[\>\"", ",", 
@@ -4792,7 +4796,7 @@ Cell[BoxData[{
       RowBox[{"{", 
        RowBox[{
         RowBox[{"SubsuperscriptBox", "[", 
-         RowBox[{"\"\<\[ScriptCapitalL]\>\"", ",", 
+         RowBox[{"\"\<L\>\"", ",", 
           RowBox[{"MakeBoxes", "[", 
            RowBox[{"v", ",", "StandardForm"}], "]"}], ",", 
           RowBox[{"Last", "@", 
@@ -4954,6 +4958,27 @@ Cell[BoxData[
      RowBox[{
       RowBox[{"Lie", "[", "v", "]"}], "[", "expr", "]"}]}], 
     ";"}]}]}]], "Input",
+ InitializationCell->True],
+
+Cell["\<\
+Leibinitz rule for xTensor LieD when acting on wedge product expressions:\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Unprotect", "@", "LieD"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"LieD", "[", "v_", "]"}], "@", "expr_Wedge"}], ":=", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Lie", "[", "v", "]"}], "@", "expr"}], "/.", 
+     RowBox[{"Lie", "\[Rule]", "LieD"}]}], ")"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Protect", "@", "LieD"}], ";"}]}], "Input",
  InitializationCell->True],
 
 Cell["\<\
@@ -5457,25 +5482,38 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{"SortDerivationsRule", "[", 
     RowBox[{"Diff", ",", "Int"}], "]"}], "=", 
-   RowBox[{"{", "\[IndentingNewLine]", 
+   RowBox[{"{", 
     RowBox[{
-     RowBox[{"HoldPattern", "[", 
-      RowBox[{
-       RowBox[{"Int", "[", "v_", "]"}], "@", 
-       RowBox[{"Diff", "[", 
-        RowBox[{"form_", ",", 
-         RowBox[{"covd_", "?", "CovDQ"}]}], "]"}]}], "]"}], "\[RuleDelayed]", 
-     
      RowBox[{
-      RowBox[{"-", 
-       RowBox[{"Diff", "[", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"Int", "[", "v", "]"}], "@", "form"}], ",", "covd"}], 
-        "]"}]}], "+", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{
+        RowBox[{"Int", "[", "v_", "]"}], "@", 
+        RowBox[{"Diff", "[", "form_", "]"}]}], "]"}], "\[RuleDelayed]", 
       RowBox[{
-       RowBox[{"Lie", "[", "v", "]"}], "[", 
-       RowBox[{"form", ",", "covd"}], "]"}]}]}], "\[IndentingNewLine]", 
+       RowBox[{"-", 
+        RowBox[{"Diff", "[", 
+         RowBox[{
+          RowBox[{"Int", "[", "v", "]"}], "@", "form"}], "]"}]}], "+", 
+       RowBox[{
+        RowBox[{"Lie", "[", "v", "]"}], "[", "form", "]"}]}]}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{
+        RowBox[{"Int", "[", "v_", "]"}], "@", 
+        RowBox[{"Diff", "[", 
+         RowBox[{"form_", ",", 
+          RowBox[{"covd_", "?", "CovDQ"}]}], "]"}]}], "]"}], "\[RuleDelayed]", 
+      RowBox[{
+       RowBox[{"-", 
+        RowBox[{"Diff", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Int", "[", "v", "]"}], "@", "form"}], ",", "covd"}], 
+         "]"}]}], "+", 
+       RowBox[{
+        RowBox[{"Lie", "[", "v", "]"}], "[", 
+        RowBox[{"form", ",", "covd"}], "]"}]}]}]}], "\[IndentingNewLine]", 
     "}"}]}], ";"}]}], "Input",
  InitializationCell->True],
 
@@ -5642,7 +5680,7 @@ Cell[BoxData[{
             RowBox[{"#", ",", "#"}], "]"}], "&"}], "/@", "order"}], 
          ")"}]}]}]}]}], "\[IndentingNewLine]", "]"}]}], ";"}]}], "Input",
  InitializationCell->True]
-}, Closed]]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -6483,8 +6521,8 @@ Cell[BoxData[{
 }, Open  ]]
 },
 AutoGeneratedPackage->Automatic,
-WindowSize->{1274, 613},
-WindowMargins->{{Automatic, 224}, {165, Automatic}},
+WindowSize->{1276, 613},
+WindowMargins->{{181, Automatic}, {Automatic, 165}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
