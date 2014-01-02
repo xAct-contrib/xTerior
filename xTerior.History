@@ -87,4 +87,6 @@ last lines of the code of FormVarD.
 31 Dec. 2013: Changed the formatting of the operator Lie which is different from LieD. The operator Lie accepts a covariant
               derivative as a second argument. The commutation rules of this operator have been adapted to this
               new situation.
+              
+1 Jan. 2014: Added action of Int on Coframe and dx.
              

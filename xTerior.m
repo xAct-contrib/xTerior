@@ -103,6 +103,11 @@ Print[xAct`xCore`Private`bars]]
 $PrePrint=ScreenDollarIndices;
 
 
+Unprotect@PD;
+PD/:ManifoldOfCovD@PD=.
+Protect@PD;
+
+
 (* Definition and undefinition of a differential form (just a wrapper for DefTensor with the option GradeOfTensor\[Rule]{Wedge})*)
 DefDiffForm::usage="DefDiffForm[form[inds], mani, Deg] defines a tensor valued differential form of degree deg on the manifold mani";
 UndefDiffForm::usage="UndefDiffForm[form] undefines the differential form form";
@@ -447,7 +452,7 @@ GiveSymbol[AChristoffel,covd,cd1][inds,-a]frame[BaseOfVBundle@vbundle][a]]/;covd
 
 
 ConnectionFormToTensor[expr_,PD,frame:(Coframe|dx)]:=expr/.{ChristoffelForm[cd1_][inds__]:>Module[{a=DummyIn@First@VBundlesOfCovD@cd1},
-GiveSymbol[Christoffel,cd1][inds,-a]frame[ManifoldOfCovD@cd1][a]],ConnectionForm[cd1__][inds__]:>Module[{a=DummyIn@First@VBundlesOfCovD@cd1},
+GiveSymbol[Christoffel,cd1][inds,-a]frame[ManifoldOfCovD@cd1][a]],ConnectionForm[cd1_,_][inds__]:>Module[{a=DummyIn@First@VBundlesOfCovD@cd1},
 GiveSymbol[AChristoffel,cd1][inds,-a]frame[ManifoldOfCovD@cd1][a]]}
 
 
@@ -470,7 +475,9 @@ PrintAs[CurvatureForm[cd_,_]]^:=PrintAs[CurvatureForm]<>"["<>Last@SymbolOfCovD[c
 xTensorQ[RiemannForm[_]]^=True;
 SlotsOfTensor[RiemannForm[cd_?CovDQ]]^:={Tangent@ManifoldOfCovD@cd,-Tangent@ManifoldOfCovD@cd};
 RiemannForm/:GradeOfTensor[RiemannForm[_],Wedge]=2;
-SymmetryGroupOfTensor[RiemannForm[_]]^=StrongGenSet[{},GenSet[]];
+SymmetryGroupOfTensor[RiemannForm[cd_?CovDQ]]^:=If[MetricOfCovD@cd=!=Null,
+Antisymmetric[{1,2},Cycles],
+StrongGenSet[{},GenSet[]]];
 
 Dagger[RiemannForm[cd_]]^:=RiemannForm[cd];
 DefInfo[RiemannForm[_]]^={"Curvature 2-form in the frame bundle",""};
@@ -593,6 +600,9 @@ DefGradedDerivation[Int[v_],Wedge,-1,PrintAs->"\[Iota]"];
 Int[v_][f_?ZeroFormQ]:=0;
 Int[v_][f_?ZeroFormQ form_]:=f Int[v][form];
 Int[f_?ScalarQ v_][form_]:=f Int[v][form];
+Int[v_[ind1_]][Coframe[mani_][ind2_]]:=v[ind2];
+Int[v_[ind1_]][dx[mani_][ind2_]]:=v[ind2];
+
 
 
 DefGradedDerivation[Lie[v_],Wedge,0,PrintAs->"L"];
