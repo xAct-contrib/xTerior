@@ -858,7 +858,12 @@ mani.\>\""}], ";"}], "\[IndentingNewLine]",
     RowBox[{
      RowBox[{"ZeroFormQ", "::", "usage"}], "=", 
      "\"\<ZeroFormQ[expr] returns True if the degree of expr is zero\>\""}], 
-    ";"}]}]}]], "Input",
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"$UseDimensionQ", "::", "usage"}], "=", 
+    "\"\<$UseDimensionQ is a global boolean variable which when set to True, \
+makes zero any differential form whose degree is greater than the \
+dimension.\>\""}]}]}]], "Input",
  InitializationCell->True]
 }, Closed]],
 
@@ -991,9 +996,6 @@ Cell[BoxData[
     RowBox[{"expr", ",", "Wedge"}], "]"}]}], ";"}]], "Input",
  InitializationCell->True],
 
-Cell[TextData[StyleBox["Alfonso: maybe this should be called ZeroDegreeForm ?",
- FontWeight->"Bold"]], "Text"],
-
 Cell[BoxData[
  RowBox[{
   RowBox[{"ZeroFormQ", "[", "expr_", "]"}], ":=", 
@@ -1095,7 +1097,89 @@ Cell[BoxData[
    ShowStringCharacters->True,
    NumberMarks->True],
   FullForm]], "Output"]
-}, Open  ]]
+}, Open  ]],
+
+Cell["\<\
+Vanishing of forms whose degree is higher than the manifold(s) dimension.\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"$UseDimensionQ", "=", "False"}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Expressions", " ", "which", " ", "are", " ", "wedge", " ", "products"}], 
+   " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"HoldPattern", "@", 
+     RowBox[{"Wedge", "[", "expr__", "]"}]}], ":=", 
+    RowBox[{"0", "/;", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Plus", "@@", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Grade", "[", 
+             RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
+           RowBox[{"{", "expr", "}"}]}], ")"}]}], ">", 
+        RowBox[{"(", 
+         RowBox[{"Plus", "@@", 
+          RowBox[{"(", 
+           RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}], 
+       ")"}], "&&", "$UseDimensionQ"}]}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Expressions", " ", "which", " ", "are", " ", "exterior", " ", 
+    "derivatives"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HoldPattern", "@", 
+    RowBox[{"Diff", "[", "expr_", "]"}]}], ":=", 
+   RowBox[{"0", "/;", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"1", "+", 
+        RowBox[{"Plus", "@@", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Grade", "[", 
+             RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
+           RowBox[{"{", "expr", "}"}]}], ")"}]}]}], ">", 
+       RowBox[{"(", 
+        RowBox[{"Plus", "@@", 
+         RowBox[{"(", 
+          RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}], 
+      ")"}], "&&", "$UseDimensionQ"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HoldPattern", "@", 
+    RowBox[{"Diff", "[", 
+     RowBox[{"expr_", ",", "covd_"}], "]"}]}], ":=", 
+   RowBox[{"0", "/;", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"1", "+", 
+        RowBox[{"Plus", "@@", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Grade", "[", 
+             RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
+           RowBox[{"{", "expr", "}"}]}], ")"}]}]}], ">", 
+       RowBox[{"(", 
+        RowBox[{"Plus", "@@", 
+         RowBox[{"(", 
+          RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}], 
+      ")"}], "&&", "$UseDimensionQ"}]}]}], ";"}]}], "Input",
+ InitializationCell->True]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1137,7 +1221,21 @@ Cell[BoxData[
      RowBox[{"DFormQ", "[", 
       RowBox[{
        RowBox[{"Head", "[", "form", "]"}], "[", "___", "]"}], "]"}], "^=", 
-     "True"}], ";"}], ")"}]}]], "Input",
+     "True"}], ";", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"deg", ">", 
+         RowBox[{"DimOfManifold", "@", "mani"}]}], ")"}], "&&", 
+       "$UseDimensionQ"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Throw", "[", 
+       RowBox[{"Message", "[", 
+        RowBox[{
+         RowBox[{"DefDiffForm", "::", "error"}], ",", 
+         "\"\<The degree of the form is greater than the dimension of the \
+manifold. Set $UseDimensionQ to False\>\""}], "]"}], "]"}]}], "]"}]}], 
+   ")"}]}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
@@ -1158,7 +1256,21 @@ Cell[BoxData[
      RowBox[{"DFormQ", "[", 
       RowBox[{
        RowBox[{"Head", "[", "form", "]"}], "[", "___", "]"}], "]"}], "^=", 
-     "True"}], ";"}], ")"}]}]], "Input",
+     "True"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"deg", ">", 
+         RowBox[{"DimOfManifold", "@", "mani"}]}], ")"}], "&&", 
+       "$UseDimensionQ"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Throw", "[", 
+       RowBox[{"Message", "[", 
+        RowBox[{
+         RowBox[{"DefDiffForm", "::", "error"}], ",", 
+         "\"\<The degree of the form is greater than the dimension of the \
+manifold. Set $UseDimensionQ to False\>\""}], "]"}], "]"}]}], "]"}]}], 
+   ")"}]}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
@@ -3199,7 +3311,7 @@ Cell[BoxData[
            RowBox[{"ManifoldOfCovD", "@", "cd1"}], "]"}], "[", "a", "]"}]}]}],
         "]"}]}]}], "}"}]}]}]], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -6561,7 +6673,7 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1276, 613},
-WindowMargins->{{0, Automatic}, {0, Automatic}},
+WindowMargins->{{303, Automatic}, {Automatic, 163}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,

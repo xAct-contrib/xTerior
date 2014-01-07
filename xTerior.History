@@ -89,4 +89,6 @@ last lines of the code of FormVarD.
               new situation.
               
 1 Jan. 2014: Added action of Int on Coframe and dx.
+
+7 Jan. 2014: Added global variable $UseDimensionQ.
              

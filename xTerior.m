@@ -157,6 +157,7 @@ TorsionForm::usage="TorsionForm[cd] represents the torsion 2-form arising from t
 ExpandDiff::usage="ExpandDiff[expr,covd] expands all the instances of the Diff using the Cartan structure equations for the connection arising from covd. In this way it is possible to expand the exterior derivative of a co-frame, a torsion 2-form and the curvature 2-form. If covd is the Levi-Civita connection of a metric, then the exterior derivatives of that metric and its volume element are expanded too. ExpandDiff[expr,PD,mani] expands all instances of the exterior derivative in terms of partial derivatives defined in the manifold mani.";
 (* Zero forms *)
 ZeroFormQ::usage="ZeroFormQ[expr] returns True if the degree of expr is zero";
+$UseDimensionQ::usage="$UseDimensionQ is a global boolean variable which when set to True, makes zero any differential form whose degree is greater than the dimension."
 
 
 Begin["`Private`"]
@@ -178,14 +179,25 @@ DefInfo->Null
 Deg[expr_]:=Grade[expr,Wedge];
 
 
+$UseDimensionQ=False;
+(* Expressions which are wedge products *)
+HoldPattern@Wedge[expr__]:=0/;(Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)))&&$UseDimensionQ;
+(* Expressions which are exterior derivatives *)
+HoldPattern@Diff[expr_]:=0/;(1+Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)))&&$UseDimensionQ;
+HoldPattern@Diff[expr_,covd_]:=0/;(1+Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)))&&$UseDimensionQ;
+
+
 DefDiffForm[form_,mani_,deg_,options___?OptionQ]:=
 (DefTensor[form,mani,GradeOfTensor->{Wedge->deg},options];
-DFormQ[Head[form][___]]^=True;)
+DFormQ[Head[form][___]]^=True;If[(deg>DimOfManifold@mani)&&$UseDimensionQ,
+Throw[Message[DefDiffForm::error,"The degree of the form is greater than the dimension of the manifold. Set $UseDimensionQ to False"]]])
 
 
 DefDiffForm[form_,mani_,deg_,sym_,options___?OptionQ]:=
 (DefTensor[form,mani,sym,GradeOfTensor->{Wedge->deg},options];
-DFormQ[Head[form][___]]^=True;)
+DFormQ[Head[form][___]]^=True;
+If[(deg>DimOfManifold@mani)&&$UseDimensionQ,
+Throw[Message[DefDiffForm::error,"The degree of the form is greater than the dimension of the manifold. Set $UseDimensionQ to False"]]])
 
 
 Options@DefDiffForm:=Options@DefTensor;
