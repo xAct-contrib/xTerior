@@ -579,11 +579,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell[TextData[{
- "1.5. Usage messages ",
- StyleBox["(revise this)",
-  FontColor->RGBColor[1, 0, 0]]
-}], "Subsubsection"],
+Cell["1.5. Usage messages ", "Subsubsection"],
 
 Cell[TextData[StyleBox["Alfonso: we need to agree on the names and syntax of \
 the commands introduced here",
@@ -787,8 +783,8 @@ RiemannForm\>\""}], ";"}], "\[IndentingNewLine]",
     RowBox[{
      RowBox[{"ChristoffelForm", "::", "usage"}], "=", 
      "\"\<ChristoffelForm[cd] is the connection 1-form associated to the \
-covariant derivative cd which is a covariant derivatives in the tangent \
-bundle of a manifold\>\""}], ";"}], "\[IndentingNewLine]", 
+covariant derivative cd which is a covariant derivative in the tangent bundle \
+of a manifold\>\""}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
      RowBox[{"Curvature", " ", "2"}], "-", 
@@ -803,7 +799,7 @@ derivative cd which is a covariant derivative in the frame bundle of a \
 manifold\>\""}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
-    "Transformation", " ", "of", " ", "the", " ", "connection", " ", "for", 
+    "Transformation", " ", "of", " ", "the", " ", "connection", " ", "form", 
      " ", "to", " ", "the", " ", "connection", " ", "tensor"}], " ", "*)"}], 
    "\[IndentingNewLine]", 
    RowBox[{

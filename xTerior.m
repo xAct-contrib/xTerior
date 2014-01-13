@@ -144,10 +144,10 @@ ConnectionForm::usage="ConnectionForm[cd,vbundle] represents the connection 1-fo
 (* The curvature 2-form *)
 CurvatureForm::usage="CurvatureForm[cd,vbundle] represents the curvature 2-form associated to the covariant derivative cd. If vbundle is the tangent bundle of a differentiable manifold then CurvatureForm is replaced by RiemannForm";
 (* Connection 2-form for a connection in a frame bundle*)
-ChristoffelForm::usage="ChristoffelForm[cd] is the connection 1-form associated to the covariant derivative cd which is a covariant derivatives in the tangent bundle of a manifold";
+ChristoffelForm::usage="ChristoffelForm[cd] is the connection 1-form associated to the covariant derivative cd which is a covariant derivative in the tangent bundle of a manifold";
 (* Curvature 2-form for a connection in a frame bundle *)
 RiemannForm::usage="RiemannForm[cd] is the curvature 2-form associated to the covariant derivative cd which is a covariant derivative in the frame bundle of a manifold";
-(* Transformation of the connection for to the connection tensor *)
+(* Transformation of the connection form to the connection tensor *)
 ConnectionFormToTensor::usage="ConnectionFormToTensor[expr,covd,frame] transforms all instances of the connection form into the (A)Christoffel tensor which relates the covariant derivative defining the connection form and covd. The variable frame can take the value of either Coframe or dx. If the (A)Christoffel tensor does not exist it is created automatically.";
 CurvatureFormToTensor::usage="CurvatureFormToTensor[expr,frame] transforms all the instances of the curvature form into the related Riemann or FRiemann tensor, inserting the corresponding frame (either Coframe or dx).";
 ChangeCurvatureForm::usage="ChangeCurvatureForm[curvature,cd1,cd2] writes the curvature 2-form curvature[cd1,vbundle] in terms of the curvature 2-form curvature[cd2,vbundle]";
