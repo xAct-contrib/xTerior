@@ -616,6 +616,11 @@ Int[v_[ind1_]][Coframe[mani_][ind2_]]:=v[ind2];
 Int[v_[ind1_]][dx[mani_][ind2_]]:=v[ind2];
 
 
+Int[v_][_Basis]:=0;
+
+
+DFormQ[Int[v_][expr_]]:=DFormQ@expr;
+
 
 DefGradedDerivation[Lie[v_],Wedge,0,PrintAs->"L"];
 
@@ -624,6 +629,12 @@ DFormQ@LieD[v_]@expr_:=DFormQ@expr;
 
 
 DFormQ@Lie[_][expr_,_]:=DFormQ@expr;
+
+
+Lie[v_][_Basis]:=0;
+
+
+Lie[v_][_Basis,_]:=0;
 
 
 Lie/:MakeBoxes[Lie[v_][form_,PD?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Lie[v][form,PD],RowBox[{SubscriptBox["L",MakeBoxes[v,StandardForm]],"[",MakeBoxes[form,StandardForm],"]"}]];
