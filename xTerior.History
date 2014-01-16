@@ -92,5 +92,8 @@ last lines of the code of FormVarD.
 
 7 Jan. 2014: Added global variable $UseDimensionQ.
 
-13 Jan. 2014: Implemented relation between Lie, Int and Basis objects.   
+13 Jan. 2014: Implemented relation between Lie, Int and Basis objects.
+
+15 Jan. 2014: Changed name "ExpandDiff" by "UseCartan".
+              Dropped $UseDimensionQ which is now replaced by UseDimensionStart[] and UseDimensionStop[].
              

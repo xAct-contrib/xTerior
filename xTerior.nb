@@ -838,13 +838,13 @@ manifold)\>\""}], ";"}], "\[IndentingNewLine]",
    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
-     RowBox[{"ExpandDiff", "::", "usage"}], "=", 
-     "\"\<ExpandDiff[expr,covd] expands all the instances of the Diff using \
+     RowBox[{"UseCartan", "::", "usage"}], "=", 
+     "\"\<UseCartan[expr,covd] expands all the instances of the Diff using \
 the Cartan structure equations for the connection arising from covd. In this \
 way it is possible to expand the exterior derivative of a co-frame, a torsion \
 2-form and the curvature 2-form. If covd is the Levi-Civita connection of a \
 metric, then the exterior derivatives of that metric and its volume element \
-are expanded too. ExpandDiff[expr,PD,mani] expands all instances of the \
+are expanded too. UseCartan[expr,PD,mani] expands all instances of the \
 exterior derivative in terms of partial derivatives defined in the manifold \
 mani.\>\""}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
@@ -855,12 +855,18 @@ mani.\>\""}], ";"}], "\[IndentingNewLine]",
      "\"\<ZeroFormQ[expr] returns True if the degree of expr is zero\>\""}], 
     ";"}], "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"$UseDimensionQ", "::", "usage"}], "=", 
-    "\"\<$UseDimensionQ is a global boolean variable which when set to True, \
-makes zero any differential form whose degree is greater than the \
-dimension.\>\""}]}]}]], "Input",
+    RowBox[{
+     RowBox[{"UseDimensionStart", "::", "usage"}], "=", 
+     "\"\<UseDimensionStart[] is an instruction that, when issued, makes any \
+expression with degree greater than the manifold dimension equal to \
+zero.\>\""}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"UseDimensionStop", "::", "usage"}], "=", 
+     "\"\<UseDimensionStop[] cancels the action of UseDimensionStart[]\>\""}],
+     ";"}]}]}]], "Input",
  InitializationCell->True]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1100,6 +1106,153 @@ Vanishing of forms whose degree is higher than the manifold(s) dimension.\
 
 Cell[BoxData[{
  RowBox[{
+  RowBox[{"$DimensionsZeroForms", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SetZeroForm", "[", "form_", "]"}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"GradeOfTensor", "[", 
+       RowBox[{"form", ",", "Wedge"}], "]"}], ">", 
+      RowBox[{"Plus", "@@", 
+       RowBox[{"(", 
+        RowBox[{"DimOfManifold", "/@", 
+         RowBox[{"DependenciesOfTensor", "[", "form", "]"}]}], ")"}]}]}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"form", "[", "___", "]"}], "=", "0"}], ";", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"$DimensionsZeroForms", ",", "form"}], "]"}]}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
+   RowBox[{"Unset", "[", 
+    RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}]}], "Input",
+ InitializationCell->True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Forms", " ", "whose", " ", "degree", " ", "is", " ", "greater", " ", 
+      "than", " ", "the", " ", "dimension"}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"SetZeroForm", "/@", "$Tensors"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Expressions", " ", "which", " ", "are", " ", "wedge", " ", 
+       "products"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"HoldPattern", "@", 
+       RowBox[{"Wedge", "[", "expr__", "]"}]}], ":=", 
+      RowBox[{"0", "/;", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Plus", "@@", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Grade", "[", 
+              RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
+            RowBox[{"{", "expr", "}"}]}], ")"}]}], ">", 
+         RowBox[{"(", 
+          RowBox[{"Plus", "@@", 
+           RowBox[{"(", 
+            RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}], 
+        ")"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Expressions", " ", "which", " ", "are", " ", "exterior", " ", 
+       "derivatives"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"HoldPattern", "@", 
+       RowBox[{"Diff", "[", "expr_", "]"}]}], ":=", 
+      RowBox[{"0", "/;", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"1", "+", 
+          RowBox[{"Plus", "@@", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Grade", "[", 
+               RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
+             RowBox[{"{", "expr", "}"}]}], ")"}]}]}], ">", 
+         RowBox[{"(", 
+          RowBox[{"Plus", "@@", 
+           RowBox[{"(", 
+            RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}], 
+        ")"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"HoldPattern", "@", 
+       RowBox[{"Diff", "[", 
+        RowBox[{"expr_", ",", "covd_"}], "]"}]}], ":=", 
+      RowBox[{"0", "/;", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"1", "+", 
+          RowBox[{"Plus", "@@", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Grade", "[", 
+               RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
+             RowBox[{"{", "expr", "}"}]}], ")"}]}]}], ">", 
+         RowBox[{"(", 
+          RowBox[{"Plus", "@@", 
+           RowBox[{"(", 
+            RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}], 
+        ")"}]}]}], ";"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ InitializationCell->True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"UnsetZeroForm", "/@", 
+      RowBox[{"Union", "@", "$DimensionsZeroForms"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"HoldPattern", "@", 
+       RowBox[{"Wedge", "[", "expr__", "]"}]}], "=."}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"HoldPattern", "@", 
+       RowBox[{"Diff", "[", "expr_", "]"}]}], "=."}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"HoldPattern", "@", 
+       RowBox[{"Diff", "[", 
+        RowBox[{"expr_", ",", "covd_"}], "]"}]}], "=."}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ InitializationCell->True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Wedge", "/:", "form_Wedge", ":=", 
+   RowBox[{"0", "/;", 
+    RowBox[{"$UseDimensionQ", "&&", 
+     RowBox[{
+      RowBox[{"Deg", "[", "form", "]"}], ">", 
+      RowBox[{"Plus", "@@", 
+       RowBox[{"(", 
+        RowBox[{"DimOfManifold", "/@", 
+         RowBox[{"ManifoldsOf", "[", "form", "]"}]}], ")"}]}]}]}]}]}], 
+  ";"}]], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
   RowBox[{
    RowBox[{"$UseDimensionQ", "=", "False"}], ";"}], "\[IndentingNewLine]", 
   RowBox[{"(*", " ", 
@@ -1173,8 +1326,7 @@ Cell[BoxData[{
         RowBox[{"Plus", "@@", 
          RowBox[{"(", 
           RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}], 
-      ")"}], "&&", "$UseDimensionQ"}]}]}], ";"}]}], "Input",
- InitializationCell->True]
+      ")"}], "&&", "$UseDimensionQ"}]}]}], ";"}]}], "Input"]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1200,6 +1352,23 @@ tensor valued differential form of degree deg on the manifold mani\"\>",
 
 Cell[BoxData[
  RowBox[{
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"deg", ">", 
+       RowBox[{"DimOfManifold", "@", "mani"}]}], ")"}], "&&", 
+     "$UseDimensionQ"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Throw", "[", 
+     RowBox[{"Message", "[", 
+      RowBox[{
+       RowBox[{"DefDiffForm", "::", "error"}], ",", 
+       "\"\<The degree of the form is greater than the dimension of the \
+manifold. Set $UseDimensionQ to False\>\""}], "]"}], "]"}]}], "]"}], 
+  ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
   RowBox[{"DefDiffForm", "[", 
    RowBox[{"form_", ",", "mani_", ",", "deg_", ",", 
     RowBox[{"options___", "?", "OptionQ"}]}], "]"}], ":=", 
@@ -1216,21 +1385,7 @@ Cell[BoxData[
      RowBox[{"DFormQ", "[", 
       RowBox[{
        RowBox[{"Head", "[", "form", "]"}], "[", "___", "]"}], "]"}], "^=", 
-     "True"}], ";", 
-    RowBox[{"If", "[", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"(", 
-        RowBox[{"deg", ">", 
-         RowBox[{"DimOfManifold", "@", "mani"}]}], ")"}], "&&", 
-       "$UseDimensionQ"}], ",", "\[IndentingNewLine]", 
-      RowBox[{"Throw", "[", 
-       RowBox[{"Message", "[", 
-        RowBox[{
-         RowBox[{"DefDiffForm", "::", "error"}], ",", 
-         "\"\<The degree of the form is greater than the dimension of the \
-manifold. Set $UseDimensionQ to False\>\""}], "]"}], "]"}]}], "]"}]}], 
-   ")"}]}]], "Input",
+     "True"}], ";"}], "\[IndentingNewLine]", ")"}]}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
@@ -1251,21 +1406,7 @@ Cell[BoxData[
      RowBox[{"DFormQ", "[", 
       RowBox[{
        RowBox[{"Head", "[", "form", "]"}], "[", "___", "]"}], "]"}], "^=", 
-     "True"}], ";", "\[IndentingNewLine]", 
-    RowBox[{"If", "[", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"(", 
-        RowBox[{"deg", ">", 
-         RowBox[{"DimOfManifold", "@", "mani"}]}], ")"}], "&&", 
-       "$UseDimensionQ"}], ",", "\[IndentingNewLine]", 
-      RowBox[{"Throw", "[", 
-       RowBox[{"Message", "[", 
-        RowBox[{
-         RowBox[{"DefDiffForm", "::", "error"}], ",", 
-         "\"\<The degree of the form is greater than the dimension of the \
-manifold. Set $UseDimensionQ to False\>\""}], "]"}], "]"}]}], "]"}]}], 
-   ")"}]}]], "Input",
+     "True"}], ";"}], "\[IndentingNewLine]", ")"}]}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
@@ -2607,8 +2748,7 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"ExtCovDiff", "[", 
       RowBox[{"form_", ",", 
-       RowBox[{"PD", "?", "CovDQ"}]}], "]"}], ",", "StandardForm"}], "]"}], ":=", \
-
+       RowBox[{"PD", "?", "CovDQ"}]}], "]"}], ",", "StandardForm"}], "]"}], ":=", 
    RowBox[{"xAct`xTensor`Private`interpretbox", "[", 
     RowBox[{
      RowBox[{"ExtCovDiff", "[", 
@@ -4366,12 +4506,12 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["3.6 ExpandDiff", "Subsubsection"],
+Cell["3.6 UseCartan", "Subsubsection"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"?", "ExpandDiff"}]], "Input"],
+ RowBox[{"?", "UseCartan"}]], "Input"],
 
 Cell[BoxData[
  StyleBox["\<\"ExpandExtDiff[expr,covd], expands all the instances of the \
@@ -4392,7 +4532,7 @@ Cell[BoxData[
     "PD"}], " ", "*)"}], "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{"ExpandDiff", "[", 
+    RowBox[{"UseCartan", "[", 
      RowBox[{"expr_", ",", "PD", ",", 
       RowBox[{"mani_", "?", "ManifoldQ"}]}], "]"}], ":=", 
     RowBox[{"(", 
@@ -4427,7 +4567,7 @@ coordinate chart.\
 Cell[BoxData[
  RowBox[{
   RowBox[{
-   RowBox[{"ExpandDiff", "[", 
+   RowBox[{"UseCartan", "[", 
     RowBox[{"expr_", ",", "covd_"}], "]"}], ":=", 
    RowBox[{"(", 
     RowBox[{"expr", "/.", "\[IndentingNewLine]", 
@@ -4848,9 +4988,7 @@ Cell[BoxData[{
    RowBox[{"v", "[", "ind2", "]"}]}], ";"}]}], "Input",
  InitializationCell->True],
 
-Cell["\<\
-Interior contraction of basis objects is zero.\
-\>", "Text"],
+Cell["Interior contraction of basis objects is zero.", "Text"],
 
 Cell[BoxData[
  RowBox[{
@@ -4920,9 +5058,7 @@ Cell[BoxData[
    RowBox[{"DFormQ", "@", "expr"}]}], ";"}]], "Input",
  InitializationCell->True],
 
-Cell["\<\
-Lie acting on basis objects is zero.\
-\>", "Text"],
+Cell["Lie acting on basis objects is zero.", "Text"],
 
 Cell[BoxData[
  RowBox[{
@@ -5294,7 +5430,7 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{"Protect", "@", "LieDToCovD"}], ";"}]}], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -6713,7 +6849,7 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1276, 613},
-WindowMargins->{{Automatic, 272}, {114, Automatic}},
+WindowMargins->{{191, Automatic}, {Automatic, 68}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,

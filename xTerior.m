@@ -154,10 +154,11 @@ ChangeCurvatureForm::usage="ChangeCurvatureForm[curvature,cd1,cd2] writes the cu
 (* The torsion 2-form *)
 TorsionForm::usage="TorsionForm[cd] represents the torsion 2-form arising from the covariant derivative cd (cd must be defined on the tangent bundle of a manifold)";
 (* Cartan structure equations *)
-ExpandDiff::usage="ExpandDiff[expr,covd] expands all the instances of the Diff using the Cartan structure equations for the connection arising from covd. In this way it is possible to expand the exterior derivative of a co-frame, a torsion 2-form and the curvature 2-form. If covd is the Levi-Civita connection of a metric, then the exterior derivatives of that metric and its volume element are expanded too. ExpandDiff[expr,PD,mani] expands all instances of the exterior derivative in terms of partial derivatives defined in the manifold mani.";
+UseCartan::usage="UseCartan[expr,covd] expands all the instances of the Diff using the Cartan structure equations for the connection arising from covd. In this way it is possible to expand the exterior derivative of a co-frame, a torsion 2-form and the curvature 2-form. If covd is the Levi-Civita connection of a metric, then the exterior derivatives of that metric and its volume element are expanded too. UseCartan[expr,PD,mani] expands all instances of the exterior derivative in terms of partial derivatives defined in the manifold mani.";
 (* Zero forms *)
 ZeroFormQ::usage="ZeroFormQ[expr] returns True if the degree of expr is zero";
-$UseDimensionQ::usage="$UseDimensionQ is a global boolean variable which when set to True, makes zero any differential form whose degree is greater than the dimension."
+UseDimensionStart::usage="UseDimensionStart[] is an instruction that, when issued, makes any expression with degree greater than the manifold dimension equal to zero.";
+UseDimensionStop::usage="UseDimensionStop[] cancels the action of UseDimensionStart[]";
 
 
 Begin["`Private`"]
@@ -179,25 +180,40 @@ DefInfo->Null
 Deg[expr_]:=Grade[expr,Wedge];
 
 
-$UseDimensionQ=False;
+$DimensionsZeroForms={};
+SetZeroForm[form_]:=If[GradeOfTensor[form,Wedge]>Plus@@(DimOfManifold/@DependenciesOfTensor[form]),form[___]=0;AppendTo[$DimensionsZeroForms,form]];
+UnsetZeroForm[form_]:=Unset[form[___]];
+
+
+UseDimensionStart[]:=Module[{},
+(* Forms whose degree is greater than the dimension *)
+SetZeroForm/@$Tensors;
 (* Expressions which are wedge products *)
-HoldPattern@Wedge[expr__]:=0/;(Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)))&&$UseDimensionQ;
+HoldPattern@Wedge[expr__]:=0/;(Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)));
 (* Expressions which are exterior derivatives *)
-HoldPattern@Diff[expr_]:=0/;(1+Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)))&&$UseDimensionQ;
-HoldPattern@Diff[expr_,covd_]:=0/;(1+Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)))&&$UseDimensionQ;
+HoldPattern@Diff[expr_]:=0/;(1+Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)));
+HoldPattern@Diff[expr_,covd_]:=0/;(1+Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)));
+]
+
+
+UseDimensionStop[]:=Module[{},
+UnsetZeroForm/@Union@$DimensionsZeroForms;
+HoldPattern@Wedge[expr__]=.;
+HoldPattern@Diff[expr_]=.;
+HoldPattern@Diff[expr_,covd_]=.;
+]
 
 
 DefDiffForm[form_,mani_,deg_,options___?OptionQ]:=
 (DefTensor[form,mani,GradeOfTensor->{Wedge->deg},options];
-DFormQ[Head[form][___]]^=True;If[(deg>DimOfManifold@mani)&&$UseDimensionQ,
-Throw[Message[DefDiffForm::error,"The degree of the form is greater than the dimension of the manifold. Set $UseDimensionQ to False"]]])
+DFormQ[Head[form][___]]^=True;
+)
 
 
 DefDiffForm[form_,mani_,deg_,sym_,options___?OptionQ]:=
 (DefTensor[form,mani,sym,GradeOfTensor->{Wedge->deg},options];
 DFormQ[Head[form][___]]^=True;
-If[(deg>DimOfManifold@mani)&&$UseDimensionQ,
-Throw[Message[DefDiffForm::error,"The degree of the form is greater than the dimension of the manifold. Set $UseDimensionQ to False"]]])
+)
 
 
 Options@DefDiffForm:=Options@DefTensor;
@@ -584,10 +600,10 @@ With[{c=DummyIn@Tangent@ManifoldOfCovD@cd2,A1=ChristoffelForm[cd2,cd1]},RiemannF
 
 
 (* Exterior derivative when covd is PD *)
-ExpandDiff[expr_,PD,mani_?ManifoldQ]:=(expr/.Diff@expr1_:>Module[{a=DummyIn@Tangent@mani},dx[mani][a]PD[-a]@expr1 ]/;Deg@expr1===0);
+UseCartan[expr_,PD,mani_?ManifoldQ]:=(expr/.Diff@expr1_:>Module[{a=DummyIn@Tangent@mani},dx[mani][a]PD[-a]@expr1 ]/;Deg@expr1===0);
 
 
-ExpandDiff[expr_,covd_]:=(expr/.
+UseCartan[expr_,covd_]:=(expr/.
 (* Exterior derivative of the coframe *)
 {HoldPattern[Diff@Coframe[mani_][ind_]]:>Module[{a=DummyIn@VBundleOfIndex@ind},If[TorsionQ@covd,-ConnectionForm[covd,VBundleOfIndex@ind][ind,-a]\[Wedge]Coframe[mani][a]+TorsionForm[covd][ind],-ConnectionForm[covd,VBundleOfIndex@ind][ind,-a]\[Wedge]Coframe[mani][a]]],
 (* Exterior derivative of the connection *)
