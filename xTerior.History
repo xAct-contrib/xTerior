@@ -97,3 +97,5 @@ last lines of the code of FormVarD.
 15 Jan. 2014: Changed name "ExpandDiff" by "UseCartan".
               Dropped $UseDimensionQ which is now replaced by UseDimensionStart[] and UseDimensionStop[].
              
+16 Jan. 2014: Threaded Diff and UseCartan over equations and lists.
+	      Diff[expr] is always automatically replaced by Diff[expr,PD].

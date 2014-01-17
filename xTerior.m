@@ -108,7 +108,7 @@ PD/:ManifoldOfCovD@PD=.
 Protect@PD;
 
 
-(* Definition and undefinition of a differential form (just a wrapper for DefTensor with the option GradeOfTensor\[Rule]{Wedge})*)
+(* Definition and undefinition of a differential form (just a wrapper for DefTensor with the option GradeOfTensor->{Wedge})*)
 DefDiffForm::usage="DefDiffForm[form[inds], mani, Deg] defines a tensor valued differential form of degree deg on the manifold mani";
 UndefDiffForm::usage="UndefDiffForm[form] undefines the differential form form";
 (* Grade of a differential form *)
@@ -156,7 +156,7 @@ TorsionForm::usage="TorsionForm[cd] represents the torsion 2-form arising from t
 (* Cartan structure equations *)
 UseCartan::usage="UseCartan[expr,covd] expands all the instances of the Diff using the Cartan structure equations for the connection arising from covd. In this way it is possible to expand the exterior derivative of a co-frame, a torsion 2-form and the curvature 2-form. If covd is the Levi-Civita connection of a metric, then the exterior derivatives of that metric and its volume element are expanded too. UseCartan[expr,PD,mani] expands all instances of the exterior derivative in terms of partial derivatives defined in the manifold mani.";
 (* Zero forms *)
-ZeroFormQ::usage="ZeroFormQ[expr] returns True if the degree of expr is zero";
+ZeroDegQ::usage="ZeroDegQ[expr] returns True if the degree of expr is zero";
 UseDimensionStart::usage="UseDimensionStart[] is an instruction that, when issued, makes any expression with degree greater than the manifold dimension equal to zero.";
 UseDimensionStop::usage="UseDimensionStop[] cancels the action of UseDimensionStart[]";
 
@@ -191,7 +191,7 @@ SetZeroForm/@$Tensors;
 (* Expressions which are wedge products *)
 HoldPattern@Wedge[expr__]:=0/;(Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)));
 (* Expressions which are exterior derivatives *)
-HoldPattern@Diff[expr_]:=0/;(1+Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)));
+HoldPattern@Diff[expr_,PD]:=0/;(1+Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)));
 HoldPattern@Diff[expr_,covd_]:=0/;(1+Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)));
 ]
 
@@ -199,20 +199,18 @@ HoldPattern@Diff[expr_,covd_]:=0/;(1+Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(Dim
 UseDimensionStop[]:=Module[{},
 UnsetZeroForm/@Union@$DimensionsZeroForms;
 HoldPattern@Wedge[expr__]=.;
-HoldPattern@Diff[expr_]=.;
+HoldPattern@Diff[expr_,PD]=.;
 HoldPattern@Diff[expr_,covd_]=.;
 ]
 
 
 DefDiffForm[form_,mani_,deg_,options___?OptionQ]:=
 (DefTensor[form,mani,GradeOfTensor->{Wedge->deg},options];
-DFormQ[Head[form][___]]^=True;
 )
 
 
 DefDiffForm[form_,mani_,deg_,sym_,options___?OptionQ]:=
 (DefTensor[form,mani,sym,GradeOfTensor->{Wedge->deg},options];
-DFormQ[Head[form][___]]^=True;
 )
 
 
@@ -223,18 +221,6 @@ UndefDiffForm:=UndefTensor;
 
 
 Protect[DefDiffForm,UndefDiffForm];
-
-
-DFormQ@expr_Plus:=And@@(DFormQ/@List@@expr);
-
-
-DFormQ@expr_Times:=And@@(DFormQ/@List@@expr);
-
-
-DFormQ@expr_Wedge:=And@@(DFormQ/@List@@expr);
-
-
-DFormQ@expr_Equal:=DFormQ/@expr;
 
 
 Options[DefGradedDerivation]={
@@ -304,6 +290,19 @@ Diff/:MakeBoxes[Diff[form_,cd_?CovDQ],StandardForm]:=xAct`xTensor`Private`interp
 Diff[x_?ConstantQ,rest___]:=0;
 
 
+HoldPattern[Diff[expr_]]:=Diff[expr,PD]
+
+
+HoldPattern[Diff[expr_Diff,PD]]:=0
+
+
+Diff[_Basis,PD]:=0;
+
+
+Diff@expr_List:=Diff/@expr;
+Diff@expr_Equal:=Diff/@expr;
+
+
 (* This produces expanded expressions and is much faster when there are many scalars *)
 Diff[expr_Times,rest___]:=Module[{grades=Grade[#,Wedge]&/@List@@expr,pos,scalar,form},
 pos=Position[grades,_?(#=!=0&),1,Heads->False];
@@ -326,15 +325,6 @@ diff0[expr_]:=Diff[expr];
 
 
 Diff[expr_,rest_?(Composition[Not,CovDQ])]:=Diff[expr]\[Wedge]rest;
-
-
-Diff[Diff[expr_]]:=0
-
-
-Diff[_Basis]:=0;
-
-
-DFormQ@Diff[expr_]:=DFormQ@expr;
 
 
 xTensorQ@Coframe[mani_?ManifoldQ]^=True;
@@ -599,34 +589,41 @@ With[{c=DummyIn@vb,A1=ConnectionForm[cd2,cd1,vb]},CurvatureForm[cd1,vb][a,b]+Dif
 With[{c=DummyIn@Tangent@ManifoldOfCovD@cd2,A1=ChristoffelForm[cd2,cd1]},RiemannForm[cd1][a,b]+Diff[A1[a,b],cd1]+Wedge[A1[a,-c],A1[c,b]]]};
 
 
+(* Thread over equations and lists *)
+UseCartan[expr_List,covd_]:=UseCartan[#,covd]&/@expr;
+UseCartan[expr_List,PD,mani_?ManifoldQ]:=UseCartan[#,PD,mani]&/@expr;
+UseCartan[expr_Equal,covd_]:=UseCartan[#,covd]&/@expr;
+UseCartan[expr_Equal,PD,mani_?ManifoldQ]:=UseCartan[#,PD,mani]&/@expr;
+
+
 (* Exterior derivative when covd is PD *)
 UseCartan[expr_,PD,mani_?ManifoldQ]:=(expr/.Diff@expr1_:>Module[{a=DummyIn@Tangent@mani},dx[mani][a]PD[-a]@expr1 ]/;Deg@expr1===0);
 
 
 UseCartan[expr_,covd_]:=(expr/.
 (* Exterior derivative of the coframe *)
-{HoldPattern[Diff@Coframe[mani_][ind_]]:>Module[{a=DummyIn@VBundleOfIndex@ind},If[TorsionQ@covd,-ConnectionForm[covd,VBundleOfIndex@ind][ind,-a]\[Wedge]Coframe[mani][a]+TorsionForm[covd][ind],-ConnectionForm[covd,VBundleOfIndex@ind][ind,-a]\[Wedge]Coframe[mani][a]]],
+{HoldPattern[Diff[Coframe[mani_][ind_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@ind},If[TorsionQ@covd,-ConnectionForm[covd,VBundleOfIndex@ind][ind,-a]\[Wedge]Coframe[mani][a]+TorsionForm[covd][ind],-ConnectionForm[covd,VBundleOfIndex@ind][ind,-a]\[Wedge]Coframe[mani][a]]],
 (* Exterior derivative of the connection *)
-HoldPattern[Diff[(connection:(ConnectionForm|ChristoffelForm))[covd,vbundle_:Tangent@ManifoldOfCovD@covd][a1_,-a2_]]]:>Module[{a=DummyIn@VBundleOfIndex@a1},CurvatureForm[covd,vbundle][a1,-a2]-connection[covd,vbundle][a1,-a]\[Wedge]connection[covd,vbundle][a,-a2]],
+HoldPattern[Diff[(connection:(ConnectionForm|ChristoffelForm))[covd,vbundle_:Tangent@ManifoldOfCovD@covd][a1_,-a2_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@a1},CurvatureForm[covd,vbundle][a1,-a2]-connection[covd,vbundle][a1,-a]\[Wedge]connection[covd,vbundle][a,-a2]],
 (* Exterior derivative of the torsion *)
-HoldPattern[Diff@TorsionForm[covd][ind_]]:>Module[{a=DummyIn@VBundleOfIndex@ind},Coframe[ManifoldOfCovD@covd][a]\[Wedge]RiemannForm[covd][ind,-a]-ChristoffelForm[covd][ind,-a]\[Wedge]TorsionForm[covd][a]],
+HoldPattern[Diff[TorsionForm[covd][ind_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@ind},Coframe[ManifoldOfCovD@covd][a]\[Wedge]RiemannForm[covd][ind,-a]-ChristoffelForm[covd][ind,-a]\[Wedge]TorsionForm[covd][a]],
 (* Exterior derivative of the curvature *)
-HoldPattern[Diff[(curvature:(CurvatureForm|RiemannForm))[covd,vbundle_:Tangent@ManifoldOfCovD@covd][a1_,-a2_]]]:>Module[{a=DummyIn@VBundleOfIndex@a1},ConnectionForm[covd,vbundle][a,-a2]\[Wedge]curvature[covd,vbundle][a1,-a]-curvature[covd,vbundle][a,-a2]\[Wedge]ConnectionForm[covd,vbundle][a1,-a]],
+HoldPattern[Diff[(curvature:(CurvatureForm|RiemannForm))[covd,vbundle_:Tangent@ManifoldOfCovD@covd][a1_,-a2_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@a1},ConnectionForm[covd,vbundle][a,-a2]\[Wedge]curvature[covd,vbundle][a1,-a]-curvature[covd,vbundle][a,-a2]\[Wedge]ConnectionForm[covd,vbundle][a1,-a]],
 (* Exterior derivative of the metric (indices downstairs) *)
-HoldPattern[Diff[metr_?MetricQ[-a1_,-a2_]]]:>Module[{a=DummyIn@VBundleOfIndex@a1},ChristoffelForm[covd][a,-a1]MetricOfCovD[covd][-a,-a2]+ChristoffelForm[covd][a,-a2]MetricOfCovD[covd][-a,-a1]]/;MetricOfCovD[covd]===metr,
+HoldPattern[Diff[metr_?MetricQ[-a1_,-a2_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@a1},ChristoffelForm[covd][a,-a1]MetricOfCovD[covd][-a,-a2]+ChristoffelForm[covd][a,-a2]MetricOfCovD[covd][-a,-a1]]/;MetricOfCovD[covd]===metr,
 (* Exterior derivative of the metric (indices upstairs) *)
-HoldPattern[Diff[metr_?MetricQ[a1_Symbol,a2_Symbol]]]:>-ChristoffelForm[covd][a1,a2]-ChristoffelForm[covd][a2,a1]/;MetricOfCovD[covd]===metr,
+HoldPattern[Diff[metr_?MetricQ[a1_Symbol,a2_Symbol],PD]]:>-ChristoffelForm[covd][a1,a2]-ChristoffelForm[covd][a2,a1]/;MetricOfCovD[covd]===metr,
 (* Exterior derivative of the tensor form of volume element, regarded as a zero-form (indices downstairs). I think that this formula is dimension independent *)
-If[MetricOfCovD[covd]=!=Null,Diff[epsilon[MetricOfCovD[covd]][inds__?DownIndexQ]]:>Module[{a=DummyIn@VBundleOfMetric@MetricOfCovD[covd]},ChristoffelForm[covd][a,-a]epsilon[MetricOfCovD[covd]][inds]],HoldPattern[Diff[epsilon[MetricOfCovD[covd]][inds__]]]:>Diff[epsilon[MetricOfCovD[covd]][inds]]],
+If[MetricOfCovD[covd]=!=Null,Diff[epsilon[MetricOfCovD[covd]][inds__?DownIndexQ],PD]:>Module[{a=DummyIn@VBundleOfMetric@MetricOfCovD[covd]},ChristoffelForm[covd][a,-a]epsilon[MetricOfCovD[covd]][inds]],HoldPattern[Diff[epsilon[MetricOfCovD[covd]][inds__],PD]]:>Diff[epsilon[MetricOfCovD[covd]][inds]]],
 (* Exterior derivative when covd is the parallel derivative of a coordinate chart *)
-HoldPattern@Diff@expr1_?ScalarQ:>Inner[covd[{#1,-BasisOfCovD@covd}]@expr1 Diff@#2&,CNumbersOf[BasisOfCovD@covd,VBundleOfBasis@BasisOfCovD@covd],ScalarsOfChart@BasisOfCovD@covd,Plus]/;(Deg@expr1===0&&BasisOfCovD@covd=!=Null)});
+HoldPattern@Diff[expr1_?ScalarQ,PD]:>Inner[covd[{#1,-BasisOfCovD@covd}]@expr1 Diff@#2&,CNumbersOf[BasisOfCovD@covd,VBundleOfBasis@BasisOfCovD@covd],ScalarsOfChart@BasisOfCovD@covd,Plus]/;(Deg@expr1===0&&BasisOfCovD@covd=!=Null)});
 
 
 DefGradedDerivation[Int[v_],Wedge,-1,PrintAs->"\[Iota]"];
 
 
-Int[v_][f_?ZeroFormQ]:=0;
-Int[v_][f_?ZeroFormQ form_]:=f Int[v][form];
+Int[v_][f_?ZeroDegQ]:=0;
+Int[v_][f_?ZeroDegQ form_]:=f Int[v][form];
 Int[f_?ScalarQ v_][form_]:=f Int[v][form];
 Int[v_[ind1_]][Coframe[mani_][ind2_]]:=v[ind2];
 Int[v_[ind1_]][dx[mani_][ind2_]]:=v[ind2];
@@ -798,9 +795,9 @@ FormVarD[form1_[inds1___],met_][form2_?xTensorQ[inds2___],rest_]:=0/;!ImplicitTe
 (* Hodge identity *)
 FormVarD[form_,met_][Hodge[met_][expr_],rest_]:=With[{k=Grade[expr,Wedge],n=DimOfMetric@met},
 (-1)^(k(n-k))FormVarD[form,met][expr,Hodge[met]@rest]];
-(* diff \[Rule] Replaced by Diff to adjust to the new notation. Dropped cd *)
+(* diff -> Replaced by Diff to adjust to the new notation. Dropped cd *)
 FormVarD[form_,met_][Diff[expr_],rest_]:=FormVarD[form,met][expr,Hodge[met]@Codiff[met][InvHodge[met]@rest]];
-(* codiff \[Rule] Replaced by Codiff to adjust to the new notation. Dropped cd and replaced ExtCovDiff by Diff *)
+(* codiff -> Replaced by Codiff to adjust to the new notation. Dropped cd and replaced ExtCovDiff by Diff *)
 FormVarD[form_,met_][Codiff[met_][expr_],rest_]:=FormVarD[form,met][expr,Hodge[met]@Diff[InvHodge[met]@rest]];
 
 
