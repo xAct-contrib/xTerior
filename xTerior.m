@@ -108,12 +108,12 @@ PD/:ManifoldOfCovD@PD=.
 Protect@PD;
 
 
-(* Definition and undefinition of a differential form (just a wrapper for DefTensor with the option GradeOfTensor->{Wedge})*)
+(* Definition and undefinition of a differential form (just a wrapper for DefTensor with the option GradeOfTensor\[Rule]{Wedge})*)
 DefDiffForm::usage="DefDiffForm[form[inds], mani, Deg] defines a tensor valued differential form of degree deg on the manifold mani";
 UndefDiffForm::usage="UndefDiffForm[form] undefines the differential form form";
 (* Grade of a differential form *)
 Deg::usage="Deg[form] returns the grade of a differential form";
-DFormQ::usage="DFormQ[expr] returns True if expr has been registered as a differential form. This happens automatically when using DefDiffForm.";
+DiffFormQ::usage="DiffFormQ is an option for LieToCovD which specifies whether the expression which is acted upon should be regarded as a differential form or not. This is an option added by xTerior and it is not present any other package using LieToCovD.";
 (* Exterior derivative and exterior covariant derivative *)
 Diff::usage="Diff[form] computes the exterior derivative of form. Diff[form,covd] computes the exterior covariant derivative of form with respect to the covariant derivative covd.";
 (* Computation of the exterior covariant derivative *)
@@ -128,9 +128,9 @@ CodiffToDiff::usage="CodiffToDiff[expr] replaces all the instances of the co-dif
 (* Interior contraction *)
 Int::usage="Int[v][form] is the interior contraction of form with the vector (rank 1-tensor) v";
 (* Lie derivative on forms *)
-Lie::usage="Lie[v][form] is the Cartan Lie derivative of form with respect to the vector (rank 1-tensor) v. Lie[v][form,covd] is the Cartan Lie derivative with respect to the covariant derivative covd.";
+CartanD::usage="CartanD[v][form] is the Cartan derivative of form with respect to the vector (rank 1-tensor) v. CartanD[v][form,covd] is the Cartan derivative with respect to the covariant derivative covd.";
 (* Cartan formula for Lie derivatives *)
-LieToDiff::usage="LieToDiff[expr] replaces the Cartan Lie derivative of all the differential forms in expr by their expansion obtained by means of the Cartan formula";
+CartanDToDiff::usage="CartanDToDiff[expr] replaces the Cartan derivative of all the differential forms in expr by their expansion obtained by means of the Cartan formula";
 (* Put derivations into canonical order *)
 SortDerivations::usage="SortDerivations[expr] brings expr into a new expression where all the derivations (exterior derivative, Lie derivative and interior contraction) are written in a canonical order. The default left-to-right order is defined by the variable $DerivationSortOrder";
 $DerivationSortOrder::usage="$DerivationSortOrder is a global variable which encodes the default ordering of the three derivatives Int, LieD and Diff. The default is {LieD,Int,Diff}";
@@ -632,33 +632,24 @@ Int[v_[ind1_]][dx[mani_][ind2_]]:=v[ind2];
 Int[v_][_Basis]:=0;
 
 
-DFormQ[Int[v_][expr_]]:=DFormQ@expr;
+DefGradedDerivation[CartanD[v_],Wedge,0,PrintAs->"L"];
 
 
-DefGradedDerivation[Lie[v_],Wedge,0,PrintAs->"L"];
+CartanD[v_][_Basis]:=0;
 
 
-DFormQ@LieD[v_]@expr_:=DFormQ@expr;
+CartanD[v_][_Basis,_]:=0;
 
 
-DFormQ@Lie[_][expr_,_]:=DFormQ@expr;
+CartanD/:MakeBoxes[CartanD[v_][form_,PD?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[CartanD[v][form,PD],RowBox[{SubscriptBox["L",MakeBoxes[v,StandardForm]],"[",MakeBoxes[form,StandardForm],"]"}]];
+CartanD/:MakeBoxes[CartanD[v_][form_,cd_?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[CartanD[v][form,cd],RowBox[{SubsuperscriptBox["L",MakeBoxes[v,StandardForm],Last@SymbolOfCovD[cd]],"[",MakeBoxes[form,StandardForm],"]"}]];
 
 
-Lie[v_][_Basis]:=0;
-
-
-Lie[v_][_Basis,_]:=0;
-
-
-Lie/:MakeBoxes[Lie[v_][form_,PD?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Lie[v][form,PD],RowBox[{SubscriptBox["L",MakeBoxes[v,StandardForm]],"[",MakeBoxes[form,StandardForm],"]"}]];
-Lie/:MakeBoxes[Lie[v_][form_,cd_?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Lie[v][form,cd],RowBox[{SubsuperscriptBox["L",MakeBoxes[v,StandardForm],Last@SymbolOfCovD[cd]],"[",MakeBoxes[form,StandardForm],"]"}]];
-
-
-Lie[f_?ScalarQ v_][form_]:=f Lie[v]@form+Wedge[Diff@f,Int[v]@form];
+CartanD[f_?ScalarQ v_][form_]:=f CartanD[v]@form+Wedge[Diff@f,Int[v]@form];
 
 
 (* This produces expanded expressions and is much faster when there are many scalars *)
-Lie[v_][expr_Times,rest___]:=Module[{grades=Grade[#,Wedge]&/@List@@expr,pos,scalar,form},
+CartanD[v_][expr_Times,rest___]:=Module[{grades=Grade[#,Wedge]&/@List@@expr,pos,scalar,form},
 pos=Position[grades,_?(#=!=0&),1,Heads->False];
 Which[
 Length[pos]>1,
@@ -667,30 +658,31 @@ Length[pos]===1,
 	pos=pos[[1,1]];
 	scalar=Delete[expr,{pos}];
 	form=expr[[pos]];
-	scalar Lie[v][form,rest]+lie0[v][scalar,form],
+	scalar CartanD[v][form,rest]+lie0[v][scalar,form],
 Length[pos]===0,
 	lie0[v][expr]
 ]
 ];
-lie0[v_][expr_Times]:=Sum[MapAt[Lie[v],expr,i],{i,1,Length[expr]}];
-lie0[v_][expr_Times,form_]:=Sum[MapAt[Lie[v][#,form]&,expr,i],{i,1,Length[expr]}];
-lie0[v_][expr_,form_]:=Wedge[Lie[v][expr],form];
-lie0[v_][expr_]:=Lie[v][expr];
+lie0[v_][expr_Times]:=Sum[MapAt[CartanD[v],expr,i],{i,1,Length[expr]}];
+lie0[v_][expr_Times,form_]:=Sum[MapAt[CartanD[v][#,form]&,expr,i],{i,1,Length[expr]}];
+lie0[v_][expr_,form_]:=Wedge[CartanD[v][expr],form];
+lie0[v_][expr_]:=CartanD[v][expr];
 
 
 Unprotect@LieD;
-LieD[v_]@expr_Wedge:=(Lie[v]@expr/.Lie->LieD);
+LieD[v_]@expr_Wedge:=(CartanD[v]@expr/.CartanD->LieD);
 Protect@LieD;
 
 
-LieToDiff[expr_]:=expr/.{Lie[v_][form_]:>Diff@Int[v]@form+Int[v]@Diff@form,Lie[v_][form_,covd_?CovDQ]:>Diff[Int[v]@form,covd]+Int[v]@Diff[form,covd]};
+CartanDToDiff[expr_]:=expr/.{CartanD[v_][form_]:>Diff@Int[v]@form+Int[v]@Diff@form,CartanD[v_][form_,covd_?CovDQ]:>Diff[Int[v]@form,covd]+Int[v]@Diff[form,covd]};
 
 
-LieDForm[v_[ind_],covd_?CovDQ]@ten_:=If[DFormQ@ten,Module[{a=DummyIn@VBundleOfIndex@ind},LieD[v[ind],covd]@ten+Lie[v[ind]][ten,covd]-v[a]covd[-a]@ten]];
+LieDForm[v_[ind_],covd_?CovDQ]@ten_:=Module[{a=DummyIn@VBundleOfIndex@ind},ToCanonical[LieD[v[ind],covd]@ten+CartanD[v[ind]][ten,covd]-v[a]covd[-a]@ten,UseMetricOnVBundle->None]];
+LieDFormToCovD[expr_,covd_]:=expr//.LieD[vector_]:>LieDForm[vector,covd];
 
 
 Unprotect@LieDToCovD;
-LieDToCovD[expr_,covd_:PD]:=If[DFormQ@expr,expr//.LieD[vector_]:>LieDForm[vector,covd],expr//.LieD[vector_]:>LieD[vector,covd]];
+LieDToCovD[expr_,arg_:PD]:=LieDFormToCovD[expr,arg]/;Deg@expr>=1
 Protect@LieDToCovD;
 
 
@@ -702,36 +694,36 @@ HoldPattern[Int[v_]@Int[w_]@form_]:>-Int[w]@Int[v]@form/;!OrderedQ[{v,w}]
 };
 
 
-SortDerivationsRule[Lie,Lie]={
-HoldPattern[Lie[v_]@Lie[w_]@form_]:>Module[{a=First@FindFreeIndices[v]},Lie[w]@Lie[v]@form+Lie[Bracket[v,w][a]]@form]/;!OrderedQ[{v,w}],HoldPattern[Lie[v_][Lie[w_][form_,covd_?CovDQ],covd_?CovDQ]]:>Module[{a=First@FindFreeIndices[v]},Lie[w][Lie[v][form,covd],covd]+Lie[Bracket[v,w][a]][form,covd]]/;!OrderedQ[{v,w}]
+SortDerivationsRule[CartanD,CartanD]={
+HoldPattern[CartanD[v_]@CartanD[w_]@form_]:>Module[{a=First@FindFreeIndices[v]},CartanD[w]@CartanD[v]@form+CartanD[Bracket[v,w][a]]@form]/;!OrderedQ[{v,w}],HoldPattern[CartanD[v_][CartanD[w_][form_,covd_?CovDQ],covd_?CovDQ]]:>Module[{a=First@FindFreeIndices[v]},CartanD[w][CartanD[v][form,covd],covd]+CartanD[Bracket[v,w][a]][form,covd]]/;!OrderedQ[{v,w}]
 };
 
 
-SortDerivationsRule[Int,Lie]={
-HoldPattern[Lie[w_]@Int[v_]@form_]:>Module[{a=First@FindFreeIndices[w]},Int[v]@Lie[w]@form+Int[Bracket[w,v][a]]@form],HoldPattern[Lie[w_][Int[v_]@form_,covd_?CovDQ]]:>Module[{a=First@FindFreeIndices[w]},Int[v]@Lie[w][form,covd]+Int[Bracket[w,v][a]]@form]
+SortDerivationsRule[Int,CartanD]={
+HoldPattern[CartanD[w_]@Int[v_]@form_]:>Module[{a=First@FindFreeIndices[w]},Int[v]@CartanD[w]@form+Int[Bracket[w,v][a]]@form],HoldPattern[CartanD[w_][Int[v_]@form_,covd_?CovDQ]]:>Module[{a=First@FindFreeIndices[w]},Int[v]@CartanD[w][form,covd]+Int[Bracket[w,v][a]]@form]
 };
-SortDerivationsRule[Lie,Int]={
-HoldPattern[Int[v_]@Lie[w_]@form_]:>Module[{a=First@FindFreeIndices[w]},Lie[w]@Int[v]@form+Int[Bracket[v,w][a]]@form],HoldPattern[Int[v_]@Lie[w_][form_,covd_?CovDQ]]:>Module[{a=First@FindFreeIndices[w]},Lie[w][Int[v]@form,covd]+Int[Bracket[v,w][a]]@form]
+SortDerivationsRule[CartanD,Int]={
+HoldPattern[Int[v_]@CartanD[w_]@form_]:>Module[{a=First@FindFreeIndices[w]},CartanD[w]@Int[v]@form+Int[Bracket[v,w][a]]@form],HoldPattern[Int[v_]@CartanD[w_][form_,covd_?CovDQ]]:>Module[{a=First@FindFreeIndices[w]},CartanD[w][Int[v]@form,covd]+Int[Bracket[v,w][a]]@form]
 };
 
 
 SortDerivationsRule[Int,Diff]={
-HoldPattern[Diff[Int[v_]@form_]]:>-Int[v]@Diff@form+Lie[v]@form,HoldPattern[Diff[Int[v_]@form_,covd_?CovDQ]]:>-Int[v]@Diff[form,covd]+Lie[v][form,covd]
+HoldPattern[Diff[Int[v_]@form_,covd_?CovDQ]]:>-Int[v]@Diff[form,covd]+CartanD[v][form,covd]
 };
-SortDerivationsRule[Diff,Int]={HoldPattern[Int[v_]@Diff[form_]]:>-Diff[Int[v]@form]+Lie[v][form],
-HoldPattern[Int[v_]@Diff[form_,covd_?CovDQ]]:>-Diff[Int[v]@form,covd]+Lie[v][form,covd]
-};
-
-
-SortDerivationsRule[Lie,Diff]={
-HoldPattern[Diff[Lie[v_]@form_]]:>Lie[v]@Diff@form,HoldPattern[Diff[Lie[v_][form_,covd_?CovDQ],covd_?CovDQ]]:>Lie[v][Diff[form,covd],covd]
-};
-SortDerivationsRule[Diff,Lie]={
-HoldPattern[Lie[v_]@Diff[form_]]:>Diff@Lie[v]@form,HoldPattern[Lie[v_][Diff[form_,covd_?CovDQ],covd_?CovDQ]]:>Diff[Lie[v][form,covd],covd]
+SortDerivationsRule[Diff,Int]={
+HoldPattern[Int[v_]@Diff[form_,covd_?CovDQ]]:>-Diff[Int[v]@form,covd]+CartanD[v][form,covd]
 };
 
 
-$Derivations={Lie,Int,Diff};
+SortDerivationsRule[CartanD,Diff]={
+HoldPattern[Diff[CartanD[v_]@form_,PD]]:>CartanD[v]@Diff@form,HoldPattern[Diff[CartanD[v_][form_,covd_?CovDQ],covd_?CovDQ]]:>CartanD[v][Diff[form,covd],covd]
+};
+SortDerivationsRule[Diff,CartanD]={
+HoldPattern[CartanD[v_]@Diff[form_,PD]]:>Diff@CartanD[v]@form,HoldPattern[CartanD[v_][Diff[form_,covd_?CovDQ],covd_?CovDQ]]:>Diff[CartanD[v][form,covd],covd]
+};
+
+
+$Derivations={CartanD,Int,Diff};
 $DerivationSortOrder=$Derivations;
 
 
@@ -795,9 +787,9 @@ FormVarD[form1_[inds1___],met_][form2_?xTensorQ[inds2___],rest_]:=0/;!ImplicitTe
 (* Hodge identity *)
 FormVarD[form_,met_][Hodge[met_][expr_],rest_]:=With[{k=Grade[expr,Wedge],n=DimOfMetric@met},
 (-1)^(k(n-k))FormVarD[form,met][expr,Hodge[met]@rest]];
-(* diff -> Replaced by Diff to adjust to the new notation. Dropped cd *)
+(* diff \[Rule] Replaced by Diff to adjust to the new notation. Dropped cd *)
 FormVarD[form_,met_][Diff[expr_],rest_]:=FormVarD[form,met][expr,Hodge[met]@Codiff[met][InvHodge[met]@rest]];
-(* codiff -> Replaced by Codiff to adjust to the new notation. Dropped cd and replaced ExtCovDiff by Diff *)
+(* codiff \[Rule] Replaced by Codiff to adjust to the new notation. Dropped cd and replaced ExtCovDiff by Diff *)
 FormVarD[form_,met_][Codiff[met_][expr_],rest_]:=FormVarD[form,met][expr,Hodge[met]@Diff[InvHodge[met]@rest]];
 
 
