@@ -336,7 +336,6 @@ DependenciesOfTensor[Coframe[mani_?ManifoldQ]]^:={mani};
 HostsOf[Coframe[mani_?ManifoldQ]]^={};
 TensorID[Coframe[mani_?ManifoldQ]]^={};
 PrintAs[Coframe[mani_?ManifoldQ]]^="\[Theta]";
-DFormQ[Coframe[mani_?ManifoldQ][ind_]]^=True;
 
 
 xTensorQ@dx[mani_?ManifoldQ]^=True;
@@ -348,7 +347,6 @@ DependenciesOfTensor[dx[mani_?ManifoldQ]]^:={mani};
 HostsOf[dx[mani_?ManifoldQ]]^={};
 TensorID[dx[mani_?ManifoldQ]]^={};
 PrintAs[dx[mani_?ManifoldQ]]^="dx";
-DFormQ[dx[mani_?ManifoldQ][ind_]]^=True;
 
 
 Diff[dx[mani_?ManifoldQ][ind_]]:=0;
@@ -393,9 +391,6 @@ ExpandHodgeDual1[expr_,Coframe,met_]:=Fold[ExpandHodgeDual1[#1,Coframe[#2],met]&
 ExpandHodgeDual1[expr_,dx,met_]:=Fold[ExpandHodgeDual1[#1,dx[#2],met]&,expr,$Manifolds];
 
 
-DFormQ[Hodge[metric_][expr_]]:=DFormQ@expr;
-
-
 DefInertHead[Codiff[metric_],
 LinearQ->True,
 ContractThrough->delta,
@@ -418,9 +413,6 @@ ContractBasis[basis_Basis Codiff[metric_][expr_],args_]:=Codiff[metric][Contract
 Protect@ContractBasis;
 
 
-DFormQ[Codiff[metric_][expr_]]:=DFormQ@expr;
-
-
 xTensorQ[ConnectionForm[cd_?CovDQ,_]]^=True;
 SlotsOfTensor[ConnectionForm[_,vb_?VBundleQ]]^:={vb,-vb};
 ConnectionForm/:GradeOfTensor[ConnectionForm[_,_],Wedge]=1;
@@ -431,7 +423,6 @@ DefInfo[ConnectionForm[_,_]]^={"nonsymmetric Connection 1-form",""};
 DependenciesOfTensor[ConnectionForm[cd1_,_]]^:=Union@@DependenciesOfCovD/@{cd1};
 HostsOf[ConnectionForm[cd1_,vb_]]^:=Join[{cd1},Union@@HostsOf/@{cd1,vb}];(* Should we put Union@@HostsOf/@{cd1,vb} here? Yes but we need to add cd1 itself *)
 TensorID[ConnectionForm[_,_]]^={};
-DFormQ[ConnectionForm[cd1_,vb_][inds__]]^=True;
 
 PrintAs[ConnectionForm]^="A";
 PrintAs[ConnectionForm[cd1_,_]]^:=PrintAs[ConnectionForm]<>"["<>Last@SymbolOfCovD[cd1]<>"]";
@@ -448,7 +439,6 @@ DefInfo[ChristoffelForm[_]]^={"nonsymmetric frame bundle Connection 1-form",""};
 DependenciesOfTensor[ChristoffelForm[cd1_]]^:=Union@@DependenciesOfCovD/@{cd1};
 HostsOf[ChristoffelForm[cd1_]]^:=Join[{cd1},Union@@HostsOf/@{cd1}];(* Should we put Union@@HostsOf/@{cd1,cd2,vb} here? Yes, but addint also cd1 *)
 TensorID[ChristoffelForm[_]]^={};
-DFormQ[ChristoffelForm[cd1_][inds__]]^=True;
 
 PrintAs[ChristoffelForm]^="\[CapitalGamma]";
 PrintAs[ChristoffelForm[cd1_]]^:=PrintAs[ChristoffelForm]<>"["<>Last@SymbolOfCovD[cd1]<>"]";
@@ -484,7 +474,6 @@ DefInfo[CurvatureForm[_,_]]^={"Curvature 2-form",""};
 DependenciesOfTensor[CurvatureForm[cd_,_]]^:=DependenciesOfCovD[cd];
 HostsOf[CurvatureForm[cd_,vb_]]^:=Join[{cd},Union@@HostsOf/@{cd,vb}];(* Should we put Union@@HostsOf/@{cd,vb} here? Yes but we need to add cd itself *)
 TensorID[CurvatureForm[_,_]]^={};
-DFormQ[CurvatureForm[_,_][__]]^=True;
 
 PrintAs[CurvatureForm]^="F";
 PrintAs[CurvatureForm[cd_,_]]^:=PrintAs[CurvatureForm]<>"["<>Last@SymbolOfCovD[cd]<>"]";
@@ -502,7 +491,6 @@ DefInfo[RiemannForm[_]]^={"Curvature 2-form in the frame bundle",""};
 DependenciesOfTensor[RiemannForm[cd_]]^:=DependenciesOfCovD[cd];
 HostsOf[RiemannForm[cd_]]^:=Join[{cd},Union@@HostsOf/@{cd}];(* Should we put Union@@HostsOf/@{cd,vb} here? Yes but we need to add cd itself *)
 TensorID[RiemannForm[_]]^={};
-DFormQ[RiemannForm[_][__]]^=True;
 
 PrintAs[RiemannForm]^="R";
 PrintAs[RiemannForm[cd_]]^:=PrintAs[RiemannForm]<>"["<>Last@SymbolOfCovD[cd]<>"]";
@@ -527,7 +515,6 @@ DefInfo[TorsionForm[_]]^={"Torsion 2-form",""};
 DependenciesOfTensor[TorsionForm[cd_]]^:=DependenciesOfCovD[cd];
 HostsOf[TorsionForm[cd_]]^:=HostsOf@cd;(* Should we put HostsOf@cd here? OK*)
 TensorID[TorsionForm[_]]^={};
-DFormQ[TorsionForm[_][__]]^=True;
 
 
 PrintAs[TorsionForm]^="\[GothicCapitalT]";
@@ -787,8 +774,8 @@ FormVarD[form1_[inds1___],met_][form2_?xTensorQ[inds2___],rest_]:=0/;!ImplicitTe
 (* Hodge identity *)
 FormVarD[form_,met_][Hodge[met_][expr_],rest_]:=With[{k=Grade[expr,Wedge],n=DimOfMetric@met},
 (-1)^(k(n-k))FormVarD[form,met][expr,Hodge[met]@rest]];
-(* diff \[Rule] Replaced by Diff to adjust to the new notation. Dropped cd *)
-FormVarD[form_,met_][Diff[expr_],rest_]:=FormVarD[form,met][expr,Hodge[met]@Codiff[met][InvHodge[met]@rest]];
+(* diff \[Rule] Replaced by Diff to adjust to the new notation. Dropped cd. Added back PD *)
+FormVarD[form_,met_][Diff[expr_,PD],rest_]:=FormVarD[form,met][expr,Hodge[met]@Codiff[met][InvHodge[met]@rest]];
 (* codiff \[Rule] Replaced by Codiff to adjust to the new notation. Dropped cd and replaced ExtCovDiff by Diff *)
 FormVarD[form_,met_][Codiff[met_][expr_],rest_]:=FormVarD[form,met][expr,Hodge[met]@Diff[InvHodge[met]@rest]];
 

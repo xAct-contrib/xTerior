@@ -101,17 +101,19 @@ Cell[CellGroupData[{
 
 Cell["1.0. TODO list", "Subsubsection"],
 
-Cell["\<\
-TODO : 
--In the definition of the connection forms there are no checks about the \
-manifolds in which the covariant derivatives are defined and they may well be \
-defined in different tangent bundles.
+Cell[TextData[{
+ StyleBox["TODO : ",
+  FontWeight->"Bold"],
+ "\n-Add some option to DefDiffForm which allows the user to include the \
+degree in the printing output.\n-In the definition of the connection forms \
+there are no checks about the manifolds in which the covariant derivatives \
+are defined and they may well be defined in different tangent bundles.\n\
 -ContractBasis and ToBasis commute with the exterior derivative. Implement \
-it. This is partially done.
--If we introduce a second metric in the session then the volume element is \
-not defined (not know how to define epsilon for a frozen metric).\
-\>", "Text"]
-}, Open  ]],
+it. This is partially done.\n-If we introduce a second metric in the session \
+then the volume element is not defined (not know how to define epsilon for a \
+frozen metric).\n-Reinstate covariant co-differentials."
+}], "Text"]
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -244,8 +246,8 @@ Cell[BoxData[
        RowBox[{"Join", "[", 
         RowBox[{
          RowBox[{"Names", "[", "\"\<xAct`xTerior`*\>\"", "]"}], ",", 
-         RowBox[{"Names", "[", "\"\<xAct`xTerior`Private`*\>\"", "]"}]}], 
-        "]"}], ",", 
+         RowBox[{"Names", "[", "\"\<xAct`xTerior`Private`*\>\"", "]"}]}], "]"}
+        ], ",", 
        RowBox[{
        "\"\<$Version\>\"", "|", "\"\<xAct`xTerior`$Version\>\"", "|", 
         "\"\<$xTensorVersionExpected\>\"", "|", 
@@ -2187,14 +2189,7 @@ Cell[BoxData[{
    RowBox[{"PrintAs", "[", 
     RowBox[{"Coframe", "[", 
      RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "]"}], "^=", 
-   "\"\<\[Theta]\>\""}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"DFormQ", "[", 
-    RowBox[{
-     RowBox[{"Coframe", "[", 
-      RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "[", "ind_", "]"}], "]"}], "^=",
-    "True"}], ";"}]}], "Input",
+   "\"\<\[Theta]\>\""}], ";"}]}], "Input",
  InitializationCell->True],
 
 Cell["Holonomic Co-frame", "Text"],
@@ -2260,14 +2255,7 @@ Cell[BoxData[{
    RowBox[{"PrintAs", "[", 
     RowBox[{"dx", "[", 
      RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "]"}], "^=", "\"\<dx\>\""}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"DFormQ", "[", 
-    RowBox[{
-     RowBox[{"dx", "[", 
-      RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "[", "ind_", "]"}], "]"}], "^=",
-    "True"}], ";"}]}], "Input",
+  ";"}]}], "Input",
  InitializationCell->True],
 
 Cell["Condition of the co-frame being holonomic.", "Text"],
@@ -2559,17 +2547,6 @@ Cell[BoxData[
        RowBox[{"#1", ",", 
         RowBox[{"dx", "[", "#2", "]"}], ",", "met"}], "]"}], "&"}], ",", 
      "expr", ",", "$Manifolds"}], "]"}]}], ";"}]], "Input",
- InitializationCell->True],
-
-Cell["Behaviour with respect to DFormQ", "Text"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"DFormQ", "[", 
-    RowBox[{
-     RowBox[{"Hodge", "[", "metric_", "]"}], "[", "expr_", "]"}], "]"}], ":=", 
-   RowBox[{"DFormQ", "@", "expr"}]}], ";"}]], "Input",
  InitializationCell->True]
 }, Closed]],
 
@@ -2750,17 +2727,6 @@ Cell[BoxData[{
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Protect", "@", "ContractBasis"}], ";"}]}], "Input",
- InitializationCell->True],
-
-Cell["Behaviour with respect to DFormQ", "Text"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"DFormQ", "[", 
-    RowBox[{
-     RowBox[{"Codiff", "[", "metric_", "]"}], "[", "expr_", "]"}], "]"}], ":=", 
-   RowBox[{"DFormQ", "@", "expr"}]}], ";"}]], "Input",
  InitializationCell->True]
 }, Closed]]
 }, Open  ]],
@@ -3106,18 +3072,12 @@ Cell[BoxData[{
    "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"TensorID", "[", 
-    RowBox[{"ConnectionForm", "[", 
-     RowBox[{"_", ",", "_"}], "]"}], "]"}], "^=", 
-   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
    RowBox[{
-    RowBox[{"DFormQ", "[", 
-     RowBox[{
-      RowBox[{"ConnectionForm", "[", 
-       RowBox[{"cd1_", ",", "vb_"}], "]"}], "[", "inds__", "]"}], "]"}], "^=",
-     "True"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+    RowBox[{"TensorID", "[", 
+     RowBox[{"ConnectionForm", "[", 
+      RowBox[{"_", ",", "_"}], "]"}], "]"}], "^=", 
+    RowBox[{"{", "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"PrintAs", "[", "ConnectionForm", "]"}], "^=", "\"\<A\>\""}], 
@@ -3268,16 +3228,10 @@ Cell[BoxData[{
    "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"TensorID", "[", 
-    RowBox[{"ChristoffelForm", "[", "_", "]"}], "]"}], "^=", 
-   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
    RowBox[{
-    RowBox[{"DFormQ", "[", 
-     RowBox[{
-      RowBox[{"ChristoffelForm", "[", "cd1_", "]"}], "[", "inds__", "]"}], 
-     "]"}], "^=", "True"}], ";"}], 
+    RowBox[{"TensorID", "[", 
+     RowBox[{"ChristoffelForm", "[", "_", "]"}], "]"}], "^=", 
+    RowBox[{"{", "}"}]}], ";"}], 
   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
@@ -3338,9 +3292,12 @@ Cell[BoxData[{
    RowBox[{"ChristoffelForm", "[", "cd", "]"}]}], ";"}]}], "Input",
  InitializationCell->True],
 
-Cell["\<\
-PD is regarded as the trivial connection in a principal bundle. Hence\
-\>", "Text"],
+Cell[TextData[{
+ "PD is regarded as the trivial connection in a principal bundle. Hence: ",
+ StyleBox["Alfonso: I\[CloseCurlyQuote]m not sure that this is correct from \
+the mathematical point of view but it works from the practical point of view.",
+  FontWeight->"Bold"]
+}], "Text"],
 
 Cell[BoxData[{
  RowBox[{
@@ -3602,18 +3559,12 @@ Cell[BoxData[{
    "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"TensorID", "[", 
-    RowBox[{"CurvatureForm", "[", 
-     RowBox[{"_", ",", "_"}], "]"}], "]"}], "^=", 
-   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
    RowBox[{
-    RowBox[{"DFormQ", "[", 
-     RowBox[{
-      RowBox[{"CurvatureForm", "[", 
-       RowBox[{"_", ",", "_"}], "]"}], "[", "__", "]"}], "]"}], "^=", 
-    "True"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+    RowBox[{"TensorID", "[", 
+     RowBox[{"CurvatureForm", "[", 
+      RowBox[{"_", ",", "_"}], "]"}], "]"}], "^=", 
+    RowBox[{"{", "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"PrintAs", "[", "CurvatureForm", "]"}], "^=", "\"\<F\>\""}], 
@@ -3718,16 +3669,11 @@ Cell[BoxData[{
    "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"TensorID", "[", 
-    RowBox[{"RiemannForm", "[", "_", "]"}], "]"}], "^=", 
-   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
    RowBox[{
-    RowBox[{"DFormQ", "[", 
-     RowBox[{
-      RowBox[{"RiemannForm", "[", "_", "]"}], "[", "__", "]"}], "]"}], "^=", 
-    "True"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+    RowBox[{"TensorID", "[", 
+     RowBox[{"RiemannForm", "[", "_", "]"}], "]"}], "^=", 
+    RowBox[{"{", "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"PrintAs", "[", "RiemannForm", "]"}], "^=", "\"\<R\>\""}], 
@@ -3768,8 +3714,8 @@ Cell[BoxData[{
  InitializationCell->True],
 
 Cell["\<\
-Transformation of the Curvature form into the curvature tensor plus co-frame. \
-Check conventions.\
+Transformation of the Curvature form into the curvature tensor plus co-frame.\
+\
 \>", "Text"],
 
 Cell[BoxData[
@@ -3934,13 +3880,7 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{"TensorID", "[", 
     RowBox[{"TorsionForm", "[", "_", "]"}], "]"}], "^=", 
-   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"DFormQ", "[", 
-    RowBox[{
-     RowBox[{"TorsionForm", "[", "_", "]"}], "[", "__", "]"}], "]"}], "^=", 
-   "True"}], ";"}]}], "Input",
+   RowBox[{"{", "}"}]}], ";"}]}], "Input",
  InitializationCell->True],
 
 Cell[BoxData[{
@@ -6893,15 +6833,17 @@ Cell[BoxData[
      RowBox[{
      "Replaced", " ", "by", " ", "Diff", " ", "to", " ", "adjust", " ", "to", 
       " ", "the", " ", "new", " ", 
-      RowBox[{"notation", ".", " ", "Dropped"}], " ", "cd"}]}], " ", "*)"}], 
-   "\[IndentingNewLine]", 
+      RowBox[{"notation", ".", " ", "Dropped"}], " ", 
+      RowBox[{"cd", ".", " ", "Added"}], " ", "back", " ", "PD"}]}], " ", 
+    "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{
       RowBox[{"FormVarD", "[", 
        RowBox[{"form_", ",", "met_"}], "]"}], "[", 
       RowBox[{
-       RowBox[{"Diff", "[", "expr_", "]"}], ",", "rest_"}], "]"}], ":=", 
+       RowBox[{"Diff", "[", 
+        RowBox[{"expr_", ",", "PD"}], "]"}], ",", "rest_"}], "]"}], ":=", 
      RowBox[{
       RowBox[{"FormVarD", "[", 
        RowBox[{"form", ",", "met"}], "]"}], "[", 
@@ -6951,7 +6893,7 @@ Cell[BoxData[
  StyleBox["\<\"Diff[form] computes the exterior derivative of form. \
 Diff[form,covd] computes the exterior covariant derivative of form with \
 respect to the covariant derivative covd.\"\>", "MSG"]], "Print", "PrintUsage",
- CellTags->"Info3598867441-7944634"]
+ CellTags->"Info3599198498-4009857"]
 }, Open  ]]
 }, Closed]]
 }, Open  ]],
@@ -6972,7 +6914,7 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1276, 613},
-WindowMargins->{{Automatic, 195}, {157, Automatic}},
+WindowMargins->{{306, Automatic}, {159, Automatic}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,

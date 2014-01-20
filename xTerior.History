@@ -102,3 +102,6 @@ last lines of the code of FormVarD.
 	    
 18 Jan. 2014: Some name changes: new symbols are CartanD (Cartan Derivative) and CartanToDiff (transformation of the Cartan
               derivative into an expression with the exterior derivative and the inner contraction by using the Cartan rule).
+              
+20 Jan. 2014: Removed DFormQ from xTerior.nb. It is no longer needed.
+           
