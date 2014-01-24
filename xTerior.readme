@@ -1,0 +1,84 @@
+############################################################################
+#
+# Readme file of the xTerior (version 0.8.5) package - Installation Instructions
+#
+# Language: Mathematica 9.0 or later. 
+#
+# Description: The xTerior package is part of the xAct suite of Mathematica  
+#              packages to deal with computations with differential forms in  
+#              differential geometry.   
+#
+# Developers: Alfonso García-Parrado 
+#             Centro de Matemática, Universidade do Minho (Portugal)                  
+#                      and 
+#             Leo C. Stein 
+#             Cornell University, NY, United States. 
+#             
+# Contact and bug report: alfonso@math.uminho.pt, leo.stein@gmail.com
+#
+############################################################################
+
+The authors kindly ask that researchers who have used the package cite
+references describing it.
+
+INSTALLATION INSTRUCTIONS
+
+In order to run xTerior you need to have first:
+
+1) Mathematica, at least version 9.0 (earlier versions might also work).
+
+2) The xAct software, including xTerior and other packages it needs.
+   They can all be downloaded as a single file
+   (the current version is 1.1.0):
+ 
+   Linux/Unix/Mac users:
+      http://www.xact.es/download/xAct_1.1.0.tgz
+   Windows users:
+      http://www.xact.es/download/xAct_1.1.0.zip
+
+The file xAct_1.1.0.tgz (or .zip) must be unpacked in one of the
+directories prepared for Mathematica addons. We recommend,
+for single-user installations:
+
+  Linux/Unix:
+      $HOME/.Mathematica/Applications/
+  Windows:
+      C:\Document and Settings\<user>\Application Data\Mathematica\Applications\
+  Mac:
+      /Users/<user>/Library/Mathematica/Applications/
+
+or for system-wide installations:
+
+  Linux/Unix:
+      /usr/share/Mathematica/Applications/
+  Windows:
+      C:\Documents and settings\All Users\Application data\Mathematica\Applications\
+  Mac:
+      /Library/Mathematica/Applications/
+
+Everything will be placed in a directory xAct under Applications/.
+For further installation hints see the "Installation Notes" at the
+xAct webpage.
+
+That means that the structure of the essential dependencies should be something like
+
+.../Applications/xAct/xTensor
+                     /xPerm
+                     /xCoba
+                     /Documentation/English/xTeriorDoc.nb
+                     /xTerior/Kernel/init.m
+                            /xTerior.m
+                            /xTerior.nb
+                 
+
+At this point, it should be possible to execute everything in the
+xTeriorDoc.nb file. 
+
+SPECIAL NOTES FOR WINDOWS USERS:
+
+1) The external executable of the xPerm package is required to speed up
+   the computations. It works for all Mathematica versions under Linux and
+   Mac, but only for Mathematica 6.0 or higher under Windows.
+
+2) A DOS-like window may appear when loading this executable. Do not
+   close it; it can be minimized at the task bar.
