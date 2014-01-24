@@ -111,9 +111,9 @@ are defined and they may well be defined in different tangent bundles.\n\
 -ContractBasis and ToBasis commute with the exterior derivative. Implement \
 it. This is partially done.\n-If we introduce a second metric in the session \
 then the volume element is not defined (not know how to define epsilon for a \
-frozen metric).\n-Reinstate covariant co-differentials."
+frozen metric)."
 }], "Text"]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -246,8 +246,8 @@ Cell[BoxData[
        RowBox[{"Join", "[", 
         RowBox[{
          RowBox[{"Names", "[", "\"\<xAct`xTerior`*\>\"", "]"}], ",", 
-         RowBox[{"Names", "[", "\"\<xAct`xTerior`Private`*\>\"", "]"}]}], "]"}
-        ], ",", 
+         RowBox[{"Names", "[", "\"\<xAct`xTerior`Private`*\>\"", "]"}]}], 
+        "]"}], ",", 
        RowBox[{
        "\"\<$Version\>\"", "|", "\"\<xAct`xTerior`$Version\>\"", "|", 
         "\"\<$xTensorVersionExpected\>\"", "|", 
@@ -2265,9 +2265,10 @@ Cell[BoxData[
   RowBox[{
    RowBox[{"Diff", "[", 
     RowBox[{
-     RowBox[{"dx", "[", 
-      RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "[", "ind_", "]"}], "]"}], ":=",
-    "0"}], ";"}]], "Input",
+     RowBox[{
+      RowBox[{"dx", "[", 
+       RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "[", "ind_", "]"}], ",", 
+     "PD"}], "]"}], ":=", "0"}], ";"}]], "Input",
  InitializationCell->True]
 }, Closed]],
 
@@ -2642,7 +2643,21 @@ Cell[BoxData[{
         "\"\<[\>\"", ",", 
         RowBox[{"MakeBoxes", "[", 
          RowBox[{"form", ",", "StandardForm"}], "]"}], ",", "\"\<]\>\""}], 
-       "}"}], "]"}]}], "]"}]}], ";"}]}], "Input"],
+       "}"}], "]"}]}], "]"}]}], ";"}]}], "Input",
+ InitializationCell->True],
+
+Cell["We always have PD as the covariant derivative.", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"HoldPattern", "[", 
+    RowBox[{
+     RowBox[{"Codiff", "[", "met_", "]"}], "[", "expr_", "]"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Codiff", "[", "met", "]"}], "[", 
+    RowBox[{"expr", ",", "PD"}], "]"}]}], ";"}]], "Input",
+ InitializationCell->True],
 
 Cell["\<\
 The co-differential is defined in terms of the exterior derivative and the \
@@ -2652,7 +2667,8 @@ Shouldn\[CloseCurlyQuote]t it depend on the difference between the number of \
 plus and minus?
 Jose: I think it is correct.
 Leo: Ok, I agree now. Also, ReplaceRepeated in case of nested codiff.
-Alfonso: dropped dependency on a covariant derivative.\
+Alfonso: dropped dependency on a covariant derivative.
+Alfonso: added back dependency on a covariant derivative.\
 \>", "Text"],
 
 Cell[BoxData[
@@ -2661,8 +2677,9 @@ Cell[BoxData[
   RowBox[{"expr", "//.", 
    RowBox[{
     RowBox[{
-     RowBox[{"Codiff", "[", "met_", "]"}], "[", "expr1_", "]"}], 
-    "\[RuleDelayed]", 
+     RowBox[{"Codiff", "[", "met_", "]"}], "[", 
+     RowBox[{"expr1_", ",", 
+      RowBox[{"covd_", "?", "CovDQ"}]}], "]"}], "\[RuleDelayed]", 
     RowBox[{
      RowBox[{
       RowBox[{"(", 
@@ -2681,7 +2698,8 @@ Cell[BoxData[
       RowBox[{"Hodge", "[", "met", "]"}], "@", 
       RowBox[{"Diff", "[", 
        RowBox[{
-        RowBox[{"Hodge", "[", "met", "]"}], "@", "expr1"}], 
+        RowBox[{
+         RowBox[{"Hodge", "[", "met", "]"}], "@", "expr1"}], ",", "covd"}], 
        "]"}]}]}]}]}]}]], "Input",
  InitializationCell->True],
 
@@ -2690,17 +2708,40 @@ Cell["Leo: For convenience we program this identity:", "Text"],
 Cell[BoxData[
  RowBox[{
   RowBox[{
-   RowBox[{"Codiff", "[", "metric_", "]"}], "@", 
+   RowBox[{"Codiff", "[", "metric_", "]"}], "[", 
    RowBox[{
-    RowBox[{"Codiff", "[", "metric_", "]"}], "@", "expr_"}]}], ":=", 
-  "0"}]], "Input",
+    RowBox[{"Codiff", "[", "metric_", "]"}], "[", 
+    RowBox[{"expr_", ",", "PD"}], "]"}], "]"}], ":=", "0"}]], "Input",
+ InitializationCell->True],
+
+Cell["Co-differential of basis objects is zero.", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Codiff", "[", 
+    RowBox[{"_Basis", ",", 
+     RowBox[{"covd_", "?", "CovDQ"}]}], "]"}], ":=", "0"}], ";"}]], "Input",
+ InitializationCell->True],
+
+Cell["Thread over lists and equal", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Codiff", "@", "expr_List"}], ":=", 
+   RowBox[{"Codiff", "/@", "expr"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Codiff", "@", "expr_Equal"}], ":=", 
+   RowBox[{"Codiff", "/@", "expr"}]}], ";"}]}], "Input",
  InitializationCell->True],
 
 Cell[TextData[{
  "Automatic contraction of products of basis objects and the co-differential. \
 These kind of expressions arise after the application of ToBasis to an \
 expression containing the co-differential. ",
- StyleBox["Alfonso: I\[CloseCurlyQuote]m not sure this works ...",
+ StyleBox["Alfonso: This is now deactivated",
   FontWeight->"Bold"]
 }], "Text"],
 
@@ -2726,8 +2767,7 @@ Cell[BoxData[{
       RowBox[{"Codiff", "[", "metric", "]"}], "[", "basis", "]"}]}]}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"Protect", "@", "ContractBasis"}], ";"}]}], "Input",
- InitializationCell->True]
+  RowBox[{"Protect", "@", "ContractBasis"}], ";"}]}], "Input"]
 }, Closed]]
 }, Open  ]],
 
@@ -6861,8 +6901,9 @@ Cell[BoxData[
      "Replaced", " ", "by", " ", "Codiff", " ", "to", " ", "adjust", " ", 
       "to", " ", "the", " ", "new", " ", 
       RowBox[{"notation", ".", " ", "Dropped"}], " ", "cd", " ", "and", " ", 
-      "replaced", " ", "ExtCovDiff", " ", "by", " ", "Diff"}]}], " ", "*)"}], 
-   "\[IndentingNewLine]", 
+      "replaced", " ", "ExtCovDiff", " ", "by", " ", 
+      RowBox[{"Diff", " ", ".", " ", "Added"}], " ", "back", " ", "covd"}]}], 
+    " ", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{
@@ -6870,8 +6911,9 @@ Cell[BoxData[
        RowBox[{"form_", ",", "met_"}], "]"}], "[", 
       RowBox[{
        RowBox[{
-        RowBox[{"Codiff", "[", "met_", "]"}], "[", "expr_", "]"}], ",", 
-       "rest_"}], "]"}], ":=", 
+        RowBox[{"Codiff", "[", "met_", "]"}], "[", 
+        RowBox[{"expr_", ",", 
+         RowBox[{"covd_", "?", "CovDQ"}]}], "]"}], ",", "rest_"}], "]"}], ":=", 
      RowBox[{
       RowBox[{"FormVarD", "[", 
        RowBox[{"form", ",", "met"}], "]"}], "[", 
@@ -6880,8 +6922,9 @@ Cell[BoxData[
         RowBox[{"Hodge", "[", "met", "]"}], "@", 
         RowBox[{"Diff", "[", 
          RowBox[{
-          RowBox[{"InvHodge", "[", "met", "]"}], "@", "rest"}], "]"}]}]}], 
-      "]"}]}], ";"}]}]}]], "Input",
+          RowBox[{
+           RowBox[{"InvHodge", "[", "met", "]"}], "@", "rest"}], ",", 
+          "covd"}], "]"}]}]}], "]"}]}], ";"}]}]}]], "Input",
  InitializationCell->True],
 
 Cell[CellGroupData[{
@@ -6914,7 +6957,7 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1276, 613},
-WindowMargins->{{306, Automatic}, {159, Automatic}},
+WindowMargins->{{Automatic, 208}, {Automatic, 162}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,

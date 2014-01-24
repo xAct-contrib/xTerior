@@ -349,7 +349,7 @@ TensorID[dx[mani_?ManifoldQ]]^={};
 PrintAs[dx[mani_?ManifoldQ]]^="dx";
 
 
-Diff[dx[mani_?ManifoldQ][ind_]]:=0;
+Diff[dx[mani_?ManifoldQ][ind_],PD]:=0;
 
 
 DefInertHead[Hodge[metric_],
@@ -402,15 +402,24 @@ DefInfo->Null
 Codiff/:Grade[Codiff[metric_][expr_,___],Wedge]:=-1+Grade[expr,Wedge]
 
 
-CodiffToDiff[expr_]:=expr//.Codiff[met_][expr1_]:>(-1)^(DimOfMetric[met]Grade[expr1,Wedge]+DimOfMetric[met]+1+SignatureOfMetric[met][[2]])Hodge[met]@Diff[Hodge[met]@expr1]
+Codiff/:MakeBoxes[Codiff[metric_][form_,PD?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Codiff[metric][form,PD],RowBox[{PrintAs[Codiff[metric]],"[",MakeBoxes[form,StandardForm],"]"}]];
+Codiff/:MakeBoxes[Codiff[metric_][form_,cd_?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Codiff[metric][form,cd],RowBox[{SuperscriptBox[PrintAs[Codiff[metric]],Last@SymbolOfCovD[cd]],"[",MakeBoxes[form,StandardForm],"]"}]];
 
 
-Codiff[metric_]@Codiff[metric_]@expr_:=0
+HoldPattern[Codiff[met_][expr_]]:=Codiff[met][expr,PD];
 
 
-Unprotect@ContractBasis;
-ContractBasis[basis_Basis Codiff[metric_][expr_],args_]:=Codiff[metric][ContractBasis[basis expr,args]]-expr Codiff[metric][basis];
-Protect@ContractBasis;
+CodiffToDiff[expr_]:=expr//.Codiff[met_][expr1_,covd_?CovDQ]:>(-1)^(DimOfMetric[met]Grade[expr1,Wedge]+DimOfMetric[met]+1+SignatureOfMetric[met][[2]])Hodge[met]@Diff[Hodge[met]@expr1,covd]
+
+
+Codiff[metric_][Codiff[metric_][expr_,PD]]:=0
+
+
+Codiff[_Basis,covd_?CovDQ]:=0;
+
+
+Codiff@expr_List:=Codiff/@expr;
+Codiff@expr_Equal:=Codiff/@expr;
 
 
 xTensorQ[ConnectionForm[cd_?CovDQ,_]]^=True;
@@ -776,8 +785,8 @@ FormVarD[form_,met_][Hodge[met_][expr_],rest_]:=With[{k=Grade[expr,Wedge],n=DimO
 (-1)^(k(n-k))FormVarD[form,met][expr,Hodge[met]@rest]];
 (* diff \[Rule] Replaced by Diff to adjust to the new notation. Dropped cd. Added back PD *)
 FormVarD[form_,met_][Diff[expr_,PD],rest_]:=FormVarD[form,met][expr,Hodge[met]@Codiff[met][InvHodge[met]@rest]];
-(* codiff \[Rule] Replaced by Codiff to adjust to the new notation. Dropped cd and replaced ExtCovDiff by Diff *)
-FormVarD[form_,met_][Codiff[met_][expr_],rest_]:=FormVarD[form,met][expr,Hodge[met]@Diff[InvHodge[met]@rest]];
+(* codiff \[Rule] Replaced by Codiff to adjust to the new notation. Dropped cd and replaced ExtCovDiff by Diff . Added back covd *)
+FormVarD[form_,met_][Codiff[met_][expr_,covd_?CovDQ],rest_]:=FormVarD[form,met][expr,Hodge[met]@Diff[InvHodge[met]@rest,covd]];
 
 
 End[];

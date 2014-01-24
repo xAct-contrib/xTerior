@@ -104,4 +104,6 @@ last lines of the code of FormVarD.
               derivative into an expression with the exterior derivative and the inner contraction by using the Cartan rule).
               
 20 Jan. 2014: Removed DFormQ from xTerior.nb. It is no longer needed.
+
+24 Jan. 2014: Added back dependency on the covariant derivative in Codiff. Codiff of xCoba basis objects yields zero.
            
