@@ -4697,6 +4697,84 @@ Cell[BoxData[
     ";"}]}]}]], "Input",
  InitializationCell->True],
 
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "ManifoldsOf"}]], "Input"],
+
+Cell[BoxData[
+ StyleBox["\<\"ManifoldsOf[expr] gives the list of manifolds on which expr \
+lives.\"\>", "MSG"]], "Print", "PrintUsage",
+ CellTags->"Info3599722207-1999108"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Inner", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"dx", "[", "#1", "]"}], "[", "#2", "]"}], 
+     RowBox[{
+      RowBox[{"PD", "[", 
+       RowBox[{"-", "#2"}], "]"}], "@", "expr"}]}], "&"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"m1", ",", "m2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a1", ",", "a2"}], "}"}], ",", "Plus"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"dx", "[", "m1", "]"}], "[", "a1", "]"}], " ", 
+   InterpretationBox[
+    StyleBox[
+     RowBox[{
+      SubscriptBox["\[PartialD]", "a1"], "expr"}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    xAct`xTensor`PD[-$CellContext`a1][$CellContext`expr],
+    Editable->False]}], "+", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"dx", "[", "m2", "]"}], "[", "a2", "]"}], " ", 
+   InterpretationBox[
+    StyleBox[
+     RowBox[{
+      SubscriptBox["\[PartialD]", "a2"], "expr"}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    xAct`xTensor`PD[-$CellContext`a2][$CellContext`expr],
+    Editable->False]}]}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "Inner"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox["\<\"\\!\\(\\*RowBox[{\\\"Inner\\\", \\\"[\\\", \
+RowBox[{StyleBox[\\\"f\\\", \\\"TI\\\"], \\\",\\\", \
+SubscriptBox[StyleBox[\\\"list\\\", \\\"TI\\\"], StyleBox[\\\"1\\\", \\\"TR\\\
+\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"list\\\", \\\"TI\\\"], StyleBox[\\\
+\"2\\\", \\\"TR\\\"]], \\\",\\\", StyleBox[\\\"g\\\", \\\"TI\\\"]}], \
+\\\"]\\\"}]\\) is a generalization of Dot in which \
+\\!\\(\\*StyleBox[\\\"f\\\", \\\"TI\\\"]\\) plays the role of multiplication \
+and \\!\\(\\*StyleBox[\\\"g\\\", \\\"TI\\\"]\\) of addition. \"\>", "MSG"], 
+  "\[NonBreakingSpace]", 
+  ButtonBox[
+   StyleBox["\[RightSkeleton]", "SR"],
+   Active->True,
+   BaseStyle->"Link",
+   ButtonData->"paclet:ref/Inner"]}]], "Print", "PrintUsage",
+ CellTags->"Info3599721511-1999108"]
+}, Open  ]],
+
 Cell["\<\
 We encode the Cartan equations in a set of rules. We also encode the action \
 of the exterior derivative on a function whose arguments are scalars of a \
@@ -5062,7 +5140,7 @@ Cell[BoxData[
             RowBox[{"BasisOfCovD", "@", "covd"}], "=!=", "Null"}]}], 
           ")"}]}]}]}], "}"}]}], ")"}]}], ";"}]], "Input",
  InitializationCell->True]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
