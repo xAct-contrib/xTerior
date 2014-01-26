@@ -154,7 +154,7 @@ ChangeCurvatureForm::usage="ChangeCurvatureForm[curvature,cd1,cd2] writes the cu
 (* The torsion 2-form *)
 TorsionForm::usage="TorsionForm[cd] represents the torsion 2-form arising from the covariant derivative cd (cd must be defined on the tangent bundle of a manifold)";
 (* Cartan structure equations *)
-UseCartan::usage="UseCartan[expr,covd] expands all the instances of the Diff using the Cartan structure equations for the connection arising from covd. In this way it is possible to expand the exterior derivative of a co-frame, a torsion 2-form and the curvature 2-form. If covd is the Levi-Civita connection of a metric, then the exterior derivatives of that metric and its volume element are expanded too. UseCartan[expr,PD,mani] expands all instances of the exterior derivative in terms of partial derivatives defined in the manifold mani.";
+UseCartan::usage="UseCartan[expr,covd] expands all the instances of the Diff using the Cartan structure equations for the connection arising from covd. In this way it is possible to expand the exterior derivative of a co-frame, a torsion 2-form and the curvature 2-form. If covd is the Levi-Civita connection of a metric, then the exterior derivatives of that metric and its volume element are expanded too. UseCartan[expr,PD] expands all instances of the exterior derivative in terms of partial derivatives defined in the list of manifolds returned by ManifoldsOf[expr]. It is possible to specify a custom list of manifolds as a third argument in the form UseCartan[expr,PD,{M1,M2,..}]";
 (* Zero forms *)
 ZeroDegQ::usage="ZeroDegQ[expr] returns True if the degree of expr is zero";
 UseDimensionStart::usage="UseDimensionStart[] is an instruction that, when issued, makes any expression with degree greater than the manifold dimension equal to zero.";
@@ -587,13 +587,14 @@ With[{c=DummyIn@Tangent@ManifoldOfCovD@cd2,A1=ChristoffelForm[cd2,cd1]},RiemannF
 
 (* Thread over equations and lists *)
 UseCartan[expr_List,covd_]:=UseCartan[#,covd]&/@expr;
-UseCartan[expr_List,PD,mani_?ManifoldQ]:=UseCartan[#,PD,mani]&/@expr;
+UseCartan[expr_List,PD,{mani__?ManifoldQ}]:=UseCartan[#,PD,{mani}]&/@expr;
 UseCartan[expr_Equal,covd_]:=UseCartan[#,covd]&/@expr;
-UseCartan[expr_Equal,PD,mani_?ManifoldQ]:=UseCartan[#,PD,mani]&/@expr;
+UseCartan[expr_Equal,PD,{mani__?ManifoldQ}]:=UseCartan[#,PD,{mani}]&/@expr;
 
 
 (* Exterior derivative when covd is PD *)
-UseCartan[expr_,PD,mani_?ManifoldQ]:=(expr/.Diff@expr1_:>Module[{a=DummyIn@Tangent@mani},dx[mani][a]PD[-a]@expr1 ]/;Deg@expr1===0);
+UseCartan[expr_,PD,{mani__?ManifoldQ}]:=(expr/.Diff@expr1_:>Module[{a=DummyIn/@(Tangent/@{mani})},Inner[dx[#1][#2]PD[-#2]@expr1&,{mani},a,Plus]]/;Deg@expr1===0);
+UseCartan[expr_,PD]:=(expr/.Diff@expr1_:>Module[{a=DummyIn/@(Tangent/@ManifoldsOf@expr)},Inner[dx[#1][#2]PD[-#2]@expr1&,ManifoldsOf@expr,a,Plus]]/;Deg@expr1===0);
 
 
 UseCartan[expr_,covd_]:=(expr/.
@@ -618,8 +619,8 @@ HoldPattern@Diff[expr1_?ScalarQ,PD]:>Inner[covd[{#1,-BasisOfCovD@covd}]@expr1 Di
 DefGradedDerivation[Int[v_],Wedge,-1,PrintAs->"\[Iota]"];
 
 
-Int[v_][f_?ZeroDegQ]:=0;
-Int[v_][f_?ZeroDegQ form_]:=f Int[v][form];
+Int[v_][f_ form_]:=f Int[v][form]/;Deg@f===0;
+Int[v_][f_]:=0/;Deg@f===0;
 Int[f_?ScalarQ v_][form_]:=f Int[v][form];
 Int[v_[ind1_]][Coframe[mani_][ind2_]]:=v[ind2];
 Int[v_[ind1_]][dx[mani_][ind2_]]:=v[ind2];

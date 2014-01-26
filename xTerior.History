@@ -106,4 +106,7 @@ last lines of the code of FormVarD.
 20 Jan. 2014: Removed DFormQ from xTerior.nb. It is no longer needed.
 
 24 Jan. 2014: Added back dependency on the covariant derivative in Codiff. Codiff of xCoba basis objects yields zero.
+
+26 Jan. 2014: Changed syntax of UseCartan when the covariant derivative argument is PD. See the on-line help of UseCartan.
+              Dropped ZeroFormQ
            
