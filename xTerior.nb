@@ -895,9 +895,11 @@ the Cartan structure equations for the connection arising from covd. In this \
 way it is possible to expand the exterior derivative of a co-frame, a torsion \
 2-form and the curvature 2-form. If covd is the Levi-Civita connection of a \
 metric, then the exterior derivatives of that metric and its volume element \
-are expanded too. UseCartan[expr,PD,mani] expands all instances of the \
-exterior derivative in terms of partial derivatives defined in the manifold \
-mani.\>\""}], ";"}], "\[IndentingNewLine]", 
+are expanded too. UseCartan[expr,PD] expands all instances of the exterior \
+derivative in terms of partial derivatives defined in the list of manifolds \
+returned by ManifoldsOf[expr]. It is possible to specify a custom list of \
+manifolds as a third argument in the form \
+UseCartan[expr,PD,{M1,M2,..}]\>\""}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{"Zero", " ", "forms"}], " ", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
@@ -4591,12 +4593,14 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"UseCartan", "[", 
       RowBox[{"expr_List", ",", "PD", ",", 
-       RowBox[{"mani_", "?", "ManifoldQ"}]}], "]"}], ":=", 
+       RowBox[{"{", 
+        RowBox[{"mani__", "?", "ManifoldQ"}], "}"}]}], "]"}], ":=", 
      RowBox[{
       RowBox[{
        RowBox[{"UseCartan", "[", 
-        RowBox[{"#", ",", "PD", ",", "mani"}], "]"}], "&"}], "/@", "expr"}]}],
-     ";"}], "\[IndentingNewLine]", 
+        RowBox[{"#", ",", "PD", ",", 
+         RowBox[{"{", "mani", "}"}]}], "]"}], "&"}], "/@", "expr"}]}], ";"}], 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"UseCartan", "[", 
@@ -4610,12 +4614,14 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"UseCartan", "[", 
       RowBox[{"expr_Equal", ",", "PD", ",", 
-       RowBox[{"mani_", "?", "ManifoldQ"}]}], "]"}], ":=", 
+       RowBox[{"{", 
+        RowBox[{"mani__", "?", "ManifoldQ"}], "}"}]}], "]"}], ":=", 
      RowBox[{
       RowBox[{
        RowBox[{"UseCartan", "[", 
-        RowBox[{"#", ",", "PD", ",", "mani"}], "]"}], "&"}], "/@", "expr"}]}],
-     ";"}]}]}]], "Input",
+        RowBox[{"#", ",", "PD", ",", 
+         RowBox[{"{", "mani", "}"}]}], "]"}], "&"}], "/@", "expr"}]}], 
+    ";"}]}]}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
@@ -4626,31 +4632,148 @@ Cell[BoxData[
     "PD"}], " ", "*)"}], "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{"UseCartan", "[", 
-     RowBox[{"expr_", ",", "PD", ",", 
-      RowBox[{"mani_", "?", "ManifoldQ"}]}], "]"}], ":=", 
-    RowBox[{"(", 
-     RowBox[{"expr", "/.", 
-      RowBox[{
-       RowBox[{"Diff", "@", "expr1_"}], ":>", 
+    RowBox[{
+     RowBox[{"UseCartan", "[", 
+      RowBox[{"expr_", ",", "PD", ",", 
+       RowBox[{"{", 
+        RowBox[{"mani__", "?", "ManifoldQ"}], "}"}]}], "]"}], ":=", 
+     RowBox[{"(", 
+      RowBox[{"expr", "/.", 
        RowBox[{
-        RowBox[{"Module", "[", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{"a", "=", 
-            RowBox[{"DummyIn", "@", 
-             RowBox[{"Tangent", "@", "mani"}]}]}], "}"}], ",", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"dx", "[", "mani", "]"}], "[", "a", "]"}], 
-           RowBox[{
-            RowBox[{"PD", "[", 
-             RowBox[{"-", "a"}], "]"}], "@", "expr1"}]}]}], " ", "]"}], "/;", 
-        
+        RowBox[{"Diff", "@", "expr1_"}], ":>", 
         RowBox[{
-         RowBox[{"Deg", "@", "expr1"}], "===", "0"}]}]}]}], ")"}]}], 
-   ";"}]}]], "Input",
+         RowBox[{"Module", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"a", "=", 
+             RowBox[{"DummyIn", "/@", 
+              RowBox[{"(", 
+               RowBox[{"Tangent", "/@", 
+                RowBox[{"{", "mani", "}"}]}], ")"}]}]}], "}"}], ",", 
+           RowBox[{"Inner", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"dx", "[", "#1", "]"}], "[", "#2", "]"}], 
+               RowBox[{
+                RowBox[{"PD", "[", 
+                 RowBox[{"-", "#2"}], "]"}], "@", "expr1"}]}], "&"}], ",", 
+             RowBox[{"{", "mani", "}"}], ",", "a", ",", "Plus"}], "]"}]}], 
+          "]"}], "/;", 
+         RowBox[{
+          RowBox[{"Deg", "@", "expr1"}], "===", "0"}]}]}]}], ")"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"UseCartan", "[", 
+      RowBox[{"expr_", ",", "PD"}], "]"}], ":=", 
+     RowBox[{"(", 
+      RowBox[{"expr", "/.", 
+       RowBox[{
+        RowBox[{"Diff", "@", "expr1_"}], ":>", 
+        RowBox[{
+         RowBox[{"Module", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"a", "=", 
+             RowBox[{"DummyIn", "/@", 
+              RowBox[{"(", 
+               RowBox[{"Tangent", "/@", 
+                RowBox[{"ManifoldsOf", "@", "expr"}]}], ")"}]}]}], "}"}], ",", 
+           RowBox[{"Inner", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"dx", "[", "#1", "]"}], "[", "#2", "]"}], 
+               RowBox[{
+                RowBox[{"PD", "[", 
+                 RowBox[{"-", "#2"}], "]"}], "@", "expr1"}]}], "&"}], ",", 
+             RowBox[{"ManifoldsOf", "@", "expr"}], ",", "a", ",", "Plus"}], 
+            "]"}]}], "]"}], "/;", 
+         RowBox[{
+          RowBox[{"Deg", "@", "expr1"}], "===", "0"}]}]}]}], ")"}]}], 
+    ";"}]}]}]], "Input",
  InitializationCell->True],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "ManifoldsOf"}]], "Input"],
+
+Cell[BoxData[
+ StyleBox["\<\"ManifoldsOf[expr] gives the list of manifolds on which expr \
+lives.\"\>", "MSG"]], "Print", "PrintUsage",
+ CellTags->"Info3599722207-1999108"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Inner", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"dx", "[", "#1", "]"}], "[", "#2", "]"}], 
+     RowBox[{
+      RowBox[{"PD", "[", 
+       RowBox[{"-", "#2"}], "]"}], "@", "expr"}]}], "&"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"m1", ",", "m2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a1", ",", "a2"}], "}"}], ",", "Plus"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"dx", "[", "m1", "]"}], "[", "a1", "]"}], " ", 
+   InterpretationBox[
+    StyleBox[
+     RowBox[{
+      SubscriptBox["\[PartialD]", "a1"], "expr"}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    xAct`xTensor`PD[-$CellContext`a1][$CellContext`expr],
+    Editable->False]}], "+", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"dx", "[", "m2", "]"}], "[", "a2", "]"}], " ", 
+   InterpretationBox[
+    StyleBox[
+     RowBox[{
+      SubscriptBox["\[PartialD]", "a2"], "expr"}],
+     ShowAutoStyles->False,
+     AutoSpacing->False],
+    xAct`xTensor`PD[-$CellContext`a2][$CellContext`expr],
+    Editable->False]}]}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "Inner"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox["\<\"\\!\\(\\*RowBox[{\\\"Inner\\\", \\\"[\\\", \
+RowBox[{StyleBox[\\\"f\\\", \\\"TI\\\"], \\\",\\\", \
+SubscriptBox[StyleBox[\\\"list\\\", \\\"TI\\\"], StyleBox[\\\"1\\\", \\\"TR\\\
+\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"list\\\", \\\"TI\\\"], StyleBox[\\\
+\"2\\\", \\\"TR\\\"]], \\\",\\\", StyleBox[\\\"g\\\", \\\"TI\\\"]}], \
+\\\"]\\\"}]\\) is a generalization of Dot in which \
+\\!\\(\\*StyleBox[\\\"f\\\", \\\"TI\\\"]\\) plays the role of multiplication \
+and \\!\\(\\*StyleBox[\\\"g\\\", \\\"TI\\\"]\\) of addition. \"\>", "MSG"], 
+  "\[NonBreakingSpace]", 
+  ButtonBox[
+   StyleBox["\[RightSkeleton]", "SR"],
+   Active->True,
+   BaseStyle->"Link",
+   ButtonData->"paclet:ref/Inner"]}]], "Print", "PrintUsage",
+ CellTags->"Info3599721511-1999108"]
+}, Open  ]],
 
 Cell["\<\
 We encode the Cartan equations in a set of rules. We also encode the action \
@@ -5017,7 +5140,7 @@ Cell[BoxData[
             RowBox[{"BasisOfCovD", "@", "covd"}], "=!=", "Null"}]}], 
           ")"}]}]}]}], "}"}]}], ")"}]}], ";"}]], "Input",
  InitializationCell->True]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -5049,6 +5172,9 @@ Cell[BoxData[
   ";"}]], "Input",
  InitializationCell->True],
 
+Cell[TextData[StyleBox["Use this code",
+ FontWeight->"Bold"]], "Text"],
+
 Cell[BoxData[{
  RowBox[{
   RowBox[{
@@ -5064,7 +5190,28 @@ Cell[BoxData[{
      RowBox[{"f_", "?", "ZeroDegQ"}], " ", "form_"}], "]"}], ":=", 
    RowBox[{"f", " ", 
     RowBox[{
-     RowBox[{"Int", "[", "v", "]"}], "[", "form", "]"}]}]}], 
+     RowBox[{"Int", "[", "v", "]"}], "[", "form", "]"}]}]}], ";"}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Int", "[", "v_", "]"}], "[", 
+    RowBox[{"f_", " ", "form_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"f", " ", 
+     RowBox[{
+      RowBox[{"Int", "[", "v", "]"}], "[", "form", "]"}]}], "/;", 
+    RowBox[{
+     RowBox[{"Deg", "@", "f"}], "===", "0"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Int", "[", "v_", "]"}], "[", "f_", "]"}], ":=", 
+   RowBox[{"0", "/;", 
+    RowBox[{
+     RowBox[{"Deg", "@", "f"}], "===", "0"}]}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
@@ -6957,7 +7104,7 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1276, 613},
-WindowMargins->{{Automatic, 208}, {Automatic, 162}},
+WindowMargins->{{Automatic, 200}, {Automatic, 162}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
