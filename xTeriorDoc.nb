@@ -105,7 +105,7 @@ Cell[BoxData[
  RowBox[{"MemoryInUse", "[", "]"}]], "Input",
  CellLabel->"In[1]:="],
 
-Cell[BoxData["16618056"], "Output",
+Cell[BoxData["16588080"], "Output",
  CellLabel->"Out[1]="]
 }, Open  ]],
 
@@ -244,7 +244,7 @@ Cell[BoxData[
  RowBox[{"MemoryInUse", "[", "]"}]], "Input",
  CellLabel->"In[3]:="],
 
-Cell[BoxData["30899992"], "Output",
+Cell[BoxData["36624448"], "Output",
  CellLabel->"Out[3]="]
 }, Open  ]],
 
@@ -260,7 +260,7 @@ Cell[BoxData[
    RowBox[{"2", "^", "20"}]}], "//", "N"}]], "Input",
  CellLabel->"In[4]:="],
 
-Cell[BoxData["13.620315551757812`"], "Output",
+Cell[BoxData["19.108169555664062`"], "Output",
  CellLabel->"Out[4]="]
 }, Open  ]],
 
@@ -8256,7 +8256,7 @@ Cell[BoxData[
 a pair {metric, o} where o is the factor between the epsilon of the given \
 metric and the eta tensors of the basis being defined. By default it takes \
 the value {Null, 1}.\"\>", "MSG"]], "Print", "PrintUsage",
- CellTags->"Info3599726567-5061372"]
+ CellTags->"Info3599826642-7859528"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -20794,9 +20794,8 @@ Cell[BoxData[
   "]"}]], "Input",
  CellLabel->"In[159]:="],
 
-Cell["\<\
-We need some preliminary code to work with these forms:\
-\>", "MathCaption",
+Cell["We need some preliminary code to work with these forms:", "MathCaption",
+ 
  FontFamily->"Arial"],
 
 Cell[BoxData[{
@@ -32235,7 +32234,9 @@ covariant derivative."
  FontWeight->"Plain"],
 
 Cell[TextData[{
- StyleBox["ChangeExtCovDiff \t\t\t\t", "Input",
+ StyleBox["ChangeExtD", "DisplayMath",
+  FontColor->RGBColor[0, 0, 1]],
+ StyleBox[" \t\t\t\t", "Input",
   FontWeight->"Plain",
   FontColor->RGBColor[0, 0, 1]],
  StyleBox["Changes the covariant derivative which appears in the exterior \
@@ -32412,7 +32413,7 @@ the ordinary exterior differential as follows: \
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"ChangeExtCovDiff", "[", 
+ RowBox[{"ChangeExtD", "[", 
   RowBox[{"%", ",", "CD", ",", "PD"}], "]"}]], "Input",
  CellLabel->"In[211]:="],
 
@@ -33009,7 +33010,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"ChangeExtCovDiff", "[", 
+ RowBox[{"ChangeExtD", "[", 
   RowBox[{"%", ",", "CV", ",", "PD"}], "]"}]], "Input",
  CellLabel->"In[216]:="],
 
@@ -36599,7 +36600,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"ChangeExtCovDiff", "[", 
+ RowBox[{"ChangeExtD", "[", 
   RowBox[{"%", ",", "CV", ",", "PD"}], "]"}]], "Input",
  CellLabel->"In[243]:="],
 
@@ -38566,7 +38567,7 @@ derivative:\
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"ChangeExtCovDiff", "[", 
+ RowBox[{"ChangeExtD", "[", 
   RowBox[{"%", ",", "CV", ",", "PD"}], "]"}]], "Input",
  CellLabel->"In[253]:="],
 
@@ -42458,7 +42459,7 @@ $CellContext`VB][$CellContext`A, -C]]],
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"ChangeExtCovDiff", "[", 
+ RowBox[{"ChangeExtD", "[", 
   RowBox[{"%", ",", "PD", ",", "cdv"}], "]"}]], "Input",
  CellLabel->"In[280]:="],
 
@@ -46124,30 +46125,30 @@ Cell[BoxData[
 \", \\\"Times\\\", \\\"]\\\"]]], \
 Function[Slot[1]]])\\)\\)[\\(\\(\\*InterpretationBox[StyleBox[GridBox[{{\\\"\
 \[Delta]\\\", StyleBox[GridBox[{{\\\"h\\\", \\\" \\\"}, {\\\" \\\", \
-\\\"h$10021\\\"}}, RowSpacings -> 0, ColumnSpacings -> 0.05, GridFrameMargins \
+\\\"h$10022\\\"}}, RowSpacings -> 0, ColumnSpacings -> 0.05, GridFrameMargins \
 -> {{0, 0}, {0, 0}}], Rule[FontSize, 9]]}}, ColumnSpacings -> 0.05, \
 RowAlignments -> Center], Rule[AutoSpacing, False], Rule[ShowAutoStyles, \
-False]], delta[h, Times[-1, h$10021]], Rule[Editable, False]], \
+False]], delta[h, Times[-1, h$10022]], Rule[Editable, False]], \
 \\*InterpretationBox[StyleBox[GridBox[{{\\\"g\\\", StyleBox[GridBox[{{\\\" \\\
-\", \\\" \\\"}, {\\\"f\\\", \\\"h$10020\\\"}}, RowSpacings -> 0, \
+\", \\\" \\\"}, {\\\"f\\\", \\\"h$10021\\\"}}, RowSpacings -> 0, \
 ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, {0, 0}}], Rule[FontSize, \
 9]]}}, ColumnSpacings -> 0.05, RowAlignments -> Center], Rule[AutoSpacing, \
 False], Rule[ShowAutoStyles, False]], metricg[Times[-1, f], Times[-1, \
-h$10020]], Rule[Editable, False]]\\)\\)]\\)\\), \
+h$10021]], Rule[Editable, False]]\\)\\)]\\)\\), \
 \\(\\(\\(\\((\\*TagBox[TooltipBox[\\(Times\\+_\\), \
 RowBox[List[\\\"\\\\\\\"VerbatimProduct\\\\\\\"\\\", \\\"[\\\", \
 \\\"Times\\\", \\\"]\\\"]]], Function[Slot[1]]])\\)\\)[\\(\\(\\(\\(-1\\)\\), \
 \\*InterpretationBox[StyleBox[GridBox[{{\\\"\[Delta]\\\", StyleBox[GridBox[{{\
-\\\"h\\\", \\\" \\\"}, {\\\" \\\", \\\"h$10020\\\"}}, RowSpacings -> 0, \
+\\\"h\\\", \\\" \\\"}, {\\\" \\\", \\\"h$10021\\\"}}, RowSpacings -> 0, \
 ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, {0, 0}}], Rule[FontSize, \
 9]]}}, ColumnSpacings -> 0.05, RowAlignments -> Center], Rule[AutoSpacing, \
-False], Rule[ShowAutoStyles, False]], delta[h, Times[-1, h$10020]], \
+False], Rule[ShowAutoStyles, False]], delta[h, Times[-1, h$10021]], \
 Rule[Editable, False]], \\*InterpretationBox[StyleBox[GridBox[{{\\\"g\\\", \
-StyleBox[GridBox[{{\\\" \\\", \\\" \\\"}, {\\\"f\\\", \\\"h$10021\\\"}}, \
+StyleBox[GridBox[{{\\\" \\\", \\\" \\\"}, {\\\"f\\\", \\\"h$10022\\\"}}, \
 RowSpacings -> 0, ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, {0, \
 0}}], Rule[FontSize, 9]]}}, ColumnSpacings -> 0.05, RowAlignments -> Center], \
 Rule[AutoSpacing, False], Rule[ShowAutoStyles, False]], metricg[Times[-1, f], \
-Times[-1, h$10021]], Rule[Editable, False]]\\)\\)]\\)\\)\\)\\)]\\)\[NoBreak] \
+Times[-1, h$10022]], Rule[Editable, False]]\\)\\)]\\)\\)\\)\\)]\\)\[NoBreak] \
 .\"\>"}]], "Message", "MSG",
  CellLabel->"During evaluation of In[297]:="],
 
@@ -59338,11 +59339,11 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Constructed in \"\>", "\[InvisibleSpace]", 
-   "0.00615900000000000041183723098470181867`3.8101101173698786", 
+   "0.04095100000000000128874688698488171212`4.6328644247284245", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Constructed in ", 
-   0.00615900000000000041183723098470181867`3.8101101173698786, " seconds"],
+   0.04095100000000000128874688698488171212`4.6328644247284245, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59350,11 +59351,11 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Applied \"\>", "\[InvisibleSpace]", "Simplify", 
    "\[InvisibleSpace]", "\<\" in \"\>", "\[InvisibleSpace]", 
-   "0.00548400000000000015926149288247870572`3.759697359397099", 
+   "0.01146900000000000002797762022055394482`4.080125466018314", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Applied ", Simplify, " in ", 
-   0.00548400000000000015926149288247870572`3.759697359397099, " seconds"],
+   0.01146900000000000002797762022055394482`4.080125466018314, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59371,9 +59372,9 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"      Computed cache value in \"\>", "\[InvisibleSpace]", 
-   "0.000086`2.386043444739543", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
+   "0.000121`2.534330363812423", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
-  "      Computed cache value in ", 0.000086`2.386043444739543, " seconds"],
+  "      Computed cache value in ", 0.000121`2.534330363812423, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59388,12 +59389,12 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Stored in \"\>", "\[InvisibleSpace]", 
-   "0.00076800000000000001945665850655586837`2.905961133311136", 
+   "0.00125500000000000003913536161803676805`3.119243639096681", 
    "\[InvisibleSpace]", "\<\" seconds and \"\>", "\[InvisibleSpace]", "6696", 
    "\[InvisibleSpace]", "\<\" bytes\"\>"}],
   SequenceForm[
   "    Stored in ", 
-   0.00076800000000000001945665850655586837`2.905961133311136, 
+   0.00125500000000000003913536161803676805`3.119243639096681, 
    " seconds and ", 6696, " bytes"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
@@ -59414,11 +59415,11 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Constructed in \"\>", "\[InvisibleSpace]", 
-   "0.000444999999999999974568953842180008`2.6689599242605557", 
+   "0.00073200000000000001176836406102665933`2.885110994338016", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Constructed in ", 
-   0.000444999999999999974568953842180008`2.6689599242605557, " seconds"],
+   0.00073200000000000001176836406102665933`2.885110994338016, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59426,11 +59427,11 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Applied \"\>", "\[InvisibleSpace]", "Simplify", 
    "\[InvisibleSpace]", "\<\" in \"\>", "\[InvisibleSpace]", 
-   "0.00484099999999999981714626784423671779`3.7055349959205137", 
+   "0.01628800000000000039457326295178063447`4.232467673936289", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Applied ", Simplify, " in ", 
-   0.00484099999999999981714626784423671779`3.7055349959205137, " seconds"],
+   0.01628800000000000039457326295178063447`4.232467673936289, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59450,9 +59451,9 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"      Computed cache value in \"\>", "\[InvisibleSpace]", 
-   "0.000203`2.759041031409184", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
+   "0.000305`2.9358448328427587", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
-  "      Computed cache value in ", 0.000203`2.759041031409184, " seconds"],
+  "      Computed cache value in ", 0.000305`2.9358448328427587, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59467,12 +59468,12 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Stored in \"\>", "\[InvisibleSpace]", 
-   "0.00122700000000000000906219543850284026`3.109444476006628", 
+   "0.00207600000000000015423773369604987238`3.3378272624560448", 
    "\[InvisibleSpace]", "\<\" seconds and \"\>", "\[InvisibleSpace]", "49704",
     "\[InvisibleSpace]", "\<\" bytes\"\>"}],
   SequenceForm[
   "    Stored in ", 
-   0.00122700000000000000906219543850284026`3.109444476006628, 
+   0.00207600000000000015423773369604987238`3.3378272624560448, 
    " seconds and ", 49704, " bytes"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
@@ -59494,11 +59495,11 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Constructed in \"\>", "\[InvisibleSpace]", 
-   "0.00084800000000000001244837566360956771`2.948995765536338", 
+   "0.00140900000000000009611755835692292749`3.16951090638898", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Constructed in ", 
-   0.00084800000000000001244837566360956771`2.948995765536338, " seconds"],
+   0.00140900000000000009611755835692292749`3.16951090638898, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59506,11 +59507,11 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Applied \"\>", "\[InvisibleSpace]", "Simplify", 
    "\[InvisibleSpace]", "\<\" in \"\>", "\[InvisibleSpace]", 
-   "0.00740600000000000025651702983964241866`3.890183620993048", 
+   "0.01508100000000000065480953992391732754`4.199030053227362", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Applied ", Simplify, " in ", 
-   0.00740600000000000025651702983964241866`3.890183620993048, " seconds"],
+   0.01508100000000000065480953992391732754`4.199030053227362, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59531,9 +59532,9 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"      Computed cache value in \"\>", "\[InvisibleSpace]", 
-   "0.000431`3.0860222636567047", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
+   "0.000666`3.275019222666276", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
-  "      Computed cache value in ", 0.000431`3.0860222636567047, " seconds"],
+  "      Computed cache value in ", 0.000666`3.275019222666276, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59548,12 +59549,12 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Stored in \"\>", "\[InvisibleSpace]", 
-   "0.00512600000000000034783287361506154411`3.730378515127849", 
+   "0.0079909999999999998393507283367398486`3.9232010439461553", 
    "\[InvisibleSpace]", "\<\" seconds and \"\>", "\[InvisibleSpace]", 
    "286600", "\[InvisibleSpace]", "\<\" bytes\"\>"}],
   SequenceForm[
   "    Stored in ", 
-   0.00512600000000000034783287361506154411`3.730378515127849, 
+   0.0079909999999999998393507283367398486`3.9232010439461553, 
    " seconds and ", 286600, " bytes"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
@@ -59574,11 +59575,11 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Constructed in \"\>", "\[InvisibleSpace]", 
-   "0.00072599999999999997434690923725497669`2.881536533979718", 
+   "0.00120199999999999994348964804657953209`3.1005043809463446", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Constructed in ", 
-   0.00072599999999999997434690923725497669`2.881536533979718, " seconds"],
+   0.00120199999999999994348964804657953209`3.1005043809463446, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59586,11 +59587,11 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Applied \"\>", "\[InvisibleSpace]", "Simplify", 
    "\[InvisibleSpace]", "\<\" in \"\>", "\[InvisibleSpace]", 
-   "0.00721999999999999985539345104257336061`3.8791371108492627", 
+   "0.01442300000000000005651035195342046791`4.179655516793112", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Applied ", Simplify, " in ", 
-   0.00721999999999999985539345104257336061`3.8791371108492627, " seconds"],
+   0.01442300000000000005651035195342046791`4.179655516793112, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59610,9 +59611,9 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"      Computed cache value in \"\>", "\[InvisibleSpace]", 
-   "0.000309`2.941503472920808", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
+   "0.000492`3.143510096263331", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
-  "      Computed cache value in ", 0.000309`2.941503472920808, " seconds"],
+  "      Computed cache value in ", 0.000492`3.143510096263331, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59627,12 +59628,12 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Stored in \"\>", "\[InvisibleSpace]", 
-   "0.00157599999999999992698895834308814301`3.2181561264331604", 
+   "0.00262500000000000016306400674181986687`3.4397292210215995", 
    "\[InvisibleSpace]", "\<\" seconds and \"\>", "\[InvisibleSpace]", "65416",
     "\[InvisibleSpace]", "\<\" bytes\"\>"}],
   SequenceForm[
   "    Stored in ", 
-   0.00157599999999999992698895834308814301`3.2181561264331604, 
+   0.00262500000000000016306400674181986687`3.4397292210215995, 
    " seconds and ", 65416, " bytes"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
@@ -59652,11 +59653,11 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Constructed in \"\>", "\[InvisibleSpace]", 
-   "0.00074799999999999996699862059301722184`2.8945015111440857", 
+   "0.00134800000000000002285671651947041028`3.1502898054789252", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Constructed in ", 
-   0.00074799999999999996699862059301722184`2.8945015111440857, " seconds"],
+   0.00134800000000000002285671651947041028`3.1502898054789252, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59664,11 +59665,11 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Applied \"\>", "\[InvisibleSpace]", "Simplify", 
    "\[InvisibleSpace]", "\<\" in \"\>", "\[InvisibleSpace]", 
-   "0.00811399999999999968491870561138057383`3.929834916647932", 
+   "0.01650099999999999830779806586633640109`4.238110177573652", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Applied ", Simplify, " in ", 
-   0.00811399999999999968491870561138057383`3.929834916647932, " seconds"],
+   0.01650099999999999830779806586633640109`4.238110177573652, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59687,9 +59688,9 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"      Computed cache value in \"\>", "\[InvisibleSpace]", 
-   "0.000204`2.7611751609218693", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
+   "0.000349`2.994370420455151", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
-  "      Computed cache value in ", 0.000204`2.7611751609218693, " seconds"],
+  "      Computed cache value in ", 0.000349`2.994370420455151, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59704,12 +59705,12 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Stored in \"\>", "\[InvisibleSpace]", 
-   "0.00119500000000000009860168237452171525`3.097967818563781", 
+   "0.00201899999999999996136423874304455239`3.3257362322232633", 
    "\[InvisibleSpace]", "\<\" seconds and \"\>", "\[InvisibleSpace]", "44632",
     "\[InvisibleSpace]", "\<\" bytes\"\>"}],
   SequenceForm[
   "    Stored in ", 
-   0.00119500000000000009860168237452171525`3.097967818563781, 
+   0.00201899999999999996136423874304455239`3.3257362322232633, 
    " seconds and ", 44632, " bytes"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
@@ -59731,11 +59732,11 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Constructed in \"\>", "\[InvisibleSpace]", 
-   "0.00101500000000000006016021014687567003`3.0270659555288555", 
+   "0.0016780000000000000210526041044545309`3.245391869772306", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Constructed in ", 
-   0.00101500000000000006016021014687567003`3.0270659555288555, " seconds"],
+   0.0016780000000000000210526041044545309`3.245391869772306, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59743,11 +59744,11 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Applied \"\>", "\[InvisibleSpace]", "Simplify", 
    "\[InvisibleSpace]", "\<\" in \"\>", "\[InvisibleSpace]", 
-   "0.0137979999999999995013988396408421977`4.1604160538902", 
+   "0.02622000000000000025091040356528537814`4.43923260063369", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Applied ", Simplify, " in ", 
-   0.0137979999999999995013988396408421977`4.1604160538902, " seconds"],
+   0.02622000000000000025091040356528537814`4.43923260063369, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59768,9 +59769,9 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"      Computed cache value in \"\>", "\[InvisibleSpace]", 
-   "0.000137`2.5882655606523777", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
+   "0.000231`2.8151569733881177", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
-  "      Computed cache value in ", 0.000137`2.5882655606523777, " seconds"],
+  "      Computed cache value in ", 0.000231`2.8151569733881177, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59785,12 +59786,11 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Stored in \"\>", "\[InvisibleSpace]", 
-   "0.01072000000000000036193270602780103218`4.050794698636375", 
+   "0.02542900000000000021449508835758024361`4.4259291950825", 
    "\[InvisibleSpace]", "\<\" seconds and \"\>", "\[InvisibleSpace]", 
    "271744", "\[InvisibleSpace]", "\<\" bytes\"\>"}],
   SequenceForm[
-  "    Stored in ", 
-   0.01072000000000000036193270602780103218`4.050794698636375, 
+  "    Stored in ", 0.02542900000000000021449508835758024361`4.4259291950825, 
    " seconds and ", 271744, " bytes"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
@@ -59811,11 +59811,11 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Constructed in \"\>", "\[InvisibleSpace]", 
-   "0.00309299999999999982933096553949781082`3.5109798332828026", 
+   "0.00537499999999999956978857795775184059`3.750978381867267", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Constructed in ", 
-   0.00309299999999999982933096553949781082`3.5109798332828026, " seconds"],
+   0.00537499999999999956978857795775184059`3.750978381867267, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59823,11 +59823,11 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Applied \"\>", "\[InvisibleSpace]", "Simplify", 
    "\[InvisibleSpace]", "\<\" in \"\>", "\[InvisibleSpace]", 
-   "0.01184600000000000062649885279597583576`4.094171641584548", 
+   "0.02452800000000000119060317160801787395`4.410262050789924", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Applied ", Simplify, " in ", 
-   0.01184600000000000062649885279597583576`4.094171641584548, " seconds"],
+   0.02452800000000000119060317160801787395`4.410262050789924, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59848,9 +59848,9 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"      Computed cache value in \"\>", "\[InvisibleSpace]", 
-   "0.00046`3.1143028251775453", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
+   "0.000737`3.319012481355027", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
-  "      Computed cache value in ", 0.00046`3.1143028251775453, " seconds"],
+  "      Computed cache value in ", 0.000737`3.319012481355027, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="],
 
@@ -59865,12 +59865,12 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Stored in \"\>", "\[InvisibleSpace]", 
-   "0.01061499999999999943600670349042047746`4.046519911781641", 
+   "0.02738900000000000015121237595394632081`4.458176089293715", 
    "\[InvisibleSpace]", "\<\" seconds and \"\>", "\[InvisibleSpace]", 
    "233208", "\[InvisibleSpace]", "\<\" bytes\"\>"}],
   SequenceForm[
   "    Stored in ", 
-   0.01061499999999999943600670349042047746`4.046519911781641, 
+   0.02738900000000000015121237595394632081`4.458176089293715, 
    " seconds and ", 233208, " bytes"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[328]:="]
@@ -64621,11 +64621,11 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Constructed in \"\>", "\[InvisibleSpace]", 
-   "0.00061499999999999998678140711305672994`2.8094750290550405", 
+   "0.00101099999999999996293242876532758601`3.0253510688706253", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Constructed in ", 
-   0.00061499999999999998678140711305672994`2.8094750290550405, " seconds"],
+   0.00101099999999999996293242876532758601`3.0253510688706253, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[338]:="],
 
@@ -64633,11 +64633,11 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Applied \"\>", "\[InvisibleSpace]", "Simplify", 
    "\[InvisibleSpace]", "\<\" in \"\>", "\[InvisibleSpace]", 
-   "0.00131999999999999999278355033993648249`3.141173844485474", 
+   "0.00241200000000000008143485885625523224`3.4029772167477375", 
    "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
   "    Applied ", Simplify, " in ", 
-   0.00131999999999999999278355033993648249`3.141173844485474, " seconds"],
+   0.00241200000000000008143485885625523224`3.4029772167477375, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[338]:="],
 
@@ -64654,9 +64654,9 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"      Computed cache value in \"\>", "\[InvisibleSpace]", 
-   "0.000041`2.0643288502157087", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
+   "0.00007`2.2966430335102297", "\[InvisibleSpace]", "\<\" seconds\"\>"}],
   SequenceForm[
-  "      Computed cache value in ", 0.000041`2.0643288502157087, " seconds"],
+  "      Computed cache value in ", 0.00007`2.2966430335102297, " seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[338]:="],
 
@@ -64671,12 +64671,12 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"    Stored in \"\>", "\[InvisibleSpace]", 
-   "0.00023100000000000000415813217191640661`2.3842118931717686", 
+   "0.00030800000000000000554417622922187547`2.5091506297800685", 
    "\[InvisibleSpace]", "\<\" seconds and \"\>", "\[InvisibleSpace]", "592", 
    "\[InvisibleSpace]", "\<\" bytes\"\>"}],
   SequenceForm[
   "    Stored in ", 
-   0.00023100000000000000415813217191640661`2.3842118931717686, 
+   0.00030800000000000000554417622922187547`2.5091506297800685, 
    " seconds and ", 592, " bytes"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[338]:="]
@@ -65714,7 +65714,7 @@ Cell[BoxData[
       $CellContext`metricg[{$CellContext`a, $CellContext`Sch}, \
 {$CellContext`e, $CellContext`Sch}],
       Editable->False]}]}], "\[InvisibleSpace]", "\<\" in \"\>", 
-   "\[InvisibleSpace]", "5.716827`7.208700043488423", 
+   "\[InvisibleSpace]", "7.258671`7.312402105903873", 
    "\[InvisibleSpace]", "\<\" Seconds\"\>"}],
   SequenceForm[
   "Computed ", $CellContext`epsilonmetricg[{$CellContext`a, \
@@ -65724,7 +65724,7 @@ $CellContext`epsilonmetricg[{-$CellContext`e, -$CellContext`Sch}, \
 {-$CellContext`b, -$CellContext`Sch}, {-$CellContext`c, -$CellContext`Sch}, \
 {-$CellContext`d, -$CellContext`Sch}] $CellContext`metricg[{$CellContext`a, \
 $CellContext`Sch}, {$CellContext`e, $CellContext`Sch}], " in ", 
-   5.716827`7.208700043488423, " Seconds"],
+   7.258671`7.312402105903873, " Seconds"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[350]:="]
 }, Open  ]],
@@ -98859,7 +98859,7 @@ Cell[BoxData[
  RowBox[{"MaxMemoryUsed", "[", "]"}]], "Input",
  CellLabel->"In[381]:="],
 
-Cell[BoxData["53889984"], "Output",
+Cell[BoxData["53898824"], "Output",
  CellLabel->"Out[381]="]
 }, Open  ]],
 
@@ -98869,7 +98869,7 @@ Cell[BoxData[
  RowBox[{"TimeUsed", "[", "]"}]], "Input",
  CellLabel->"In[382]:="],
 
-Cell[BoxData["56.187458`"], "Output",
+Cell[BoxData["83.875248`"], "Output",
  CellLabel->"Out[382]="]
 }, Open  ]],
 
@@ -98914,98 +98914,98 @@ Cell[BoxData[
         {
          ButtonBox["CartanD",
           BaseStyle->"InformationLink",
-          ButtonData:>{"Info3599726638-5061372", {"CartanD", "xAct`xTerior`"}},
+          ButtonData:>{"Info3599826738-7859528", {"CartanD", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["ConnectionFormToTensor",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {
+           "Info3599826738-7859528", {
             "ConnectionFormToTensor", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["ExpandHodgeDual",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"ExpandHodgeDual", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"ExpandHodgeDual", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["UseDimensionStart",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"UseDimensionStart", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"UseDimensionStart", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"]},
         {
          ButtonBox["CartanDToDiff",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"CartanDToDiff", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"CartanDToDiff", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["CurvatureForm",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"CurvatureForm", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"CurvatureForm", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["FormVarD",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"FormVarD", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"FormVarD", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["UseDimensionStop",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"UseDimensionStop", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"UseDimensionStop", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"]},
         {
          ButtonBox["ChangeCurvatureForm",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"ChangeCurvatureForm", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"ChangeCurvatureForm", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["CurvatureFormToTensor",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {
+           "Info3599826738-7859528", {
             "CurvatureFormToTensor", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["Hodge",
           BaseStyle->"InformationLink",
-          ButtonData:>{"Info3599726638-5061372", {"Hodge", "xAct`xTerior`"}},
+          ButtonData:>{"Info3599826738-7859528", {"Hodge", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["ZeroDegQ",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"ZeroDegQ", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"ZeroDegQ", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"]},
         {
-         ButtonBox["ChangeExtCovDiff",
+         ButtonBox["ChangeExtD",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"ChangeExtCovDiff", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"ChangeExtD", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["DefDiffForm",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"DefDiffForm", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"DefDiffForm", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["Int",
           BaseStyle->"InformationLink",
-          ButtonData:>{"Info3599726638-5061372", {"Int", "xAct`xTerior`"}},
+          ButtonData:>{"Info3599826738-7859528", {"Int", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["$DerivationSortOrder",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {
+           "Info3599826738-7859528", {
             "$DerivationSortOrder", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"]},
         {
@@ -99013,45 +99013,45 @@ Cell[BoxData[
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"ChristoffelForm", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"ChristoffelForm", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["Deg",
           BaseStyle->"InformationLink",
-          ButtonData:>{"Info3599726638-5061372", {"Deg", "xAct`xTerior`"}},
+          ButtonData:>{"Info3599826738-7859528", {"Deg", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["RiemannForm",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"RiemannForm", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"RiemannForm", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["$Version",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"$Version", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"$Version", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"]},
         {
          ButtonBox["Codiff",
           BaseStyle->"InformationLink",
-          ButtonData:>{"Info3599726638-5061372", {"Codiff", "xAct`xTerior`"}},
+          ButtonData:>{"Info3599826738-7859528", {"Codiff", "xAct`xTerior`"}},
           
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["Diff",
           BaseStyle->"InformationLink",
-          ButtonData:>{"Info3599726638-5061372", {"Diff", "xAct`xTerior`"}},
+          ButtonData:>{"Info3599826738-7859528", {"Diff", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["SortDerivations",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"SortDerivations", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"SortDerivations", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["$xTensorVersionExpected",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {
+           "Info3599826738-7859528", {
             "$xTensorVersionExpected", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"]},
         {
@@ -99059,52 +99059,52 @@ Cell[BoxData[
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"CodiffToDiff", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"CodiffToDiff", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["DiffFormQ",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"DiffFormQ", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"DiffFormQ", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["TorsionForm",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"TorsionForm", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"TorsionForm", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], ""},
         {
          ButtonBox["Coframe",
           BaseStyle->"InformationLink",
-          ButtonData:>{"Info3599726638-5061372", {"Coframe", "xAct`xTerior`"}},
+          ButtonData:>{"Info3599826738-7859528", {"Coframe", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["Disclaimer",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"Disclaimer", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"Disclaimer", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["UndefDiffForm",
           BaseStyle->"InformationLink",
           ButtonData:>{
-           "Info3599726638-5061372", {"UndefDiffForm", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"UndefDiffForm", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], ""},
         {
          ButtonBox["ConnectionForm",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"ConnectionForm", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"ConnectionForm", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["dx",
           BaseStyle->"InformationLink",
-          ButtonData:>{"Info3599726638-5061372", {"dx", "xAct`xTerior`"}},
+          ButtonData:>{"Info3599826738-7859528", {"dx", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], 
          ButtonBox["UseCartan",
           BaseStyle->"InformationLink",
           
           ButtonData:>{
-           "Info3599726638-5061372", {"UseCartan", "xAct`xTerior`"}},
+           "Info3599826738-7859528", {"UseCartan", "xAct`xTerior`"}},
           ButtonNote->"xAct`xTerior`"], ""}
        },
        DefaultBaseStyle->"InfoGrid",
@@ -99121,7 +99121,7 @@ Cell[BoxData[
 ScreenStyleEnvironment->"Brackets",
 WindowToolbars->"EditBar",
 WindowSize->{1276, 692},
-WindowMargins->{{315, Automatic}, {Automatic, 122}},
+WindowMargins->{{0, Automatic}, {0, Automatic}},
 PrintingCopies->1,
 PrintingPageRange->{Automatic, Automatic},
 PageHeaders->{{Inherited, Inherited, 
@@ -99153,7 +99153,7 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
 Magnification->1.5,
-FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (November 20, 2012)",
 StyleDefinitions->Notebook[{
    Cell[
     CellGroupData[{
@@ -106327,7 +106327,7 @@ stand out).", "Text"],
          Cell[
           StyleData["UnmatchedBracket"], StyleMenuListing -> None]}, 
         Closed]]}, Open]]}, Visible -> False, FrontEndVersion -> 
-  "9.0 for Linux x86 (64-bit) (February 7, 2013)", StyleDefinitions -> 
+  "9.0 for Linux x86 (64-bit) (November 20, 2012)", StyleDefinitions -> 
   "Default.nb"]
 ]
 

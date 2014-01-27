@@ -68,8 +68,8 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
-  "2014", ",", "1", ",", "16", ",", "13", ",", "23", ",", 
-   "56.550945`8.505014840527565"}], "}"}]], "Output"]
+  "2014", ",", "1", ",", "27", ",", "15", ",", "47", ",", 
+   "39.360406`8.347634548024022"}], "}"}]], "Output"]
 }, Open  ]],
 
 Cell[BoxData[{
@@ -518,8 +518,9 @@ Cell[BoxData[{
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"TagUnset", "::", "norep"}], "MessageName"], ":", 
-  " ", "\<\"Assignment on \[NoBreak]\\!\\(PD\\)\[NoBreak] for \
+   RowBox[{"TagUnset", "::", "norep"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Assignment on \[NoBreak]\\!\\(PD\\)\[NoBreak] for \
 \[NoBreak]\\!\\(ManifoldOfCovD[PD]\\)\[NoBreak] not found. \
 \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
 ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/TagUnset/norep\\\", \
@@ -558,8 +559,9 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Set", "::", "write"}], "MessageName"], ":", 
-  " ", "\<\"Tag \[NoBreak]\\!\\(ColorPositions\\)\[NoBreak] in \
+   RowBox[{"Set", "::", "write"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Tag \[NoBreak]\\!\\(ColorPositions\\)\[NoBreak] in \
 \[NoBreak]\\!\\(Options[ColorPositions]\\)\[NoBreak] is Protected. \
 \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
 ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/write\\\", \
@@ -568,8 +570,9 @@ ButtonNote -> \\\"Set::write\\\"]\\)\"\>"}]], "Message", "MSG"],
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"SetDelayed", "::", "write"}], "MessageName"], ":", 
-  " ", "\<\"Tag \[NoBreak]\\!\\(ColorPositions\\)\[NoBreak] in \
+   RowBox[{"SetDelayed", "::", "write"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Tag \[NoBreak]\\!\\(ColorPositions\\)\[NoBreak] in \
 \[NoBreak]\\!\\(\\(\\(ColorPositions[\\(\\(positionlist_, \\(\\(opts___ ? \
 OptionQ\\)\\)\\)\\)]\\)\\)[expr_]\\)\[NoBreak] is Protected. \
 \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
@@ -579,8 +582,9 @@ ButtonNote -> \\\"SetDelayed::write\\\"]\\)\"\>"}]], "Message", "MSG"],
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"SetDelayed", "::", "write"}], "MessageName"], ":", 
-  " ", "\<\"Tag \[NoBreak]\\!\\(CompleteTheSquare\\)\[NoBreak] in \
+   RowBox[{"SetDelayed", "::", "write"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Tag \[NoBreak]\\!\\(CompleteTheSquare\\)\[NoBreak] in \
 \[NoBreak]\\!\\(CompleteTheSquare[\\(\\(expr_, \\(\\(var_ : x\\)\\)\\)\\)]\\)\
 \[NoBreak] is Protected. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
 ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
@@ -590,26 +594,31 @@ ButtonData:>\\\"paclet:ref/message/General/write\\\", ButtonNote -> \
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"SetDelayed", "::", "wrsym"}], "MessageName"], ":", 
-  " ", "\<\"Symbol \[NoBreak]\\!\\(ErsekComplexity\\)\[NoBreak] is Protected. \
-\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
-ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/wrsym\\\", \
-ButtonNote -> \\\"SetDelayed::wrsym\\\"]\\)\"\>"}]], "Message", "MSG"],
+   RowBox[{"SetDelayed", "::", "wrsym"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Symbol \[NoBreak]\\!\\(ErsekComplexity\\)\[NoBreak] is \
+Protected. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\
+\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/wrsym\\\", ButtonNote -> \
+\\\"SetDelayed::wrsym\\\"]\\)\"\>"}]], "Message", "MSG"],
 
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Set", "::", "wrsym"}], "MessageName"], ":", 
-  " ", "\<\"Symbol \[NoBreak]\\!\\(ErsekComplexity\\)\[NoBreak] is Protected. \
-\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
-ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/wrsym\\\", \
-ButtonNote -> \\\"Set::wrsym\\\"]\\)\"\>"}]], "Message", "MSG"],
+   RowBox[{"Set", "::", "wrsym"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Symbol \[NoBreak]\\!\\(ErsekComplexity\\)\[NoBreak] is \
+Protected. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\
+\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/wrsym\\\", ButtonNote -> \
+\\\"Set::wrsym\\\"]\\)\"\>"}]], "Message", "MSG"],
 
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"SetDelayed", "::", "write"}], "MessageName"], ":", 
-  " ", "\<\"Tag \[NoBreak]\\!\\(EvaluateAt\\)\[NoBreak] in \
+   RowBox[{"SetDelayed", "::", "write"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Tag \[NoBreak]\\!\\(EvaluateAt\\)\[NoBreak] in \
 \[NoBreak]\\!\\(\\(\\(EvaluateAt[\\(\\(\\(\\(posn : \\(\\(_Integer | \
 \\(\\({__Integer}\\)\\)\\)\\)\\)\\), \\(\\(f_ : \
 Identity\\)\\)\\)\\)]\\)\\)[expr_]\\)\[NoBreak] is Protected. \
@@ -620,13 +629,14 @@ ButtonNote -> \\\"SetDelayed::write\\\"]\\)\"\>"}]], "Message", "MSG"],
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"General", "::", "stop"}], "MessageName"], ":", 
-  " ", "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(SetDelayed :: \
-write\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
-calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
-\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG"]
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \
+\[NoBreak]\\!\\(\\*StyleBox[\\(SetDelayed :: write\\), \
+\\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this calculation. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
+ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG"]
 }, Open  ]]
 }, Closed]],
 
@@ -690,8 +700,8 @@ respect to the covariant derivative covd.\>\""}], ";"}],
      " ", "derivative"}], " ", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
-     RowBox[{"ChangeExtCovDiff", "::", "usage"}], "=", 
-     "\"\<ChangeExtCovDiff[expr,cd1,cd2] expresses the exterior covariant \
+     RowBox[{"ChangeExtD", "::", "usage"}], "=", 
+     "\"\<ChangeExtD[expr,cd1,cd2] expresses the exterior covariant \
 derivative taken with respect to the connection defined by the covariant \
 derivative cd1 in terms of the exterior covariant derivative taken with \
 respect to the connection defined by the covariant derivative cd2\>\""}], 
@@ -943,22 +953,22 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"ChangeCurvatureForm\"\>", ",", "\<\"ChangeExtCovDiff\"\>", 
+  RowBox[{"\<\"CartanD\"\>", ",", "\<\"CartanDToDiff\"\>", 
+   ",", "\<\"ChangeCurvatureForm\"\>", ",", "\<\"ChangeExtD\"\>", 
    ",", "\<\"ChristoffelForm\"\>", ",", "\<\"Codiff\"\>", 
    ",", "\<\"CodiffToDiff\"\>", ",", "\<\"Coframe\"\>", 
    ",", "\<\"ConnectionForm\"\>", ",", "\<\"ConnectionFormToTensor\"\>", 
    ",", "\<\"CurvatureForm\"\>", ",", "\<\"CurvatureFormToTensor\"\>", 
-   ",", "\<\"DefDiffForm\"\>", ",", "\<\"Deg\"\>", ",", "\<\"DFormQ\"\>", 
-   ",", "\<\"Diff\"\>", ",", "\<\"Disclaimer\"\>", ",", "\<\"dx\"\>", 
+   ",", "\<\"DefDiffForm\"\>", ",", "\<\"Deg\"\>", ",", "\<\"Diff\"\>", 
+   ",", "\<\"DiffFormQ\"\>", ",", "\<\"Disclaimer\"\>", ",", "\<\"dx\"\>", 
    ",", "\<\"ExpandHodgeDual\"\>", ",", "\<\"FormVarD\"\>", 
-   ",", "\<\"Hodge\"\>", ",", "\<\"Int\"\>", ",", "\<\"Lie\"\>", 
-   ",", "\<\"LieToDiff\"\>", ",", "\<\"RiemannForm\"\>", 
+   ",", "\<\"Hodge\"\>", ",", "\<\"Int\"\>", ",", "\<\"RiemannForm\"\>", 
    ",", "\<\"SortDerivations\"\>", ",", "\<\"TorsionForm\"\>", 
    ",", "\<\"UndefDiffForm\"\>", ",", "\<\"UseCartan\"\>", 
    ",", "\<\"UseDimensionStart\"\>", ",", "\<\"UseDimensionStop\"\>", 
-   ",", "\<\"ZeroDegQ\"\>", ",", "\<\"ZeroFormQ\"\>", 
-   ",", "\<\"$DerivationSortOrder\"\>", ",", "\<\"$Version\"\>", 
-   ",", "\<\"$xTensorVersionExpected\"\>"}], "}"}]], "Output"]
+   ",", "\<\"ZeroDegQ\"\>", ",", "\<\"$DerivationSortOrder\"\>", 
+   ",", "\<\"$Version\"\>", ",", "\<\"$xTensorVersionExpected\"\>"}], 
+  "}"}]], "Output"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -966,7 +976,7 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"%", "//", "Length"}]], "Input"],
 
-Cell[BoxData["34"], "Output"]
+Cell[BoxData["33"], "Output"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1016,6 +1026,8 @@ actually in this case true elements of the algebra. The product by scalar and \
 the product of scalars are both Times, so we do not need to specify them.\
 \>", "Text"],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[
  RowBox[{
   RowBox[{"DefProduct", "[", 
@@ -1038,6 +1050,16 @@ Cell[BoxData[
     RowBox[{"DefInfo", "\[Rule]", "Null"}]}], "\[IndentingNewLine]", "]"}], 
   ";"}]], "Input",
  InitializationCell->True],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"ValidateSymbol", "::", "used"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Symbol \[NoBreak]\\!\\(\\\"Wedge\\\"\\)\[NoBreak] is \
+already used \[NoBreak]\\!\\(\\\"as a product\\\"\\)\[NoBreak].\"\>"}]], \
+"Message", "MSG"]
+}, Open  ]],
 
 Cell[TextData[{
  "When working with the exterior algebra the grade is typically called ",
@@ -1428,7 +1450,7 @@ Cell[BoxData[
  StyleBox["\<\"DefDiffForm[form[inds], mani, Deg] defines a tensor valued \
 differential form of degree deg on the manifold mani\"\>", 
   "MSG"]], "Print", "PrintUsage",
- CellTags->"Info3598867437-7944634"]
+ CellTags->"Info3599826461-4210687"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -1837,7 +1859,7 @@ Cell[BoxData[
  StyleBox["\<\"Diff[form] computes the exterior derivative of form. \
 Diff[form,covd] computes the exterior covariant derivative of form with \
 respect to the covariant derivative covd.\"\>", "MSG"]], "Print", "PrintUsage",
- CellTags->"Info3598867438-7944634"]
+ CellTags->"Info3599826462-4210687"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -2286,7 +2308,7 @@ Cell[BoxData[
 Cell[BoxData[
  StyleBox["\<\"Hodge[metric][expr] is the Hodge dual of expr defined with \
 respect to metric\"\>", "MSG"]], "Print", "PrintUsage",
- CellTags->"Info3598867438-7944634"]
+ CellTags->"Info3599826462-4210687"]
 }, Open  ]],
 
 Cell["\<\
@@ -2405,7 +2427,7 @@ Hodge duals of the exterior powers of Coframe[mani], defined with respect to \
 the metric g. If the manifold tag mani is dropped, then all the instances of \
 Coframe are expanded. The Coframe label can be replaced by dx if we are using \
 the holonomic coframe.\"\>", "MSG"]], "Print", "PrintUsage",
- CellTags->"Info3598867438-7944634"]
+ CellTags->"Info3599826463-4210687"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -2799,11 +2821,13 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Information", "::", "notfound"}], "MessageName"], ":", 
-  " ", "\<\"Symbol \[NoBreak]\\!\\(\\\"ExtCovDiff\\\"\\)\[NoBreak] not found. \
-\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
-ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/notfound\\\", \
-ButtonNote -> \\\"Information::notfound\\\"]\\)\"\>"}]], "Message", "MSG"]
+   RowBox[{"Information", "::", "notfound"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Symbol \[NoBreak]\\!\\(\\\"ExtCovDiff\\\"\\)\[NoBreak] not \
+found. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/notfound\\\", ButtonNote -> \
+\\\"Information::notfound\\\"]\\)\"\>"}]], "Message", "MSG"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -3994,15 +4018,15 @@ context."
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"?", "ChangeExtCovDiff"}]], "Input"],
+ RowBox[{"?", "ChangeExtD"}]], "Input"],
 
 Cell[BoxData[
- StyleBox["\<\"ChangeExtCovDiff[expr,cd1,cd2] expresses the exterior \
-covariant derivative taken with respect to the connection defined by the \
-covariant derivative cd1 in terms of the exterior covariant derivative taken \
-with respect to the connection defined by the covariant derivative cd2\"\>", 
+ StyleBox["\<\"ChangeExtD[expr,cd1,cd2] expresses the exterior covariant \
+derivative taken with respect to the connection defined by the covariant \
+derivative cd1 in terms of the exterior covariant derivative taken with \
+respect to the connection defined by the covariant derivative cd2\"\>", 
   "MSG"]], "Print", "PrintUsage",
- CellTags->"Info3598867439-7944634"]
+ CellTags->"Info3599826463-4210687"]
 }, Open  ]],
 
 Cell["\<\
@@ -4031,14 +4055,14 @@ Cell[BoxData[
 Cell[BoxData[{
  RowBox[{
   RowBox[{
-   RowBox[{"ChangeExtCovDiff", "[", 
+   RowBox[{"ChangeExtD", "[", 
     RowBox[{"expr_", ",", 
      RowBox[{"cd_", "?", "CovDQ"}], ",", "cd_"}], "]"}], ":=", "expr"}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{
-    RowBox[{"ChangeExtCovDiff", "[", 
+    RowBox[{"ChangeExtD", "[", 
      RowBox[{"expr_", ",", 
       RowBox[{"cd1_", "?", "CovDQ"}], ",", 
       RowBox[{"cd2_:", "PD"}]}], "]"}], ":=", 
@@ -4050,36 +4074,36 @@ Cell[BoxData[{
       "\[IndentingNewLine]", 
       RowBox[{"makeChangeExtD", "[", 
        RowBox[{
-        RowBox[{"ChangeExtCovDiff", "[", 
+        RowBox[{"ChangeExtD", "[", 
          RowBox[{"expr1", ",", "cd1", ",", "cd2"}], "]"}], ",", "cd1", ",", 
         "cd2"}], "]"}]}]}]}], ";"}], 
   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"ChangeExtCovDiff", "[", 
+   RowBox[{"ChangeExtD", "[", 
     RowBox[{"expr_", ",", "list_List", ",", 
      RowBox[{"covd2_:", "PD"}]}], "]"}], ":=", 
    RowBox[{"Fold", "[", 
     RowBox[{
      RowBox[{
-      RowBox[{"ChangeExtCovDiff", "[", 
+      RowBox[{"ChangeExtD", "[", 
        RowBox[{"#1", ",", "#2", ",", "covd2"}], "]"}], "&"}], ",", "expr", 
      ",", "list"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"ChangeExtCovDiff", "[", 
+   RowBox[{"ChangeExtD", "[", 
     RowBox[{"expr_", ",", "x_", ",", 
      RowBox[{"_", ":", "PD"}]}], "]"}], ":=", 
    RowBox[{"Throw", "@", 
     RowBox[{"Message", "[", 
      RowBox[{
-      RowBox[{"ChangeExtCovDiff", "::", "unknown"}], ",", 
+      RowBox[{"ChangeExtD", "::", "unknown"}], ",", 
       "\"\<covariant derivative\>\"", ",", "x"}], "]"}]}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"ChangeExtCovDiff", "[", "expr_", "]"}], ":=", 
-   RowBox[{"ChangeExtCovDiff", "[", 
+   RowBox[{"ChangeExtD", "[", "expr_", "]"}], ":=", 
+   RowBox[{"ChangeExtD", "[", 
     RowBox[{"expr", ",", "$CovDs"}], "]"}]}], ";"}]}], "Input",
  InitializationCell->True],
 
@@ -4567,10 +4591,12 @@ using the Cartan structure equations for the connection arising from covd. In \
 this way it is possible to expand the exterior derivative of a co-frame, a \
 torsion 2-form and the curvature 2-form. If covd is the Levi-Civita \
 connection of a metric, then the exterior derivatives of that metric and its \
-volume element are expanded too. UseCartan[expr,PD,mani] expands all \
-instances of the exterior derivative in terms of partial derivatives defined \
-in the manifold mani.\"\>", "MSG"]], "Print", "PrintUsage",
- CellTags->"Info3598867439-7944634"]
+volume element are expanded too. UseCartan[expr,PD] expands all instances of \
+the exterior derivative in terms of partial derivatives defined in the list \
+of manifolds returned by ManifoldsOf[expr]. It is possible to specify a \
+custom list of manifolds as a third argument in the form \
+UseCartan[expr,PD,{M1,M2,..}]\"\>", "MSG"]], "Print", "PrintUsage",
+ CellTags->"Info3599826464-4210687"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -4705,7 +4731,7 @@ Cell[BoxData[
 Cell[BoxData[
  StyleBox["\<\"ManifoldsOf[expr] gives the list of manifolds on which expr \
 lives.\"\>", "MSG"]], "Print", "PrintUsage",
- CellTags->"Info3599722207-1999108"]
+ CellTags->"Info3599826464-4210687"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -4736,7 +4762,7 @@ Cell[BoxData[
       SubscriptBox["\[PartialD]", "a1"], "expr"}],
      ShowAutoStyles->False,
      AutoSpacing->False],
-    xAct`xTensor`PD[-$CellContext`a1][$CellContext`expr],
+    xAct`xTensor`PD[-xAct`xTerior`Private`a1][xAct`xTerior`Private`expr],
     Editable->False]}], "+", 
   RowBox[{
    RowBox[{
@@ -4747,7 +4773,7 @@ Cell[BoxData[
       SubscriptBox["\[PartialD]", "a2"], "expr"}],
      ShowAutoStyles->False,
      AutoSpacing->False],
-    xAct`xTensor`PD[-$CellContext`a2][$CellContext`expr],
+    xAct`xTensor`PD[-xAct`xTerior`Private`a2][xAct`xTerior`Private`expr],
     Editable->False]}]}]], "Output"]
 }, Open  ]],
 
@@ -4758,21 +4784,20 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{
-  StyleBox["\<\"\\!\\(\\*RowBox[{\\\"Inner\\\", \\\"[\\\", \
+  StyleBox["\<\"\!\(\*RowBox[{\\\"Inner\\\", \\\"[\\\", \
 RowBox[{StyleBox[\\\"f\\\", \\\"TI\\\"], \\\",\\\", \
 SubscriptBox[StyleBox[\\\"list\\\", \\\"TI\\\"], StyleBox[\\\"1\\\", \\\"TR\\\
 \"]], \\\",\\\", SubscriptBox[StyleBox[\\\"list\\\", \\\"TI\\\"], StyleBox[\\\
 \"2\\\", \\\"TR\\\"]], \\\",\\\", StyleBox[\\\"g\\\", \\\"TI\\\"]}], \
-\\\"]\\\"}]\\) is a generalization of Dot in which \
-\\!\\(\\*StyleBox[\\\"f\\\", \\\"TI\\\"]\\) plays the role of multiplication \
-and \\!\\(\\*StyleBox[\\\"g\\\", \\\"TI\\\"]\\) of addition. \"\>", "MSG"], 
-  "\[NonBreakingSpace]", 
+\\\"]\\\"}]\) is a generalization of Dot in which \!\(\*StyleBox[\\\"f\\\", \
+\\\"TI\\\"]\) plays the role of multiplication and \!\(\*StyleBox[\\\"g\\\", \
+\\\"TI\\\"]\) of addition. \"\>", "MSG"], "\[NonBreakingSpace]", 
   ButtonBox[
    StyleBox["\[RightSkeleton]", "SR"],
    Active->True,
    BaseStyle->"Link",
    ButtonData->"paclet:ref/Inner"]}]], "Print", "PrintUsage",
- CellTags->"Info3599721511-1999108"]
+ CellTags->"Info3599826465-4210687"]
 }, Open  ]],
 
 Cell["\<\
@@ -5140,7 +5165,7 @@ Cell[BoxData[
             RowBox[{"BasisOfCovD", "@", "covd"}], "=!=", "Null"}]}], 
           ")"}]}]}]}], "}"}]}], ")"}]}], ";"}]], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -5159,7 +5184,7 @@ Cell[BoxData[
 Cell[BoxData[
  StyleBox["\<\"Int[v][form] is the interior contraction of form with the \
 vector (rank 1-tensor) v\"\>", "MSG"]], "Print", "PrintUsage",
- CellTags->"Info3598867439-7944634"]
+ CellTags->"Info3599826465-4210687"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -5263,11 +5288,11 @@ Cell[BoxData[
  RowBox[{"?", "CartanD"}]], "Input"],
 
 Cell[BoxData[
- StyleBox["\<\"CartanD[v][form] is the Cartan Lie derivative of form with \
-respect to the vector (rank 1-tensor) v. CartanD[v][form,covd] is the Cartan \
-Lie derivative with respect to the covariant derivative covd.\"\>", 
+ StyleBox["\<\"CartanD[v][form] is the Cartan derivative of form with respect \
+to the vector (rank 1-tensor) v. CartanD[v][form,covd] is the Cartan \
+derivative with respect to the covariant derivative covd.\"\>", 
   "MSG"]], "Print", "PrintUsage",
- CellTags->"Info3599054849-4923295"]
+ CellTags->"Info3599826465-4210687"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -5587,7 +5612,7 @@ Cell[BoxData[
  StyleBox["\<\"LieDToCovD[expr, covd] transforms LieD[v][expr1] into LieD[v, \
 covd][expr1] so that the Lie derivative of expr1 along v is computed in terms \
 of the covariant derivative covd.\"\>", "MSG"]], "Print", "PrintUsage",
- CellTags->"Info3599054873-4923295"]
+ CellTags->"Info3599826466-4210687"]
 }, Open  ]],
 
 Cell[BoxData[{
@@ -6170,7 +6195,7 @@ Cell[BoxData[
  StyleBox["\<\"$DerivationSortOrder is a global variable which encodes the \
 default ordering of the three derivatives Int, LieD and Diff. The default is \
 {LieD,Int,Diff}\"\>", "MSG"]], "Print", "PrintUsage",
- CellTags->"Info3598867441-7944634"]
+ CellTags->"Info3599826466-4210687"]
 }, Open  ]],
 
 Cell[BoxData[{
@@ -6194,7 +6219,7 @@ all the derivations (exterior derivative, Lie derivative and interior \
 contraction) are written in a canonical order. The default left-to-right \
 order is defined by the variable $DerivationSortOrder\"\>", 
   "MSG"]], "Print", "PrintUsage",
- CellTags->"Info3598867441-7944634"]
+ CellTags->"Info3599826466-4210687"]
 }, Open  ]],
 
 Cell[BoxData[{
@@ -6583,6 +6608,8 @@ Cell[TextData[{
       SubsuperscriptBox["\[Star]", "g", 
        RowBox[{"-", "1"}]], "c"}]}]}], TraditionalForm]]]
 }], "Text"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
@@ -7074,6 +7101,18 @@ Cell[BoxData[
           "covd"}], "]"}]}]}], "]"}]}], ";"}]}]}]], "Input",
  InitializationCell->True],
 
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$IterationLimit", "::", "itlim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Iteration limit of \[NoBreak]\\!\\(4096\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$IterationLimit/itlim\\\", ButtonNote -> \
+\\\"$IterationLimit::itlim\\\"]\\)\"\>"}]], "Message", "MSG"]
+}, Open  ]],
+
 Cell[CellGroupData[{
 
 Cell[BoxData[
@@ -7083,7 +7122,7 @@ Cell[BoxData[
  StyleBox["\<\"Diff[form] computes the exterior derivative of form. \
 Diff[form,covd] computes the exterior covariant derivative of form with \
 respect to the covariant derivative covd.\"\>", "MSG"]], "Print", "PrintUsage",
- CellTags->"Info3599198498-4009857"]
+ CellTags->"Info3599826467-4210687"]
 }, Open  ]]
 }, Closed]]
 }, Open  ]],
@@ -7104,12 +7143,12 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1276, 613},
-WindowMargins->{{Automatic, 200}, {Automatic, 162}},
+WindowMargins->{{0, Automatic}, {32, Automatic}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
 Magnification->1.5,
-FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (November 20, 2012)",
 StyleDefinitions->"Default.nb"
 ]
 

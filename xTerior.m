@@ -108,7 +108,7 @@ PD/:ManifoldOfCovD@PD=.
 Protect@PD;
 
 
-(* Definition and undefinition of a differential form (just a wrapper for DefTensor with the option GradeOfTensor\[Rule]{Wedge})*)
+(* Definition and undefinition of a differential form (just a wrapper for DefTensor with the option GradeOfTensor->{Wedge})*)
 DefDiffForm::usage="DefDiffForm[form[inds], mani, Deg] defines a tensor valued differential form of degree deg on the manifold mani";
 UndefDiffForm::usage="UndefDiffForm[form] undefines the differential form form";
 (* Grade of a differential form *)
@@ -117,7 +117,7 @@ DiffFormQ::usage="DiffFormQ is an option for LieToCovD which specifies whether t
 (* Exterior derivative and exterior covariant derivative *)
 Diff::usage="Diff[form] computes the exterior derivative of form. Diff[form,covd] computes the exterior covariant derivative of form with respect to the covariant derivative covd.";
 (* Computation of the exterior covariant derivative *)
-ChangeExtCovDiff::usage="ChangeExtCovDiff[expr,cd1,cd2] expresses the exterior covariant derivative taken with respect to the connection defined by the covariant derivative cd1 in terms of the exterior covariant derivative taken with respect to the connection defined by the covariant derivative cd2";
+ChangeExtD::usage="ChangeExtD[expr,cd1,cd2] expresses the exterior covariant derivative taken with respect to the connection defined by the covariant derivative cd1 in terms of the exterior covariant derivative taken with respect to the connection defined by the covariant derivative cd2";
 (* Hodge dual *)
 Hodge::usage="Hodge[metric][expr] is the Hodge dual of expr defined with respect to metric";
 ExpandHodgeDual::usage="ExpandHodgeDual[expr,Coframe[mani],g] expands out all the Hodge duals of the exterior powers of Coframe[mani], defined with respect to the metric g. If the manifold tag mani is dropped, then all the instances of Coframe are expanded. The Coframe label can be replaced by dx if we are using the holonomic coframe.";
@@ -533,13 +533,13 @@ PrintAs[TorsionForm[cd_]]^:=PrintAs[TorsionForm]<>"["<>Last@SymbolOfCovD[cd]<>"]
 ConnectionForm[cd1_,cd2_,vbundle_][inds__]:=ConnectionForm[cd1,vbundle][inds]-ConnectionForm[cd2,vbundle][inds];
 
 
-ChangeExtCovDiff[expr_,cd_?CovDQ,cd_]:=expr;
-ChangeExtCovDiff[expr_,cd1_?CovDQ,cd2_:PD]:=expr/.HoldPattern[Diff[expr1_,cd1]]:>
-makeChangeExtD[ChangeExtCovDiff[expr1,cd1,cd2],cd1,cd2];
+ChangeExtD[expr_,cd_?CovDQ,cd_]:=expr;
+ChangeExtD[expr_,cd1_?CovDQ,cd2_:PD]:=expr/.HoldPattern[Diff[expr1_,cd1]]:>
+makeChangeExtD[ChangeExtD[expr1,cd1,cd2],cd1,cd2];
 
-ChangeExtCovDiff[expr_,list_List,covd2_:PD]:=Fold[ChangeExtCovDiff[#1,#2,covd2]&,expr,list];
-ChangeExtCovDiff[expr_,x_,_:PD]:=Throw@Message[ChangeExtCovDiff::unknown,"covariant derivative",x];
-ChangeExtCovDiff[expr_]:=ChangeExtCovDiff[expr,$CovDs];
+ChangeExtD[expr_,list_List,covd2_:PD]:=Fold[ChangeExtD[#1,#2,covd2]&,expr,list];
+ChangeExtD[expr_,x_,_:PD]:=Throw@Message[ChangeExtD::unknown,"covariant derivative",x];
+ChangeExtD[expr_]:=ChangeExtD[expr,$CovDs];
 
 
 makeChangeExtD[expr_,cd1_,cd2_]:=With[{vbs=Apply[Union,VBundlesOfCovD/@DeleteCases[{cd1,cd2},PD]]},
@@ -784,9 +784,9 @@ FormVarD[form1_[inds1___],met_][form2_?xTensorQ[inds2___],rest_]:=0/;!ImplicitTe
 (* Hodge identity *)
 FormVarD[form_,met_][Hodge[met_][expr_],rest_]:=With[{k=Grade[expr,Wedge],n=DimOfMetric@met},
 (-1)^(k(n-k))FormVarD[form,met][expr,Hodge[met]@rest]];
-(* diff \[Rule] Replaced by Diff to adjust to the new notation. Dropped cd. Added back PD *)
+(* diff -> Replaced by Diff to adjust to the new notation. Dropped cd. Added back PD *)
 FormVarD[form_,met_][Diff[expr_,PD],rest_]:=FormVarD[form,met][expr,Hodge[met]@Codiff[met][InvHodge[met]@rest]];
-(* codiff \[Rule] Replaced by Codiff to adjust to the new notation. Dropped cd and replaced ExtCovDiff by Diff . Added back covd *)
+(* codiff -> Replaced by Codiff to adjust to the new notation. Dropped cd and replaced ExtCovDiff by Diff . Added back covd *)
 FormVarD[form_,met_][Codiff[met_][expr_,covd_?CovDQ],rest_]:=FormVarD[form,met][expr,Hodge[met]@Diff[InvHodge[met]@rest,covd]];
 
 
