@@ -108,7 +108,7 @@ PD/:ManifoldOfCovD@PD=.
 Protect@PD;
 
 
-(* Definition and undefinition of a differential form (just a wrapper for DefTensor with the option GradeOfTensor->{Wedge})*)
+(* Definition and undefinition of a differential form (just a wrapper for DefTensor with the option GradeOfTensor\[Rule]{Wedge})*)
 DefDiffForm::usage="DefDiffForm[form[inds], mani, Deg] defines a tensor valued differential form of degree deg on the manifold mani";
 UndefDiffForm::usage="UndefDiffForm[form] undefines the differential form form";
 (* Grade of a differential form *)
@@ -180,28 +180,37 @@ DefInfo->Null
 Deg[expr_]:=Grade[expr,Wedge];
 
 
+(*Code added by Jos\[EAcute]*)
+$UseDimensionsQ=False;
+
 $DimensionsZeroForms={};
 SetZeroForm[form_]:=If[GradeOfTensor[form,Wedge]>Plus@@(DimOfManifold/@DependenciesOfTensor[form]),form[___]=0;AppendTo[$DimensionsZeroForms,form]];
 UnsetZeroForm[form_]:=Unset[form[___]];
 
 
-UseDimensionStart[]:=Module[{},
-(* Forms whose degree is greater than the dimension *)
-SetZeroForm/@$Tensors;
-(* Expressions which are wedge products *)
-HoldPattern@Wedge[expr__]:=0/;(Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)));
-(* Expressions which are exterior derivatives *)
-HoldPattern@Diff[expr_,PD]:=0/;(1+Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)));
-HoldPattern@Diff[expr_,covd_]:=0/;(1+Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)));
-]
+UseDimensionStart[]:=Module[{},If[$UseDimensionsQ,Return[]];
+$UseDimensionsQ=True;
+(*Forms whose degree is greater than the dimension*)SetZeroForm/@$Tensors;
+(*Expressions which are wedge products*)HoldPattern@Wedge[expr__]:=0/;(Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)));
+(*Expressions which are exterior derivatives*)HoldPattern@Diff[expr_,PD]:=0/;(1+Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)));
+HoldPattern@Diff[expr_,covd_]:=0/;(1+Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@$Manifolds)));]
 
 
-UseDimensionStop[]:=Module[{},
+UseDimensionStop[]:=Module[{},If[!$UseDimensionsQ,Return[]];
+$UseDimensionsQ=False;
 UnsetZeroForm/@Union@$DimensionsZeroForms;
 HoldPattern@Wedge[expr__]=.;
 HoldPattern@Diff[expr_,PD]=.;
-HoldPattern@Diff[expr_,covd_]=.;
-]
+HoldPattern@Diff[expr_,covd_]=.;]
+
+(* xTensions *)
+
+xTension["xTerior`",DefTensor,"End"]:=DefTensorUseDimensions;
+DefTensorUseDimensions[tensor_[inds___],__]:=If[$UseDimensionsQ,SetZeroForm[tensor]];
+
+xTension["xTerior`",UndefTensor,"Beginning"]:=UndefTensorUseDimensions;
+UndefTensorUseDimensions[tensor_]:=If[$UseDimensionsQ,UnsetZeroForm[tensor]];
+
 
 
 DefDiffForm[form_,mani_,deg_,options___?OptionQ]:=
@@ -784,9 +793,9 @@ FormVarD[form1_[inds1___],met_][form2_?xTensorQ[inds2___],rest_]:=0/;!ImplicitTe
 (* Hodge identity *)
 FormVarD[form_,met_][Hodge[met_][expr_],rest_]:=With[{k=Grade[expr,Wedge],n=DimOfMetric@met},
 (-1)^(k(n-k))FormVarD[form,met][expr,Hodge[met]@rest]];
-(* diff -> Replaced by Diff to adjust to the new notation. Dropped cd. Added back PD *)
+(* diff \[Rule] Replaced by Diff to adjust to the new notation. Dropped cd. Added back PD *)
 FormVarD[form_,met_][Diff[expr_,PD],rest_]:=FormVarD[form,met][expr,Hodge[met]@Codiff[met][InvHodge[met]@rest]];
-(* codiff -> Replaced by Codiff to adjust to the new notation. Dropped cd and replaced ExtCovDiff by Diff . Added back covd *)
+(* codiff \[Rule] Replaced by Codiff to adjust to the new notation. Dropped cd and replaced ExtCovDiff by Diff . Added back covd *)
 FormVarD[form_,met_][Codiff[met_][expr_,covd_?CovDQ],rest_]:=FormVarD[form,met][expr,Hodge[met]@Diff[InvHodge[met]@rest,covd]];
 
 

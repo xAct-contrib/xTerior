@@ -111,3 +111,5 @@ last lines of the code of FormVarD.
               Dropped ZeroFormQ.
               
 27 Jan 2014: Changed name ExtCovDiff by ExtCovD.
+
+28 Jan 2014: Coded UseDimensionStart and UseDimensionStop with xTensions. Patch submitted by José María.

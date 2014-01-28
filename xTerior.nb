@@ -518,9 +518,8 @@ Cell[BoxData[{
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"TagUnset", "::", "norep"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Assignment on \[NoBreak]\\!\\(PD\\)\[NoBreak] for \
+   RowBox[{"TagUnset", "::", "norep"}], "MessageName"], ":", 
+  " ", "\<\"Assignment on \[NoBreak]\\!\\(PD\\)\[NoBreak] for \
 \[NoBreak]\\!\\(ManifoldOfCovD[PD]\\)\[NoBreak] not found. \
 \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
 ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/TagUnset/norep\\\", \
@@ -559,9 +558,8 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Set", "::", "write"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Tag \[NoBreak]\\!\\(ColorPositions\\)\[NoBreak] in \
+   RowBox[{"Set", "::", "write"}], "MessageName"], ":", 
+  " ", "\<\"Tag \[NoBreak]\\!\\(ColorPositions\\)\[NoBreak] in \
 \[NoBreak]\\!\\(Options[ColorPositions]\\)\[NoBreak] is Protected. \
 \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
 ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/write\\\", \
@@ -570,9 +568,8 @@ ButtonNote -> \\\"Set::write\\\"]\\)\"\>"}]], "Message", "MSG"],
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"SetDelayed", "::", "write"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Tag \[NoBreak]\\!\\(ColorPositions\\)\[NoBreak] in \
+   RowBox[{"SetDelayed", "::", "write"}], "MessageName"], ":", 
+  " ", "\<\"Tag \[NoBreak]\\!\\(ColorPositions\\)\[NoBreak] in \
 \[NoBreak]\\!\\(\\(\\(ColorPositions[\\(\\(positionlist_, \\(\\(opts___ ? \
 OptionQ\\)\\)\\)\\)]\\)\\)[expr_]\\)\[NoBreak] is Protected. \
 \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
@@ -582,9 +579,8 @@ ButtonNote -> \\\"SetDelayed::write\\\"]\\)\"\>"}]], "Message", "MSG"],
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"SetDelayed", "::", "write"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Tag \[NoBreak]\\!\\(CompleteTheSquare\\)\[NoBreak] in \
+   RowBox[{"SetDelayed", "::", "write"}], "MessageName"], ":", 
+  " ", "\<\"Tag \[NoBreak]\\!\\(CompleteTheSquare\\)\[NoBreak] in \
 \[NoBreak]\\!\\(CompleteTheSquare[\\(\\(expr_, \\(\\(var_ : x\\)\\)\\)\\)]\\)\
 \[NoBreak] is Protected. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
 ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
@@ -594,31 +590,26 @@ ButtonData:>\\\"paclet:ref/message/General/write\\\", ButtonNote -> \
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"SetDelayed", "::", "wrsym"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Symbol \[NoBreak]\\!\\(ErsekComplexity\\)\[NoBreak] is \
-Protected. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\
-\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/wrsym\\\", ButtonNote -> \
-\\\"SetDelayed::wrsym\\\"]\\)\"\>"}]], "Message", "MSG"],
+   RowBox[{"SetDelayed", "::", "wrsym"}], "MessageName"], ":", 
+  " ", "\<\"Symbol \[NoBreak]\\!\\(ErsekComplexity\\)\[NoBreak] is Protected. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/wrsym\\\", \
+ButtonNote -> \\\"SetDelayed::wrsym\\\"]\\)\"\>"}]], "Message", "MSG"],
 
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Set", "::", "wrsym"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Symbol \[NoBreak]\\!\\(ErsekComplexity\\)\[NoBreak] is \
-Protected. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\
-\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/wrsym\\\", ButtonNote -> \
-\\\"Set::wrsym\\\"]\\)\"\>"}]], "Message", "MSG"],
+   RowBox[{"Set", "::", "wrsym"}], "MessageName"], ":", 
+  " ", "\<\"Symbol \[NoBreak]\\!\\(ErsekComplexity\\)\[NoBreak] is Protected. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/wrsym\\\", \
+ButtonNote -> \\\"Set::wrsym\\\"]\\)\"\>"}]], "Message", "MSG"],
 
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"SetDelayed", "::", "write"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Tag \[NoBreak]\\!\\(EvaluateAt\\)\[NoBreak] in \
+   RowBox[{"SetDelayed", "::", "write"}], "MessageName"], ":", 
+  " ", "\<\"Tag \[NoBreak]\\!\\(EvaluateAt\\)\[NoBreak] in \
 \[NoBreak]\\!\\(\\(\\(EvaluateAt[\\(\\(\\(\\(posn : \\(\\(_Integer | \
 \\(\\({__Integer}\\)\\)\\)\\)\\)\\), \\(\\(f_ : \
 Identity\\)\\)\\)\\)]\\)\\)[expr_]\\)\[NoBreak] is Protected. \
@@ -629,14 +620,13 @@ ButtonNote -> \\\"SetDelayed::write\\\"]\\)\"\>"}]], "Message", "MSG"],
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"General", "::", "stop"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Further output of \
-\[NoBreak]\\!\\(\\*StyleBox[\\(SetDelayed :: write\\), \
-\\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this calculation. \
-\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
-ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
-ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG"]
+   RowBox[{"General", "::", "stop"}], "MessageName"], ":", 
+  " ", "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(SetDelayed :: \
+write\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG"]
 }, Open  ]]
 }, Closed]],
 
@@ -1054,11 +1044,9 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"ValidateSymbol", "::", "used"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Symbol \[NoBreak]\\!\\(\\\"Wedge\\\"\\)\[NoBreak] is \
-already used \[NoBreak]\\!\\(\\\"as a product\\\"\\)\[NoBreak].\"\>"}]], \
-"Message", "MSG"]
+   RowBox[{"ValidateSymbol", "::", "used"}], "MessageName"], ":", 
+  " ", "\<\"Symbol \[NoBreak]\\!\\(\\\"Wedge\\\"\\)\[NoBreak] is already used \
+\[NoBreak]\\!\\(\\\"as a product\\\"\\)\[NoBreak].\"\>"}]], "Message", "MSG"]
 }, Open  ]],
 
 Cell[TextData[{
@@ -1075,14 +1063,6 @@ Cell[BoxData[
    RowBox[{"Grade", "[", 
     RowBox[{"expr", ",", "Wedge"}], "]"}]}], ";"}]], "Input",
  InitializationCell->True],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"ZeroDegQ", "[", "expr_", "]"}], ":=", 
-  RowBox[{"SameQ", "[", 
-   RowBox[{
-    RowBox[{"Grade", "[", 
-     RowBox[{"expr", ",", "Wedge"}], "]"}], ",", "0"}], "]"}]}]], "Input"],
 
 Cell["Scalars have zero degree:", "Text"],
 
@@ -1183,254 +1163,185 @@ Cell["\<\
 Vanishing of forms whose degree is higher than the manifold(s) dimension.\
 \>", "Text"],
 
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"$DimensionsZeroForms", "=", 
-   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"SetZeroForm", "[", "form_", "]"}], ":=", 
-   RowBox[{"If", "[", 
-    RowBox[{
-     RowBox[{
-      RowBox[{"GradeOfTensor", "[", 
-       RowBox[{"form", ",", "Wedge"}], "]"}], ">", 
-      RowBox[{"Plus", "@@", 
-       RowBox[{"(", 
-        RowBox[{"DimOfManifold", "/@", 
-         RowBox[{"DependenciesOfTensor", "[", "form", "]"}]}], ")"}]}]}], ",", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"form", "[", "___", "]"}], "=", "0"}], ";", 
-      RowBox[{"AppendTo", "[", 
-       RowBox[{"$DimensionsZeroForms", ",", "form"}], "]"}]}]}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
-   RowBox[{"Unset", "[", 
-    RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}]}], "Input",
- InitializationCell->True],
-
 Cell[BoxData[
  RowBox[{
-  RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
-  RowBox[{"Module", "[", 
-   RowBox[{
-    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
-    RowBox[{"(*", " ", 
-     RowBox[{
-     "Forms", " ", "whose", " ", "degree", " ", "is", " ", "greater", " ", 
-      "than", " ", "the", " ", "dimension"}], " ", "*)"}], 
-    "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"SetZeroForm", "/@", "$Tensors"}], ";", "\[IndentingNewLine]", 
-     RowBox[{"(*", " ", 
-      RowBox[{
-      "Expressions", " ", "which", " ", "are", " ", "wedge", " ", 
-       "products"}], " ", "*)"}], "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{"HoldPattern", "@", 
-       RowBox[{"Wedge", "[", "expr__", "]"}]}], ":=", 
-      RowBox[{"0", "/;", 
-       RowBox[{"(", 
-        RowBox[{
-         RowBox[{"Plus", "@@", 
-          RowBox[{"(", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"Grade", "[", 
-              RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
-            RowBox[{"{", "expr", "}"}]}], ")"}]}], ">", 
-         RowBox[{"(", 
-          RowBox[{"Plus", "@@", 
-           RowBox[{"(", 
-            RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}], 
-        ")"}]}]}], ";", "\[IndentingNewLine]", 
-     RowBox[{"(*", " ", 
-      RowBox[{
-      "Expressions", " ", "which", " ", "are", " ", "exterior", " ", 
-       "derivatives"}], " ", "*)"}], "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{"HoldPattern", "@", 
-       RowBox[{"Diff", "[", 
-        RowBox[{"expr_", ",", "PD"}], "]"}]}], ":=", 
-      RowBox[{"0", "/;", 
-       RowBox[{"(", 
-        RowBox[{
-         RowBox[{"1", "+", 
-          RowBox[{"Plus", "@@", 
-           RowBox[{"(", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"Grade", "[", 
-               RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
-             RowBox[{"{", "expr", "}"}]}], ")"}]}]}], ">", 
-         RowBox[{"(", 
-          RowBox[{"Plus", "@@", 
-           RowBox[{"(", 
-            RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}], 
-        ")"}]}]}], ";", "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{"HoldPattern", "@", 
-       RowBox[{"Diff", "[", 
-        RowBox[{"expr_", ",", "covd_"}], "]"}]}], ":=", 
-      RowBox[{"0", "/;", 
-       RowBox[{"(", 
-        RowBox[{
-         RowBox[{"1", "+", 
-          RowBox[{"Plus", "@@", 
-           RowBox[{"(", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"Grade", "[", 
-               RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
-             RowBox[{"{", "expr", "}"}]}], ")"}]}]}], ">", 
-         RowBox[{"(", 
-          RowBox[{"Plus", "@@", 
-           RowBox[{"(", 
-            RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}], 
-        ")"}]}]}], ";"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
- InitializationCell->True],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
-  RowBox[{"Module", "[", 
-   RowBox[{
-    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"UnsetZeroForm", "/@", 
-      RowBox[{"Union", "@", "$DimensionsZeroForms"}]}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{"HoldPattern", "@", 
-       RowBox[{"Wedge", "[", "expr__", "]"}]}], "=."}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{"HoldPattern", "@", 
-       RowBox[{"Diff", "[", 
-        RowBox[{"expr_", ",", "PD"}], "]"}]}], "=."}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{"HoldPattern", "@", 
-       RowBox[{"Diff", "[", 
-        RowBox[{"expr_", ",", "covd_"}], "]"}]}], "=."}], ";"}]}], 
-   "\[IndentingNewLine]", "]"}]}]], "Input",
- InitializationCell->True],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"Wedge", "/:", "form_Wedge", ":=", 
-   RowBox[{"0", "/;", 
-    RowBox[{"$UseDimensionQ", "&&", 
-     RowBox[{
-      RowBox[{"Deg", "[", "form", "]"}], ">", 
-      RowBox[{"Plus", "@@", 
-       RowBox[{"(", 
-        RowBox[{"DimOfManifold", "/@", 
-         RowBox[{"ManifoldsOf", "[", "form", "]"}]}], ")"}]}]}]}]}]}], 
-  ";"}]], "Input"],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{
-   RowBox[{"$UseDimensionQ", "=", "False"}], ";"}], "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
-   RowBox[{
-   "Expressions", " ", "which", " ", "are", " ", "wedge", " ", "products"}], 
-   " ", "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Code", " ", "added", " ", "by", " ", "Jos\[EAcute]"}], "*)"}], 
+  "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{"HoldPattern", "@", 
-     RowBox[{"Wedge", "[", "expr__", "]"}]}], ":=", 
-    RowBox[{"0", "/;", 
-     RowBox[{
-      RowBox[{"(", 
+    RowBox[{"$UseDimensionsQ", "=", "False"}], ";"}], "\[IndentingNewLine]", 
+   "\n", 
+   RowBox[{
+    RowBox[{"$DimensionsZeroForms", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"SetZeroForm", "[", "form_", "]"}], ":=", 
+     RowBox[{"If", "[", 
+      RowBox[{
        RowBox[{
+        RowBox[{"GradeOfTensor", "[", 
+         RowBox[{"form", ",", "Wedge"}], "]"}], ">", 
         RowBox[{"Plus", "@@", 
          RowBox[{"(", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"Grade", "[", 
-             RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
-           RowBox[{"{", "expr", "}"}]}], ")"}]}], ">", 
-        RowBox[{"(", 
-         RowBox[{"Plus", "@@", 
-          RowBox[{"(", 
-           RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}], 
-       ")"}], "&&", "$UseDimensionQ"}]}]}], ";"}], "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
+          RowBox[{"DimOfManifold", "/@", 
+           RowBox[{"DependenciesOfTensor", "[", "form", "]"}]}], ")"}]}]}], 
+       ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"form", "[", "___", "]"}], "=", "0"}], ";", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"$DimensionsZeroForms", ",", "form"}], "]"}]}]}], "]"}]}], 
+    ";"}], "\n", 
    RowBox[{
-   "Expressions", " ", "which", " ", "are", " ", "exterior", " ", 
-    "derivatives"}], " ", "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"HoldPattern", "@", 
-    RowBox[{"Diff", "[", "expr_", "]"}]}], ":=", 
-   RowBox[{"0", "/;", 
     RowBox[{
-     RowBox[{"(", 
+     RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
+     RowBox[{"Unset", "[", 
+      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "}"}], ",", 
       RowBox[{
-       RowBox[{"1", "+", 
-        RowBox[{"Plus", "@@", 
+       RowBox[{"If", "[", 
+        RowBox[{"$UseDimensionsQ", ",", 
+         RowBox[{"Return", "[", "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"$UseDimensionsQ", "=", "True"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "Forms", " ", "whose", " ", "degree", " ", "is", " ", "greater", " ", 
+         "than", " ", "the", " ", "dimension"}], "*)"}], 
+       RowBox[{"SetZeroForm", "/@", "$Tensors"}], ";", "\[IndentingNewLine]", 
+       
+       RowBox[{"(*", 
+        RowBox[{
+        "Expressions", " ", "which", " ", "are", " ", "wedge", " ", 
+         "products"}], "*)"}], 
+       RowBox[{
+        RowBox[{"HoldPattern", "@", 
+         RowBox[{"Wedge", "[", "expr__", "]"}]}], ":=", 
+        RowBox[{"0", "/;", 
          RowBox[{"(", 
           RowBox[{
-           RowBox[{
-            RowBox[{"Grade", "[", 
-             RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
-           RowBox[{"{", "expr", "}"}]}], ")"}]}]}], ">", 
-       RowBox[{"(", 
-        RowBox[{"Plus", "@@", 
-         RowBox[{"(", 
-          RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}], 
-      ")"}], "&&", "$UseDimensionQ"}]}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"HoldPattern", "@", 
-    RowBox[{"Diff", "[", 
-     RowBox[{"expr_", ",", "PD"}], "]"}]}], ":=", 
-   RowBox[{"0", "/;", 
-    RowBox[{
-     RowBox[{"(", 
-      RowBox[{
-       RowBox[{"1", "+", 
-        RowBox[{"Plus", "@@", 
-         RowBox[{"(", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"Grade", "[", 
-             RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
-           RowBox[{"{", "expr", "}"}]}], ")"}]}]}], ">", 
-       RowBox[{"(", 
-        RowBox[{"Plus", "@@", 
-         RowBox[{"(", 
-          RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}], 
-      ")"}], "&&", "$UseDimensionQ"}]}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"HoldPattern", "@", 
-    RowBox[{"Diff", "[", 
-     RowBox[{"expr_", ",", "covd_"}], "]"}]}], ":=", 
-   RowBox[{"0", "/;", 
-    RowBox[{
-     RowBox[{"(", 
-      RowBox[{
-       RowBox[{"1", "+", 
-        RowBox[{"Plus", "@@", 
+           RowBox[{"Plus", "@@", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Grade", "[", 
+                RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
+              RowBox[{"{", "expr", "}"}]}], ")"}]}], ">", 
+           RowBox[{"(", 
+            RowBox[{"Plus", "@@", 
+             RowBox[{"(", 
+              RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}],
+           ")"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "Expressions", " ", "which", " ", "are", " ", "exterior", " ", 
+         "derivatives"}], "*)"}], 
+       RowBox[{
+        RowBox[{"HoldPattern", "@", 
+         RowBox[{"Diff", "[", 
+          RowBox[{"expr_", ",", "PD"}], "]"}]}], ":=", 
+        RowBox[{"0", "/;", 
          RowBox[{"(", 
           RowBox[{
-           RowBox[{
-            RowBox[{"Grade", "[", 
-             RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
-           RowBox[{"{", "expr", "}"}]}], ")"}]}]}], ">", 
-       RowBox[{"(", 
-        RowBox[{"Plus", "@@", 
+           RowBox[{"1", "+", 
+            RowBox[{"Plus", "@@", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"Grade", "[", 
+                 RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
+               RowBox[{"{", "expr", "}"}]}], ")"}]}]}], ">", 
+           RowBox[{"(", 
+            RowBox[{"Plus", "@@", 
+             RowBox[{"(", 
+              RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}],
+           ")"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"HoldPattern", "@", 
+         RowBox[{"Diff", "[", 
+          RowBox[{"expr_", ",", "covd_"}], "]"}]}], ":=", 
+        RowBox[{"0", "/;", 
          RowBox[{"(", 
-          RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}], 
-      ")"}], "&&", "$UseDimensionQ"}]}]}], ";"}]}], "Input"]
-}, Closed]],
+          RowBox[{
+           RowBox[{"1", "+", 
+            RowBox[{"Plus", "@@", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"Grade", "[", 
+                 RowBox[{"#", ",", "Wedge"}], "]"}], "&"}], "/@", 
+               RowBox[{"{", "expr", "}"}]}], ")"}]}]}], ">", 
+           RowBox[{"(", 
+            RowBox[{"Plus", "@@", 
+             RowBox[{"(", 
+              RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}],
+           ")"}]}]}], ";"}]}], "]"}]}], "\n", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "}"}], ",", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"!", "$UseDimensionsQ"}], ",", 
+         RowBox[{"Return", "[", "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"$UseDimensionsQ", "=", "False"}], ";", "\[IndentingNewLine]", 
+       
+       RowBox[{"UnsetZeroForm", "/@", 
+        RowBox[{"Union", "@", "$DimensionsZeroForms"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"HoldPattern", "@", 
+         RowBox[{"Wedge", "[", "expr__", "]"}]}], "=."}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"HoldPattern", "@", 
+         RowBox[{"Diff", "[", 
+          RowBox[{"expr_", ",", "PD"}], "]"}]}], "=."}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"HoldPattern", "@", 
+         RowBox[{"Diff", "[", 
+          RowBox[{"expr_", ",", "covd_"}], "]"}]}], "=."}], ";"}]}], "]"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"xTension", "[", 
+      RowBox[{"\"\<xTerior`\>\"", ",", "DefTensor", ",", "\"\<End\>\""}], 
+      "]"}], ":=", "DefTensorUseDimensions"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"DefTensorUseDimensions", "[", 
+      RowBox[{
+       RowBox[{"tensor_", "[", "inds___", "]"}], ",", "__"}], "]"}], ":=", 
+     RowBox[{"If", "[", 
+      RowBox[{"$UseDimensionsQ", ",", 
+       RowBox[{"SetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"xTension", "[", 
+      RowBox[{
+      "\"\<xTerior`\>\"", ",", "UndefTensor", ",", "\"\<Beginning\>\""}], 
+      "]"}], ":=", "UndefTensorUseDimensions"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"UndefTensorUseDimensions", "[", "tensor_", "]"}], ":=", 
+     RowBox[{"If", "[", 
+      RowBox[{"$UseDimensionsQ", ",", 
+       RowBox[{"UnsetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], 
+   "\n"}]}]], "Input",
+ InitializationCell->True]
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1501,54 +1412,7 @@ Cell[BoxData[
  RowBox[{
   RowBox[{"Protect", "[", 
    RowBox[{"DefDiffForm", ",", "UndefDiffForm"}], "]"}], ";"}]], "Input",
- InitializationCell->True],
-
-Cell[TextData[{
- "Behaviour of DFormQ with respect to basic arithmetic operations. ",
- StyleBox["Deactivated.",
-  FontWeight->"Bold"]
-}], "Text"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"DFormQ", "@", "expr_Plus"}], ":=", 
-   RowBox[{"And", "@@", 
-    RowBox[{"(", 
-     RowBox[{"DFormQ", "/@", 
-      RowBox[{"List", "@@", "expr"}]}], ")"}]}]}], ";"}]], "Input",
- CellChangeTimes->{{3.5971328918130617`*^9, 3.597132914491391*^9}, {
-   3.597133658565295*^9, 3.597133660756384*^9}, {3.597133813440701*^9, 
-   3.597133815025052*^9}, 3.597134971426072*^9, 3.597135410486031*^9}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"DFormQ", "@", "expr_Times"}], ":=", 
-   RowBox[{"And", "@@", 
-    RowBox[{"(", 
-     RowBox[{"DFormQ", "/@", 
-      RowBox[{"List", "@@", "expr"}]}], ")"}]}]}], ";"}]], "Input",
- CellChangeTimes->{{3.597132957434472*^9, 3.597132959494627*^9}, {
-   3.597133664836067*^9, 3.597133666578635*^9}, {3.597133818630035*^9, 
-   3.597133820343976*^9}, 3.5971349723455763`*^9, {3.597135415199111*^9, 
-   3.597135415791442*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"DFormQ", "@", "expr_Wedge"}], ":=", 
-   RowBox[{"And", "@@", 
-    RowBox[{"(", 
-     RowBox[{"DFormQ", "/@", 
-      RowBox[{"List", "@@", "expr"}]}], ")"}]}]}], ";"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"DFormQ", "@", "expr_Equal"}], ":=", 
-   RowBox[{"DFormQ", "/@", "expr"}]}], ";"}]], "Input",
- CellChangeTimes->{{3.597136585670034*^9, 3.597136608985752*^9}}]
+ InitializationCell->True]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -2821,13 +2685,11 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Information", "::", "notfound"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Symbol \[NoBreak]\\!\\(\\\"ExtCovDiff\\\"\\)\[NoBreak] not \
-found. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/notfound\\\", ButtonNote -> \
-\\\"Information::notfound\\\"]\\)\"\>"}]], "Message", "MSG"]
+   RowBox[{"Information", "::", "notfound"}], "MessageName"], ":", 
+  " ", "\<\"Symbol \[NoBreak]\\!\\(\\\"ExtCovDiff\\\"\\)\[NoBreak] not found. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/notfound\\\", \
+ButtonNote -> \\\"Information::notfound\\\"]\\)\"\>"}]], "Message", "MSG"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -7104,13 +6966,11 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"$IterationLimit", "::", "itlim"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Iteration limit of \[NoBreak]\\!\\(4096\\)\[NoBreak] \
-exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/$IterationLimit/itlim\\\", ButtonNote -> \
-\\\"$IterationLimit::itlim\\\"]\\)\"\>"}]], "Message", "MSG"]
+   RowBox[{"$IterationLimit", "::", "itlim"}], "MessageName"], ":", 
+  " ", "\<\"Iteration limit of \[NoBreak]\\!\\(4096\\)\[NoBreak] exceeded. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/$IterationLimit/itlim\\\
+\", ButtonNote -> \\\"$IterationLimit::itlim\\\"]\\)\"\>"}]], "Message", "MSG"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -7143,12 +7003,12 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1276, 613},
-WindowMargins->{{0, Automatic}, {32, Automatic}},
+WindowMargins->{{233, Automatic}, {199, Automatic}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
 Magnification->1.5,
-FrontEndVersion->"9.0 for Linux x86 (64-bit) (November 20, 2012)",
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
 StyleDefinitions->"Default.nb"
 ]
 
