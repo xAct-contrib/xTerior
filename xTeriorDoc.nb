@@ -34,7 +34,7 @@ Cell[TextData[StyleBox["Authors",
  FontSize->14]], "SubsectionIcon"],
 
 Cell[TextData[{
- "\[Copyright] 2006-2013, under the GNU General Public License (GPL)\n    ",
+ "\[Copyright] 2006-2014, under the GNU General Public License (GPL)\n    ",
  StyleBox[" Alfonso Garc\[IAcute]a-Parrado G\[OAcute]mez-Lobo\n",
   FontWeight->"Bold"],
  "\tCentro de Matematica\n\tUniversidade do Minho, Portugal",
@@ -53,6 +53,7 @@ Cell[TextData[{
   FontFamily->"Courier"],
  "\n "
 }], "Text",
+ FontFamily->"Arial",
  FontWeight->"Plain"]
 }, Open  ]],
 
@@ -72,8 +73,8 @@ Cell[TextData[{
  StyleBox["xAct`",
   FontFamily->"Courier",
   FontWeight->"Plain"],
- StyleBox[" package for computations with (tensor valued) differential forms",
-  
+ StyleBox[" package for computations with (tensor valued) differential forms. \
+This package requires xAct version 1.1.0.5 which will be soon released.",
   FontWeight->"Plain"]
 }], "Text",
  TextJustification->1.,
@@ -93,7 +94,7 @@ $Home/.",
  StyleBox["Mathematica",
   FontWeight->Plain,
   FontSlant->"Italic"],
- StyleBox["/Applications/xAct/ for a single-user installation under Linux.",
+ StyleBox["/Applications/xAct/ for a single-user installation under Linux. ",
   FontWeight->"Plain"]
 }], "MathCaption",
  FontFamily->"Arial",
@@ -323,10 +324,9 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Information", "::", "nomatch"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"No symbol matching \[NoBreak]\\!\\(\\\"Global`*\\\"\\)\
-\[NoBreak] found. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+   RowBox[{"Information", "::", "nomatch"}], "MessageName"], ":", 
+  " ", "\<\"No symbol matching \[NoBreak]\\!\\(\\\"Global`*\\\"\\)\[NoBreak] \
+found. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
 ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
 ButtonData:>\\\"paclet:ref/message/Information/nomatch\\\", ButtonNote -> \
 \\\"Information::nomatch\\\"]\\)\"\>"}]], "Message", "MSG",
@@ -692,20 +692,17 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Validate", "::", "inhom"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Found inhomogeneous \[NoBreak]\\!\\(\\\"grades\\\"\\)\
-\[NoBreak]: \[NoBreak]\\!\\(\\\"{5, 6}\\\"\\)\[NoBreak].\"\>"}]], "Message", \
-"MSG",
+   RowBox[{"Validate", "::", "inhom"}], "MessageName"], ":", 
+  " ", "\<\"Found inhomogeneous \[NoBreak]\\!\\(\\\"grades\\\"\\)\[NoBreak]: \
+\[NoBreak]\\!\\(\\\"{5, 6}\\\"\\)\[NoBreak].\"\>"}]], "Message", "MSG",
  CellLabel->"During evaluation of In[23]:="],
 
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Throw", "::", "nocatch"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Uncaught \[NoBreak]\\!\\(Throw[Null]\\)\[NoBreak] returned \
-to top level. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+   RowBox[{"Throw", "::", "nocatch"}], "MessageName"], ":", 
+  " ", "\<\"Uncaught \[NoBreak]\\!\\(Throw[Null]\\)\[NoBreak] returned to top \
+level. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
 ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
 ButtonData:>\\\"paclet:ref/message/Throw/nocatch\\\", ButtonNote -> \
 \\\"Throw::nocatch\\\"]\\)\"\>"}]], "Message", "MSG",
@@ -10821,10 +10818,9 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Information", "::", "nomatch"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"No symbol matching \[NoBreak]\\!\\(\\\"Global`*\\\"\\)\
-\[NoBreak] found. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+   RowBox[{"Information", "::", "nomatch"}], "MessageName"], ":", 
+  " ", "\<\"No symbol matching \[NoBreak]\\!\\(\\\"Global`*\\\"\\)\[NoBreak] \
+found. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
 ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
 ButtonData:>\\\"paclet:ref/message/Information/nomatch\\\", ButtonNote -> \
 \\\"Information::nomatch\\\"]\\)\"\>"}]], "Message", "MSG",
@@ -17602,19 +17598,17 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"ValidateSymbol", "::", "capital"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"System name \[NoBreak]\\!\\(\\\"C\\\"\\)\[NoBreak] is \
-overloaded as an abstract index.\"\>"}]], "Message", "MSG",
+   RowBox[{"ValidateSymbol", "::", "capital"}], "MessageName"], ":", 
+  " ", "\<\"System name \[NoBreak]\\!\\(\\\"C\\\"\\)\[NoBreak] is overloaded \
+as an abstract index.\"\>"}]], "Message", "MSG",
  CellLabel->"During evaluation of In[143]:="],
 
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"ValidateSymbol", "::", "capital"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"System name \[NoBreak]\\!\\(\\\"D\\\"\\)\[NoBreak] is \
-overloaded as an abstract index.\"\>"}]], "Message", "MSG",
+   RowBox[{"ValidateSymbol", "::", "capital"}], "MessageName"], ":", 
+  " ", "\<\"System name \[NoBreak]\\!\\(\\\"D\\\"\\)\[NoBreak] is overloaded \
+as an abstract index.\"\>"}]], "Message", "MSG",
  CellLabel->"During evaluation of In[143]:="]
 }, Open  ]],
 
@@ -46113,9 +46107,8 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"ToCanonical", "::", "noident"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Unknown expression not canonicalized: \
+   RowBox[{"ToCanonical", "::", "noident"}], "MessageName"], ":", 
+  " ", "\<\"Unknown expression not canonicalized: \
 \[NoBreak]\\!\\(\\\"VerbatimPlus\\\"[\\(\\(\\(\\(\\(\\((\\*TagBox[TooltipBox[\
 \\(Times\\+_\\), RowBox[List[\\\"\\\\\\\"VerbatimProduct\\\\\\\"\\\", \\\"[\\\
 \", \\\"Times\\\", \\\"]\\\"]]], \
@@ -46151,11 +46144,10 @@ Times[-1, h$10580]], Rule[Editable, False]]\\)\\)]\\)\\)\\)\\)]\\)\[NoBreak] \
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\(1\\)\[NoBreak] of \
-\[NoBreak]\\!\\({}\\)\[NoBreak] does not exist. \\!\\(\\*ButtonBox[\\\"\
-\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+   RowBox[{"Part", "::", "partw"}], "MessageName"], ":", 
+  " ", "\<\"Part \[NoBreak]\\!\\(1\\)\[NoBreak] of \[NoBreak]\\!\\({}\\)\
+\[NoBreak] does not exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
 ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
 \\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
  CellLabel->"During evaluation of In[296]:="],
@@ -46163,11 +46155,10 @@ ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\(1\\)\[NoBreak] of \
-\[NoBreak]\\!\\({}\\)\[NoBreak] does not exist. \\!\\(\\*ButtonBox[\\\"\
-\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+   RowBox[{"Part", "::", "partw"}], "MessageName"], ":", 
+  " ", "\<\"Part \[NoBreak]\\!\\(1\\)\[NoBreak] of \[NoBreak]\\!\\({}\\)\
+\[NoBreak] does not exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
 ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
 \\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
  CellLabel->"During evaluation of In[296]:="],
@@ -46175,20 +46166,17 @@ ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"TranslatePerm", "::", "invalid"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"\[NoBreak]\\!\\(InversePerm[$Failed]\\)\[NoBreak] is not a \
-valid \[NoBreak]\\!\\(\\\"permutation\\\"\\)\[NoBreak].\"\>"}]], "Message", \
-"MSG",
+   RowBox[{"TranslatePerm", "::", "invalid"}], "MessageName"], ":", 
+  " ", "\<\"\[NoBreak]\\!\\(InversePerm[$Failed]\\)\[NoBreak] is not a valid \
+\[NoBreak]\\!\\(\\\"permutation\\\"\\)\[NoBreak].\"\>"}]], "Message", "MSG",
  CellLabel->"During evaluation of In[296]:="],
 
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Throw", "::", "nocatch"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Uncaught \[NoBreak]\\!\\(Throw[Null]\\)\[NoBreak] returned \
-to top level. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+   RowBox[{"Throw", "::", "nocatch"}], "MessageName"], ":", 
+  " ", "\<\"Uncaught \[NoBreak]\\!\\(Throw[Null]\\)\[NoBreak] returned to top \
+level. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
 ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
 ButtonData:>\\\"paclet:ref/message/Throw/nocatch\\\", ButtonNote -> \
 \\\"Throw::nocatch\\\"]\\)\"\>"}]], "Message", "MSG",
@@ -99117,7 +99105,7 @@ Cell[BoxData[
 ScreenStyleEnvironment->"Brackets",
 WindowToolbars->"EditBar",
 WindowSize->{1276, 692},
-WindowMargins->{{229, Automatic}, {Automatic, 100}},
+WindowMargins->{{Automatic, 316}, {-38, Automatic}},
 PrintingCopies->1,
 PrintingPageRange->{Automatic, Automatic},
 PageHeaders->{{Inherited, Inherited, 
