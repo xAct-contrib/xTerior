@@ -9,7 +9,7 @@ Cell[TextData[{
  "This is the doc file xTeriorDoc.nb of version 0.8.5 of ",
  StyleBox["xTerior`",
   FontFamily->"Courier"],
- "Last update on Date 27 of January of 2014."
+ "Last update on Date 28 of January of 2014."
 }], "Text",
  FontFamily->"Arial",
  FontWeight->"Plain"],
@@ -74,7 +74,7 @@ Cell[TextData[{
   FontFamily->"Courier",
   FontWeight->"Plain"],
  StyleBox[" package for computations with (tensor valued) differential forms. \
-This package requires xAct version 1.1.0.5 which will be soon released.",
+",
   FontWeight->"Plain"]
 }], "Text",
  TextJustification->1.,
@@ -8232,29 +8232,6 @@ Cell[TextData[{
  "."
 }], "MathCaption",
  FontFamily->"Arial"],
-
-Cell["\<\
-The option epsilonOrientationOfMetric->{metricg,I} is not accepted by \
-DefChart.\
-\>", "Text"],
-
-Cell["\<\
-Jose: Good point. I\[CloseCurlyQuote]ll fix that.\
-\>", "Text"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"?", "epsilonOrientationOfMetric"}]], "Input",
- CellLabel->"In[85]:="],
-
-Cell[BoxData[
- StyleBox["\<\"epsilonOrientationOfMetric is an option of DefBasis specifying \
-a pair {metric, o} where o is the factor between the epsilon of the given \
-metric and the eta tensors of the basis being defined. By default it takes \
-the value {Null, 1}.\"\>", "MSG"]], "Print", "PrintUsage",
- CellTags->"Info3599917951-2179367"]
-}, Open  ]],
 
 Cell[BoxData[
  RowBox[{"DefChart", "[", 
@@ -18273,7 +18250,8 @@ $CellContext`VB][$CellContext`A, -C],
             GridBoxSpacings->{"Columns" -> {
                 Offset[0.27999999999999997`], {
                  Offset[0.034999999999999996`]}, 
-                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+                Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {\
+
                 Offset[0.2], {
                  Offset[0.4]}, 
                 Offset[0.2]}, "RowsIndexed" -> {}}],
@@ -20794,7 +20772,7 @@ Cell[BoxData[{
    RowBox[{"TR", ",", 
     RowBox[{"LinearQ", "\[Rule]", "True"}], ",", 
     RowBox[{"PrintAs", "\[Rule]", "\"\<Tr\>\""}]}], "]"}], 
-  "\n"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{
@@ -20803,7 +20781,7 @@ Cell[BoxData[{
       RowBox[{"TR", "[", "expr_", "]"}], ",", "Wedge"}], "]"}], "^:=", 
     RowBox[{"Grade", "[", 
      RowBox[{"expr", ",", "Wedge"}], "]"}]}], ";"}], 
-  "\n"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{
@@ -20822,7 +20800,7 @@ Cell[BoxData[{
             "DownIndexQ"}], "]"}]}]}], ",", 
        RowBox[{"-", 
         RowBox[{"NewIndexIn", "[", "VB", "]"}]}]}], "]"}]}]}], ";"}], 
-  "\n"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{
@@ -20833,7 +20811,7 @@ Cell[BoxData[{
        RowBox[{"Rule", "@@", 
         RowBox[{
          RowBox[{"IndicesOf", "[", "Free", "]"}], "[", "expr", "]"}]}], 
-       ")"}]}]}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
+       ")"}]}]}]}], ";"}], "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{"rules", "=", 
@@ -20847,7 +20825,7 @@ Cell[BoxData[{
        RowBox[{"\[ScriptCapitalA]", "[", "]"}], "\[Rule]", 
        RowBox[{"ConnectionForm", "[", 
         RowBox[{"cdv", ",", "VB"}], "]"}]}]}], "}"}]}], ";"}], 
-  "\n"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{"expandtrace", "=", 
    RowBox[{"expr_TR", "\[RuleDelayed]", 
@@ -30716,7 +30694,6 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                FontSize->9]}
             },
-            
             GridBoxAlignment->{
              "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
               "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -39004,6 +38981,7 @@ Cell[BoxData[
                     Offset[0.]}}, "RowsIndexed" -> {}}],
                 FontSize->9]}
              },
+             
              GridBoxAlignment->{
               "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
                "Rows" -> {{Center}}, "RowsIndexed" -> {}},
@@ -46091,101 +46069,6 @@ $CellContext`metricg[-$CellContext`f, -$CellContext`b]) Wedge[
        xAct`xTensor`PD]],
      Editable->False]}]}]}]], "Output",
  CellLabel->"Out[295]="]
-}, Open  ]],
-
-Cell["\<\
-For some reason, ToCanonical gives an error when acting on this expression. \
-We must fully expand it first.\
-\>", "Text"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"ToCanonical", "@", "%"}]], "Input",
- CellLabel->"In[296]:="],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"ToCanonical", "::", "noident"}], "MessageName"], ":", 
-  " ", "\<\"Unknown expression not canonicalized: \
-\[NoBreak]\\!\\(\\\"VerbatimPlus\\\"[\\(\\(\\(\\(\\(\\((\\*TagBox[TooltipBox[\
-\\(Times\\+_\\), RowBox[List[\\\"\\\\\\\"VerbatimProduct\\\\\\\"\\\", \\\"[\\\
-\", \\\"Times\\\", \\\"]\\\"]]], \
-Function[Slot[1]]])\\)\\)[\\(\\(\\*InterpretationBox[StyleBox[GridBox[{{\\\"\
-\[Delta]\\\", StyleBox[GridBox[{{\\\"h\\\", \\\" \\\"}, {\\\" \\\", \
-\\\"h$10580\\\"}}, RowSpacings -> 0, ColumnSpacings -> 0.05, GridFrameMargins \
--> {{0, 0}, {0, 0}}], Rule[FontSize, 9]]}}, ColumnSpacings -> 0.05, \
-RowAlignments -> Center], Rule[AutoSpacing, False], Rule[ShowAutoStyles, \
-False]], delta[h, Times[-1, h$10580]], Rule[Editable, False]], \
-\\*InterpretationBox[StyleBox[GridBox[{{\\\"g\\\", StyleBox[GridBox[{{\\\" \\\
-\", \\\" \\\"}, {\\\"f\\\", \\\"h$10579\\\"}}, RowSpacings -> 0, \
-ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, {0, 0}}], Rule[FontSize, \
-9]]}}, ColumnSpacings -> 0.05, RowAlignments -> Center], Rule[AutoSpacing, \
-False], Rule[ShowAutoStyles, False]], metricg[Times[-1, f], Times[-1, \
-h$10579]], Rule[Editable, False]]\\)\\)]\\)\\), \
-\\(\\(\\(\\((\\*TagBox[TooltipBox[\\(Times\\+_\\), \
-RowBox[List[\\\"\\\\\\\"VerbatimProduct\\\\\\\"\\\", \\\"[\\\", \
-\\\"Times\\\", \\\"]\\\"]]], Function[Slot[1]]])\\)\\)[\\(\\(\\(\\(-1\\)\\), \
-\\*InterpretationBox[StyleBox[GridBox[{{\\\"\[Delta]\\\", StyleBox[GridBox[{{\
-\\\"h\\\", \\\" \\\"}, {\\\" \\\", \\\"h$10579\\\"}}, RowSpacings -> 0, \
-ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, {0, 0}}], Rule[FontSize, \
-9]]}}, ColumnSpacings -> 0.05, RowAlignments -> Center], Rule[AutoSpacing, \
-False], Rule[ShowAutoStyles, False]], delta[h, Times[-1, h$10579]], \
-Rule[Editable, False]], \\*InterpretationBox[StyleBox[GridBox[{{\\\"g\\\", \
-StyleBox[GridBox[{{\\\" \\\", \\\" \\\"}, {\\\"f\\\", \\\"h$10580\\\"}}, \
-RowSpacings -> 0, ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, {0, \
-0}}], Rule[FontSize, 9]]}}, ColumnSpacings -> 0.05, RowAlignments -> Center], \
-Rule[AutoSpacing, False], Rule[ShowAutoStyles, False]], metricg[Times[-1, f], \
-Times[-1, h$10580]], Rule[Editable, False]]\\)\\)]\\)\\)\\)\\)]\\)\[NoBreak] \
-.\"\>"}]], "Message", "MSG",
- CellLabel->"During evaluation of In[296]:="],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], ":", 
-  " ", "\<\"Part \[NoBreak]\\!\\(1\\)\[NoBreak] of \[NoBreak]\\!\\({}\\)\
-\[NoBreak] does not exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
-\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellLabel->"During evaluation of In[296]:="],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], ":", 
-  " ", "\<\"Part \[NoBreak]\\!\\(1\\)\[NoBreak] of \[NoBreak]\\!\\({}\\)\
-\[NoBreak] does not exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
-\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellLabel->"During evaluation of In[296]:="],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"TranslatePerm", "::", "invalid"}], "MessageName"], ":", 
-  " ", "\<\"\[NoBreak]\\!\\(InversePerm[$Failed]\\)\[NoBreak] is not a valid \
-\[NoBreak]\\!\\(\\\"permutation\\\"\\)\[NoBreak].\"\>"}]], "Message", "MSG",
- CellLabel->"During evaluation of In[296]:="],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Throw", "::", "nocatch"}], "MessageName"], ":", 
-  " ", "\<\"Uncaught \[NoBreak]\\!\\(Throw[Null]\\)\[NoBreak] returned to top \
-level. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/Throw/nocatch\\\", ButtonNote -> \
-\\\"Throw::nocatch\\\"]\\)\"\>"}]], "Message", "MSG",
- CellLabel->"During evaluation of In[296]:="],
-
-Cell[BoxData[
- RowBox[{"Hold", "[", 
-  RowBox[{"Throw", "[", "Null", "]"}], "]"}]], "Output",
- CellLabel->"Out[296]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -58259,12 +58142,6 @@ Cell[BoxData[
      RowBox[{"-", "TangentM"}]}], "}"}]}], ";"}]], "Input",
  CellLabel->"In[317]:="],
 
-Cell[TextData[StyleBox["Alfonso: this should be done automatically by \
-xTensor:",
- FontWeight->"Bold"]], "Text",
- FontFamily->"Arial",
- FontWeight->"Plain"],
-
 Cell[BoxData[
  RowBox[{
   RowBox[{
@@ -58277,18 +58154,6 @@ Cell[BoxData[
       RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], ",", "Cycles"}], 
     "]"}]}], ";"}]], "Input",
  CellLabel->"In[318]:="],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"SlotsOfTensor", "@", "epsilonmetricg"}], "^=", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"-", "TangentM"}], ",", 
-     RowBox[{"-", "TangentM"}], ",", 
-     RowBox[{"-", "TangentM"}], ",", 
-     RowBox[{"-", "TangentM"}]}], "}"}]}], ";"}]], "Input",
- CellLabel->"In[319]:="],
 
 Cell[TextData[{
  "Let us introduce a specific metric in our session. We choose the \
@@ -99105,7 +98970,7 @@ Cell[BoxData[
 ScreenStyleEnvironment->"Brackets",
 WindowToolbars->"EditBar",
 WindowSize->{1276, 692},
-WindowMargins->{{Automatic, 316}, {-38, Automatic}},
+WindowMargins->{{Automatic, 294}, {98, Automatic}},
 PrintingCopies->1,
 PrintingPageRange->{Automatic, Automatic},
 PageHeaders->{{Inherited, Inherited, 
