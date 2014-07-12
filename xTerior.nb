@@ -1016,8 +1016,6 @@ actually in this case true elements of the algebra. The product by scalar and \
 the product of scalars are both Times, so we do not need to specify them.\
 \>", "Text"],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{
   RowBox[{"DefProduct", "[", 
@@ -1040,14 +1038,6 @@ Cell[BoxData[
     RowBox[{"DefInfo", "\[Rule]", "Null"}]}], "\[IndentingNewLine]", "]"}], 
   ";"}]], "Input",
  InitializationCell->True],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"ValidateSymbol", "::", "used"}], "MessageName"], ":", 
-  " ", "\<\"Symbol \[NoBreak]\\!\\(\\\"Wedge\\\"\\)\[NoBreak] is already used \
-\[NoBreak]\\!\\(\\\"as a product\\\"\\)\[NoBreak].\"\>"}]], "Message", "MSG"]
-}, Open  ]],
 
 Cell[TextData[{
  "When working with the exterior algebra the grade is typically called ",
@@ -1170,8 +1160,8 @@ Cell[BoxData[
   "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{"$UseDimensionsQ", "=", "False"}], ";"}], "\[IndentingNewLine]", 
-   "\n", 
+    RowBox[{"$UseDimensionsQ", "=", "False"}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"$DimensionsZeroForms", "=", 
      RowBox[{"{", "}"}]}], ";"}], "\n", 
@@ -1198,8 +1188,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
      RowBox[{"Unset", "[", 
-      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\n", "\[IndentingNewLine]", 
+      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1281,8 +1271,8 @@ Cell[BoxData[
             RowBox[{"Plus", "@@", 
              RowBox[{"(", 
               RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}],
-           ")"}]}]}], ";"}]}], "]"}]}], "\n", "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+           ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1312,7 +1302,7 @@ Cell[BoxData[
          RowBox[{"Diff", "[", 
           RowBox[{"expr_", ",", "covd_"}], "]"}]}], "=."}], ";"}]}], "]"}]}], 
    "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\n", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"xTension", "[", 
@@ -1325,8 +1315,8 @@ Cell[BoxData[
        RowBox[{"tensor_", "[", "inds___", "]"}], ",", "__"}], "]"}], ":=", 
      RowBox[{"If", "[", 
       RowBox[{"$UseDimensionsQ", ",", 
-       RowBox[{"SetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\n", 
+       RowBox[{"SetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"xTension", "[", 
@@ -1341,7 +1331,97 @@ Cell[BoxData[
        RowBox[{"UnsetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], 
    "\n"}]}]], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+2.2 Definition of the CircleTimes product\
+\>", "Subsubsection"],
+
+Cell["\<\
+By default we define the CircleTimes \[OpenCurlyDoubleQuote]\[CircleTimes]\
+\[CloseCurlyDoubleQuote] product.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"DefProduct", "[", 
+  RowBox[{"CircleTimes", ",", "\[IndentingNewLine]", 
+   RowBox[{"AssociativeProductQ", "\[Rule]", "True"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"IdentityElementOfProduct", "\[Rule]", "1"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"GradedProductQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+   
+   RowBox[{"ScalarsOfProduct", "\[Rule]", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"SameQ", "[", 
+       RowBox[{
+        RowBox[{"Grade", "[", 
+         RowBox[{"#", ",", "CircleTimes"}], "]"}], ",", "0"}], "]"}], "&"}], 
+     ")"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"PrintAs", "\[Rule]", "\"\<\[CircleTimes]\>\""}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ InitializationCell->True],
+
+Cell["\<\
+Exterior algebra grade and tensor grade should coincide on elementary objects:\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CircleTimes", "/:", 
+   RowBox[{"GradeOfTensor", "[", 
+    RowBox[{"head_", ",", "CircleTimes"}], "]"}], ":=", 
+   RowBox[{"GradeOfTensor", "[", 
+    RowBox[{"head", ",", "Wedge"}], "]"}]}], ";"}]], "Input",
+ InitializationCell->True],
+
+Cell["\<\
+We also need to specify the Grade of the inert - head expressions :\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CircleTimes", "/:", 
+   RowBox[{"Grade", "[", 
+    RowBox[{
+     RowBox[{"Diff", "[", 
+      RowBox[{"expr_", ",", "_"}], "]"}], ",", "CircleTimes"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Grade", "[", 
+     RowBox[{"expr", ",", "CircleTimes"}], "]"}], "+", "1"}]}], 
+  ";"}]], "Input",
+ InitializationCell->True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CircleTimes", "/:", 
+   RowBox[{"Grade", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Hodge", "[", "metricg_", "]"}], "[", "expr_", "]"}], ",", 
+     "CircleTimes"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"DimOfVBundle", "[", 
+     RowBox[{"VBundleOfMetric", "[", "metricg", "]"}], "]"}], "-", 
+    RowBox[{"Grade", "[", 
+     RowBox[{"expr", ",", "CircleTimes"}], "]"}]}]}], ";"}]], "Input",
+ InitializationCell->True],
+
+Cell["\<\
+The CircleTimes - grade of a form coincides with the Wedge - grade of that \
+form. However, the Wedge - grade is not well defined for generic expressions \
+having positive CircleTimes - grade unless they are forms.That is why we have \
+given CircleTimes - grade in terms of Wedge - grade and not viceversa.There \
+is no general way in which we can know the relations between the grades of a \
+given expression in several products.The user must define carefully the \
+relations. Usually it is safer to declare independently the grades in each \
+product. Recall that objects for which a grade has not been given are taken \
+to have degree 0.\
+\>", "Text"]
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -7003,12 +7083,12 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1276, 613},
-WindowMargins->{{233, Automatic}, {199, Automatic}},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
 Magnification->1.5,
-FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (November 20, 2012)",
 StyleDefinitions->"Default.nb"
 ]
 

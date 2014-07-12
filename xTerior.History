@@ -115,3 +115,5 @@ last lines of the code of FormVarD.
 28 Jan 2014: Coded UseDimensionStart and UseDimensionStop with xTensions. Patch submitted by José María.
 
 * Released with version 0.8.5
+
+12 Jul 2014: Added product CircleTimes.
