@@ -116,6 +116,7 @@ Deg::usage="Deg[form] returns the grade of a differential form";
 DiffFormQ::usage="DiffFormQ is an option for LieToCovD which specifies whether the expression which is acted upon should be regarded as a differential form or not. This is an option added by xTerior and it is not present any other package using LieToCovD.";
 (* Exterior derivative and exterior covariant derivative *)
 Diff::usage="Diff[form] computes the exterior derivative of form. Diff[form,covd] computes the exterior covariant derivative of form with respect to the covariant derivative covd.";
+FindPotential::usage="FindPotential[form, point, chart] uses the Poincar\[EAcute] lemma to compute a potential for a closed form form (no checks are carried out to ensure that the form is actually closed). The form must be written in some explicit coordinates belonging to chart and the argument point is the point, assumed to be in the same coordinate chart as form, which defines a star-shaped region where the potential is differentiable. A change in the point will give in general a different potential";
 (* Computation of the exterior covariant derivative *)
 ChangeExtD::usage="ChangeExtD[expr,cd1,cd2] expresses the exterior covariant derivative taken with respect to the connection defined by the covariant derivative cd1 in terms of the exterior covariant derivative taken with respect to the connection defined by the covariant derivative cd2";
 (* Hodge dual *)
@@ -447,6 +448,20 @@ Codiff[_Basis,covd_?CovDQ]:=0;
 
 Codiff@expr_List:=Codiff/@expr;
 Codiff@expr_Equal:=Codiff/@expr;
+
+
+FindPotential[expr_Plus,point_List,chart_?ChartQ,options:OptionsPattern[Integrate]]:=FindPotential[#,point,chart,options]&/@expr;
+FindPotential[expr_Times,point_List,chart_?ChartQ,options:OptionsPattern[Integrate]]:=FindPotential[Expand@expr,point,chart,options];
+
+
+(*Simplest cases for grade 1 forms *)
+FindPotential[expr_Diff,point_List,chart_?ChartQ,options:OptionsPattern[Integrate]]:=Part[expr,1];
+
+FindPotential[factor_ expr_Diff,point_List,chart_?ChartQ,options:OptionsPattern[Integrate]]:=Integrate[(factor/.Thread[Rule[ScalarsOfChart@chart,Times[#,t]&/@(ScalarsOfChart@chart-point)+point]]) (Part[expr,1]-Part[point,First@Flatten@Position[ScalarsOfChart@chart,Part[expr,1]]]),{t,0,1},options];
+
+
+(* Poincare Lemma for higher degree forms *)
+FindPotential[factor_. expr_Wedge,point_List,chart_?ChartQ,options:OptionsPattern[Integrate]]:=Integrate[(factor/.Thread[Rule[ScalarsOfChart@chart,Times[#,t]&/@(ScalarsOfChart@chart-point)+point]]) Sum[(-1)^(i-1)t^(Deg@expr-1) (Part[expr,i,1]-Part[point,First@Flatten@Position[ScalarsOfChart@chart,Part[expr,i,1]]])Delete[expr,{i}],{i,1,Length[expr]}],{t,0,1},options];
 
 
 xTensorQ[ConnectionForm[cd_?CovDQ,_]]^=True;

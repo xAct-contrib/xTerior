@@ -682,6 +682,17 @@ package using LieToCovD.\>\""}], ";"}], "\[IndentingNewLine]",
 Diff[form,covd] computes the exterior covariant derivative of form with \
 respect to the covariant derivative covd.\>\""}], ";"}], 
    "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"FindPotential", "::", "usage"}], "=", 
+     "\"\<FindPotential[form, point, chart] uses the Poincar\[EAcute] lemma \
+to compute a potential for a closed form form (no checks are carried out to \
+ensure that the form is actually closed). The form must be written in some \
+explicit coordinates belonging to chart and the argument point is the point, \
+assumed to be in the same coordinate chart as form, which defines a \
+star-shaped region where the potential is differentiable. A change in the \
+point will give in general a different potential\>\""}], ";"}], 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
     "Computation", " ", "of", " ", "the", " ", "exterior", " ", "covariant", 
@@ -1196,8 +1207,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
      RowBox[{"Unset", "[", 
-      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], "\n", 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1279,8 +1290,8 @@ Cell[BoxData[
             RowBox[{"Plus", "@@", 
              RowBox[{"(", 
               RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}],
-           ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", "\n", 
+           ")"}]}]}], ";"}]}], "]"}]}], "\n", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1309,8 +1320,9 @@ Cell[BoxData[
         RowBox[{"HoldPattern", "@", 
          RowBox[{"Diff", "[", 
           RowBox[{"expr_", ",", "covd_"}], "]"}]}], "=."}], ";"}]}], "]"}]}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\[IndentingNewLine]", "\n", 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"xTension", "[", 
@@ -1345,10 +1357,8 @@ Cell[CellGroupData[{
 
 Cell["2.2 Definition of the CircleTimes product", "Subsubsection"],
 
-Cell["\<\
-By default we define the CircleTimes \[OpenCurlyDoubleQuote]\[CircleTimes]\
-\[CloseCurlyDoubleQuote] product.\
-\>", "Text"],
+Cell["By default we define the CircleTimes \[OpenCurlyDoubleQuote]\
+\[CircleTimes]\[CloseCurlyDoubleQuote] product.", "Text"],
 
 Cell[CellGroupData[{
 
@@ -2647,6 +2657,172 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{"Codiff", "@", "expr_Equal"}], ":=", 
    RowBox[{"Codiff", "/@", "expr"}]}], ";"}]}], "Input",
+ InitializationCell->True]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["2.8 Poincar\[EAcute] lemma", "Subsubsection"],
+
+Cell["\<\
+We implement the computation of the potential for an exact form (Poincar\
+\[EAcute] lemma)\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"FindPotential", "[", 
+    RowBox[{"expr_Plus", ",", "point_List", ",", 
+     RowBox[{"chart_", "?", "ChartQ"}], ",", 
+     RowBox[{"options", ":", 
+      RowBox[{"OptionsPattern", "[", "Integrate", "]"}]}]}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"FindPotential", "[", 
+      RowBox[{"#", ",", "point", ",", "chart", ",", "options"}], "]"}], "&"}],
+     "/@", "expr"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FindPotential", "[", 
+    RowBox[{"expr_Times", ",", "point_List", ",", 
+     RowBox[{"chart_", "?", "ChartQ"}], ",", 
+     RowBox[{"options", ":", 
+      RowBox[{"OptionsPattern", "[", "Integrate", "]"}]}]}], "]"}], ":=", 
+   RowBox[{"FindPotential", "[", 
+    RowBox[{
+     RowBox[{"Expand", "@", "expr"}], ",", "point", ",", "chart", ",", 
+     "options"}], "]"}]}], ";"}]}], "Input",
+ InitializationCell->True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Simplest", " ", "cases", " ", "for", " ", "grade", " ", "1", " ", 
+    "forms"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"FindPotential", "[", 
+      RowBox[{"expr_Diff", ",", "point_List", ",", 
+       RowBox[{"chart_", "?", "ChartQ"}], ",", 
+       RowBox[{"options", ":", 
+        RowBox[{"OptionsPattern", "[", "Integrate", "]"}]}]}], "]"}], ":=", 
+     RowBox[{"Part", "[", 
+      RowBox[{"expr", ",", "1"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"FindPotential", "[", 
+      RowBox[{
+       RowBox[{"factor_", " ", "expr_Diff"}], ",", "point_List", ",", 
+       RowBox[{"chart_", "?", "ChartQ"}], ",", 
+       RowBox[{"options", ":", 
+        RowBox[{"OptionsPattern", "[", "Integrate", "]"}]}]}], "]"}], ":=", 
+     RowBox[{"Integrate", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"factor", "/.", 
+          RowBox[{"Thread", "[", 
+           RowBox[{"Rule", "[", 
+            RowBox[{
+             RowBox[{"ScalarsOfChart", "@", "chart"}], ",", 
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"Times", "[", 
+                 RowBox[{"#", ",", "t"}], "]"}], "&"}], "/@", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"ScalarsOfChart", "@", "chart"}], "-", "point"}], 
+                ")"}]}], "+", "point"}]}], "]"}], "]"}]}], ")"}], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"Part", "[", 
+           RowBox[{"expr", ",", "1"}], "]"}], "-", 
+          RowBox[{"Part", "[", 
+           RowBox[{"point", ",", 
+            RowBox[{"First", "@", 
+             RowBox[{"Flatten", "@", 
+              RowBox[{"Position", "[", 
+               RowBox[{
+                RowBox[{"ScalarsOfChart", "@", "chart"}], ",", 
+                RowBox[{"Part", "[", 
+                 RowBox[{"expr", ",", "1"}], "]"}]}], "]"}]}]}]}], "]"}]}], 
+         ")"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "0", ",", "1"}], "}"}], ",", "options"}], "]"}]}], 
+    ";"}]}]}]], "Input",
+ InitializationCell->True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Poincare", " ", "Lemma", " ", "for", " ", "higher", " ", "degree", " ", 
+    "forms"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"FindPotential", "[", 
+     RowBox[{
+      RowBox[{"factor_.", "expr_Wedge"}], ",", "point_List", ",", 
+      RowBox[{"chart_", "?", "ChartQ"}], ",", 
+      RowBox[{"options", ":", 
+       RowBox[{"OptionsPattern", "[", "Integrate", "]"}]}]}], "]"}], ":=", 
+    RowBox[{"Integrate", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"factor", "/.", 
+         RowBox[{"Thread", "[", 
+          RowBox[{"Rule", "[", 
+           RowBox[{
+            RowBox[{"ScalarsOfChart", "@", "chart"}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"Times", "[", 
+                RowBox[{"#", ",", "t"}], "]"}], "&"}], "/@", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"ScalarsOfChart", "@", "chart"}], "-", "point"}], 
+               ")"}]}], "+", "point"}]}], "]"}], "]"}]}], ")"}], " ", 
+       RowBox[{"Sum", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"-", "1"}], ")"}], "^", 
+           RowBox[{"(", 
+            RowBox[{"i", "-", "1"}], ")"}]}], 
+          RowBox[{"t", "^", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Deg", "@", "expr"}], "-", "1"}], ")"}]}], " ", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"Part", "[", 
+             RowBox[{"expr", ",", "i", ",", "1"}], "]"}], "-", 
+            RowBox[{"Part", "[", 
+             RowBox[{"point", ",", 
+              RowBox[{"First", "@", 
+               RowBox[{"Flatten", "@", 
+                RowBox[{"Position", "[", 
+                 RowBox[{
+                  RowBox[{"ScalarsOfChart", "@", "chart"}], ",", 
+                  RowBox[{"Part", "[", 
+                   RowBox[{"expr", ",", "i", ",", "1"}], "]"}]}], "]"}]}]}]}],
+              "]"}]}], ")"}], 
+          RowBox[{"Delete", "[", 
+           RowBox[{"expr", ",", 
+            RowBox[{"{", "i", "}"}]}], "]"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", 
+           RowBox[{"Length", "[", "expr", "]"}]}], "}"}]}], "]"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"t", ",", "0", ",", "1"}], "}"}], ",", "options"}], "]"}]}], 
+   ";"}]}]], "Input",
  InitializationCell->True]
 }, Closed]]
 }, Open  ]],
@@ -4684,9 +4860,7 @@ Cell[BoxData[
   ";"}]], "Input",
  InitializationCell->True],
 
-Cell["\<\
-Main properties of the interior product:\
-\>", "Text"],
+Cell["Main properties of the interior product:", "Text"],
 
 Cell[BoxData[{
  RowBox[{
@@ -6515,12 +6689,12 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1276, 613},
-WindowMargins->{{Automatic, 306}, {160, Automatic}},
+WindowMargins->{{218, Automatic}, {189, Automatic}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
 Magnification->1.5,
-FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+FrontEndVersion->"10.0 for Linux x86 (64-bit) (June 27, 2014)",
 StyleDefinitions->"Default.nb"
 ]
 
