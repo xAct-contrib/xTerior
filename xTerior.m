@@ -666,6 +666,10 @@ Int[v_][f_]:=0/;Deg@f===0;
 Int[f_?ScalarQ v_][form_]:=f Int[v][form];
 Int[v_[ind1_]][Coframe[mani_][ind2_]]:=v[ind2];
 Int[v_[ind1_]][dx[mani_][ind2_]]:=v[ind2];
+Int[Basis[{cnumber1_?IntegerQ,-basisname_?BasisQ},ind_Symbol]][dx[mani_][{cnumber2_?IntegerQ,basisname_?BasisQ}]]:=0/;cnumber1=!=cnumber2;
+Int[Basis[{cnumber1_?IntegerQ,-basisname_?BasisQ},ind_Symbol]][dx[mani_][{cnumber2_?IntegerQ,basisname_?BasisQ}]]:=1/;cnumber1===cnumber2;
+Int[Basis[{cnumber1_?IntegerQ,-basisname_?BasisQ},ind_Symbol]][Coframe[mani_][{cnumber2_?IntegerQ,basisname_?BasisQ}]]:=0/;cnumber1=!=cnumber2;
+Int[Basis[{cnumber1_?IntegerQ,-basisname_?BasisQ},ind_Symbol]][Coframe[mani_][{cnumber2_?IntegerQ,basisname_?BasisQ}]]:=1/;cnumber1===cnumber2;
 
 
 Int[v_][_Basis]:=0;

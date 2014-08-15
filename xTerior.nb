@@ -1179,8 +1179,8 @@ Cell[BoxData[
   "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{"$UseDimensionsQ", "=", "False"}], ";"}], "\[IndentingNewLine]", 
-   "\n", 
+    RowBox[{"$UseDimensionsQ", "=", "False"}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"$DimensionsZeroForms", "=", 
      RowBox[{"{", "}"}]}], ";"}], "\n", 
@@ -1207,8 +1207,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
      RowBox[{"Unset", "[", 
-      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\n", "\[IndentingNewLine]", 
+      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1290,8 +1290,8 @@ Cell[BoxData[
             RowBox[{"Plus", "@@", 
              RowBox[{"(", 
               RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}],
-           ")"}]}]}], ";"}]}], "]"}]}], "\n", "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+           ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1320,7 +1320,7 @@ Cell[BoxData[
         RowBox[{"HoldPattern", "@", 
          RowBox[{"Diff", "[", 
           RowBox[{"expr_", ",", "covd_"}], "]"}]}], "=."}], ";"}]}], "]"}]}], 
-   "\[IndentingNewLine]", "\n", 
+   "\n", "\[IndentingNewLine]", 
    RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\[IndentingNewLine]", 
    "\[IndentingNewLine]", 
    RowBox[{
@@ -1335,8 +1335,8 @@ Cell[BoxData[
        RowBox[{"tensor_", "[", "inds___", "]"}], ",", "__"}], "]"}], ":=", 
      RowBox[{"If", "[", 
       RowBox[{"$UseDimensionsQ", ",", 
-       RowBox[{"SetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\n", 
+       RowBox[{"SetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"xTension", "[", 
@@ -2710,7 +2710,7 @@ Cell[BoxData[
        RowBox[{"options", ":", 
         RowBox[{"OptionsPattern", "[", "Integrate", "]"}]}]}], "]"}], ":=", 
      RowBox[{"Part", "[", 
-      RowBox[{"expr", ",", "1"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+      RowBox[{"expr", ",", "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"FindPotential", "[", 
@@ -4909,7 +4909,87 @@ Cell[BoxData[{
      RowBox[{"v_", "[", "ind1_", "]"}], "]"}], "[", 
     RowBox[{
      RowBox[{"dx", "[", "mani_", "]"}], "[", "ind2_", "]"}], "]"}], ":=", 
-   RowBox[{"v", "[", "ind2", "]"}]}], ";"}]}], "Input",
+   RowBox[{"v", "[", "ind2", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Int", "[", 
+     RowBox[{"Basis", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"cnumber1_", "?", "IntegerQ"}], ",", 
+         RowBox[{"-", 
+          RowBox[{"basisname_", "?", "BasisQ"}]}]}], "}"}], ",", 
+       "ind_Symbol"}], "]"}], "]"}], "[", 
+    RowBox[{
+     RowBox[{"dx", "[", "mani_", "]"}], "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"cnumber2_", "?", "IntegerQ"}], ",", 
+       RowBox[{"basisname_", "?", "BasisQ"}]}], "}"}], "]"}], "]"}], ":=", 
+   RowBox[{"0", "/;", 
+    RowBox[{"cnumber1", "=!=", "cnumber2"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Int", "[", 
+     RowBox[{"Basis", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"cnumber1_", "?", "IntegerQ"}], ",", 
+         RowBox[{"-", 
+          RowBox[{"basisname_", "?", "BasisQ"}]}]}], "}"}], ",", 
+       "ind_Symbol"}], "]"}], "]"}], "[", 
+    RowBox[{
+     RowBox[{"dx", "[", "mani_", "]"}], "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"cnumber2_", "?", "IntegerQ"}], ",", 
+       RowBox[{"basisname_", "?", "BasisQ"}]}], "}"}], "]"}], "]"}], ":=", 
+   RowBox[{"1", "/;", 
+    RowBox[{"cnumber1", "===", "cnumber2"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Int", "[", 
+     RowBox[{"Basis", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"cnumber1_", "?", "IntegerQ"}], ",", 
+         RowBox[{"-", 
+          RowBox[{"basisname_", "?", "BasisQ"}]}]}], "}"}], ",", 
+       "ind_Symbol"}], "]"}], "]"}], "[", 
+    RowBox[{
+     RowBox[{"Coframe", "[", "mani_", "]"}], "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"cnumber2_", "?", "IntegerQ"}], ",", 
+       RowBox[{"basisname_", "?", "BasisQ"}]}], "}"}], "]"}], "]"}], ":=", 
+   RowBox[{"0", "/;", 
+    RowBox[{"cnumber1", "=!=", "cnumber2"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Int", "[", 
+     RowBox[{"Basis", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"cnumber1_", "?", "IntegerQ"}], ",", 
+         RowBox[{"-", 
+          RowBox[{"basisname_", "?", "BasisQ"}]}]}], "}"}], ",", 
+       "ind_Symbol"}], "]"}], "]"}], "[", 
+    RowBox[{
+     RowBox[{"Coframe", "[", "mani_", "]"}], "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"cnumber2_", "?", "IntegerQ"}], ",", 
+       RowBox[{"basisname_", "?", "BasisQ"}]}], "}"}], "]"}], "]"}], ":=", 
+   RowBox[{"1", "/;", 
+    RowBox[{"cnumber1", "===", "cnumber2"}]}]}], ";"}]}], "Input",
  InitializationCell->True],
 
 Cell["Interior contraction of basis objects is zero.", "Text"],
@@ -6689,7 +6769,7 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1276, 613},
-WindowMargins->{{218, Automatic}, {189, Automatic}},
+WindowMargins->{{218, Automatic}, {162, Automatic}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
