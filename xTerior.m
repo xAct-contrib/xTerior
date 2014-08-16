@@ -181,6 +181,11 @@ DefInfo->Null
 Deg[expr_]:=Grade[expr,Wedge];
 
 
+Unprotect@Dagger;
+Dagger@expr_Wedge:=Dagger/@expr;
+Protect@Dagger;
+
+
 (*Code added by Jos\[EAcute]*)
 $UseDimensionsQ=False;
 
@@ -230,6 +235,11 @@ CircleTimes/:Grade[Diff[expr_,_],CircleTimes]:=Grade[expr,CircleTimes]+1;
 
 
 CircleTimes/:Grade[Hodge[metricg_][expr_],CircleTimes]:=DimOfVBundle[VBundleOfMetric[metricg]]-Grade[expr,CircleTimes];
+
+
+Unprotect@Dagger;
+Dagger@expr_CircleTimes:=Dagger/@expr;
+Protect@Dagger;
 
 
 DefDiffForm[form_,mani_,deg_,options___?OptionQ]:=
@@ -353,6 +363,12 @@ diff0[expr_]:=Diff[expr];
 
 
 Diff[expr_,rest_?(Composition[Not,CovDQ])]:=Diff[expr]\[Wedge]rest;
+
+
+Unprotect@Dagger;
+Dagger[expr_Diff]:=Dagger/@expr;
+Dagger@PD=PD;
+Protect@Dagger;
 
 
 xTensorQ@Coframe[mani_?ManifoldQ]^=True;
