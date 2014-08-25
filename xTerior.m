@@ -219,6 +219,9 @@ UndefTensorUseDimensions[tensor_]:=If[$UseDimensionsQ,UnsetZeroForm[tensor]];
 
 
 
+$DefInfoQ=False;
+
+
 DefProduct[CircleTimes,
 AssociativeProductQ->True,
 IdentityElementOfProduct->1,
@@ -226,6 +229,9 @@ GradedProductQ->True,
 ScalarsOfProduct->(SameQ[Grade[#,CircleTimes],0]&),
 PrintAs->"\[CircleTimes]"
 ]
+
+
+$DefInfoQ=True;
 
 
 CircleTimes/:GradeOfTensor[head_,CircleTimes]:=GradeOfTensor[head,Wedge];
