@@ -518,7 +518,7 @@ PrintAs[ChristoffelForm[cd1_]]^:=PrintAs[ChristoffelForm]<>"["<>Last@SymbolOfCov
 PrintAs[ChristoffelForm[PD]]^:=PrintAs[ChristoffelForm];
 
 
-ConnectionForm[cd1_,vb_]:=ChristoffelForm[cd1]/;(Tangent@ManifoldOfCovD@cd1==vb);
+ConnectionForm[cd1_,vb_]:=ChristoffelForm[cd1]/;(Tangent@ManifoldOfCovD@cd1===vb);
 ChristoffelForm[cd_,tangentbundle_]:=ChristoffelForm[cd];
 
 
@@ -686,8 +686,8 @@ DefGradedDerivation[Int[v_],Wedge,-1,PrintAs->"\[Iota]"];
 Int[v_][f_ form_]:=f Int[v][form]/;Deg@f===0;
 Int[v_][f_]:=0/;Deg@f===0;
 Int[f_?ScalarQ v_][form_]:=f Int[v][form];
-Int[v_[ind1_]][Coframe[mani_][ind2_]]:=v[ind2];
-Int[v_[ind1_]][dx[mani_][ind2_]]:=v[ind2];
+Int[v_[ind1_]][Coframe[mani_][ind2_]]:=v[ind2]/;Deg[v[ind1]]===0;
+Int[v_[ind1_]][dx[mani_][ind2_]]:=v[ind2]/;Deg[v[ind1]]===0;
 Int[Basis[{cnumber1_?IntegerQ,-basisname_?BasisQ},ind_Symbol]][dx[mani_][{cnumber2_?IntegerQ,basisname_?BasisQ}]]:=0/;cnumber1=!=cnumber2;
 Int[Basis[{cnumber1_?IntegerQ,-basisname_?BasisQ},ind_Symbol]][dx[mani_][{cnumber2_?IntegerQ,basisname_?BasisQ}]]:=1/;cnumber1===cnumber2;
 Int[Basis[{cnumber1_?IntegerQ,-basisname_?BasisQ},ind_Symbol]][Coframe[mani_][{cnumber2_?IntegerQ,basisname_?BasisQ}]]:=0/;cnumber1=!=cnumber2;

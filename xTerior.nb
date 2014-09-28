@@ -110,7 +110,117 @@ there are no checks about the manifolds in which the covariant derivatives \
 are defined and they may well be defined in different tangent bundles.\n\
 -ContractBasis and ToBasis commute with the exterior derivative. Implement \
 it. This is partially done."
-}], "Text"]
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Diff", "[", 
+  RowBox[{
+   RowBox[{"FBasis", "[", 
+    RowBox[{
+     RowBox[{"{", "1", "}"}], ",", "B"}], "]"}], ",", "cd"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   RowBox[{
+    SuperscriptBox["d", "\[EmptyDownTriangle]"], "[", 
+    InterpretationBox[
+     StyleBox[GridBox[{
+        {"\[Theta]", 
+         StyleBox[GridBox[{
+            {
+             StyleBox["1",
+              FontColor->RGBColor[1., 0., 0.]]},
+            {" "}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                Offset[0.]}}, "RowsIndexed" -> {}}],
+          FontSize->Rational[39, 4]]}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.034999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     xAct`xTerior`Coframe[$CellContext`M][{1, $CellContext`B}],
+     Editable->False], "]"}],
+   ShowAutoStyles->False,
+   AutoSpacing->False],
+  xAct`xTerior`Diff[
+   xAct`xTerior`Coframe[$CellContext`M][{1, $CellContext`B}], $CellContext`cd],
+  Editable->False]], "Output",
+ CellChangeTimes->{
+  3.619261014112267*^9, 3.619261052189788*^9, {3.6192611310384417`*^9, 
+   3.619261140408046*^9}}]
+}, Open  ]],
+
+Cell[TextData[StyleBox["There\[CloseCurlyQuote]s a bug here, this should have \
+expressed the exterior covariant derivative in terms of the usual exterior \
+derivative.",
+ FontWeight->"Bold"]], "Text",
+ CellChangeTimes->{{3.6192611467543697`*^9, 3.619261194338331*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ChangeExtD", "[", 
+  RowBox[{"%", ",", "cd", ",", "PD"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6192610572099447`*^9, 3.6192610640105762`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   RowBox[{"d", "[", 
+    InterpretationBox[
+     StyleBox[GridBox[{
+        {"\[Theta]", 
+         StyleBox[GridBox[{
+            {
+             StyleBox["1",
+              FontColor->RGBColor[1., 0., 0.]]},
+            {" "}
+           },
+           GridBoxSpacings->{"Columns" -> {
+               Offset[0.], {
+                Offset[0.034999999999999996`]}, 
+               Offset[0.]}, "ColumnsIndexed" -> {}, "Rows" -> {{
+                Offset[0.]}}, "RowsIndexed" -> {}}],
+          FontSize->Rational[39, 4]]}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Center}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.034999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      ShowAutoStyles->False,
+      AutoSpacing->False],
+     xAct`xTerior`Coframe[$CellContext`M][{1, $CellContext`B}],
+     Editable->False], "]"}],
+   ShowAutoStyles->False,
+   AutoSpacing->False],
+  xAct`xTerior`Diff[
+   xAct`xTerior`Coframe[$CellContext`M][{1, $CellContext`B}], xAct`xTensor`PD],
+  Editable->False]], "Output",
+ CellChangeTimes->{
+  3.6192610645130043`*^9, {3.6192611203076057`*^9, 3.61926114192344*^9}}]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -961,8 +1071,8 @@ Cell[BoxData[
    ",", "\<\"DefDiffForm\"\>", ",", "\<\"Deg\"\>", ",", "\<\"Diff\"\>", 
    ",", "\<\"DiffFormQ\"\>", ",", "\<\"Disclaimer\"\>", ",", "\<\"dx\"\>", 
    ",", "\<\"ExpandHodgeDual\"\>", ",", "\<\"FormVarD\"\>", 
-   ",", "\<\"Hodge\"\>", ",", "\<\"Int\"\>", ",", "\<\"RiemannForm\"\>", 
-   ",", "\<\"SortDerivations\"\>", ",", "\<\"TorsionForm\"\>", 
+   ",", "\<\"Hodge\"\>", ",", "\<\"Int\"\>", ",", "\<\"RiemannForm\"\>", ",", 
+   "\<\"SortDerivations\"\>", ",", "\<\"TorsionForm\"\>", 
    ",", "\<\"UndefDiffForm\"\>", ",", "\<\"UseCartan\"\>", 
    ",", "\<\"UseDimensionStart\"\>", ",", "\<\"UseDimensionStop\"\>", 
    ",", "\<\"ZeroDegQ\"\>", ",", "\<\"$DerivationSortOrder\"\>", 
@@ -1220,8 +1330,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
      RowBox[{"Unset", "[", 
-      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\n", "\[IndentingNewLine]", 
+      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1303,8 +1413,8 @@ Cell[BoxData[
             RowBox[{"Plus", "@@", 
              RowBox[{"(", 
               RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}],
-           ")"}]}]}], ";"}]}], "]"}]}], "\n", "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+           ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -3148,8 +3258,8 @@ Cell[BoxData[{
     RowBox[{"(", 
      RowBox[{
       RowBox[{"Tangent", "@", 
-       RowBox[{"ManifoldOfCovD", "@", "cd1"}]}], "\[Equal]", "vb"}], 
-     ")"}]}]}], ";"}], "\[IndentingNewLine]", 
+       RowBox[{"ManifoldOfCovD", "@", "cd1"}]}], "===", "vb"}], ")"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"ChristoffelForm", "[", 
@@ -4941,7 +5051,12 @@ Cell[BoxData[{
      RowBox[{"v_", "[", "ind1_", "]"}], "]"}], "[", 
     RowBox[{
      RowBox[{"Coframe", "[", "mani_", "]"}], "[", "ind2_", "]"}], "]"}], ":=", 
-   RowBox[{"v", "[", "ind2", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"v", "[", "ind2", "]"}], "/;", 
+    RowBox[{
+     RowBox[{"Deg", "[", 
+      RowBox[{"v", "[", "ind1", "]"}], "]"}], "===", "0"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{
@@ -4949,7 +5064,12 @@ Cell[BoxData[{
      RowBox[{"v_", "[", "ind1_", "]"}], "]"}], "[", 
     RowBox[{
      RowBox[{"dx", "[", "mani_", "]"}], "[", "ind2_", "]"}], "]"}], ":=", 
-   RowBox[{"v", "[", "ind2", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"v", "[", "ind2", "]"}], "/;", 
+    RowBox[{
+     RowBox[{"Deg", "[", 
+      RowBox[{"v", "[", "ind1", "]"}], "]"}], "===", "0"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{
@@ -6809,7 +6929,7 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1276, 613},
-WindowMargins->{{Automatic, 208}, {Automatic, 174}},
+WindowMargins->{{0, Automatic}, {0, Automatic}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
