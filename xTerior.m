@@ -178,6 +178,9 @@ DefInfo->Null
 ];
 
 
+Wedge/:GradeOfProduct[Times,Wedge]=0;
+
+
 Deg[expr_]:=Grade[expr,Wedge];
 
 
@@ -686,8 +689,8 @@ DefGradedDerivation[Int[v_],Wedge,-1,PrintAs->"\[Iota]"];
 Int[v_][f_ form_]:=f Int[v][form]/;Deg@f===0;
 Int[v_][f_]:=0/;Deg@f===0;
 Int[f_?ScalarQ v_][form_]:=f Int[v][form];
-Int[v_[ind1_Symbol]][Coframe[mani_][ind2_]]:=v[ind2]/;v=!=Coframe[_];
-Int[v_[ind1_Symbol]][dx[mani_][ind2_]]:=v[ind2]/;v=!=dx[_];
+Int[v_[ind1_Symbol]][Coframe[mani_][ind2_]]:=v[ind2]/;v=!=Coframe[mani];
+Int[v_[ind1_Symbol]][dx[mani_][ind2_]]:=v[ind2]/;v=!=dx[mani];
 Int[v_[-ind1_Symbol]][Coframe[mani_][ind2_]]:=v[-ind1](First@MetricsOfVBundle@Tangent@mani)[ind1,ind2];
 Int[v_[-ind1_Symbol]][dx[mani_][ind2_]]:=v[-ind1](First@MetricsOfVBundle@Tangent@mani)[ind1,ind2];
 Int[Basis[{cnumber1_?IntegerQ,-basisname_?BasisQ},ind_Symbol]][dx[mani_][{cnumber2_?IntegerQ,basisname_?BasisQ}]]:=0/;cnumber1=!=cnumber2;
