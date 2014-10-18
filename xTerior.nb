@@ -1472,7 +1472,7 @@ Cell[BoxData[
        RowBox[{"UnsetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], 
    "\n"}]}]], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -2401,16 +2401,26 @@ Cell[BoxData[
    RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
    RowBox[{"ContractThrough", "\[Rule]", 
     RowBox[{"{", "delta", "}"}]}], ",", "\[IndentingNewLine]", 
-   RowBox[{"PrintAs", "\[Rule]", 
-    RowBox[{"Hold", "[", 
+   RowBox[{"DefInfo", "\[Rule]", "Null"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ InitializationCell->True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Hodge", "/:", 
+   RowBox[{"PrintAs", "@", 
+    RowBox[{"Hodge", "[", "metric_", "]"}]}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Head", "[", "metric", "]"}], "\[Equal]", "CTensor"}], ",", 
+     "\"\<*\>\"", ",", 
      StyleBox[
       RowBox[{"\"\<\\!\\(\\*SubscriptBox[\\(*\\), \\(\>\"", "<>", 
        RowBox[{"PrintAs", "[", "metric", "]"}], "<>", "\"\<\\)]\\)\>\""}],
       ShowSpecialCharacters->False,
       ShowStringCharacters->True,
-      NumberMarks->True], "]"}]}], ",", "\[IndentingNewLine]", 
-   RowBox[{"DefInfo", "\[Rule]", "Null"}]}], "\[IndentingNewLine]", 
-  "]"}]], "Input",
+      NumberMarks->True]}], "]"}]}], ";"}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
@@ -2638,7 +2648,7 @@ Cell[BoxData[
         RowBox[{"dx", "[", "#2", "]"}], ",", "met"}], "]"}], "&"}], ",", 
      "expr", ",", "$Manifolds"}], "]"}]}], ";"}]], "Input",
  InitializationCell->True]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 

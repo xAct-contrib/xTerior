@@ -408,9 +408,11 @@ Diff[dx[mani_?ManifoldQ][ind_],PD]:=0;
 DefInertHead[Hodge[metric_],
 LinearQ->True,
 ContractThrough->{delta},
-PrintAs->Hold["\!\(\*SubscriptBox[\(*\), \("<>PrintAs[metric]<>"\)]\)"],
 DefInfo->Null
 ]
+
+
+Hodge/:PrintAs@Hodge[metric_]:=If[Head[metric]==CTensor,"*","\!\(\*SubscriptBox[\(*\), \("<>PrintAs[metric]<>"\)]\)"];
 
 
 Hodge[metric_][x_ y_]:=x Hodge[metric][y]/;Grade[x,Wedge]===0
