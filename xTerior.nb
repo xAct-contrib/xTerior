@@ -1301,8 +1301,8 @@ Cell[BoxData[
   "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{"$UseDimensionsQ", "=", "False"}], ";"}], "\n", 
-   "\[IndentingNewLine]", 
+    RowBox[{"$UseDimensionsQ", "=", "False"}], ";"}], "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{
     RowBox[{"$DimensionsZeroForms", "=", 
      RowBox[{"{", "}"}]}], ";"}], "\n", 
@@ -1330,7 +1330,7 @@ Cell[BoxData[
      RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
      RowBox[{"Unset", "[", 
       RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", "\n", 
+   "\[IndentingNewLine]", "\n", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1367,8 +1367,11 @@ Cell[BoxData[
            RowBox[{"(", 
             RowBox[{"Plus", "@@", 
              RowBox[{"(", 
-              RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}],
-           ")"}]}]}], ";", "\[IndentingNewLine]", 
+              RowBox[{"DimOfManifold", "/@", 
+               RowBox[{"Flatten", "[", 
+                RowBox[{"DependenciesOf", "/@", 
+                 RowBox[{"{", "expr", "}"}]}], "]"}]}], ")"}]}], ")"}]}], 
+          ")"}]}]}], ";", "\[IndentingNewLine]", 
        RowBox[{"(*", 
         RowBox[{
         "Expressions", " ", "which", " ", "are", " ", "exterior", " ", 
@@ -1391,8 +1394,9 @@ Cell[BoxData[
            RowBox[{"(", 
             RowBox[{"Plus", "@@", 
              RowBox[{"(", 
-              RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}],
-           ")"}]}]}], ";", "\[IndentingNewLine]", 
+              RowBox[{"DimOfManifold", "/@", 
+               RowBox[{"DependenciesOf", "[", "expr", "]"}]}], ")"}]}], 
+            ")"}]}], ")"}]}]}], ";", "\[IndentingNewLine]", 
        RowBox[{
         RowBox[{"HoldPattern", "@", 
          RowBox[{"Diff", "[", 
@@ -1411,9 +1415,10 @@ Cell[BoxData[
            RowBox[{"(", 
             RowBox[{"Plus", "@@", 
              RowBox[{"(", 
-              RowBox[{"DimOfManifold", "/@", "$Manifolds"}], ")"}]}], ")"}]}],
-           ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", "\n", 
-   "\[IndentingNewLine]", 
+              RowBox[{"DimOfManifold", "/@", 
+               RowBox[{"DependenciesOf", "[", "expr", "]"}]}], ")"}]}], 
+            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -2907,7 +2912,7 @@ Cell[BoxData[
        RowBox[{"options", ":", 
         RowBox[{"OptionsPattern", "[", "Integrate", "]"}]}]}], "]"}], ":=", 
      RowBox[{"Part", "[", 
-      RowBox[{"expr", ",", "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+      RowBox[{"expr", ",", "1"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"FindPotential", "[", 
