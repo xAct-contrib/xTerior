@@ -405,6 +405,11 @@ PrintAs[dx[mani_?ManifoldQ]]^="dx";
 Diff[dx[mani_?ManifoldQ][ind_],PD]:=0;
 
 
+(* xTensions *)
+xTension["xTerior`",DefChart,"Beginning"]:=setdiffs;
+setdiffs[chartname_]:=Thread[ComponentValue[dx[ManifoldOfChart@chartname][{#,chartname}]&/@CNumbersOf@chartname,Diff/@ScalarsOfChart@chartname]];
+
+
 DefInertHead[Hodge[metric_],
 LinearQ->True,
 ContractThrough->{delta},
@@ -449,9 +454,11 @@ ExpandHodgeDual1[expr_,dx,met_]:=Fold[ExpandHodgeDual1[#1,dx[#2],met]&,expr,$Man
 DefInertHead[Codiff[metric_],
 LinearQ->True,
 ContractThrough->delta,
-PrintAs->Hold["\!\(\*SubscriptBox[\(\[Delta]\), \("<>PrintAs[metric]<>"\)]\)"],
 DefInfo->Null
 ];
+
+
+Codiff/:PrintAs@Codiff[metric_]:=If[Head@metric==CTensor,"\[Delta]","\!\(\*SubscriptBox[\(\[Delta]\), \("<>PrintAs[metric]<>"\)]\)"];
 
 
 Codiff/:Grade[Codiff[metric_][expr_,___],Wedge]:=-1+Grade[expr,Wedge]

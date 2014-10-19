@@ -1472,7 +1472,7 @@ Cell[BoxData[
        RowBox[{"UnsetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], 
    "\n"}]}]], "Input",
  InitializationCell->True]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -2371,8 +2371,36 @@ Cell[BoxData[
       RowBox[{"dx", "[", 
        RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "[", "ind_", "]"}], ",", 
      "PD"}], "]"}], ":=", "0"}], ";"}]], "Input",
+ InitializationCell->True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"xTension", "[", 
+      RowBox[{"\"\<xTerior`\>\"", ",", "DefChart", ",", "\"\<Beginning\>\""}],
+       "]"}], ":=", "setdiffs"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"setdiffs", "[", "chartname_", "]"}], ":=", 
+     RowBox[{"Thread", "[", 
+      RowBox[{"ComponentValue", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"dx", "[", 
+            RowBox[{"ManifoldOfChart", "@", "chartname"}], "]"}], "[", 
+           RowBox[{"{", 
+            RowBox[{"#", ",", "chartname"}], "}"}], "]"}], "&"}], "/@", 
+         RowBox[{"CNumbersOf", "@", "chartname"}]}], ",", 
+        RowBox[{"Diff", "/@", 
+         RowBox[{"ScalarsOfChart", "@", "chartname"}]}]}], "]"}], "]"}]}], 
+    ";"}]}]}]], "Input",
  InitializationCell->True]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -2648,7 +2676,7 @@ Cell[BoxData[
         RowBox[{"dx", "[", "#2", "]"}], ",", "met"}], "]"}], "&"}], ",", 
      "expr", ",", "$Manifolds"}], "]"}]}], ";"}]], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -2664,16 +2692,26 @@ Cell[BoxData[
     RowBox[{"LinearQ", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
     RowBox[{"ContractThrough", "\[Rule]", "delta"}], ",", 
     "\[IndentingNewLine]", 
-    RowBox[{"PrintAs", "\[Rule]", 
-     RowBox[{"Hold", "[", 
-      StyleBox[
-       RowBox[{"\"\<\\!\\(\\*SubscriptBox[\\(\\[Delta]\\), \\(\>\"", "<>", 
-        RowBox[{"PrintAs", "[", "metric", "]"}], "<>", "\"\<\\)]\\)\>\""}],
-       ShowSpecialCharacters->False,
-       ShowStringCharacters->True,
-       NumberMarks->True], "]"}]}], ",", "\[IndentingNewLine]", 
     RowBox[{"DefInfo", "\[Rule]", "Null"}]}], "\[IndentingNewLine]", "]"}], 
   ";"}]], "Input",
+ InitializationCell->True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Codiff", "/:", 
+   RowBox[{"PrintAs", "@", 
+    RowBox[{"Codiff", "[", "metric_", "]"}]}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Head", "@", "metric"}], "\[Equal]", "CTensor"}], ",", 
+     "\"\<\[Delta]\>\"", ",", 
+     StyleBox[
+      RowBox[{"\"\<\\!\\(\\*SubscriptBox[\\(\\[Delta]\\), \\(\>\"", "<>", 
+       RowBox[{"PrintAs", "[", "metric", "]"}], "<>", "\"\<\\)]\\)\>\""}],
+      ShowSpecialCharacters->False,
+      ShowStringCharacters->True,
+      NumberMarks->True]}], "]"}]}], ";"}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
@@ -5595,7 +5633,7 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{"Protect", "@", "LieDToCovD"}], ";"}]}], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
