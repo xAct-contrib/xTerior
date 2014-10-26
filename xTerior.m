@@ -222,6 +222,7 @@ UndefTensorUseDimensions[tensor_]:=If[$UseDimensionsQ,UnsetZeroForm[tensor]];
 
 
 
+(* Contracted wedge product of CTensor objects *)
 Wedge[ctensor1_CTensor[left1___,a_,right1___],ctensor2_CTensor[left2___,-a_,right2___]]:=Module[{n1=Length[{left1,a}],n2=Length[{left2,-a}],res},res=xAct`xCoba`Private`CTensorContract[ctensor1,ctensor2,{n1,n2},Wedge];
 res[left1,right1,left2,right2]/;FreeQ[res,$Failed]];
 
@@ -233,6 +234,8 @@ signatureOrZero[indices_]:=If[DuplicateFreeQ[indices],Signature[Ordering[indices
 
 simplifyBasisWedge[expr_]:=expr/.wed_Wedge:>simplifyBasisWedge1[wed];
 simplifyBasisWedge1[HoldPattern[Wedge[factors:((head:((xAct`xTerior`Coframe|xAct`xTerior`dx)[_]))[_]..)]]]:=With[{indices=First/@{factors}},signatureOrZero[indices] Wedge@@(head/@Sort[indices])]
+
+(* Wedge product of general CTensor objects *)
 
 CTensorWedge[]:=1;
 CTensorWedge[ctensors__CTensor]:=CTensor[simplifyBasisWedge[xAct`xCoba`Private`tensorproduct[Wedge]@@#1],Join@@#2,Plus@@#3]&@@Transpose[List@@@{ctensors}];
@@ -428,8 +431,8 @@ Diff[dx[mani_?ManifoldQ][ind_],PD]:=0;
 
 
 (* xTensions *)
-(*xTension["xTerior`",DefChart,"Beginning"]:=setdiffs;
-setdiffs[chartname_,__]:=Thread[ComponentValue[dx[ManifoldOfChart@chartname][{#,chartname}]&/@CNumbersOf@chartname,Diff/@ScalarsOfChart@chartname]];*)
+xTension["xTerior`",DefChart,"End"]:=setdiffs;
+setdiffs[chartname_,__]:=Thread[ComponentValue[dx[ManifoldOfChart@chartname][{#,chartname}]&/@CNumbersOf@chartname,Diff/@ScalarsOfChart@chartname]];
 
 
 DefInertHead[Hodge[metric_],

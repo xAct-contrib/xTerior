@@ -1306,8 +1306,8 @@ Cell[BoxData[
   "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{"$UseDimensionsQ", "=", "False"}], ";"}], "\n", 
-   "\[IndentingNewLine]", 
+    RowBox[{"$UseDimensionsQ", "=", "False"}], ";"}], "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{
     RowBox[{"$DimensionsZeroForms", "=", 
      RowBox[{"{", "}"}]}], ";"}], "\n", 
@@ -1334,8 +1334,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
      RowBox[{"Unset", "[", 
-      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], "\n", 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1422,7 +1422,7 @@ Cell[BoxData[
              RowBox[{"(", 
               RowBox[{"DimOfManifold", "/@", 
                RowBox[{"DependenciesOf", "[", "expr", "]"}]}], ")"}]}], 
-            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", "\n",
+            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\n", "\[IndentingNewLine]",
     "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
@@ -1453,7 +1453,7 @@ Cell[BoxData[
          RowBox[{"Diff", "[", 
           RowBox[{"expr_", ",", "covd_"}], "]"}]}], "=."}], ";"}]}], "]"}]}], 
    "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\n", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"xTension", "[", 
@@ -1466,8 +1466,8 @@ Cell[BoxData[
        RowBox[{"tensor_", "[", "inds___", "]"}], ",", "__"}], "]"}], ":=", 
      RowBox[{"If", "[", 
       RowBox[{"$UseDimensionsQ", ",", 
-       RowBox[{"SetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\n", 
+       RowBox[{"SetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"xTension", "[", 
@@ -1482,87 +1482,103 @@ Cell[BoxData[
        RowBox[{"UnsetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], 
    "\n"}]}]], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
-Cell["Wedge on CTensor", "Subsubsection"],
+Cell["2.2 Integration of CTensor in Wedge", "Subsubsection"],
 
-Cell[BoxData[{
+Cell["\<\
+In this section we implement the Wedge product of CTensor objects. This code \
+has been supplied by Jos\[EAcute] Mart\[IAcute]n-Garc\[IAcute]a.\
+\>", "Text"],
+
+Cell[BoxData[
  RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Contracted", " ", "wedge", " ", "product", " ", "of", " ", "CTensor", " ",
+     "objects"}], " ", "*)"}], "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{"Wedge", "[", 
-     RowBox[{
-      RowBox[{"ctensor1_CTensor", "[", 
-       RowBox[{"left1___", ",", "a_", ",", "right1___"}], "]"}], ",", 
-      RowBox[{"ctensor2_CTensor", "[", 
-       RowBox[{"left2___", ",", 
-        RowBox[{"-", "a_"}], ",", "right2___"}], "]"}]}], "]"}], ":=", 
-    RowBox[{"Module", "[", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"n1", "=", 
-         RowBox[{"Length", "[", 
-          RowBox[{"{", 
-           RowBox[{"left1", ",", "a"}], "}"}], "]"}]}], ",", 
-        RowBox[{"n2", "=", 
-         RowBox[{"Length", "[", 
-          RowBox[{"{", 
-           RowBox[{"left2", ",", 
-            RowBox[{"-", "a"}]}], "}"}], "]"}]}], ",", "res"}], "}"}], ",", 
-      RowBox[{
-       RowBox[{"res", "=", 
-        RowBox[{"xAct`xCoba`Private`CTensorContract", "[", 
-         RowBox[{"ctensor1", ",", "ctensor2", ",", 
-          RowBox[{"{", 
-           RowBox[{"n1", ",", "n2"}], "}"}], ",", "Wedge"}], "]"}]}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"res", "[", 
-         RowBox[{"left1", ",", "right1", ",", "left2", ",", "right2"}], "]"}],
-         "/;", 
-        RowBox[{"FreeQ", "[", 
-         RowBox[{"res", ",", "$Failed"}], "]"}]}]}]}], "]"}]}], ";"}], 
-  "\n"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"Wedge", "[", 
     RowBox[{
-     RowBox[{"ctensor1_CTensor", "[", 
-      RowBox[{"left1___", ",", 
-       RowBox[{"-", "a_"}], ",", "right1___"}], "]"}], ",", 
-     RowBox[{"ctensor2_CTensor", "[", 
-      RowBox[{"left2___", ",", "a_", ",", "right2___"}], "]"}]}], "]"}], ":=", 
-   RowBox[{"Module", "[", 
+     RowBox[{"Wedge", "[", 
+      RowBox[{
+       RowBox[{"ctensor1_CTensor", "[", 
+        RowBox[{"left1___", ",", "a_", ",", "right1___"}], "]"}], ",", 
+       RowBox[{"ctensor2_CTensor", "[", 
+        RowBox[{"left2___", ",", 
+         RowBox[{"-", "a_"}], ",", "right2___"}], "]"}]}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"n1", "=", 
+          RowBox[{"Length", "[", 
+           RowBox[{"{", 
+            RowBox[{"left1", ",", "a"}], "}"}], "]"}]}], ",", 
+         RowBox[{"n2", "=", 
+          RowBox[{"Length", "[", 
+           RowBox[{"{", 
+            RowBox[{"left2", ",", 
+             RowBox[{"-", "a"}]}], "}"}], "]"}]}], ",", "res"}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"res", "=", 
+         RowBox[{"xAct`xCoba`Private`CTensorContract", "[", 
+          RowBox[{"ctensor1", ",", "ctensor2", ",", 
+           RowBox[{"{", 
+            RowBox[{"n1", ",", "n2"}], "}"}], ",", "Wedge"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"res", "[", 
+          RowBox[{"left1", ",", "right1", ",", "left2", ",", "right2"}], 
+          "]"}], "/;", 
+         RowBox[{"FreeQ", "[", 
+          RowBox[{"res", ",", "$Failed"}], "]"}]}]}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
     RowBox[{
-     RowBox[{"{", 
+     RowBox[{"Wedge", "[", 
       RowBox[{
-       RowBox[{"n1", "=", 
-        RowBox[{"Length", "[", 
-         RowBox[{"{", 
-          RowBox[{"left1", ",", "a"}], "}"}], "]"}]}], ",", 
-       RowBox[{"n2", "=", 
-        RowBox[{"Length", "[", 
-         RowBox[{"{", 
-          RowBox[{"left2", ",", 
-           RowBox[{"-", "a"}]}], "}"}], "]"}]}], ",", "res"}], "}"}], ",", 
-     RowBox[{
-      RowBox[{"res", "=", 
-       RowBox[{"xAct`xCoba`Private`CTensorContract", "[", 
-        RowBox[{"ctensor1", ",", "ctensor2", ",", 
-         RowBox[{"{", 
-          RowBox[{"n1", ",", "n2"}], "}"}], ",", "Wedge"}], "]"}]}], ";", 
-      "\[IndentingNewLine]", 
+       RowBox[{"ctensor1_CTensor", "[", 
+        RowBox[{"left1___", ",", 
+         RowBox[{"-", "a_"}], ",", "right1___"}], "]"}], ",", 
+       RowBox[{"ctensor2_CTensor", "[", 
+        RowBox[{"left2___", ",", "a_", ",", "right2___"}], "]"}]}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
       RowBox[{
-       RowBox[{"res", "[", 
-        RowBox[{"left1", ",", "right1", ",", "left2", ",", "right2"}], "]"}], 
-       "/;", 
-       RowBox[{"FreeQ", "[", 
-        RowBox[{"res", ",", "$Failed"}], "]"}]}]}]}], "]"}]}], 
-  ";"}]}], "Input",
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"n1", "=", 
+          RowBox[{"Length", "[", 
+           RowBox[{"{", 
+            RowBox[{"left1", ",", "a"}], "}"}], "]"}]}], ",", 
+         RowBox[{"n2", "=", 
+          RowBox[{"Length", "[", 
+           RowBox[{"{", 
+            RowBox[{"left2", ",", 
+             RowBox[{"-", "a"}]}], "}"}], "]"}]}], ",", "res"}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"res", "=", 
+         RowBox[{"xAct`xCoba`Private`CTensorContract", "[", 
+          RowBox[{"ctensor1", ",", "ctensor2", ",", 
+           RowBox[{"{", 
+            RowBox[{"n1", ",", "n2"}], "}"}], ",", "Wedge"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"res", "[", 
+          RowBox[{"left1", ",", "right1", ",", "left2", ",", "right2"}], 
+          "]"}], "/;", 
+         RowBox[{"FreeQ", "[", 
+          RowBox[{"res", ",", "$Failed"}], "]"}]}]}]}], "]"}]}], 
+    ";"}]}]}]], "Input",
  InitializationCell->True],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+  "Wedge", " ", "product", " ", "of", " ", "Frame", " ", "or", " ", 
+   "Coframe"}], "  ", "*)"}]], "Input"],
 
 Cell[BoxData[{
  RowBox[{
@@ -1574,7 +1590,7 @@ Cell[BoxData[{
       RowBox[{"DuplicateFreeQ", "[", "indices", "]"}], ",", 
       RowBox[{"Signature", "[", 
        RowBox[{"Ordering", "[", "indices", "]"}], "]"}], ",", "0"}], "]"}]}], 
-   ";"}], "\n"}], "\[IndentingNewLine]", 
+   ";"}], "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{"simplifyBasisWedge", "[", "expr_", "]"}], ":=", 
@@ -1610,7 +1626,11 @@ Cell[BoxData[{
        RowBox[{"(", 
         RowBox[{"head", "/@", 
          RowBox[{"Sort", "[", "indices", "]"}]}], ")"}]}]}]}], "]"}]}], 
-  "\n"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Wedge", " ", "product", " ", "of", " ", "general", " ", "CTensor", " ", 
+    "objects"}], " ", "*)"}], "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{"CTensorWedge", "[", "]"}], ":=", "1"}], ";"}], "\n", 
@@ -1652,7 +1672,7 @@ Cell[BoxData[{
       RowBox[{"inds1", ",", "inds2"}], "}"}], "]"}], "===", 
     RowBox[{"{", "}"}]}]}]}]}], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -1761,7 +1781,7 @@ relations. Usually it is safer to declare independently the grades in each \
 product. Recall that objects for which a grade has not been given are taken \
 to have degree 0.\
 \>", "Text"]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -2573,12 +2593,13 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\n", 
-  RowBox[{"(*", 
+  RowBox[{
    RowBox[{
     RowBox[{
      RowBox[{"xTension", "[", 
-      RowBox[{"\"\<xTerior`\>\"", ",", "DefChart", ",", "\"\<Beginning\>\""}],
-       "]"}], ":=", "setdiffs"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"\"\<xTerior`\>\"", ",", "DefChart", ",", "\"\<End\>\""}], 
+      "]"}], ":=", "setdiffs"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
     RowBox[{
      RowBox[{"setdiffs", "[", 
       RowBox[{"chartname_", ",", "__"}], "]"}], ":=", 
@@ -2595,9 +2616,9 @@ Cell[BoxData[
          RowBox[{"CNumbersOf", "@", "chartname"}]}], ",", 
         RowBox[{"Diff", "/@", 
          RowBox[{"ScalarsOfChart", "@", "chartname"}]}]}], "]"}], "]"}]}], 
-    ";"}], "*)"}]}]], "Input",
+    ";"}]}]}]], "Input",
  InitializationCell->True]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -3104,7 +3125,7 @@ Cell[BoxData[
        RowBox[{"options", ":", 
         RowBox[{"OptionsPattern", "[", "Integrate", "]"}]}]}], "]"}], ":=", 
      RowBox[{"Part", "[", 
-      RowBox[{"expr", ",", "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+      RowBox[{"expr", ",", "1"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"FindPotential", "[", 
