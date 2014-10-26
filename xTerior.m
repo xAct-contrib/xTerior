@@ -222,6 +222,25 @@ UndefTensorUseDimensions[tensor_]:=If[$UseDimensionsQ,UnsetZeroForm[tensor]];
 
 
 
+Wedge[ctensor1_CTensor[left1___,a_,right1___],ctensor2_CTensor[left2___,-a_,right2___]]:=Module[{n1=Length[{left1,a}],n2=Length[{left2,-a}],res},res=xAct`xCoba`Private`CTensorContract[ctensor1,ctensor2,{n1,n2},Wedge];
+res[left1,right1,left2,right2]/;FreeQ[res,$Failed]];
+
+Wedge[ctensor1_CTensor[left1___,-a_,right1___],ctensor2_CTensor[left2___,a_,right2___]]:=Module[{n1=Length[{left1,a}],n2=Length[{left2,-a}],res},res=xAct`xCoba`Private`CTensorContract[ctensor1,ctensor2,{n1,n2},Wedge];
+res[left1,right1,left2,right2]/;FreeQ[res,$Failed]];
+
+
+signatureOrZero[indices_]:=If[DuplicateFreeQ[indices],Signature[Ordering[indices]],0];
+
+simplifyBasisWedge[expr_]:=expr/.wed_Wedge:>simplifyBasisWedge1[wed];
+simplifyBasisWedge1[HoldPattern[Wedge[factors:((head:((xAct`xTerior`Coframe|xAct`xTerior`dx)[_]))[_]..)]]]:=With[{indices=First/@{factors}},signatureOrZero[indices] Wedge@@(head/@Sort[indices])]
+
+CTensorWedge[]:=1;
+CTensorWedge[ctensors__CTensor]:=CTensor[simplifyBasisWedge[xAct`xCoba`Private`tensorproduct[Wedge]@@#1],Join@@#2,Plus@@#3]&@@Transpose[List@@@{ctensors}];
+CTensorWedge[___,Zero,___]:=Zero;
+
+Wedge[ctensor1_CTensor[inds1___],ctensor2_CTensor[inds2___]]:=CTensorWedge[ctensor1,ctensor2][inds1,inds2]/;xAct`xTensor`Private`TakePairs[{inds1,inds2}]==={}
+
+
 $DefInfoQ=False;
 
 
@@ -380,6 +399,9 @@ Dagger@PD=PD;
 Protect@Dagger;
 
 
+Diff[CTensor[array_,bases_List,weight_][inds__]]:=CTensor[Diff[array],bases,weight][inds];
+
+
 xTensorQ@Coframe[mani_?ManifoldQ]^=True;
 SlotsOfTensor[Coframe[mani_?ManifoldQ]]^:={Tangent@mani};
 Coframe/:GradeOfTensor[Coframe[mani_?ManifoldQ],Wedge]=1;
@@ -406,8 +428,8 @@ Diff[dx[mani_?ManifoldQ][ind_],PD]:=0;
 
 
 (* xTensions *)
-xTension["xTerior`",DefChart,"Beginning"]:=setdiffs;
-setdiffs[chartname_]:=Thread[ComponentValue[dx[ManifoldOfChart@chartname][{#,chartname}]&/@CNumbersOf@chartname,Diff/@ScalarsOfChart@chartname]];
+(*xTension["xTerior`",DefChart,"Beginning"]:=setdiffs;
+setdiffs[chartname_,__]:=Thread[ComponentValue[dx[ManifoldOfChart@chartname][{#,chartname}]&/@CNumbersOf@chartname,Diff/@ScalarsOfChart@chartname]];*)
 
 
 DefInertHead[Hodge[metric_],
@@ -526,8 +548,14 @@ HostsOf[ChristoffelForm[cd1_]]^:=Join[{cd1},Union@@HostsOf/@{cd1}];(* Should we 
 TensorID[ChristoffelForm[_]]^={};
 
 PrintAs[ChristoffelForm]^="\[CapitalGamma]";
-PrintAs[ChristoffelForm[cd1_]]^:=PrintAs[ChristoffelForm]<>"["<>Last@SymbolOfCovD[cd1]<>"]";
+(PrintAs[ChristoffelForm[cd1_]]/;Head@cd1=!=CCovD)^:=PrintAs[ChristoffelForm]<>"["<>Last@SymbolOfCovD[cd1]<>"]";
 PrintAs[ChristoffelForm[PD]]^:=PrintAs[ChristoffelForm];
+
+
+ChristoffelForm[exr_CCovD]:=Head@Module[{ind=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],a1,a2},
+{a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[-First@Part[Last@exr,2]],2];
+Part[exr,2][a1,-a2,-ind] ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind]
+];
 
 
 ConnectionForm[cd1_,vb_]:=ChristoffelForm[cd1]/;(Tangent@ManifoldOfCovD@cd1===vb);
@@ -578,7 +606,13 @@ HostsOf[RiemannForm[cd_]]^:=Join[{cd},Union@@HostsOf/@{cd}];(* Should we put Uni
 TensorID[RiemannForm[_]]^={};
 
 PrintAs[RiemannForm]^="R";
-PrintAs[RiemannForm[cd_]]^:=PrintAs[RiemannForm]<>"["<>Last@SymbolOfCovD[cd]<>"]";
+(PrintAs[RiemannForm[cd_]]/;Head@cd=!=CCovD)^:=PrintAs[RiemannForm]<>"["<>Last@SymbolOfCovD[cd]<>"]";
+
+
+RiemannForm[exr_CCovD]:=Head@Module[{ind1=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],ind2=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],a1,a2},
+{a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[-First@Part[Last@exr,2]],2];
+Riemann[exr][-ind1,-ind2,-a1,a2] Wedge[ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind1],ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind2]]
+];
 
 
 CurvatureForm[cd_?CovDQ,vbundle_]:=RiemannForm[cd]/;vbundle===Tangent@ManifoldOfCovD@cd;
@@ -603,7 +637,13 @@ TensorID[TorsionForm[_]]^={};
 
 
 PrintAs[TorsionForm]^="\[GothicCapitalT]";
-PrintAs[TorsionForm[cd_]]^:=PrintAs[TorsionForm]<>"["<>Last@SymbolOfCovD[cd]<>"]";
+(PrintAs[TorsionForm[cd_]]/;Head@cd=!=CCovD)^:=PrintAs[TorsionForm]<>"["<>Last@SymbolOfCovD[cd]<>"]";
+
+
+TorsionForm[exr_CCovD]:=Head@Module[{ind1=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],ind2=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],a1},
+{a1}=GetIndicesOfVBundle[VBundleOfBasis[-First@Part[Last@exr,2]],1];
+Torsion[exr][a1,-ind1,-ind2] ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind1]\[Wedge]ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind2]
+];
 
 
 ConnectionForm[cd1_,cd2_,vbundle_][inds__]:=ConnectionForm[cd1,vbundle][inds]-ConnectionForm[cd2,vbundle][inds];
@@ -687,7 +727,7 @@ HoldPattern[Diff[metr_?MetricQ[-a1_,-a2_],PD]]:>Module[{a=DummyIn@VBundleOfIndex
 (* Exterior derivative of the metric (indices upstairs) *)
 HoldPattern[Diff[metr_?MetricQ[a1_Symbol,a2_Symbol],PD]]:>-ChristoffelForm[covd][a1,a2]-ChristoffelForm[covd][a2,a1]/;MetricOfCovD[covd]===metr,
 (* Exterior derivative of the tensor form of volume element, regarded as a zero-form (indices downstairs). I think that this formula is dimension independent *)
-If[MetricOfCovD[covd]=!=Null,Diff[epsilon[MetricOfCovD[covd]][inds__?DownIndexQ],PD]:>Module[{a=DummyIn@VBundleOfMetric@MetricOfCovD[covd]},ChristoffelForm[covd][a,-a]epsilon[MetricOfCovD[covd]][inds]],HoldPattern[Diff[epsilon[MetricOfCovD[covd]][inds__],PD]]:>Diff[epsilon[MetricOfCovD[covd]][inds]]],
+If[MetricOfCovD[covd]=!=Null,HoldPattern[Diff[epsilon[MetricOfCovD[covd]][inds__?DownIndexQ],PD]]:>Module[{a=DummyIn@VBundleOfMetric@MetricOfCovD[covd]},ChristoffelForm[covd][a,-a]epsilon[MetricOfCovD[covd]][inds]],HoldPattern[Diff[epsilon[MetricOfCovD[covd]][inds__],PD]]:>Diff[epsilon[MetricOfCovD[covd]][inds]]],
 (* Exterior derivative when covd is the parallel derivative of a coordinate chart *)
 HoldPattern@Diff[expr1_?ScalarQ,PD]:>Inner[covd[{#1,-BasisOfCovD@covd}]@expr1 Diff@#2&,CNumbersOf[BasisOfCovD@covd,VBundleOfBasis@BasisOfCovD@covd],ScalarsOfChart@BasisOfCovD@covd,Plus]/;(Deg@expr1===0&&BasisOfCovD@covd=!=Null)});
 
