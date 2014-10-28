@@ -1335,7 +1335,7 @@ Cell[BoxData[
      RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
      RowBox[{"Unset", "[", 
       RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", "\n", 
+   "\[IndentingNewLine]", "\n", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1422,8 +1422,8 @@ Cell[BoxData[
              RowBox[{"(", 
               RowBox[{"DimOfManifold", "/@", 
                RowBox[{"DependenciesOf", "[", "expr", "]"}]}], ")"}]}], 
-            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\n", "\[IndentingNewLine]",
-    "\[IndentingNewLine]", 
+            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1676,7 +1676,7 @@ Cell[BoxData[{
 
 Cell[CellGroupData[{
 
-Cell["2.2 Definition of the CircleTimes product", "Subsubsection"],
+Cell["2.3 Definition of the CircleTimes product", "Subsubsection"],
 
 Cell["By default we define the CircleTimes \[OpenCurlyDoubleQuote]\
 \[CircleTimes]\[CloseCurlyDoubleQuote] product.", "Text"],
@@ -1785,7 +1785,7 @@ to have degree 0.\
 
 Cell[CellGroupData[{
 
-Cell["2.1 Definition and undefinition of differential forms", "Subsubsection"],
+Cell["2.4 Definition and undefinition of differential forms", "Subsubsection"],
 
 Cell["\<\
 Definition and undefinition of differential forms. This is simply DefTensor \
@@ -1857,7 +1857,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["2.3 Graded derivations", "Subsubsection"],
+Cell["2.5 Graded derivations", "Subsubsection"],
 
 Cell[CellGroupData[{
 
@@ -2134,7 +2134,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["2.4 Exterior differentiation", "Subsubsection"],
+Cell["2.6 Exterior differentiation", "Subsubsection"],
 
 Cell["\<\
 The second key ingredient for exterior algebra is the differential operator. \
@@ -2160,6 +2160,16 @@ Cell[BoxData[
    RowBox[{"Diff", ",", "Wedge", ",", 
     RowBox[{"+", "1"}], ",", 
     RowBox[{"PrintAs", "\[Rule]", "\"\<d\>\""}]}], "]"}], ";"}]], "Input",
+ InitializationCell->True],
+
+Cell["We always have PD as the covariant derivative.", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"HoldPattern", "[", 
+   RowBox[{"Diff", "[", "expr_", "]"}], "]"}], ":=", 
+  RowBox[{"Diff", "[", 
+   RowBox[{"expr", ",", "PD"}], "]"}]}]], "Input",
  InitializationCell->True],
 
 Cell["Superscript formatting for covariant exterior derivatives", "Text"],
@@ -2208,23 +2218,27 @@ Cell[BoxData[{
        "}"}], "]"}]}], "]"}]}], ";"}]}], "Input",
  InitializationCell->True],
 
-Cell[BoxData[
+Cell["Thread over lists and equal", "Text"],
+
+Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"Diff", "[", 
+    RowBox[{"expr_List", ",", "cd_"}], "]"}], ":=", 
+   RowBox[{
     RowBox[{
-     RowBox[{"x_", "?", "ConstantQ"}], ",", "rest___"}], "]"}], ":=", "0"}], 
-  ";"}]], "Input",
- InitializationCell->True],
-
-Cell["We always have PD as the covariant derivative.", "Text"],
-
-Cell[BoxData[
+     RowBox[{"Diff", "[", 
+      RowBox[{"#", ",", "cd"}], "]"}], "&"}], "/@", "expr"}]}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"HoldPattern", "[", 
-   RowBox[{"Diff", "[", "expr_", "]"}], "]"}], ":=", 
-  RowBox[{"Diff", "[", 
-   RowBox[{"expr", ",", "PD"}], "]"}]}]], "Input",
+  RowBox[{
+   RowBox[{"Diff", "[", 
+    RowBox[{"expr_Equal", ",", "cd_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Diff", "[", 
+      RowBox[{"#", ",", "cd"}], "]"}], "&"}], "/@", "expr"}]}], 
+  ";"}]}], "Input",
  InitializationCell->True],
 
 Cell["The exterior derivative applied twice is zero:", "Text"],
@@ -2243,19 +2257,6 @@ Cell[BoxData[
   RowBox[{
    RowBox[{"Diff", "[", 
     RowBox[{"_Basis", ",", "PD"}], "]"}], ":=", "0"}], ";"}]], "Input",
- InitializationCell->True],
-
-Cell["Thread over lists and equal", "Text"],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{
-   RowBox[{"Diff", "@", "expr_List"}], ":=", 
-   RowBox[{"Diff", "/@", "expr"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"Diff", "@", "expr_Equal"}], ":=", 
-   RowBox[{"Diff", "/@", "expr"}]}], ";"}]}], "Input",
  InitializationCell->True],
 
 Cell["We still need definition when acting on Times", "Text"],
@@ -2397,6 +2398,15 @@ Cell[BoxData[
   ";"}]], "Input",
  InitializationCell->True],
 
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Diff", "[", 
+    RowBox[{
+     RowBox[{"x_", "?", "ConstantQ"}], ",", "rest___"}], "]"}], ":=", "0"}], 
+  ";"}]], "Input",
+ InitializationCell->True],
+
 Cell["Behavior with respect to Dagger.", "Text"],
 
 Cell[BoxData[{
@@ -2420,20 +2430,22 @@ Cell[BoxData[
   RowBox[{
    RowBox[{"Diff", "[", 
     RowBox[{
-     RowBox[{"CTensor", "[", 
-      RowBox[{"array_", ",", "bases_List", ",", "weight_"}], "]"}], "[", 
-     "inds__", "]"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"CTensor", "[", 
+       RowBox[{"array_", ",", "bases_List", ",", "weight_"}], "]"}], "[", 
+      "inds__", "]"}], ",", "cd_"}], "]"}], ":=", 
    RowBox[{
     RowBox[{"CTensor", "[", 
      RowBox[{
-      RowBox[{"Diff", "[", "array", "]"}], ",", "bases", ",", "weight"}], 
+      RowBox[{"Diff", "[", 
+       RowBox[{"array", ",", "cd"}], "]"}], ",", "bases", ",", "weight"}], 
      "]"}], "[", "inds", "]"}]}], ";"}]], "Input",
  InitializationCell->True]
 }, Closed]],
 
 Cell[CellGroupData[{
 
-Cell["2.5 Introduction of co-frame", "Subsubsection"],
+Cell["2.7 Introduction of co-frame", "Subsubsection"],
 
 Cell[TextData[{
  "We create the non-atomic tensor ",
@@ -2618,11 +2630,11 @@ Cell[BoxData[
          RowBox[{"ScalarsOfChart", "@", "chartname"}]}]}], "]"}], "]"}]}], 
     ";"}]}]}]], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
-Cell["2.6 The Hodge dual", "Subsubsection"],
+Cell["2.8 The Hodge dual", "Subsubsection"],
 
 Cell[CellGroupData[{
 
@@ -2668,6 +2680,50 @@ Cell[BoxData[
       ShowStringCharacters->True,
       NumberMarks->True]}], "]"}]}], ";"}]], "Input",
  InitializationCell->True],
+
+Cell["Thread over lists and equal", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Hodge", "[", "metric_", "]"}], "[", "expr_List", "]"}], ":=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Hodge", "[", "metric", "]"}], "[", "#", "]"}], "&"}], "/@", 
+    "expr"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Hodge", "[", "metric_", "]"}], "[", "expr_Equal", "]"}], ":=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Hodge", "[", "metric", "]"}], "[", "#", "]"}], "&"}], "/@", 
+    "expr"}]}], ";"}]}], "Input",
+ InitializationCell->True],
+
+Cell["Hodge of a CTensor object", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Hodge", "[", "metric_", "]"}], "[", 
+    RowBox[{
+     RowBox[{"CTensor", "[", 
+      RowBox[{"array_", ",", "bases_List", ",", "weight_"}], "]"}], "[", 
+     "inds__", "]"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"CTensor", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Hodge", "[", "metric", "]"}], "[", "array", "]"}], ",", 
+      "bases", ",", "weight"}], "]"}], "[", "inds", "]"}]}], ";"}]], "Input",
+ InitializationCell->True],
+
+Cell["Hodge of the product of two objects", "Text"],
 
 Cell[BoxData[
  RowBox[{
@@ -2898,7 +2954,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["2.7 The co-differential", "Subsubsection"],
+Cell["2.9 The co-differential", "Subsubsection"],
 
 Cell["We introduce the co-differential.", "Text"],
 
@@ -3077,7 +3133,7 @@ Cell[BoxData[{
 
 Cell[CellGroupData[{
 
-Cell["2.8 Poincar\[EAcute] lemma", "Subsubsection"],
+Cell["2.10 Poincar\[EAcute] lemma", "Subsubsection"],
 
 Cell["\<\
 We implement the computation of the potential for an exact form (Poincar\
@@ -7493,12 +7549,12 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1276, 613},
-WindowMargins->{{0, Automatic}, {Automatic, 40}},
+WindowMargins->{{257, Automatic}, {185, Automatic}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
 Magnification->1.5,
-FrontEndVersion->"10.0 for Linux x86 (64-bit) (September 9, 2014)",
+FrontEndVersion->"10.1 for Linux x86 (64-bit) (October 26, 2014)",
 StyleDefinitions->"Default.nb"
 ]
 

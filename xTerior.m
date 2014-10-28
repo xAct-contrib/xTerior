@@ -352,24 +352,21 @@ head/:DependenciesOfInertHead[derL]:=DependenciesOf[First[derR]]
 DefGradedDerivation[Diff,Wedge,+1,PrintAs->"d"];
 
 
+HoldPattern[Diff[expr_]]:=Diff[expr,PD]
+
+
 Diff/:MakeBoxes[Diff[form_,PD?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Diff[form,PD],RowBox[{PrintAs[Diff],"[",MakeBoxes[form,StandardForm],"]"}]];
 Diff/:MakeBoxes[Diff[form_,cd_?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Diff[form,cd],RowBox[{SuperscriptBox[PrintAs[Diff],Last@SymbolOfCovD[cd]],"[",MakeBoxes[form,StandardForm],"]"}]];
 
 
-Diff[x_?ConstantQ,rest___]:=0;
-
-
-HoldPattern[Diff[expr_]]:=Diff[expr,PD]
+Diff[expr_List,cd_]:=Diff[#,cd]&/@expr;
+Diff[expr_Equal,cd_]:=Diff[#,cd]&/@expr;
 
 
 HoldPattern[Diff[expr_Diff,PD]]:=0
 
 
 Diff[_Basis,PD]:=0;
-
-
-Diff@expr_List:=Diff/@expr;
-Diff@expr_Equal:=Diff/@expr;
 
 
 (* This produces expanded expressions and is much faster when there are many scalars *)
@@ -396,13 +393,16 @@ diff0[expr_]:=Diff[expr];
 Diff[expr_,rest_?(Composition[Not,CovDQ])]:=Diff[expr]\[Wedge]rest;
 
 
+Diff[x_?ConstantQ,rest___]:=0;
+
+
 Unprotect@Dagger;
 Dagger[expr_Diff]:=Dagger/@expr;
 Dagger@PD=PD;
 Protect@Dagger;
 
 
-Diff[CTensor[array_,bases_List,weight_][inds__]]:=CTensor[Diff[array],bases,weight][inds];
+Diff[CTensor[array_,bases_List,weight_][inds__],cd_]:=CTensor[Diff[array,cd],bases,weight][inds];
 
 
 xTensorQ@Coframe[mani_?ManifoldQ]^=True;
@@ -443,6 +443,13 @@ DefInfo->Null
 
 
 Hodge/:PrintAs@Hodge[metric_]:=If[Head[metric]==CTensor,"*","\!\(\*SubscriptBox[\(*\), \("<>PrintAs[metric]<>"\)]\)"];
+
+
+Hodge[metric_][expr_List]:=Hodge[metric][#]&/@expr;
+Hodge[metric_][expr_Equal]:=Hodge[metric][#]&/@expr;
+
+
+Hodge[metric_][CTensor[array_,bases_List,weight_][inds__]]:=CTensor[Hodge[metric][array],bases,weight][inds];
 
 
 Hodge[metric_][x_ y_]:=x Hodge[metric][y]/;Grade[x,Wedge]===0
