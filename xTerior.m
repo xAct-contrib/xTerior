@@ -359,7 +359,7 @@ Diff/:MakeBoxes[Diff[form_,PD?CovDQ],StandardForm]:=xAct`xTensor`Private`interpr
 Diff/:MakeBoxes[Diff[form_,cd_?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Diff[form,cd],RowBox[{SuperscriptBox[PrintAs[Diff],Last@SymbolOfCovD[cd]],"[",MakeBoxes[form,StandardForm],"]"}]];
 
 
-Diff[expr_List,cd_]:=Diff[#,cd]&/@expr;
+Diff[expr_?ArrayQ,cd_]:=Diff[#,cd]&/@expr;
 Diff[expr_Equal,cd_]:=Diff[#,cd]&/@expr;
 
 
@@ -390,7 +390,7 @@ diff0[expr_,form_]:=Wedge[Diff[expr],form];
 diff0[expr_]:=Diff[expr];
 
 
-Diff[expr_,rest_?(Composition[Not,CovDQ])]:=Diff[expr]\[Wedge]rest;
+HoldPattern[Diff[expr_,rest_?(Composition[Not,CovDQ])]]:=Diff[expr]\[Wedge]rest;
 
 
 Diff[x_?ConstantQ,rest___]:=0;
@@ -442,7 +442,7 @@ DefInfo->Null
 ]
 
 
-Hodge/:PrintAs@Hodge[metric_]:=If[Head[metric]==CTensor,"*","\!\(\*SubscriptBox[\(*\), \("<>PrintAs[metric]<>"\)]\)"];
+Hodge/:PrintAs@Hodge[metric_]:=If[Head[metric]===CTensor,"*","\!\(\*SubscriptBox[\(*\), \("<>PrintAs[metric]<>"\)]\)"];
 
 
 Hodge[metric_][expr_List]:=Hodge[metric][#]&/@expr;
@@ -490,7 +490,7 @@ DefInfo->Null
 ];
 
 
-Codiff/:PrintAs@Codiff[metric_]:=If[Head@metric==CTensor,"\[Delta]","\!\(\*SubscriptBox[\(\[Delta]\), \("<>PrintAs[metric]<>"\)]\)"];
+Codiff/:PrintAs@Codiff[metric_]:=If[Head@metric===CTensor,"\[Delta]","\!\(\*SubscriptBox[\(\[Delta]\), \("<>PrintAs[metric]<>"\)]\)"];
 
 
 Codiff/:Grade[Codiff[metric_][expr_,___],Wedge]:=-1+Grade[expr,Wedge]
@@ -723,7 +723,8 @@ UseCartan[expr_,PD,{mani__?ManifoldQ}]:=(expr/.Diff@expr1_:>Module[{a=DummyIn/@(
 UseCartan[expr_,PD]:=(expr/.Diff@expr1_:>Module[{a=DummyIn/@(Tangent/@ManifoldsOf@expr)},Inner[dx[#1][#2]PD[-#2]@expr1&,ManifoldsOf@expr,a,Plus]]/;Deg@expr1===0);
 
 
-UseCartan[expr_,covd_]:=(expr/.
+UseCartan[expr_,covd_]:=With[{metric=MetricOfCovD[covd],basis=BasisOfCovD[covd]},
+expr/.Flatten@
 (* Exterior derivative of the coframe *)
 {HoldPattern[Diff[Coframe[mani_][ind_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@ind},If[TorsionQ@covd,-ConnectionForm[covd,VBundleOfIndex@ind][ind,-a]\[Wedge]Coframe[mani][a]+TorsionForm[covd][ind],-ConnectionForm[covd,VBundleOfIndex@ind][ind,-a]\[Wedge]Coframe[mani][a]]],
 (* Exterior derivative of the connection *)
@@ -733,13 +734,19 @@ HoldPattern[Diff[TorsionForm[covd][ind_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@
 (* Exterior derivative of the curvature *)
 HoldPattern[Diff[(curvature:(CurvatureForm|RiemannForm))[covd,vbundle_:Tangent@ManifoldOfCovD@covd][a1_,-a2_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@a1},ConnectionForm[covd,vbundle][a,-a2]\[Wedge]curvature[covd,vbundle][a1,-a]-curvature[covd,vbundle][a,-a2]\[Wedge]ConnectionForm[covd,vbundle][a1,-a]],
 (* Exterior derivative of the metric (indices downstairs) *)
-HoldPattern[Diff[metr_?MetricQ[-a1_,-a2_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@a1},ChristoffelForm[covd][a,-a1]MetricOfCovD[covd][-a,-a2]+ChristoffelForm[covd][a,-a2]MetricOfCovD[covd][-a,-a1]]/;MetricOfCovD[covd]===metr,
+HoldPattern[Diff[metr_?MetricQ[-a1_,-a2_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@a1},ChristoffelForm[covd][a,-a1]metric[-a,-a2]+ChristoffelForm[covd][a,-a2]metric[-a,-a1]]/;MetricOfCovD[covd]===metr,
 (* Exterior derivative of the metric (indices upstairs) *)
-HoldPattern[Diff[metr_?MetricQ[a1_Symbol,a2_Symbol],PD]]:>-ChristoffelForm[covd][a1,a2]-ChristoffelForm[covd][a2,a1]/;MetricOfCovD[covd]===metr,
-(* Exterior derivative of the tensor form of volume element, regarded as a zero-form (indices downstairs). I think that this formula is dimension independent *)
-If[MetricOfCovD[covd]=!=Null,HoldPattern[Diff[epsilon[MetricOfCovD[covd]][inds__?DownIndexQ],PD]]:>Module[{a=DummyIn@VBundleOfMetric@MetricOfCovD[covd]},ChristoffelForm[covd][a,-a]epsilon[MetricOfCovD[covd]][inds]],HoldPattern[Diff[epsilon[MetricOfCovD[covd]][inds__],PD]]:>Diff[epsilon[MetricOfCovD[covd]][inds]]],
+HoldPattern[Diff[metric[a1_Symbol,a2_Symbol],PD]]:>-ChristoffelForm[covd][a1,a2]-ChristoffelForm[covd][a2,a1],
 (* Exterior derivative when covd is the parallel derivative of a coordinate chart *)
-HoldPattern@Diff[expr1_?ScalarQ,PD]:>Inner[covd[{#1,-BasisOfCovD@covd}]@expr1 Diff@#2&,CNumbersOf[BasisOfCovD@covd,VBundleOfBasis@BasisOfCovD@covd],ScalarsOfChart@BasisOfCovD@covd,Plus]/;(Deg@expr1===0&&BasisOfCovD@covd=!=Null)});
+HoldPattern@Diff[expr1_?ScalarQ,PD]:>Inner[covd[{#1,-BasisOfCovD@covd}]@expr1 Diff@#2&,CNumbersOf[basis,VBundleOfBasis[basis]],ScalarsOfChart[basis],Plus]/;(Deg@expr1===0&&basis=!=Null),
+If[metric=!=Null,
+With[{eps=epsilon[metric]},
+HoldPattern[Diff[eps[inds__?DownIndexQ],PD]]:>Module[{a=DummyIn[VBundleOfMetric[metric]]},ChristoffelForm[covd][a,-a]eps[inds]]
+],
+{}
+]
+}
+];
 
 
 DefGradedDerivation[Int[v_],Wedge,-1,PrintAs->"\[Iota]"];

@@ -1334,8 +1334,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
      RowBox[{"Unset", "[", 
-      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\n", "\[IndentingNewLine]", 
+      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1422,8 +1422,8 @@ Cell[BoxData[
              RowBox[{"(", 
               RowBox[{"DimOfManifold", "/@", 
                RowBox[{"DependenciesOf", "[", "expr", "]"}]}], ")"}]}], 
-            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", "\n", 
+            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", "\n",
+    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -2224,7 +2224,8 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"Diff", "[", 
-    RowBox[{"expr_List", ",", "cd_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{"expr_", "?", "ArrayQ"}], ",", "cd_"}], "]"}], ":=", 
    RowBox[{
     RowBox[{
      RowBox[{"Diff", "[", 
@@ -2387,12 +2388,14 @@ Sin[\[CapitalTheta]]. The problem appears to be solved by adding the line\
 Cell[BoxData[
  RowBox[{
   RowBox[{
-   RowBox[{"Diff", "[", 
-    RowBox[{"expr_", ",", 
-     RowBox[{"rest_", "?", 
-      RowBox[{"(", 
-       RowBox[{"Composition", "[", 
-        RowBox[{"Not", ",", "CovDQ"}], "]"}], ")"}]}]}], "]"}], ":=", 
+   RowBox[{"HoldPattern", "[", 
+    RowBox[{"Diff", "[", 
+     RowBox[{"expr_", ",", 
+      RowBox[{"rest_", "?", 
+       RowBox[{"(", 
+        RowBox[{"Composition", "[", 
+         RowBox[{"Not", ",", "CovDQ"}], "]"}], ")"}]}]}], "]"}], "]"}], ":=", 
+   
    RowBox[{
     RowBox[{"Diff", "[", "expr", "]"}], "\[Wedge]", "rest"}]}], 
   ";"}]], "Input",
@@ -2441,7 +2444,7 @@ Cell[BoxData[
        RowBox[{"array", ",", "cd"}], "]"}], ",", "bases", ",", "weight"}], 
      "]"}], "[", "inds", "]"}]}], ";"}]], "Input",
  InitializationCell->True]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -2671,7 +2674,7 @@ Cell[BoxData[
    RowBox[{"If", "[", 
     RowBox[{
      RowBox[{
-      RowBox[{"Head", "[", "metric", "]"}], "\[Equal]", "CTensor"}], ",", 
+      RowBox[{"Head", "[", "metric", "]"}], "===", "CTensor"}], ",", 
      "\"\<*\>\"", ",", 
      StyleBox[
       RowBox[{"\"\<\\!\\(\\*SubscriptBox[\\(*\\), \\(\>\"", "<>", 
@@ -2978,7 +2981,7 @@ Cell[BoxData[
    RowBox[{"If", "[", 
     RowBox[{
      RowBox[{
-      RowBox[{"Head", "@", "metric"}], "\[Equal]", "CTensor"}], ",", 
+      RowBox[{"Head", "@", "metric"}], "===", "CTensor"}], ",", 
      "\"\<\[Delta]\>\"", ",", 
      StyleBox[
       RowBox[{"\"\<\\!\\(\\*SubscriptBox[\\(\\[Delta]\\), \\(\>\"", "<>", 
@@ -5212,360 +5215,336 @@ Cell[BoxData[
   RowBox[{
    RowBox[{"UseCartan", "[", 
     RowBox[{"expr_", ",", "covd_"}], "]"}], ":=", 
-   RowBox[{"(", 
-    RowBox[{"expr", "/.", "\[IndentingNewLine]", 
-     RowBox[{"(*", " ", 
-      RowBox[{
-      "Exterior", " ", "derivative", " ", "of", " ", "the", " ", "coframe"}], 
-      " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"With", "[", 
+    RowBox[{
      RowBox[{"{", 
       RowBox[{
-       RowBox[{
-        RowBox[{"HoldPattern", "[", 
-         RowBox[{"Diff", "[", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"Coframe", "[", "mani_", "]"}], "[", "ind_", "]"}], ",", 
-           "PD"}], "]"}], "]"}], "\[RuleDelayed]", 
-        RowBox[{"Module", "[", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{"a", "=", 
-            RowBox[{"DummyIn", "@", 
-             RowBox[{"VBundleOfIndex", "@", "ind"}]}]}], "}"}], ",", 
-          RowBox[{"If", "[", 
-           RowBox[{
-            RowBox[{"TorsionQ", "@", "covd"}], ",", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"-", 
-               RowBox[{
-                RowBox[{"ConnectionForm", "[", 
-                 RowBox[{"covd", ",", 
-                  RowBox[{"VBundleOfIndex", "@", "ind"}]}], "]"}], "[", 
-                RowBox[{"ind", ",", 
-                 RowBox[{"-", "a"}]}], "]"}]}], "\[Wedge]", 
-              RowBox[{
-               RowBox[{"Coframe", "[", "mani", "]"}], "[", "a", "]"}]}], "+", 
-             
-             RowBox[{
-              RowBox[{"TorsionForm", "[", "covd", "]"}], "[", "ind", "]"}]}], 
-            ",", 
-            RowBox[{
-             RowBox[{"-", 
-              RowBox[{
-               RowBox[{"ConnectionForm", "[", 
-                RowBox[{"covd", ",", 
-                 RowBox[{"VBundleOfIndex", "@", "ind"}]}], "]"}], "[", 
-               RowBox[{"ind", ",", 
-                RowBox[{"-", "a"}]}], "]"}]}], "\[Wedge]", 
-             RowBox[{
-              RowBox[{"Coframe", "[", "mani", "]"}], "[", "a", "]"}]}]}], 
-           "]"}]}], "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"metric", "=", 
+        RowBox[{"MetricOfCovD", "[", "covd", "]"}]}], ",", 
+       RowBox[{"basis", "=", 
+        RowBox[{"BasisOfCovD", "[", "covd", "]"}]}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"expr", "/.", 
+      RowBox[{"Flatten", "@", "\[IndentingNewLine]", 
        RowBox[{"(*", " ", 
         RowBox[{
         "Exterior", " ", "derivative", " ", "of", " ", "the", " ", 
-         "connection"}], " ", "*)"}], "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"HoldPattern", "[", 
-         RowBox[{"Diff", "[", 
-          RowBox[{
-           RowBox[{
-            RowBox[{
-             RowBox[{"(", 
-              RowBox[{"connection", ":", 
-               RowBox[{"(", 
-                RowBox[{"ConnectionForm", "|", "ChristoffelForm"}], ")"}]}], 
-              ")"}], "[", 
-             RowBox[{"covd", ",", 
-              RowBox[{"vbundle_:", 
-               RowBox[{"Tangent", "@", 
-                RowBox[{"ManifoldOfCovD", "@", "covd"}]}]}]}], "]"}], "[", 
-            RowBox[{"a1_", ",", 
-             RowBox[{"-", "a2_"}]}], "]"}], ",", "PD"}], "]"}], "]"}], 
-        "\[RuleDelayed]", 
-        RowBox[{"Module", "[", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{"a", "=", 
-            RowBox[{"DummyIn", "@", 
-             RowBox[{"VBundleOfIndex", "@", "a1"}]}]}], "}"}], ",", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"CurvatureForm", "[", 
-             RowBox[{"covd", ",", "vbundle"}], "]"}], "[", 
-            RowBox[{"a1", ",", 
-             RowBox[{"-", "a2"}]}], "]"}], "-", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"connection", "[", 
-              RowBox[{"covd", ",", "vbundle"}], "]"}], "[", 
-             RowBox[{"a1", ",", 
-              RowBox[{"-", "a"}]}], "]"}], "\[Wedge]", 
-            RowBox[{
-             RowBox[{"connection", "[", 
-              RowBox[{"covd", ",", "vbundle"}], "]"}], "[", 
-             RowBox[{"a", ",", 
-              RowBox[{"-", "a2"}]}], "]"}]}]}]}], "]"}]}], ",", 
-       "\[IndentingNewLine]", 
-       RowBox[{"(*", " ", 
+         "coframe"}], " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"{", 
         RowBox[{
-        "Exterior", " ", "derivative", " ", "of", " ", "the", " ", 
-         "torsion"}], " ", "*)"}], "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"HoldPattern", "[", 
-         RowBox[{"Diff", "[", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"TorsionForm", "[", "covd", "]"}], "[", "ind_", "]"}], 
-           ",", "PD"}], "]"}], "]"}], "\[RuleDelayed]", 
-        RowBox[{"Module", "[", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{"a", "=", 
-            RowBox[{"DummyIn", "@", 
-             RowBox[{"VBundleOfIndex", "@", "ind"}]}]}], "}"}], ",", 
-          RowBox[{
-           RowBox[{
-            RowBox[{
-             RowBox[{"Coframe", "[", 
-              RowBox[{"ManifoldOfCovD", "@", "covd"}], "]"}], "[", "a", "]"}],
-             "\[Wedge]", 
-            RowBox[{
-             RowBox[{"RiemannForm", "[", "covd", "]"}], "[", 
-             RowBox[{"ind", ",", 
-              RowBox[{"-", "a"}]}], "]"}]}], "-", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"ChristoffelForm", "[", "covd", "]"}], "[", 
-             RowBox[{"ind", ",", 
-              RowBox[{"-", "a"}]}], "]"}], "\[Wedge]", 
-            RowBox[{
-             RowBox[{"TorsionForm", "[", "covd", "]"}], "[", "a", "]"}]}]}]}],
-          "]"}]}], ",", "\[IndentingNewLine]", 
-       RowBox[{"(*", " ", 
-        RowBox[{
-        "Exterior", " ", "derivative", " ", "of", " ", "the", " ", 
-         "curvature"}], " ", "*)"}], "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"HoldPattern", "[", 
-         RowBox[{"Diff", "[", 
-          RowBox[{
-           RowBox[{
-            RowBox[{
-             RowBox[{"(", 
-              RowBox[{"curvature", ":", 
-               RowBox[{"(", 
-                RowBox[{"CurvatureForm", "|", "RiemannForm"}], ")"}]}], ")"}],
-              "[", 
-             RowBox[{"covd", ",", 
-              RowBox[{"vbundle_:", 
-               RowBox[{"Tangent", "@", 
-                RowBox[{"ManifoldOfCovD", "@", "covd"}]}]}]}], "]"}], "[", 
-            RowBox[{"a1_", ",", 
-             RowBox[{"-", "a2_"}]}], "]"}], ",", "PD"}], "]"}], "]"}], 
-        "\[RuleDelayed]", 
-        RowBox[{"Module", "[", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{"a", "=", 
-            RowBox[{"DummyIn", "@", 
-             RowBox[{"VBundleOfIndex", "@", "a1"}]}]}], "}"}], ",", 
-          RowBox[{
-           RowBox[{
-            RowBox[{
-             RowBox[{"ConnectionForm", "[", 
-              RowBox[{"covd", ",", "vbundle"}], "]"}], "[", 
-             RowBox[{"a", ",", 
-              RowBox[{"-", "a2"}]}], "]"}], "\[Wedge]", 
-            RowBox[{
-             RowBox[{"curvature", "[", 
-              RowBox[{"covd", ",", "vbundle"}], "]"}], "[", 
-             RowBox[{"a1", ",", 
-              RowBox[{"-", "a"}]}], "]"}]}], "-", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"curvature", "[", 
-              RowBox[{"covd", ",", "vbundle"}], "]"}], "[", 
-             RowBox[{"a", ",", 
-              RowBox[{"-", "a2"}]}], "]"}], "\[Wedge]", 
-            RowBox[{
-             RowBox[{"ConnectionForm", "[", 
-              RowBox[{"covd", ",", "vbundle"}], "]"}], "[", 
-             RowBox[{"a1", ",", 
-              RowBox[{"-", "a"}]}], "]"}]}]}]}], "]"}]}], ",", 
-       "\[IndentingNewLine]", 
-       RowBox[{"(*", " ", 
-        RowBox[{
-        "Exterior", " ", "derivative", " ", "of", " ", "the", " ", "metric", 
-         " ", 
-         RowBox[{"(", 
-          RowBox[{"indices", " ", "downstairs"}], ")"}]}], " ", "*)"}], 
-       "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"HoldPattern", "[", 
-         RowBox[{"Diff", "[", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"metr_", "?", "MetricQ"}], "[", 
-            RowBox[{
-             RowBox[{"-", "a1_"}], ",", 
-             RowBox[{"-", "a2_"}]}], "]"}], ",", "PD"}], "]"}], "]"}], 
-        "\[RuleDelayed]", 
-        RowBox[{
-         RowBox[{"Module", "[", 
-          RowBox[{
-           RowBox[{"{", 
-            RowBox[{"a", "=", 
-             RowBox[{"DummyIn", "@", 
-              RowBox[{"VBundleOfIndex", "@", "a1"}]}]}], "}"}], ",", 
-           RowBox[{
-            RowBox[{
-             RowBox[{
-              RowBox[{"ChristoffelForm", "[", "covd", "]"}], "[", 
-              RowBox[{"a", ",", 
-               RowBox[{"-", "a1"}]}], "]"}], 
-             RowBox[{
-              RowBox[{"MetricOfCovD", "[", "covd", "]"}], "[", 
-              RowBox[{
-               RowBox[{"-", "a"}], ",", 
-               RowBox[{"-", "a2"}]}], "]"}]}], "+", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"ChristoffelForm", "[", "covd", "]"}], "[", 
-              RowBox[{"a", ",", 
-               RowBox[{"-", "a2"}]}], "]"}], 
-             RowBox[{
-              RowBox[{"MetricOfCovD", "[", "covd", "]"}], "[", 
-              RowBox[{
-               RowBox[{"-", "a"}], ",", 
-               RowBox[{"-", "a1"}]}], "]"}]}]}]}], "]"}], "/;", 
-         RowBox[{
-          RowBox[{"MetricOfCovD", "[", "covd", "]"}], "===", "metr"}]}]}], 
-       ",", "\[IndentingNewLine]", 
-       RowBox[{"(*", " ", 
-        RowBox[{
-        "Exterior", " ", "derivative", " ", "of", " ", "the", " ", "metric", 
-         " ", 
-         RowBox[{"(", 
-          RowBox[{"indices", " ", "upstairs"}], ")"}]}], " ", "*)"}], 
-       "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"HoldPattern", "[", 
-         RowBox[{"Diff", "[", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"metr_", "?", "MetricQ"}], "[", 
-            RowBox[{"a1_Symbol", ",", "a2_Symbol"}], "]"}], ",", "PD"}], 
-          "]"}], "]"}], "\[RuleDelayed]", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"-", 
-           RowBox[{
-            RowBox[{"ChristoffelForm", "[", "covd", "]"}], "[", 
-            RowBox[{"a1", ",", "a2"}], "]"}]}], "-", 
-          RowBox[{
-           RowBox[{"ChristoffelForm", "[", "covd", "]"}], "[", 
-           RowBox[{"a2", ",", "a1"}], "]"}]}], "/;", 
-         RowBox[{
-          RowBox[{"MetricOfCovD", "[", "covd", "]"}], "===", "metr"}]}]}], 
-       ",", "\[IndentingNewLine]", 
-       RowBox[{"(*", " ", 
-        RowBox[{
-         RowBox[{
-         "Exterior", " ", "derivative", " ", "of", " ", "the", " ", "tensor", 
-          " ", "form", " ", "of", " ", "volume", " ", "element"}], ",", " ", 
-         RowBox[{
-          RowBox[{"regarded", " ", "as", " ", "a", " ", "zero"}], "-", 
-          RowBox[{"form", " ", 
-           RowBox[{
-            RowBox[{"(", 
-             RowBox[{"indices", " ", "downstairs"}], ")"}], ".", " ", "I"}], 
-           " ", "think", " ", "that", " ", "this", " ", "formula", " ", "is", 
-           " ", "dimension", " ", "independent"}]}]}], " ", "*)"}], 
-       "\[IndentingNewLine]", 
-       RowBox[{"If", "[", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"MetricOfCovD", "[", "covd", "]"}], "=!=", "Null"}], ",", 
          RowBox[{
           RowBox[{"HoldPattern", "[", 
            RowBox[{"Diff", "[", 
             RowBox[{
              RowBox[{
-              RowBox[{"epsilon", "[", 
-               RowBox[{"MetricOfCovD", "[", "covd", "]"}], "]"}], "[", 
-              RowBox[{"inds__", "?", "DownIndexQ"}], "]"}], ",", "PD"}], 
-            "]"}], "]"}], "\[RuleDelayed]", 
+              RowBox[{"Coframe", "[", "mani_", "]"}], "[", "ind_", "]"}], ",",
+              "PD"}], "]"}], "]"}], "\[RuleDelayed]", 
           RowBox[{"Module", "[", 
            RowBox[{
             RowBox[{"{", 
              RowBox[{"a", "=", 
               RowBox[{"DummyIn", "@", 
-               RowBox[{"VBundleOfMetric", "@", 
-                RowBox[{"MetricOfCovD", "[", "covd", "]"}]}]}]}], "}"}], ",", 
-            
-            RowBox[{
+               RowBox[{"VBundleOfIndex", "@", "ind"}]}]}], "}"}], ",", 
+            RowBox[{"If", "[", 
              RowBox[{
-              RowBox[{"ChristoffelForm", "[", "covd", "]"}], "[", 
-              RowBox[{"a", ",", 
-               RowBox[{"-", "a"}]}], "]"}], 
-             RowBox[{
-              RowBox[{"epsilon", "[", 
-               RowBox[{"MetricOfCovD", "[", "covd", "]"}], "]"}], "[", "inds",
-               "]"}]}]}], "]"}]}], ",", 
+              RowBox[{"TorsionQ", "@", "covd"}], ",", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"-", 
+                 RowBox[{
+                  RowBox[{"ConnectionForm", "[", 
+                   RowBox[{"covd", ",", 
+                    RowBox[{"VBundleOfIndex", "@", "ind"}]}], "]"}], "[", 
+                  RowBox[{"ind", ",", 
+                   RowBox[{"-", "a"}]}], "]"}]}], "\[Wedge]", 
+                RowBox[{
+                 RowBox[{"Coframe", "[", "mani", "]"}], "[", "a", "]"}]}], 
+               "+", 
+               RowBox[{
+                RowBox[{"TorsionForm", "[", "covd", "]"}], "[", "ind", 
+                "]"}]}], ",", 
+              RowBox[{
+               RowBox[{"-", 
+                RowBox[{
+                 RowBox[{"ConnectionForm", "[", 
+                  RowBox[{"covd", ",", 
+                   RowBox[{"VBundleOfIndex", "@", "ind"}]}], "]"}], "[", 
+                 RowBox[{"ind", ",", 
+                  RowBox[{"-", "a"}]}], "]"}]}], "\[Wedge]", 
+               RowBox[{
+                RowBox[{"Coframe", "[", "mani", "]"}], "[", "a", "]"}]}]}], 
+             "]"}]}], "]"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+          "Exterior", " ", "derivative", " ", "of", " ", "the", " ", 
+           "connection"}], " ", "*)"}], "\[IndentingNewLine]", 
          RowBox[{
           RowBox[{"HoldPattern", "[", 
            RowBox[{"Diff", "[", 
             RowBox[{
              RowBox[{
-              RowBox[{"epsilon", "[", 
-               RowBox[{"MetricOfCovD", "[", "covd", "]"}], "]"}], "[", 
-              "inds__", "]"}], ",", "PD"}], "]"}], "]"}], "\[RuleDelayed]", 
-          RowBox[{"Diff", "[", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"connection", ":", 
+                 RowBox[{"(", 
+                  RowBox[{"ConnectionForm", "|", "ChristoffelForm"}], ")"}]}],
+                 ")"}], "[", 
+               RowBox[{"covd", ",", 
+                RowBox[{"vbundle_:", 
+                 RowBox[{"Tangent", "@", 
+                  RowBox[{"ManifoldOfCovD", "@", "covd"}]}]}]}], "]"}], "[", 
+              RowBox[{"a1_", ",", 
+               RowBox[{"-", "a2_"}]}], "]"}], ",", "PD"}], "]"}], "]"}], 
+          "\[RuleDelayed]", 
+          RowBox[{"Module", "[", 
            RowBox[{
-            RowBox[{"epsilon", "[", 
-             RowBox[{"MetricOfCovD", "[", "covd", "]"}], "]"}], "[", "inds", 
-            "]"}], "]"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
-       RowBox[{"(*", " ", 
-        RowBox[{
-        "Exterior", " ", "derivative", " ", "when", " ", "covd", " ", "is", 
-         " ", "the", " ", "parallel", " ", "derivative", " ", "of", " ", "a", 
-         " ", "coordinate", " ", "chart"}], " ", "*)"}], 
-       "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"HoldPattern", "@", 
-         RowBox[{"Diff", "[", 
-          RowBox[{
-           RowBox[{"expr1_", "?", "ScalarQ"}], ",", "PD"}], "]"}]}], 
-        "\[RuleDelayed]", 
-        RowBox[{
-         RowBox[{"Inner", "[", 
-          RowBox[{
-           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"a", "=", 
+              RowBox[{"DummyIn", "@", 
+               RowBox[{"VBundleOfIndex", "@", "a1"}]}]}], "}"}], ",", 
             RowBox[{
              RowBox[{
-              RowBox[{"covd", "[", 
-               RowBox[{"{", 
-                RowBox[{"#1", ",", 
-                 RowBox[{"-", 
-                  RowBox[{"BasisOfCovD", "@", "covd"}]}]}], "}"}], "]"}], "@",
-               "expr1"}], " ", 
-             RowBox[{"Diff", "@", "#2"}]}], "&"}], ",", 
-           RowBox[{"CNumbersOf", "[", 
-            RowBox[{
-             RowBox[{"BasisOfCovD", "@", "covd"}], ",", 
-             RowBox[{"VBundleOfBasis", "@", 
-              RowBox[{"BasisOfCovD", "@", "covd"}]}]}], "]"}], ",", 
-           RowBox[{"ScalarsOfChart", "@", 
-            RowBox[{"BasisOfCovD", "@", "covd"}]}], ",", "Plus"}], "]"}], "/;", 
-         RowBox[{"(", 
+              RowBox[{"CurvatureForm", "[", 
+               RowBox[{"covd", ",", "vbundle"}], "]"}], "[", 
+              RowBox[{"a1", ",", 
+               RowBox[{"-", "a2"}]}], "]"}], "-", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"connection", "[", 
+                RowBox[{"covd", ",", "vbundle"}], "]"}], "[", 
+               RowBox[{"a1", ",", 
+                RowBox[{"-", "a"}]}], "]"}], "\[Wedge]", 
+              RowBox[{
+               RowBox[{"connection", "[", 
+                RowBox[{"covd", ",", "vbundle"}], "]"}], "[", 
+               RowBox[{"a", ",", 
+                RowBox[{"-", "a2"}]}], "]"}]}]}]}], "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
           RowBox[{
+          "Exterior", " ", "derivative", " ", "of", " ", "the", " ", 
+           "torsion"}], " ", "*)"}], "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"HoldPattern", "[", 
+           RowBox[{"Diff", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"TorsionForm", "[", "covd", "]"}], "[", "ind_", "]"}], 
+             ",", "PD"}], "]"}], "]"}], "\[RuleDelayed]", 
+          RowBox[{"Module", "[", 
            RowBox[{
-            RowBox[{"Deg", "@", "expr1"}], "===", "0"}], "&&", 
+            RowBox[{"{", 
+             RowBox[{"a", "=", 
+              RowBox[{"DummyIn", "@", 
+               RowBox[{"VBundleOfIndex", "@", "ind"}]}]}], "}"}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"Coframe", "[", 
+                RowBox[{"ManifoldOfCovD", "@", "covd"}], "]"}], "[", "a", 
+               "]"}], "\[Wedge]", 
+              RowBox[{
+               RowBox[{"RiemannForm", "[", "covd", "]"}], "[", 
+               RowBox[{"ind", ",", 
+                RowBox[{"-", "a"}]}], "]"}]}], "-", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"ChristoffelForm", "[", "covd", "]"}], "[", 
+               RowBox[{"ind", ",", 
+                RowBox[{"-", "a"}]}], "]"}], "\[Wedge]", 
+              RowBox[{
+               RowBox[{"TorsionForm", "[", "covd", "]"}], "[", "a", 
+               "]"}]}]}]}], "]"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+          "Exterior", " ", "derivative", " ", "of", " ", "the", " ", 
+           "curvature"}], " ", "*)"}], "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"HoldPattern", "[", 
+           RowBox[{"Diff", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"curvature", ":", 
+                 RowBox[{"(", 
+                  RowBox[{"CurvatureForm", "|", "RiemannForm"}], ")"}]}], 
+                ")"}], "[", 
+               RowBox[{"covd", ",", 
+                RowBox[{"vbundle_:", 
+                 RowBox[{"Tangent", "@", 
+                  RowBox[{"ManifoldOfCovD", "@", "covd"}]}]}]}], "]"}], "[", 
+              RowBox[{"a1_", ",", 
+               RowBox[{"-", "a2_"}]}], "]"}], ",", "PD"}], "]"}], "]"}], 
+          "\[RuleDelayed]", 
+          RowBox[{"Module", "[", 
            RowBox[{
-            RowBox[{"BasisOfCovD", "@", "covd"}], "=!=", "Null"}]}], 
-          ")"}]}]}]}], "}"}]}], ")"}]}], ";"}]], "Input",
+            RowBox[{"{", 
+             RowBox[{"a", "=", 
+              RowBox[{"DummyIn", "@", 
+               RowBox[{"VBundleOfIndex", "@", "a1"}]}]}], "}"}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"ConnectionForm", "[", 
+                RowBox[{"covd", ",", "vbundle"}], "]"}], "[", 
+               RowBox[{"a", ",", 
+                RowBox[{"-", "a2"}]}], "]"}], "\[Wedge]", 
+              RowBox[{
+               RowBox[{"curvature", "[", 
+                RowBox[{"covd", ",", "vbundle"}], "]"}], "[", 
+               RowBox[{"a1", ",", 
+                RowBox[{"-", "a"}]}], "]"}]}], "-", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"curvature", "[", 
+                RowBox[{"covd", ",", "vbundle"}], "]"}], "[", 
+               RowBox[{"a", ",", 
+                RowBox[{"-", "a2"}]}], "]"}], "\[Wedge]", 
+              RowBox[{
+               RowBox[{"ConnectionForm", "[", 
+                RowBox[{"covd", ",", "vbundle"}], "]"}], "[", 
+               RowBox[{"a1", ",", 
+                RowBox[{"-", "a"}]}], "]"}]}]}]}], "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+          "Exterior", " ", "derivative", " ", "of", " ", "the", " ", "metric",
+            " ", 
+           RowBox[{"(", 
+            RowBox[{"indices", " ", "downstairs"}], ")"}]}], " ", "*)"}], 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"HoldPattern", "[", 
+           RowBox[{"Diff", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"metr_", "?", "MetricQ"}], "[", 
+              RowBox[{
+               RowBox[{"-", "a1_"}], ",", 
+               RowBox[{"-", "a2_"}]}], "]"}], ",", "PD"}], "]"}], "]"}], 
+          "\[RuleDelayed]", 
+          RowBox[{
+           RowBox[{"Module", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"a", "=", 
+               RowBox[{"DummyIn", "@", 
+                RowBox[{"VBundleOfIndex", "@", "a1"}]}]}], "}"}], ",", 
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"ChristoffelForm", "[", "covd", "]"}], "[", 
+                RowBox[{"a", ",", 
+                 RowBox[{"-", "a1"}]}], "]"}], 
+               RowBox[{"metric", "[", 
+                RowBox[{
+                 RowBox[{"-", "a"}], ",", 
+                 RowBox[{"-", "a2"}]}], "]"}]}], "+", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"ChristoffelForm", "[", "covd", "]"}], "[", 
+                RowBox[{"a", ",", 
+                 RowBox[{"-", "a2"}]}], "]"}], 
+               RowBox[{"metric", "[", 
+                RowBox[{
+                 RowBox[{"-", "a"}], ",", 
+                 RowBox[{"-", "a1"}]}], "]"}]}]}]}], "]"}], "/;", 
+           RowBox[{
+            RowBox[{"MetricOfCovD", "[", "covd", "]"}], "===", "metr"}]}]}], 
+         ",", "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+          "Exterior", " ", "derivative", " ", "of", " ", "the", " ", "metric",
+            " ", 
+           RowBox[{"(", 
+            RowBox[{"indices", " ", "upstairs"}], ")"}]}], " ", "*)"}], 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"HoldPattern", "[", 
+           RowBox[{"Diff", "[", 
+            RowBox[{
+             RowBox[{"metric", "[", 
+              RowBox[{"a1_Symbol", ",", "a2_Symbol"}], "]"}], ",", "PD"}], 
+            "]"}], "]"}], "\[RuleDelayed]", 
+          RowBox[{
+           RowBox[{"-", 
+            RowBox[{
+             RowBox[{"ChristoffelForm", "[", "covd", "]"}], "[", 
+             RowBox[{"a1", ",", "a2"}], "]"}]}], "-", 
+           RowBox[{
+            RowBox[{"ChristoffelForm", "[", "covd", "]"}], "[", 
+            RowBox[{"a2", ",", "a1"}], "]"}]}]}], ",", "\[IndentingNewLine]", 
+         
+         RowBox[{"(*", " ", 
+          RowBox[{
+          "Exterior", " ", "derivative", " ", "when", " ", "covd", " ", "is", 
+           " ", "the", " ", "parallel", " ", "derivative", " ", "of", " ", 
+           "a", " ", "coordinate", " ", "chart"}], " ", "*)"}], 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"HoldPattern", "@", 
+           RowBox[{"Diff", "[", 
+            RowBox[{
+             RowBox[{"expr1_", "?", "ScalarQ"}], ",", "PD"}], "]"}]}], 
+          "\[RuleDelayed]", 
+          RowBox[{
+           RowBox[{"Inner", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"covd", "[", 
+                 RowBox[{"{", 
+                  RowBox[{"#1", ",", 
+                   RowBox[{"-", 
+                    RowBox[{"BasisOfCovD", "@", "covd"}]}]}], "}"}], "]"}], 
+                "@", "expr1"}], " ", 
+               RowBox[{"Diff", "@", "#2"}]}], "&"}], ",", 
+             RowBox[{"CNumbersOf", "[", 
+              RowBox[{"basis", ",", 
+               RowBox[{"VBundleOfBasis", "[", "basis", "]"}]}], "]"}], ",", 
+             RowBox[{"ScalarsOfChart", "[", "basis", "]"}], ",", "Plus"}], 
+            "]"}], "/;", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Deg", "@", "expr1"}], "===", "0"}], "&&", 
+             RowBox[{"basis", "=!=", "Null"}]}], ")"}]}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"metric", "=!=", "Null"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"With", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"eps", "=", 
+               RowBox[{"epsilon", "[", "metric", "]"}]}], "}"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"HoldPattern", "[", 
+               RowBox[{"Diff", "[", 
+                RowBox[{
+                 RowBox[{"eps", "[", 
+                  RowBox[{"inds__", "?", "DownIndexQ"}], "]"}], ",", "PD"}], 
+                "]"}], "]"}], "\[RuleDelayed]", 
+              RowBox[{"Module", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"a", "=", 
+                  RowBox[{"DummyIn", "[", 
+                   RowBox[{"VBundleOfMetric", "[", "metric", "]"}], "]"}]}], 
+                 "}"}], ",", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"ChristoffelForm", "[", "covd", "]"}], "[", 
+                  RowBox[{"a", ",", 
+                   RowBox[{"-", "a"}]}], "]"}], 
+                 RowBox[{"eps", "[", "inds", "]"}]}]}], "]"}]}]}], 
+            "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"{", "}"}]}], "\[IndentingNewLine]", "]"}]}], 
+        "\[IndentingNewLine]", "}"}]}]}]}], "\[IndentingNewLine]", "]"}]}], 
+  ";"}]], "Input",
  InitializationCell->True]
 }, Closed]],
 
@@ -7549,12 +7528,12 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1276, 613},
-WindowMargins->{{257, Automatic}, {185, Automatic}},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
 Magnification->1.5,
-FrontEndVersion->"10.1 for Linux x86 (64-bit) (October 26, 2014)",
+FrontEndVersion->"10.0 for Linux x86 (64-bit) (September 9, 2014)",
 StyleDefinitions->"Default.nb"
 ]
 
