@@ -564,7 +564,7 @@ PrintAs[ChristoffelForm[PD]]^:=PrintAs[ChristoffelForm];
 
 ChristoffelForm[exr_CCovD]:=Head@Module[{ind=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],a1,a2},
 {a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[-First@Part[Last@exr,2]],2];
-Part[exr,2][a1,-a2,-ind] ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind]
+-Part[exr,2][a1,-a2,-ind] ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind]
 ];
 
 
