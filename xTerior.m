@@ -564,7 +564,7 @@ PrintAs[ChristoffelForm[PD]]^:=PrintAs[ChristoffelForm];
 
 ChristoffelForm[exr_CCovD]:=Head@Module[{ind=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],a1,a2},
 {a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[-First@Part[Last@exr,2]],2];
--Part[exr,2][a1,-a2,-ind] ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind]
+Part[exr,2][a1,-ind,-a2] ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind]
 ];
 
 
@@ -576,15 +576,15 @@ ConnectionForm[PD,vb_]:=Zero;
 ChristoffelForm[PD]:=Zero;
 
 
-ConnectionFormToTensor[expr_,covd_,frame:(Coframe|dx)]:=expr/.{ChristoffelForm[cd1_][inds__]:>Module[{a=DummyIn@First@VBundlesOfCovD@covd},
-If[xTensorQ@GiveSymbol[Christoffel,cd1,covd]===False,DefTensor[GiveSymbol[Christoffel,cd1,covd][inds,-a],ManifoldOfCovD@covd]];
-GiveSymbol[Christoffel,cd1,covd][inds,-a]frame[ManifoldOfCovD@covd][a]]/;covd=!=PD,ConnectionForm[cd1_,vbundle_][inds__]:>Module[{a=DummyIn@Tangent@BaseOfVBundle@vbundle},If[xTensorQ@GiveSymbol[AChristoffel,covd,cd1]===False,DefTensor[GiveSymbol[AChristoffel,covd,cd1][inds,-a],BaseOfVBundle@vbundle]];
-GiveSymbol[AChristoffel,covd,cd1][inds,-a]frame[BaseOfVBundle@vbundle][a]]/;covd=!=PD};
+ConnectionFormToTensor[expr_,covd_,frame:(Coframe|dx)]:=expr/.{ChristoffelForm[cd1_][ind1_,ind2_]:>Module[{a=DummyIn@First@VBundlesOfCovD@covd},
+If[xTensorQ@GiveSymbol[Christoffel,cd1,covd]===False,DefTensor[GiveSymbol[Christoffel,cd1,covd][ind1,-a,ind2],ManifoldOfCovD@covd]];
+GiveSymbol[Christoffel,cd1,covd][ind1,-a,ind2]frame[ManifoldOfCovD@covd][a]]/;covd=!=PD,ConnectionForm[cd1_,vbundle_][ind1_,ind2_]:>Module[{a=DummyIn@Tangent@BaseOfVBundle@vbundle},If[xTensorQ@GiveSymbol[AChristoffel,covd,cd1]===False,DefTensor[GiveSymbol[AChristoffel,covd,cd1][ind1,-a,ind2],BaseOfVBundle@vbundle]];
+GiveSymbol[AChristoffel,covd,cd1][ind1,-a,ind2]frame[BaseOfVBundle@vbundle][a]]/;covd=!=PD};
 
 
-ConnectionFormToTensor[expr_,PD,frame:(Coframe|dx)]:=expr/.{ChristoffelForm[cd1_][inds__]:>Module[{a=DummyIn@First@VBundlesOfCovD@cd1},
-GiveSymbol[Christoffel,cd1][inds,-a]frame[ManifoldOfCovD@cd1][a]],ConnectionForm[cd1_,_][inds__]:>Module[{a=DummyIn@First@VBundlesOfCovD@cd1},
-GiveSymbol[AChristoffel,cd1][inds,-a]frame[ManifoldOfCovD@cd1][a]]}
+ConnectionFormToTensor[expr_,PD,frame:(Coframe|dx)]:=expr/.{ChristoffelForm[cd1_][ind1_,ind2_]:>Module[{a=DummyIn@First@VBundlesOfCovD@cd1},
+GiveSymbol[Christoffel,cd1][ind1,-a,ind2]frame[ManifoldOfCovD@cd1][a]],ConnectionForm[cd1_,_][ind1_,ind2_]:>Module[{a=DummyIn@First@VBundlesOfCovD@cd1},
+GiveSymbol[AChristoffel,cd1][ind1,-a,ind2]frame[ManifoldOfCovD@cd1][a]]}
 
 
 xTensorQ[CurvatureForm[_,_]]^=True;
