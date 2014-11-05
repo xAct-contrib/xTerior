@@ -503,7 +503,7 @@ Codiff/:MakeBoxes[Codiff[metric_][form_,cd_?CovDQ],StandardForm]:=xAct`xTensor`P
 HoldPattern[Codiff[met_][expr_]]:=Codiff[met][expr,PD];
 
 
-CodiffToDiff[expr_]:=expr//.Codiff[met_][expr1_,covd_?CovDQ]:>(-1)^(DimOfMetric[met]Grade[expr1,Wedge]+DimOfMetric[met]+1+SignatureOfMetric[met][[2]])Hodge[met]@Diff[Hodge[met]@expr1,covd]
+CodiffToDiff[expr_]:=expr//.Codiff[met_][expr1_,covd_?CovDQ]:>(-1)^(DimOfMetric[met]Grade[expr1,Wedge]+DimOfMetric[met]+1+SignatureOfMetric[met][[2]]+1)Hodge[met]@Diff[Hodge[met]@expr1,covd]
 
 
 Codiff[metric_][Codiff[metric_][expr_,PD]]:=0

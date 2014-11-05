@@ -3089,7 +3089,7 @@ Cell[BoxData[
         RowBox[{"DimOfMetric", "[", "met", "]"}], "+", "1", "+", 
         RowBox[{
          RowBox[{"SignatureOfMetric", "[", "met", "]"}], "[", 
-         RowBox[{"[", "2", "]"}], "]"}]}], ")"}]}], 
+         RowBox[{"[", "2", "]"}], "]"}], "+", "1"}], ")"}]}], 
      RowBox[{
       RowBox[{"Hodge", "[", "met", "]"}], "@", 
       RowBox[{"Diff", "[", 
@@ -3132,7 +3132,7 @@ Cell[BoxData[{
    RowBox[{"Codiff", "@", "expr_Equal"}], ":=", 
    RowBox[{"Codiff", "/@", "expr"}]}], ";"}]}], "Input",
  InitializationCell->True]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -3837,7 +3837,7 @@ Cell[BoxData[
            RowBox[{"ManifoldOfCovD", "@", "cd1"}], "]"}], "[", "a", "]"}]}]}],
         "]"}]}]}], "}"}]}]}]], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -4276,7 +4276,7 @@ Cell[BoxData[
              RowBox[{"ManifoldOfCovD", "@", "cd1"}], "]"}], "[", "b", "]"}]}],
            "]"}]}]}], "]"}]}]}], "}"}]}]}]], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
