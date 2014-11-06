@@ -1334,8 +1334,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
      RowBox[{"Unset", "[", 
-      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", "\n", 
+      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1422,7 +1422,7 @@ Cell[BoxData[
              RowBox[{"(", 
               RowBox[{"DimOfManifold", "/@", 
                RowBox[{"DependenciesOf", "[", "expr", "]"}]}], ")"}]}], 
-            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\n", "\[IndentingNewLine]",
+            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", "\n",
     "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
@@ -1452,8 +1452,9 @@ Cell[BoxData[
         RowBox[{"HoldPattern", "@", 
          RowBox[{"Diff", "[", 
           RowBox[{"expr_", ",", "covd_"}], "]"}]}], "=."}], ";"}]}], "]"}]}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\n", "\[IndentingNewLine]", 
+   "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"xTension", "[", 
@@ -1626,11 +1627,12 @@ Cell[BoxData[{
        RowBox[{"(", 
         RowBox[{"head", "/@", 
          RowBox[{"Sort", "[", "indices", "]"}]}], ")"}]}]}]}], "]"}]}], 
-  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\n", 
   RowBox[{"(*", " ", 
    RowBox[{
    "Wedge", " ", "product", " ", "of", " ", "general", " ", "CTensor", " ", 
-    "objects"}], " ", "*)"}], "\[IndentingNewLine]"}], "\n", 
+    "objects"}], " ", "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"CTensorWedge", "[", "]"}], ":=", "1"}], ";"}], "\n", 
@@ -3132,7 +3134,7 @@ Cell[BoxData[{
    RowBox[{"Codiff", "@", "expr_Equal"}], ":=", 
    RowBox[{"Codiff", "/@", "expr"}]}], ";"}]}], "Input",
  InitializationCell->True]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -5240,8 +5242,9 @@ Cell[BoxData[
            RowBox[{"Diff", "[", 
             RowBox[{
              RowBox[{
-              RowBox[{"Coframe", "[", "mani_", "]"}], "[", "ind_", "]"}], ",",
-              "PD"}], "]"}], "]"}], "\[RuleDelayed]", 
+              RowBox[{"Coframe", "[", "mani_", "]"}], "[", 
+              RowBox[{"ind_", "?", "UpIndexQ"}], "]"}], ",", "PD"}], "]"}], 
+           "]"}], "\[RuleDelayed]", 
           RowBox[{"Module", "[", 
            RowBox[{
             RowBox[{"{", 
@@ -5296,7 +5299,8 @@ Cell[BoxData[
                 RowBox[{"vbundle_:", 
                  RowBox[{"Tangent", "@", 
                   RowBox[{"ManifoldOfCovD", "@", "covd"}]}]}]}], "]"}], "[", 
-              RowBox[{"a1_", ",", 
+              RowBox[{
+               RowBox[{"a1_", "?", "UpIndexQ"}], ",", 
                RowBox[{"-", "a2_"}]}], "]"}], ",", "PD"}], "]"}], "]"}], 
           "\[RuleDelayed]", 
           RowBox[{"Module", "[", 
@@ -5332,8 +5336,9 @@ Cell[BoxData[
            RowBox[{"Diff", "[", 
             RowBox[{
              RowBox[{
-              RowBox[{"TorsionForm", "[", "covd", "]"}], "[", "ind_", "]"}], 
-             ",", "PD"}], "]"}], "]"}], "\[RuleDelayed]", 
+              RowBox[{"TorsionForm", "[", "covd", "]"}], "[", 
+              RowBox[{"ind_", "?", "UpIndexQ"}], "]"}], ",", "PD"}], "]"}], 
+           "]"}], "\[RuleDelayed]", 
           RowBox[{"Module", "[", 
            RowBox[{
             RowBox[{"{", 
@@ -5377,7 +5382,8 @@ Cell[BoxData[
                 RowBox[{"vbundle_:", 
                  RowBox[{"Tangent", "@", 
                   RowBox[{"ManifoldOfCovD", "@", "covd"}]}]}]}], "]"}], "[", 
-              RowBox[{"a1_", ",", 
+              RowBox[{
+               RowBox[{"a1_", "?", "UpIndexQ"}], ",", 
                RowBox[{"-", "a2_"}]}], "]"}], ",", "PD"}], "]"}], "]"}], 
           "\[RuleDelayed]", 
           RowBox[{"Module", "[", 
@@ -7460,8 +7466,8 @@ Cell[BoxData[
      "Replaced", " ", "by", " ", "Diff", " ", "to", " ", "adjust", " ", "to", 
       " ", "the", " ", "new", " ", 
       RowBox[{"notation", ".", " ", "Dropped"}], " ", 
-      RowBox[{"cd", ".", " ", "Added"}], " ", "back", " ", "PD"}]}], " ", 
-    "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"cd", ".", " ", "Added"}], " ", "back", " ", 
+      RowBox[{"PD", "."}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{
@@ -7470,17 +7476,18 @@ Cell[BoxData[
       RowBox[{
        RowBox[{"Diff", "[", 
         RowBox[{"expr_", ",", "PD"}], "]"}], ",", "rest_"}], "]"}], ":=", 
-     RowBox[{
-      RowBox[{"FormVarD", "[", 
-       RowBox[{"form", ",", "met"}], "]"}], "[", 
-      RowBox[{"expr", ",", 
-       RowBox[{
-        RowBox[{"Hodge", "[", "met", "]"}], "@", 
+     RowBox[{"-", 
+      RowBox[{
+       RowBox[{"FormVarD", "[", 
+        RowBox[{"form", ",", "met"}], "]"}], "[", 
+       RowBox[{"expr", ",", 
         RowBox[{
-         RowBox[{"Codiff", "[", "met", "]"}], "[", 
+         RowBox[{"Hodge", "[", "met", "]"}], "@", 
          RowBox[{
-          RowBox[{"InvHodge", "[", "met", "]"}], "@", "rest"}], "]"}]}]}], 
-      "]"}]}], ";"}], "\[IndentingNewLine]", 
+          RowBox[{"Codiff", "[", "met", "]"}], "[", 
+          RowBox[{
+           RowBox[{"InvHodge", "[", "met", "]"}], "@", "rest"}], "]"}]}]}], 
+       "]"}]}]}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{"codiff", " ", "\[Rule]", " ", 
      RowBox[{
@@ -7500,17 +7507,18 @@ Cell[BoxData[
         RowBox[{"Codiff", "[", "met_", "]"}], "[", 
         RowBox[{"expr_", ",", 
          RowBox[{"covd_", "?", "CovDQ"}]}], "]"}], ",", "rest_"}], "]"}], ":=", 
-     RowBox[{
-      RowBox[{"FormVarD", "[", 
-       RowBox[{"form", ",", "met"}], "]"}], "[", 
-      RowBox[{"expr", ",", 
-       RowBox[{
-        RowBox[{"Hodge", "[", "met", "]"}], "@", 
-        RowBox[{"Diff", "[", 
-         RowBox[{
+     RowBox[{"-", 
+      RowBox[{
+       RowBox[{"FormVarD", "[", 
+        RowBox[{"form", ",", "met"}], "]"}], "[", 
+       RowBox[{"expr", ",", 
+        RowBox[{
+         RowBox[{"Hodge", "[", "met", "]"}], "@", 
+         RowBox[{"Diff", "[", 
           RowBox[{
-           RowBox[{"InvHodge", "[", "met", "]"}], "@", "rest"}], ",", 
-          "covd"}], "]"}]}]}], "]"}]}], ";"}]}]}]], "Input",
+           RowBox[{
+            RowBox[{"InvHodge", "[", "met", "]"}], "@", "rest"}], ",", 
+           "covd"}], "]"}]}]}], "]"}]}]}], ";"}]}]}]], "Input",
  InitializationCell->True]
 }, Closed]]
 }, Open  ]],
@@ -7531,7 +7539,7 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1276, 613},
-WindowMargins->{{0, Automatic}, {Automatic, 33}},
+WindowMargins->{{0, Automatic}, {0, Automatic}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,

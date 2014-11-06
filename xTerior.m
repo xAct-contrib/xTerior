@@ -726,13 +726,13 @@ UseCartan[expr_,PD]:=(expr/.Diff@expr1_:>Module[{a=DummyIn/@(Tangent/@ManifoldsO
 UseCartan[expr_,covd_]:=With[{metric=MetricOfCovD[covd],basis=BasisOfCovD[covd]},
 expr/.Flatten@
 (* Exterior derivative of the coframe *)
-{HoldPattern[Diff[Coframe[mani_][ind_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@ind},If[TorsionQ@covd,-ConnectionForm[covd,VBundleOfIndex@ind][ind,-a]\[Wedge]Coframe[mani][a]+TorsionForm[covd][ind],-ConnectionForm[covd,VBundleOfIndex@ind][ind,-a]\[Wedge]Coframe[mani][a]]],
+{HoldPattern[Diff[Coframe[mani_][ind_?UpIndexQ],PD]]:>Module[{a=DummyIn@VBundleOfIndex@ind},If[TorsionQ@covd,-ConnectionForm[covd,VBundleOfIndex@ind][ind,-a]\[Wedge]Coframe[mani][a]+TorsionForm[covd][ind],-ConnectionForm[covd,VBundleOfIndex@ind][ind,-a]\[Wedge]Coframe[mani][a]]],
 (* Exterior derivative of the connection *)
-HoldPattern[Diff[(connection:(ConnectionForm|ChristoffelForm))[covd,vbundle_:Tangent@ManifoldOfCovD@covd][a1_,-a2_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@a1},CurvatureForm[covd,vbundle][a1,-a2]-connection[covd,vbundle][a1,-a]\[Wedge]connection[covd,vbundle][a,-a2]],
+HoldPattern[Diff[(connection:(ConnectionForm|ChristoffelForm))[covd,vbundle_:Tangent@ManifoldOfCovD@covd][a1_?UpIndexQ,-a2_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@a1},CurvatureForm[covd,vbundle][a1,-a2]-connection[covd,vbundle][a1,-a]\[Wedge]connection[covd,vbundle][a,-a2]],
 (* Exterior derivative of the torsion *)
-HoldPattern[Diff[TorsionForm[covd][ind_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@ind},Coframe[ManifoldOfCovD@covd][a]\[Wedge]RiemannForm[covd][ind,-a]-ChristoffelForm[covd][ind,-a]\[Wedge]TorsionForm[covd][a]],
+HoldPattern[Diff[TorsionForm[covd][ind_?UpIndexQ],PD]]:>Module[{a=DummyIn@VBundleOfIndex@ind},Coframe[ManifoldOfCovD@covd][a]\[Wedge]RiemannForm[covd][ind,-a]-ChristoffelForm[covd][ind,-a]\[Wedge]TorsionForm[covd][a]],
 (* Exterior derivative of the curvature *)
-HoldPattern[Diff[(curvature:(CurvatureForm|RiemannForm))[covd,vbundle_:Tangent@ManifoldOfCovD@covd][a1_,-a2_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@a1},ConnectionForm[covd,vbundle][a,-a2]\[Wedge]curvature[covd,vbundle][a1,-a]-curvature[covd,vbundle][a,-a2]\[Wedge]ConnectionForm[covd,vbundle][a1,-a]],
+HoldPattern[Diff[(curvature:(CurvatureForm|RiemannForm))[covd,vbundle_:Tangent@ManifoldOfCovD@covd][a1_?UpIndexQ,-a2_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@a1},ConnectionForm[covd,vbundle][a,-a2]\[Wedge]curvature[covd,vbundle][a1,-a]-curvature[covd,vbundle][a,-a2]\[Wedge]ConnectionForm[covd,vbundle][a1,-a]],
 (* Exterior derivative of the metric (indices downstairs) *)
 HoldPattern[Diff[metr_?MetricQ[-a1_,-a2_],PD]]:>Module[{a=DummyIn@VBundleOfIndex@a1},ChristoffelForm[covd][a,-a1]metric[-a,-a2]+ChristoffelForm[covd][a,-a2]metric[-a,-a1]]/;MetricOfCovD[covd]===metr,
 (* Exterior derivative of the metric (indices upstairs) *)
@@ -923,10 +923,10 @@ FormVarD[form1_[inds1___],met_][form2_?xTensorQ[inds2___],rest_]:=0/;!ImplicitTe
 (* Hodge identity *)
 FormVarD[form_,met_][Hodge[met_][expr_],rest_]:=With[{k=Grade[expr,Wedge],n=DimOfMetric@met},
 (-1)^(k(n-k))FormVarD[form,met][expr,Hodge[met]@rest]];
-(* diff \[Rule] Replaced by Diff to adjust to the new notation. Dropped cd. Added back PD *)
-FormVarD[form_,met_][Diff[expr_,PD],rest_]:=FormVarD[form,met][expr,Hodge[met]@Codiff[met][InvHodge[met]@rest]];
+(* diff \[Rule] Replaced by Diff to adjust to the new notation. Dropped cd. Added back PD. *)
+FormVarD[form_,met_][Diff[expr_,PD],rest_]:=-FormVarD[form,met][expr,Hodge[met]@Codiff[met][InvHodge[met]@rest]];
 (* codiff \[Rule] Replaced by Codiff to adjust to the new notation. Dropped cd and replaced ExtCovDiff by Diff . Added back covd *)
-FormVarD[form_,met_][Codiff[met_][expr_,covd_?CovDQ],rest_]:=FormVarD[form,met][expr,Hodge[met]@Diff[InvHodge[met]@rest,covd]];
+FormVarD[form_,met_][Codiff[met_][expr_,covd_?CovDQ],rest_]:=-FormVarD[form,met][expr,Hodge[met]@Diff[InvHodge[met]@rest,covd]];
 
 
 End[];
