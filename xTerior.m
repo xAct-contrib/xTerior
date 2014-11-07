@@ -634,9 +634,10 @@ PrintAs[RiemannForm]^="R";
 (PrintAs[RiemannForm[cd_]]/;Head@cd=!=CCovD)^:=PrintAs[RiemannForm]<>"["<>Last@SymbolOfCovD[cd]<>"]";
 
 
-RiemannForm[exr_CCovD]:=Head@Module[{ind1=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],ind2=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],a1,a2},
+RiemannForm[exr_CCovD]:=If[Riemann[exr]=!=Zero,Head@Module[{ind1=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],ind2=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],a1,a2},
 {a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[-First@Part[Last@exr,2]],2];
 Riemann[exr][-ind1,-ind2,-a1,a2] Wedge[ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind1],ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind2]]
+],Zero
 ];
 
 

@@ -4235,94 +4235,100 @@ Cell[BoxData[
  RowBox[{
   RowBox[{
    RowBox[{"RiemannForm", "[", "exr_CCovD", "]"}], ":=", 
-   RowBox[{"Head", "@", 
-    RowBox[{"Module", "[", 
+   RowBox[{"If", "[", 
+    RowBox[{
      RowBox[{
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"ind1", "=", 
-         RowBox[{"DummyIn", "@", 
-          RowBox[{"VBundleOfBasis", "[", 
-           RowBox[{"-", 
-            RowBox[{"First", "@", 
-             RowBox[{"Part", "[", 
-              RowBox[{
-               RowBox[{"Last", "@", "exr"}], ",", "2"}], "]"}]}]}], "]"}]}]}],
-         ",", 
-        RowBox[{"ind2", "=", 
-         RowBox[{"DummyIn", "@", 
-          RowBox[{"VBundleOfBasis", "[", 
-           RowBox[{"-", 
-            RowBox[{"First", "@", 
-             RowBox[{"Part", "[", 
-              RowBox[{
-               RowBox[{"Last", "@", "exr"}], ",", "2"}], "]"}]}]}], "]"}]}]}],
-         ",", "a1", ",", "a2"}], "}"}], ",", "\[IndentingNewLine]", 
-      RowBox[{
+      RowBox[{"Riemann", "[", "exr", "]"}], "=!=", "Zero"}], ",", 
+     RowBox[{"Head", "@", 
+      RowBox[{"Module", "[", 
        RowBox[{
         RowBox[{"{", 
-         RowBox[{"a1", ",", "a2"}], "}"}], "=", 
-        RowBox[{"GetIndicesOfVBundle", "[", 
          RowBox[{
-          RowBox[{"VBundleOfBasis", "[", 
-           RowBox[{"-", 
-            RowBox[{"First", "@", 
-             RowBox[{"Part", "[", 
-              RowBox[{
-               RowBox[{"Last", "@", "exr"}], ",", "2"}], "]"}]}]}], "]"}], 
-          ",", "2"}], "]"}]}], ";", "\[IndentingNewLine]", 
-       RowBox[{
+          RowBox[{"ind1", "=", 
+           RowBox[{"DummyIn", "@", 
+            RowBox[{"VBundleOfBasis", "[", 
+             RowBox[{"-", 
+              RowBox[{"First", "@", 
+               RowBox[{"Part", "[", 
+                RowBox[{
+                 RowBox[{"Last", "@", "exr"}], ",", "2"}], "]"}]}]}], 
+             "]"}]}]}], ",", 
+          RowBox[{"ind2", "=", 
+           RowBox[{"DummyIn", "@", 
+            RowBox[{"VBundleOfBasis", "[", 
+             RowBox[{"-", 
+              RowBox[{"First", "@", 
+               RowBox[{"Part", "[", 
+                RowBox[{
+                 RowBox[{"Last", "@", "exr"}], ",", "2"}], "]"}]}]}], 
+             "]"}]}]}], ",", "a1", ",", "a2"}], "}"}], ",", 
+        "\[IndentingNewLine]", 
         RowBox[{
-         RowBox[{"Riemann", "[", "exr", "]"}], "[", 
          RowBox[{
-          RowBox[{"-", "ind1"}], ",", 
-          RowBox[{"-", "ind2"}], ",", 
-          RowBox[{"-", "a1"}], ",", "a2"}], "]"}], " ", 
-        RowBox[{"Wedge", "[", 
+          RowBox[{"{", 
+           RowBox[{"a1", ",", "a2"}], "}"}], "=", 
+          RowBox[{"GetIndicesOfVBundle", "[", 
+           RowBox[{
+            RowBox[{"VBundleOfBasis", "[", 
+             RowBox[{"-", 
+              RowBox[{"First", "@", 
+               RowBox[{"Part", "[", 
+                RowBox[{
+                 RowBox[{"Last", "@", "exr"}], ",", "2"}], "]"}]}]}], "]"}], 
+            ",", "2"}], "]"}]}], ";", "\[IndentingNewLine]", 
          RowBox[{
           RowBox[{
-           RowBox[{"ToCTensor", "[", 
+           RowBox[{"Riemann", "[", "exr", "]"}], "[", 
+           RowBox[{
+            RowBox[{"-", "ind1"}], ",", 
+            RowBox[{"-", "ind2"}], ",", 
+            RowBox[{"-", "a1"}], ",", "a2"}], "]"}], " ", 
+          RowBox[{"Wedge", "[", 
+           RowBox[{
             RowBox[{
-             RowBox[{"Coframe", "[", 
-              RowBox[{"BaseOfVBundle", "@", 
-               RowBox[{"VBundleOfBasis", "[", 
+             RowBox[{"ToCTensor", "[", 
+              RowBox[{
+               RowBox[{"Coframe", "[", 
+                RowBox[{"BaseOfVBundle", "@", 
+                 RowBox[{"VBundleOfBasis", "[", 
+                  RowBox[{"-", 
+                   RowBox[{"First", "@", 
+                    RowBox[{"Part", "[", 
+                    RowBox[{
+                    RowBox[{"Part", "[", 
+                    RowBox[{"exr", ",", "3"}], "]"}], ",", "2"}], "]"}]}]}], 
+                  "]"}]}], "]"}], ",", 
+               RowBox[{"{", 
                 RowBox[{"-", 
                  RowBox[{"First", "@", 
                   RowBox[{"Part", "[", 
                    RowBox[{
                     RowBox[{"Part", "[", 
                     RowBox[{"exr", ",", "3"}], "]"}], ",", "2"}], "]"}]}]}], 
-                "]"}]}], "]"}], ",", 
-             RowBox[{"{", 
-              RowBox[{"-", 
-               RowBox[{"First", "@", 
-                RowBox[{"Part", "[", 
-                 RowBox[{
-                  RowBox[{"Part", "[", 
-                   RowBox[{"exr", ",", "3"}], "]"}], ",", "2"}], "]"}]}]}], 
-              "}"}]}], "]"}], "[", "ind1", "]"}], ",", 
-          RowBox[{
-           RowBox[{"ToCTensor", "[", 
+                "}"}]}], "]"}], "[", "ind1", "]"}], ",", 
             RowBox[{
-             RowBox[{"Coframe", "[", 
-              RowBox[{"BaseOfVBundle", "@", 
-               RowBox[{"VBundleOfBasis", "[", 
+             RowBox[{"ToCTensor", "[", 
+              RowBox[{
+               RowBox[{"Coframe", "[", 
+                RowBox[{"BaseOfVBundle", "@", 
+                 RowBox[{"VBundleOfBasis", "[", 
+                  RowBox[{"-", 
+                   RowBox[{"First", "@", 
+                    RowBox[{"Part", "[", 
+                    RowBox[{
+                    RowBox[{"Part", "[", 
+                    RowBox[{"exr", ",", "3"}], "]"}], ",", "2"}], "]"}]}]}], 
+                  "]"}]}], "]"}], ",", 
+               RowBox[{"{", 
                 RowBox[{"-", 
                  RowBox[{"First", "@", 
                   RowBox[{"Part", "[", 
                    RowBox[{
                     RowBox[{"Part", "[", 
                     RowBox[{"exr", ",", "3"}], "]"}], ",", "2"}], "]"}]}]}], 
-                "]"}]}], "]"}], ",", 
-             RowBox[{"{", 
-              RowBox[{"-", 
-               RowBox[{"First", "@", 
-                RowBox[{"Part", "[", 
-                 RowBox[{
-                  RowBox[{"Part", "[", 
-                   RowBox[{"exr", ",", "3"}], "]"}], ",", "2"}], "]"}]}]}], 
-              "}"}]}], "]"}], "[", "ind2", "]"}]}], "]"}]}]}]}], 
-     "\[IndentingNewLine]", "]"}]}]}], ";"}]], "Input",
+                "}"}]}], "]"}], "[", "ind2", "]"}]}], "]"}]}]}]}], 
+       "\[IndentingNewLine]", "]"}]}], ",", "Zero"}], "\[IndentingNewLine]", 
+    "]"}]}], ";"}]], "Input",
  InitializationCell->True],
 
 Cell["\<\
