@@ -244,6 +244,21 @@ CTensorWedge[___,Zero,___]:=Zero;
 Wedge[ctensor1_CTensor[inds1___],ctensor2_CTensor[inds2___]]:=CTensorWedge[ctensor1,ctensor2][inds1,inds2]/;xAct`xTensor`Private`TakePairs[{inds1,inds2}]==={}
 
 
+Wedge[basis:(Coframe|dx)[_][_?CIndexQ],CTensor[array_,bases_List,addweight_][b__]]:=CTensor[Wedge[basis,array],bases,addweight][b]
+
+Wedge[CTensor[array_,bases_List,addweight_][b__],basis:(Coframe|dx)[_][_?CIndexQ]]:=CTensor[Wedge[array,basis],bases,addweight][b]
+
+
+FormBases[CTensor[array_,__]]:=DeleteDuplicates[xAct`xPerm`Private`nosign/@Cases[array,(Coframe|dx)[_][{_,frame_}]:>frame,{0,Infinity}]]
+
+Wedge[(basis:(Coframe|dx)[_])[ind_],ctensor_CTensor[inds___]]:=With[{frames=FormBases[ctensor]},Wedge[ToCTensor[basis,frames][ind],ctensor[inds]]/;Length[frames]===1]
+
+Wedge[ctensor_CTensor[inds___],(basis:(Coframe|dx)[_])[ind_]]:=With[{frames=FormBases[ctensor]},Wedge[ctensor[inds],ToCTensor[basis,frames][ind]]/;Length[frames]===1]
+
+
+CTensor/:(basis:(Coframe|dx)[_])[a_] (ctensor:CTensor[_,bases_List,_][l___,-a_,___]):=ToCTensor[basis,{-bases[[Length[{l,-a}]]]}][a] ctensor
+
+
 $DefInfoQ=False;
 
 
