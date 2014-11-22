@@ -218,7 +218,7 @@ xTension["xTerior`",DefTensor,"End"]:=DefTensorUseDimensions;
 DefTensorUseDimensions[tensor_[inds___],__]:=If[$UseDimensionsQ,SetZeroForm[tensor]];
 
 xTension["xTerior`",UndefTensor,"Beginning"]:=UndefTensorUseDimensions;
-UndefTensorUseDimensions[tensor_]:=If[$UseDimensionsQ,UnsetZeroForm[tensor]];
+UndefTensorUseDimensions[tensor_]:=If[$UseDimensionsQ&&MemberQ[$DimensionsZeroForms,tensor],UnsetZeroForm[tensor]];
 
 
 
