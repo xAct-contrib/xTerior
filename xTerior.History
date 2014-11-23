@@ -121,3 +121,19 @@ last lines of the code of FormVarD.
 12 Aug 2014: Added FindPotential.
 
 15 Aug 2014: Added Inner contraction of basis objects.
+
+29 Sep 2014: Added code to allow the inner contraction with covectors.
+
+18 Oct 2014:  Added relation of Wedge with respect to Times in GradeOfProduct, necessary when working with the latest xTensor.m. 
+	      Fixed the action of Int on Coframe and Frame.
+      
+18 Oct 2014: Started coding of support of CTensor in xTerior.
+
+5 Nov 2014: Changed sign convention in the definition of Codiff.
+
+6 Nov 2014: Changed sign in the definition of FormVarD to adapt to the new sign convention in Codiff.
+
+7 Nov 2014: Added code to get Zero Riemann form.
+
+23 Nov 2014:  Fixed problem with the xTension DefTensorUseDimension.
+
