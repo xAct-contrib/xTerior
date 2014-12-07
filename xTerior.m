@@ -218,7 +218,7 @@ xTension["xTerior`",DefTensor,"End"]:=DefTensorUseDimensions;
 DefTensorUseDimensions[tensor_[inds___],__]:=If[$UseDimensionsQ,SetZeroForm[tensor]];
 
 xTension["xTerior`",UndefTensor,"Beginning"]:=UndefTensorUseDimensions;
-UndefTensorUseDimensions[tensor_]:=If[$UseDimensionsQ&&MemberQ[$DimensionsZeroForms,tensor],UnsetZeroForm[tensor]];
+UndefTensorUseDimensions[tensor_]:=If[$UseDimensionsQ,UnsetZeroForm[tensor]];
 
 
 
@@ -257,6 +257,9 @@ Wedge[ctensor_CTensor[inds___],(basis:(Coframe|dx)[_])[ind_]]:=With[{frames=Form
 
 
 CTensor/:(basis:(Coframe|dx)[_])[a_] (ctensor:CTensor[_,bases_List,_][l___,-a_,___]):=ToCTensor[basis,{-bases[[Length[{l,-a}]]]}][a] ctensor
+
+
+CTensor/:HoldPattern[Wedge[lw___,(basis:(Coframe|dx)[_])[a_] ,rw___] (ctensor:CTensor[_,bases_List,_][l___,-a_,___])]:=Wedge[lw,ToCTensor[basis,{-bases[[Length[{l,-a}]]]}][a],rw] ctensor
 
 
 $DefInfoQ=False;
@@ -367,7 +370,7 @@ head/:DependenciesOfInertHead[derL]:=DependenciesOf[First[derR]]
 DefGradedDerivation[Diff,Wedge,+1,PrintAs->"d"];
 
 
-HoldPattern[Diff[expr_]]:=Diff[expr,PD]
+Diff[expr_]:=Diff[expr,PD]
 
 
 Diff/:MakeBoxes[Diff[form_,PD?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Diff[form,PD],RowBox[{PrintAs[Diff],"[",MakeBoxes[form,StandardForm],"]"}]];
@@ -378,15 +381,15 @@ Diff[expr_?ArrayQ,cd_]:=Diff[#,cd]&/@expr;
 Diff[expr_Equal,cd_]:=Diff[#,cd]&/@expr;
 
 
-HoldPattern[Diff[expr_Diff,PD]]:=0
+Diff[expr_Diff,PD]:=0
 
 
 Diff[_Basis,PD]:=0;
 
 
 (* This produces expanded expressions and is much faster when there are many scalars *)
-Diff[expr_Times,rest___]:=Module[{grades=Grade[#,Wedge]&/@List@@expr,pos,scalar,form},
-pos=Position[grades,_?(#=!=0&),1,Heads->False];
+Diff[expr_Times,cd_]:=Module[{grades=Grade[#,Wedge]&/@List@@expr,pos,scalar,form},
+pos=Position[grades,_?Positive,1,Heads->False];
 Which[
 Length[pos]>1,
 	Throw[Message[Diff::error1,"Found Times product of nonscalar forms: ",expr]],
@@ -394,27 +397,23 @@ Length[pos]===1,
 	pos=pos[[1,1]];
 	scalar=Delete[expr,{pos}];
 	form=expr[[pos]];
-	scalar Diff[form,rest]+diff0[scalar,form],
+	scalar Diff[form,cd]+diff0[scalar,cd,form],
 Length[pos]===0,
-	diff0[expr]
+	diff0[expr,cd]
 ]
 ];
-diff0[expr_Times]:=Sum[MapAt[Diff,expr,i],{i,1,Length[expr]}];
-diff0[expr_Times,form_]:=Sum[MapAt[Diff[#,form]&,expr,i],{i,1,Length[expr]}];
-diff0[expr_,form_]:=Wedge[Diff[expr],form];
-diff0[expr_]:=Diff[expr];
+(* Only scalars *)
+diff0[scalar_Times,cd_]:=Sum[MapAt[Diff[#,cd]&,scalar,i],{i,1,Length[scalar]}];
+diff0[scalar_,cd_]:=Diff[scalar,cd];
+(* Scalars and a form *)
+diff0[scalar_Times,cd_,form_]:=Sum[MapAt[diff0[#,cd,form]&,scalar,i],{i,1,Length[scalar]}];
+diff0[scalar_,cd_,form_]:=Wedge[Diff[scalar,cd],form];
 
 
-HoldPattern[Diff[expr_,rest_?(Composition[Not,CovDQ])]]:=Diff[expr]\[Wedge]rest;
+Diff[x_?ConstantQ,cd_]:=0;
 
 
-Diff[x_?ConstantQ,rest___]:=0;
-
-
-Unprotect@Dagger;
-Dagger[expr_Diff]:=Dagger/@expr;
-Dagger@PD=PD;
-Protect@Dagger;
+Diff/:HoldPattern[Dagger[Diff[expr_,cd_]]]:=Diff[Dagger[expr],cd];
 
 
 Diff[CTensor[array_,bases_List,weight_][inds__],cd_]:=CTensor[Diff[array,cd],bases,weight][inds];

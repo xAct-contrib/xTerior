@@ -1116,7 +1116,7 @@ Cell[BoxData["%"], "Input"],
 Cell[BoxData["\<\"xAct`xTerior`Private`\"\>"], "Output"]
 }, Open  ]]
 }, Closed]]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -1306,8 +1306,8 @@ Cell[BoxData[
   "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{"$UseDimensionsQ", "=", "False"}], ";"}], "\[IndentingNewLine]", 
-   "\n", 
+    RowBox[{"$UseDimensionsQ", "=", "False"}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"$DimensionsZeroForms", "=", 
      RowBox[{"{", "}"}]}], ";"}], "\n", 
@@ -1334,8 +1334,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
      RowBox[{"Unset", "[", 
-      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\n", "\[IndentingNewLine]", 
+      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1422,8 +1422,8 @@ Cell[BoxData[
              RowBox[{"(", 
               RowBox[{"DimOfManifold", "/@", 
                RowBox[{"DependenciesOf", "[", "expr", "]"}]}], ")"}]}], 
-            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", "\n", 
+            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", "\n",
+    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1452,8 +1452,9 @@ Cell[BoxData[
         RowBox[{"HoldPattern", "@", 
          RowBox[{"Diff", "[", 
           RowBox[{"expr_", ",", "covd_"}], "]"}]}], "=."}], ";"}]}], "]"}]}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\n", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"xTension", "[", 
@@ -1466,8 +1467,8 @@ Cell[BoxData[
        RowBox[{"tensor_", "[", "inds___", "]"}], ",", "__"}], "]"}], ":=", 
      RowBox[{"If", "[", 
       RowBox[{"$UseDimensionsQ", ",", 
-       RowBox[{"SetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], "\n", 
-   "\[IndentingNewLine]", 
+       RowBox[{"SetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"xTension", "[", 
@@ -1478,10 +1479,7 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"UndefTensorUseDimensions", "[", "tensor_", "]"}], ":=", 
      RowBox[{"If", "[", 
-      RowBox[{
-       RowBox[{"$UseDimensionsQ", "&&", 
-        RowBox[{"MemberQ", "[", 
-         RowBox[{"$DimensionsZeroForms", ",", "tensor"}], "]"}]}], ",", 
+      RowBox[{"$UseDimensionsQ", ",", 
        RowBox[{"UnsetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], 
    "\n"}]}]], "Input",
  InitializationCell->True]
@@ -1593,7 +1591,7 @@ Cell[BoxData[{
       RowBox[{"DuplicateFreeQ", "[", "indices", "]"}], ",", 
       RowBox[{"Signature", "[", 
        RowBox[{"Ordering", "[", "indices", "]"}], "]"}], ",", "0"}], "]"}]}], 
-   ";"}], "\[IndentingNewLine]"}], "\n", 
+   ";"}], "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"simplifyBasisWedge", "[", "expr_", "]"}], ":=", 
@@ -1633,7 +1631,7 @@ Cell[BoxData[{
   RowBox[{"(*", " ", 
    RowBox[{
    "Wedge", " ", "product", " ", "of", " ", "general", " ", "CTensor", " ", 
-    "objects"}], " ", "*)"}], "\[IndentingNewLine]"}], "\n", 
+    "objects"}], " ", "*)"}], "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"CTensorWedge", "[", "]"}], ":=", "1"}], ";"}], "\n", 
@@ -1658,7 +1656,7 @@ Cell[BoxData[{
    RowBox[{
     RowBox[{"CTensorWedge", "[", 
      RowBox[{"___", ",", "Zero", ",", "___"}], "]"}], ":=", "Zero"}], ";"}], 
-  "\n"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{"Wedge", "[", 
    RowBox[{
@@ -1702,7 +1700,7 @@ Cell[BoxData[{
       RowBox[{"Wedge", "[", 
        RowBox[{"basis", ",", "array"}], "]"}], ",", "bases", ",", 
       "addweight"}], "]"}], "[", "b", "]"}]}], 
-  "\[IndentingNewLine]"}], "\n", 
+  "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Wedge", "[", 
    RowBox[{
@@ -1750,7 +1748,7 @@ Cell[BoxData[{
         "frame"}], ",", 
        RowBox[{"{", 
         RowBox[{"0", ",", "Infinity"}], "}"}]}], "]"}]}], "]"}]}], 
-  "\[IndentingNewLine]"}], "\n", 
+  "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"Wedge", "[", 
@@ -1777,7 +1775,7 @@ Cell[BoxData[{
         RowBox[{"ctensor", "[", "inds", "]"}]}], "]"}], "/;", 
       RowBox[{
        RowBox[{"Length", "[", "frames", "]"}], "===", "1"}]}]}], "]"}]}], 
-  "\[IndentingNewLine]"}], "\n", 
+  "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Wedge", "[", 
    RowBox[{
@@ -1842,6 +1840,44 @@ Cell[BoxData[
             RowBox[{"l", ",", 
              RowBox[{"-", "a"}]}], "}"}], "]"}], "]"}], "]"}]}], "}"}]}], 
      "]"}], "[", "a", "]"}], " ", "ctensor"}]}]], "Input",
+ InitializationCell->True],
+
+Cell[BoxData[
+ RowBox[{"CTensor", "/:", 
+  RowBox[{"HoldPattern", "[", 
+   RowBox[{
+    RowBox[{"Wedge", "[", 
+     RowBox[{"lw___", ",", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"basis", ":", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"Coframe", "|", "dx"}], ")"}], "[", "_", "]"}]}], ")"}], 
+       "[", "a_", "]"}], " ", ",", "rw___"}], "]"}], " ", 
+    RowBox[{"(", 
+     RowBox[{"ctensor", ":", 
+      RowBox[{
+       RowBox[{"CTensor", "[", 
+        RowBox[{"_", ",", "bases_List", ",", "_"}], "]"}], "[", 
+       RowBox[{"l___", ",", 
+        RowBox[{"-", "a_"}], ",", "___"}], "]"}]}], ")"}]}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"Wedge", "[", 
+    RowBox[{"lw", ",", 
+     RowBox[{
+      RowBox[{"ToCTensor", "[", 
+       RowBox[{"basis", ",", 
+        RowBox[{"{", 
+         RowBox[{"-", 
+          RowBox[{"bases", "[", 
+           RowBox[{"[", 
+            RowBox[{"Length", "[", 
+             RowBox[{"{", 
+              RowBox[{"l", ",", 
+               RowBox[{"-", "a"}]}], "}"}], "]"}], "]"}], "]"}]}], "}"}]}], 
+       "]"}], "[", "a", "]"}], ",", "rw"}], "]"}], " ", 
+   "ctensor"}]}]], "Input",
  InitializationCell->True]
 }, Closed]],
 
@@ -2337,8 +2373,7 @@ Cell["We always have PD as the covariant derivative.", "Text"],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"HoldPattern", "[", 
-   RowBox[{"Diff", "[", "expr_", "]"}], "]"}], ":=", 
+  RowBox[{"Diff", "[", "expr_", "]"}], ":=", 
   RowBox[{"Diff", "[", 
    RowBox[{"expr", ",", "PD"}], "]"}]}]], "Input",
  InitializationCell->True],
@@ -2417,12 +2452,13 @@ Cell["The exterior derivative applied twice is zero:", "Text"],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"HoldPattern", "[", 
-   RowBox[{"Diff", "[", 
-    RowBox[{"expr_Diff", ",", "PD"}], "]"}], "]"}], ":=", "0"}]], "Input",
+  RowBox[{"Diff", "[", 
+   RowBox[{"expr_Diff", ",", "PD"}], "]"}], ":=", "0"}]], "Input",
  InitializationCell->True],
 
-Cell["Exterior derivative of basis objects is zero.", "Text"],
+Cell["\<\
+Exterior derivative of basis objects is zero. TODO: This is not correct.\
+\>", "Text"],
 
 Cell[BoxData[
  RowBox[{
@@ -2445,7 +2481,7 @@ Cell[BoxData[
    RowBox[{
     RowBox[{
      RowBox[{"Diff", "[", 
-      RowBox[{"expr_Times", ",", "rest___"}], "]"}], ":=", 
+      RowBox[{"expr_Times", ",", "cd_"}], "]"}], ":=", 
      RowBox[{"Module", "[", 
       RowBox[{
        RowBox[{"{", 
@@ -2461,10 +2497,7 @@ Cell[BoxData[
         RowBox[{"pos", "=", 
          RowBox[{"Position", "[", 
           RowBox[{"grades", ",", 
-           RowBox[{"_", "?", 
-            RowBox[{"(", 
-             RowBox[{
-              RowBox[{"#", "=!=", "0"}], "&"}], ")"}]}], ",", "1", ",", 
+           RowBox[{"_", "?", "Positive"}], ",", "1", ",", 
            RowBox[{"Heads", "\[Rule]", "False"}]}], "]"}]}], ";", 
         "\[IndentingNewLine]", 
         RowBox[{"Which", "[", "\[IndentingNewLine]", 
@@ -2499,77 +2532,69 @@ Cell[BoxData[
            RowBox[{
             RowBox[{"scalar", " ", 
              RowBox[{"Diff", "[", 
-              RowBox[{"form", ",", "rest"}], "]"}]}], "+", 
+              RowBox[{"form", ",", "cd"}], "]"}]}], "+", 
             RowBox[{"diff0", "[", 
-             RowBox[{"scalar", ",", "form"}], "]"}]}]}], ",", 
+             RowBox[{"scalar", ",", "cd", ",", "form"}], "]"}]}]}], ",", 
           "\[IndentingNewLine]", 
           RowBox[{
            RowBox[{"Length", "[", "pos", "]"}], "===", "0"}], ",", 
           "\[IndentingNewLine]", "\t", 
-          RowBox[{"diff0", "[", "expr", "]"}]}], "\[IndentingNewLine]", 
+          RowBox[{"diff0", "[", 
+           RowBox[{"expr", ",", "cd"}], "]"}]}], "\[IndentingNewLine]", 
          "]"}]}]}], "\[IndentingNewLine]", "]"}]}], ";"}], 
    "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"diff0", "[", "expr_Times", "]"}], ":=", 
-     RowBox[{"Sum", "[", 
-      RowBox[{
-       RowBox[{"MapAt", "[", 
-        RowBox[{"Diff", ",", "expr", ",", "i"}], "]"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"i", ",", "1", ",", 
-         RowBox[{"Length", "[", "expr", "]"}]}], "}"}]}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Only", " ", "scalars"}], " ", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"diff0", "[", 
-      RowBox[{"expr_Times", ",", "form_"}], "]"}], ":=", 
+      RowBox[{"scalar_Times", ",", "cd_"}], "]"}], ":=", 
      RowBox[{"Sum", "[", 
       RowBox[{
        RowBox[{"MapAt", "[", 
         RowBox[{
          RowBox[{
           RowBox[{"Diff", "[", 
-           RowBox[{"#", ",", "form"}], "]"}], "&"}], ",", "expr", ",", "i"}], 
+           RowBox[{"#", ",", "cd"}], "]"}], "&"}], ",", "scalar", ",", "i"}], 
         "]"}], ",", 
        RowBox[{"{", 
         RowBox[{"i", ",", "1", ",", 
-         RowBox[{"Length", "[", "expr", "]"}]}], "}"}]}], "]"}]}], ";"}], 
+         RowBox[{"Length", "[", "scalar", "]"}]}], "}"}]}], "]"}]}], ";"}], 
    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"diff0", "[", 
-      RowBox[{"expr_", ",", "form_"}], "]"}], ":=", 
-     RowBox[{"Wedge", "[", 
-      RowBox[{
-       RowBox[{"Diff", "[", "expr", "]"}], ",", "form"}], "]"}]}], ";"}], 
+      RowBox[{"scalar_", ",", "cd_"}], "]"}], ":=", 
+     RowBox[{"Diff", "[", 
+      RowBox[{"scalar", ",", "cd"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Scalars", " ", "and", " ", "a", " ", "form"}], " ", "*)"}], 
    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
-     RowBox[{"diff0", "[", "expr_", "]"}], ":=", 
-     RowBox[{"Diff", "[", "expr", "]"}]}], ";"}]}]}]], "Input",
- InitializationCell->True],
-
-Cell["\<\
-There\[CloseCurlyQuote]s a problem with the code above if you compute the \
-exterior derivative of Cos[\[CapitalTheta]] d[\[CurlyPhi]] \
-Sin[\[CapitalTheta]]. The problem appears to be solved by adding the line\
-\>", "Text"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"HoldPattern", "[", 
-    RowBox[{"Diff", "[", 
-     RowBox[{"expr_", ",", 
-      RowBox[{"rest_", "?", 
-       RowBox[{"(", 
-        RowBox[{"Composition", "[", 
-         RowBox[{"Not", ",", "CovDQ"}], "]"}], ")"}]}]}], "]"}], "]"}], ":=", 
-   
+     RowBox[{"diff0", "[", 
+      RowBox[{"scalar_Times", ",", "cd_", ",", "form_"}], "]"}], ":=", 
+     RowBox[{"Sum", "[", 
+      RowBox[{
+       RowBox[{"MapAt", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"diff0", "[", 
+           RowBox[{"#", ",", "cd", ",", "form"}], "]"}], "&"}], ",", "scalar",
+          ",", "i"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"Length", "[", "scalar", "]"}]}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"Diff", "[", "expr", "]"}], "\[Wedge]", "rest"}]}], 
-  ";"}]], "Input",
+    RowBox[{
+     RowBox[{"diff0", "[", 
+      RowBox[{"scalar_", ",", "cd_", ",", "form_"}], "]"}], ":=", 
+     RowBox[{"Wedge", "[", 
+      RowBox[{
+       RowBox[{"Diff", "[", 
+        RowBox[{"scalar", ",", "cd"}], "]"}], ",", "form"}], "]"}]}], 
+    ";"}]}]}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
@@ -2577,24 +2602,23 @@ Cell[BoxData[
   RowBox[{
    RowBox[{"Diff", "[", 
     RowBox[{
-     RowBox[{"x_", "?", "ConstantQ"}], ",", "rest___"}], "]"}], ":=", "0"}], 
+     RowBox[{"x_", "?", "ConstantQ"}], ",", "cd_"}], "]"}], ":=", "0"}], 
   ";"}]], "Input",
  InitializationCell->True],
 
 Cell["Behavior with respect to Dagger.", "Text"],
 
-Cell[BoxData[{
+Cell[BoxData[
  RowBox[{
-  RowBox[{"Unprotect", "@", "Dagger"}], ";"}], "\n", 
- RowBox[{
-  RowBox[{
-   RowBox[{"Dagger", "[", "expr_Diff", "]"}], ":=", 
-   RowBox[{"Dagger", "/@", "expr"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{
-   RowBox[{"Dagger", "@", "PD"}], "=", "PD"}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"Protect", "@", "Dagger"}], ";"}]}], "Input",
+  RowBox[{"Diff", "/:", 
+   RowBox[{"HoldPattern", "[", 
+    RowBox[{"Dagger", "[", 
+     RowBox[{"Diff", "[", 
+      RowBox[{"expr_", ",", "cd_"}], "]"}], "]"}], "]"}], ":=", 
+   RowBox[{"Diff", "[", 
+    RowBox[{
+     RowBox[{"Dagger", "[", "expr", "]"}], ",", "cd"}], "]"}]}], 
+  ";"}]], "Input",
  InitializationCell->True],
 
 Cell["Behaviour with respect to CTensor", "Text"],
@@ -3355,7 +3379,7 @@ Cell[BoxData[
        RowBox[{"options", ":", 
         RowBox[{"OptionsPattern", "[", "Integrate", "]"}]}]}], "]"}], ":=", 
      RowBox[{"Part", "[", 
-      RowBox[{"expr", ",", "1"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+      RowBox[{"expr", ",", "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"FindPotential", "[", 
@@ -7713,8 +7737,8 @@ Cell[BoxData[{
 }, Open  ]]
 },
 AutoGeneratedPackage->Automatic,
-WindowSize->{1276, 613},
-WindowMargins->{{0, Automatic}, {38, Automatic}},
+WindowSize->{1280, 727},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
