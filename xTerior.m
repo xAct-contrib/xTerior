@@ -200,7 +200,7 @@ UnsetZeroForm[form_]:=Unset[form[___]];
 UseDimensionStart[]:=Module[{},If[$UseDimensionsQ,Return[]];
 $UseDimensionsQ=True;
 (*Forms whose degree is greater than the dimension*)SetZeroForm/@$Tensors;
-(*Expressions which are wedge products*)HoldPattern@Wedge[expr__]:=0/;(Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@Flatten[DependenciesOf/@{expr}])));
+(*Expressions which are wedge products*)HoldPattern@Wedge[expr__]:=0/;(Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@Union@Flatten[DependenciesOf/@{expr}])));
 (*Expressions which are exterior derivatives*)HoldPattern@Diff[expr_,PD]:=0/;(1+Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@DependenciesOf[expr])));
 HoldPattern@Diff[expr_,covd_]:=0/;(1+Plus@@(Grade[#,Wedge]&/@{expr})>(Plus@@(DimOfManifold/@DependenciesOf[expr])));]
 
