@@ -135,5 +135,7 @@ last lines of the code of FormVarD.
 
 7 Nov 2014: Added code to get Zero Riemann form.
 
-23 Nov 2014:  Fixed problem with the xTension DefTensorUseDimension.
+23 Nov 2014: Fixed problem with the xTension DefTensorUseDimension.
 
+7 Dec 2014: Fixed problems with the code of the exterior derivative. Thanks 
+	   to José for doing this.
