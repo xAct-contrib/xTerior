@@ -277,6 +277,9 @@ PrintAs->"\[CircleTimes]"
 $DefInfoQ=True;
 
 
+CircleTimes/:GradeOfProduct[Times,CircleTimes]=0;
+
+
 CircleTimes/:GradeOfTensor[head_,CircleTimes]:=GradeOfTensor[head,Wedge];
 
 
