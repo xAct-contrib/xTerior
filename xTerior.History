@@ -139,3 +139,5 @@ last lines of the code of FormVarD.
 
 7 Dec 2014: Fixed problems with the code of the exterior derivative. Thanks 
 	   to José for doing this.
+
+16 Dec 2014: Corrected bug in UseDimensionStart
