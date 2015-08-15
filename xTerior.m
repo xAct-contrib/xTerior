@@ -803,7 +803,7 @@ CartanD[f_?ScalarQ v_][form_]:=f CartanD[v]@form+Wedge[Diff@f,Int[v]@form];
 
 
 (* This produces expanded expressions and is much faster when there are many scalars *)
-CartanD[v_][expr_Times,rest___]:=Module[{grades=Grade[#,Wedge]&/@List@@expr,pos,scalar,form},
+CartanD[v_][expr_Times]:=Module[{grades=Grade[#,Wedge]&/@List@@expr,pos,scalar,form},
 pos=Position[grades,_?(#=!=0&),1,Heads->False];
 Which[
 Length[pos]>1,
@@ -812,15 +812,20 @@ Length[pos]===1,
 	pos=pos[[1,1]];
 	scalar=Delete[expr,{pos}];
 	form=expr[[pos]];
-	scalar CartanD[v][form,rest]+lie0[v][scalar,form],
+	scalar CartanD[v][form]+lie0[v][scalar,form],
 Length[pos]===0,
 	lie0[v][expr]
 ]
 ];
+(* Only scalars *)
 lie0[v_][expr_Times]:=Sum[MapAt[CartanD[v],expr,i],{i,1,Length[expr]}];
-lie0[v_][expr_Times,form_]:=Sum[MapAt[CartanD[v][#,form]&,expr,i],{i,1,Length[expr]}];
+lie0[v_][expr_]:= CartanD[v][expr];
+(* Scalars and a form *)
+lie0[v_][expr_Times,form_]:=Sum[MapAt[lie0[v][#,form]&,expr,i],{i,1,Length[expr]}];
 lie0[v_][expr_,form_]:=Wedge[CartanD[v][expr],form];
-lie0[v_][expr_]:=CartanD[v][expr];
+
+
+CartanD[v_][expr_?ConstantQ]:=0;
 
 
 Unprotect@LieD;
