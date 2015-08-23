@@ -19,8 +19,8 @@
 
 
 
-xAct`xTerior`$xTensorVersionExpected={"1.1.0",{2013,9,1}};
-xAct`xTerior`$Version={"0.8.5",{2013,7,1}};
+xAct`xTerior`$xTensorVersionExpected={"1.1.2",{2015,8,23}};
+xAct`xTerior`$Version={"0.9.0",{2015,8,23}};
 
 
 (* xTerior: exterior calculus in Differential Geometry *)

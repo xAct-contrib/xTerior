@@ -146,4 +146,7 @@ last lines of the code of FormVarD.
 2015
 
 15 Aug 2015: corrected bug in CartanD.
-	
+
+19 Aug 2015: set version compatibility wit xTensor 1.1.2 and above.
+
+* Released with version 0.9.0
