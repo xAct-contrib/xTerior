@@ -540,7 +540,10 @@ FindPotential[expr_Times,point_List,chart_?ChartQ,options:OptionsPattern[Integra
 (*Simplest cases for grade 1 forms *)
 FindPotential[expr_Diff,point_List,chart_?ChartQ,options:OptionsPattern[Integrate]]:=Part[expr,1];
 
-FindPotential[factor_ expr_Diff,point_List,chart_?ChartQ,options:OptionsPattern[Integrate]]:=Integrate[(factor/.Thread[Rule[ScalarsOfChart@chart,Times[#,t]&/@(ScalarsOfChart@chart-point)+point]]) (Part[expr,1]-Part[point,First@Flatten@Position[ScalarsOfChart@chart,Part[expr,1]]]),{t,0,1},options];
+FindPotential[factor_ expr_Diff,point_List,chart_?ChartQ,options:OptionsPattern[Integrate]]:=Integrate1[(factor/.Thread[Rule[ScalarsOfChart@chart,Times[#,t]&/@(ScalarsOfChart@chart-point)+point]]) (Part[expr,1]-Part[point,First@Flatten@Position[ScalarsOfChart@chart,Part[expr,1]]]),{t,0,1},options];
+(* Do the actual integration *)
+Integrate1/:HoldPattern@Plus[var__Integrate1]:=Integrate[Plus@@First/@{var},{t,0,1}];
+
 
 
 (* Poincare Lemma for higher degree forms *)
@@ -687,7 +690,7 @@ ChangeExtD[expr_]:=ChangeExtD[expr,$CovDs];
 
 
 makeChangeExtD[expr_,cd1_,cd2_]:=With[{vbs=Apply[Union,VBundlesOfCovD/@DeleteCases[{cd1,cd2},PD]]},
-Diff[expr,cd2]+Plus@@Map[addAChr1[expr,cd1,cd2],xAct`xTensor`Private`selecton[Select[FindFreeIndices@expr,AIndexQ],vbs]]//ReduceAChr1
+Diff[expr,cd2]+Plus@@Map[addAChr1[expr,cd1,cd2],xAct`xTensor`Private`selecton[Select[FindFreeIndices@expr,GIndexQ],vbs]]//ReduceAChr1
 ];
 
 
