@@ -160,6 +160,9 @@ UseCartan::usage="UseCartan[expr,covd] expands all the instances of the Diff usi
 ZeroDegQ::usage="ZeroDegQ[expr] returns True if the degree of expr is zero";
 UseDimensionStart::usage="UseDimensionStart[] is an instruction that, when issued, makes any expression with degree greater than the manifold dimension equal to zero.";
 UseDimensionStop::usage="UseDimensionStop[] cancels the action of UseDimensionStart[]";
+(* Integration of differential forms over manifolds with boundary *)
+FormIntegrate::usage="FormIntegrate[form, M] represents the integration of the given differential form, of degree n, over the n-dimensional manifold M with boundary.";
+UseStokes::usage="UseStokes[expr, M] converts subexpressions FormIntegrate[Diff[form], M] in expr into FormIntegrate[form, ManifoldBoundary[M]], reducing n-dimensional integration to (n-1)-integration. UseStokes[expr, form] converts subexpressions FormIntegrate[form, ManifoldBoundary[M]] in expr into FormIntegrate[Diff[form], M]. UseStokes[expr] performs UseStokes[expr, M] wherever possible in expr, to reduce dimensionality of integration.";
 
 
 Begin["`Private`"]
@@ -548,6 +551,27 @@ Integrate1/:HoldPattern@Plus[var__Integrate1]:=Integrate[Plus@@First/@{var},{t,0
 
 (* Poincare Lemma for higher degree forms *)
 FindPotential[factor_. expr_Wedge,point_List,chart_?ChartQ,options:OptionsPattern[Integrate]]:=Integrate[(factor/.Thread[Rule[ScalarsOfChart@chart,Times[#,t]&/@(ScalarsOfChart@chart-point)+point]]) Sum[(-1)^(i-1)t^(Deg@expr-1) (Part[expr,i,1]-Part[point,First@Flatten@Position[ScalarsOfChart@chart,Part[expr,i,1]]])Delete[expr,{i}],{i,1,Length[expr]}],{t,0,1},options];
+
+
+FormIntegrate::dim="Degree of form `1` is incompatible with dimension of manifold `2`.";
+
+
+InertHeadQ[FormIntegrate]^:=True;
+LinearQ[FormIntegrate]^:=True;
+FormIntegrate[form_,EmptyManifold]:=0;
+FormIntegrate[c_?ConstantQ,man_?ManifoldQ]:=c/;DimOfManifold[man]==0;
+FormIntegrate[form_,man_?ManifoldQ]:=Throw[Message[FormIntegrate::dim,form,man];$Failed]/;Deg[form]=!=DimOfManifold[man];
+ToCanonical[FormIntegrate[form_,man_],opts___]^:=FormIntegrate[ToCanonical[form,opts],man];
+FormIntegrate/:Grade[FormIntegrate[form_,man_],Wedge]:=0/;Deg[form]===DimOfManifold[man];
+
+
+(* Formatting. Do not remove the ugly ?InertHeadQ check here. It would break typesetting *)
+MakeBoxes[FormIntegrate?InertHeadQ[form_,man_],StandardForm]:=RowBox[{SubscriptBox["\[Integral]",MakeBoxes[man,StandardForm]],MakeBoxes[form,StandardForm]}];
+
+
+UseStokes[expr_]:=expr/.HoldPattern[FormIntegrate[Diff[form_,PD],man_]]:>FormIntegrate[form,ManifoldBoundary[man]];
+UseStokes[expr_,man_?ManifoldQ]:=expr/.HoldPattern[FormIntegrate[Diff[form_,PD],man]]:>FormIntegrate[form,ManifoldBoundary[man]];
+UseStokes[expr_,form_]:=expr/.HoldPattern[FormIntegrate[form,ManifoldBoundary[man_]]]:>FormIntegrate[Diff[form],man];
 
 
 xTensorQ[ConnectionForm[cd_?CovDQ,_]]^=True;

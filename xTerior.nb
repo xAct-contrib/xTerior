@@ -1037,7 +1037,29 @@ zero.\>\""}], ";"}], "\[IndentingNewLine]",
     RowBox[{
      RowBox[{"UseDimensionStop", "::", "usage"}], "=", 
      "\"\<UseDimensionStop[] cancels the action of UseDimensionStart[]\>\""}],
-     ";"}]}]}]], "Input",
+     ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Integration", " ", "of", " ", "differential", " ", "forms", " ", "over", 
+     " ", "manifolds", " ", "with", " ", "boundary"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"FormIntegrate", "::", "usage"}], "=", 
+     "\"\<FormIntegrate[form, M] represents the integration of the given \
+differential form, of degree n, over the n-dimensional manifold M with \
+boundary.\>\""}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"UseStokes", "::", "usage"}], "=", 
+     "\"\<UseStokes[expr, M] converts subexpressions \
+FormIntegrate[Diff[form], M] in expr into FormIntegrate[form, \
+ManifoldBoundary[M]], reducing n-dimensional integration to \
+(n-1)-integration. UseStokes[expr, form] converts subexpressions \
+FormIntegrate[form, ManifoldBoundary[M]] in expr into \
+FormIntegrate[Diff[form], M]. UseStokes[expr] performs UseStokes[expr, M] \
+wherever possible in expr, to reduce dimensionality of integration.\>\""}], 
+    ";"}]}]}]], "Input",
  InitializationCell->True]
 }, Closed]],
 
@@ -1072,8 +1094,8 @@ Cell[BoxData[
    ",", "\<\"DefDiffForm\"\>", ",", "\<\"Deg\"\>", ",", "\<\"Diff\"\>", 
    ",", "\<\"DiffFormQ\"\>", ",", "\<\"Disclaimer\"\>", ",", "\<\"dx\"\>", 
    ",", "\<\"ExpandHodgeDual\"\>", ",", "\<\"FormVarD\"\>", 
-   ",", "\<\"Hodge\"\>", ",", "\<\"Int\"\>", ",", "\<\"RiemannForm\"\>", ",", 
-   "\<\"SortDerivations\"\>", ",", "\<\"TorsionForm\"\>", 
+   ",", "\<\"Hodge\"\>", ",", "\<\"Int\"\>", ",", "\<\"RiemannForm\"\>", 
+   ",", "\<\"SortDerivations\"\>", ",", "\<\"TorsionForm\"\>", 
    ",", "\<\"UndefDiffForm\"\>", ",", "\<\"UseCartan\"\>", 
    ",", "\<\"UseDimensionStart\"\>", ",", "\<\"UseDimensionStop\"\>", 
    ",", "\<\"ZeroDegQ\"\>", ",", "\<\"$DerivationSortOrder\"\>", 
@@ -1117,7 +1139,7 @@ Cell[BoxData["%"], "Input"],
 Cell[BoxData["\<\"xAct`xTerior`Private`\"\>"], "Output"]
 }, Open  ]]
 }, Closed]]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1335,8 +1357,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
      RowBox[{"Unset", "[", 
-      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", "\n", 
+      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1424,7 +1446,7 @@ Cell[BoxData[
              RowBox[{"(", 
               RowBox[{"DimOfManifold", "/@", 
                RowBox[{"DependenciesOf", "[", "expr", "]"}]}], ")"}]}], 
-            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\n", "\[IndentingNewLine]",
+            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", "\n",
     "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
@@ -3521,6 +3543,189 @@ Cell[BoxData[
        RowBox[{"t", ",", "0", ",", "1"}], "}"}], ",", "options"}], "]"}]}], 
    ";"}]}]], "Input",
  InitializationCell->True]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["2.11. Integration of differential forms", "Subsubsection"],
+
+Cell["Formatting of integration of differential forms:", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"FormIntegrate", "::", "dim"}], "=", 
+   "\"\<Degree of form `1` is incompatible with dimension of manifold \
+`2`.\>\""}], ";"}]], "Input",
+ InitializationCell->True],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"InertHeadQ", "[", "FormIntegrate", "]"}], "^:=", "True"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"LinearQ", "[", "FormIntegrate", "]"}], "^:=", "True"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FormIntegrate", "[", 
+    RowBox[{"form_", ",", "EmptyManifold"}], "]"}], ":=", "0"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FormIntegrate", "[", 
+    RowBox[{
+     RowBox[{"c_", "?", "ConstantQ"}], ",", 
+     RowBox[{"man_", "?", "ManifoldQ"}]}], "]"}], ":=", 
+   RowBox[{"c", "/;", 
+    RowBox[{
+     RowBox[{"DimOfManifold", "[", "man", "]"}], "==", "0"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FormIntegrate", "[", 
+    RowBox[{"form_", ",", 
+     RowBox[{"man_", "?", "ManifoldQ"}]}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Throw", "[", 
+     RowBox[{
+      RowBox[{"Message", "[", 
+       RowBox[{
+        RowBox[{"FormIntegrate", "::", "dim"}], ",", "form", ",", "man"}], 
+       "]"}], ";", "$Failed"}], "]"}], "/;", 
+    RowBox[{
+     RowBox[{"Deg", "[", "form", "]"}], "=!=", 
+     RowBox[{"DimOfManifold", "[", "man", "]"}]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ToCanonical", "[", 
+    RowBox[{
+     RowBox[{"FormIntegrate", "[", 
+      RowBox[{"form_", ",", "man_"}], "]"}], ",", "opts___"}], "]"}], "^:=", 
+   RowBox[{"FormIntegrate", "[", 
+    RowBox[{
+     RowBox[{"ToCanonical", "[", 
+      RowBox[{"form", ",", "opts"}], "]"}], ",", "man"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"FormIntegrate", "/:", 
+   RowBox[{"Grade", "[", 
+    RowBox[{
+     RowBox[{"FormIntegrate", "[", 
+      RowBox[{"form_", ",", "man_"}], "]"}], ",", "Wedge"}], "]"}], ":=", 
+   RowBox[{"0", "/;", 
+    RowBox[{
+     RowBox[{"Deg", "[", "form", "]"}], "===", 
+     RowBox[{"DimOfManifold", "[", "man", "]"}]}]}]}], ";"}]}], "Input",
+ InitializationCell->True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Formatting", ".", " ", "Do"}], " ", "not", " ", "remove", " ", 
+    "the", " ", 
+    RowBox[{"ugly", " ", "?", "InertHeadQ"}], " ", "check", " ", 
+    RowBox[{"here", ".", " ", "It"}], " ", "would", " ", "break", " ", 
+    "typesetting"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"MakeBoxes", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"FormIntegrate", "?", "InertHeadQ"}], "[", 
+       RowBox[{"form_", ",", "man_"}], "]"}], ",", "StandardForm"}], "]"}], ":=", 
+    RowBox[{"RowBox", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"SubscriptBox", "[", 
+        RowBox[{"\"\<\[Integral]\>\"", ",", 
+         RowBox[{"MakeBoxes", "[", 
+          RowBox[{"man", ",", "StandardForm"}], "]"}]}], "]"}], ",", 
+       RowBox[{"MakeBoxes", "[", 
+        RowBox[{"form", ",", "StandardForm"}], "]"}]}], "}"}], "]"}]}], 
+   ";"}]}]], "Input",
+ InitializationCell->True],
+
+Cell["\<\
+Use the Stokes theorem. By default it converts n-dimensional integration into \
+(n-1)-dimensional integration, but using the two-argument form, UseStokes can \
+work in both directions:\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"UseStokes", "[", "expr_", "]"}], ":=", 
+   RowBox[{"expr", "/.", 
+    RowBox[{
+     RowBox[{"HoldPattern", "[", 
+      RowBox[{"FormIntegrate", "[", 
+       RowBox[{
+        RowBox[{"Diff", "[", 
+         RowBox[{"form_", ",", "PD"}], "]"}], ",", "man_"}], "]"}], "]"}], 
+     "\[RuleDelayed]", 
+     RowBox[{"FormIntegrate", "[", 
+      RowBox[{"form", ",", 
+       RowBox[{"ManifoldBoundary", "[", "man", "]"}]}], "]"}]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"UseStokes", "[", 
+    RowBox[{"expr_", ",", 
+     RowBox[{"man_", "?", "ManifoldQ"}]}], "]"}], ":=", 
+   RowBox[{"expr", "/.", 
+    RowBox[{
+     RowBox[{"HoldPattern", "[", 
+      RowBox[{"FormIntegrate", "[", 
+       RowBox[{
+        RowBox[{"Diff", "[", 
+         RowBox[{"form_", ",", "PD"}], "]"}], ",", "man"}], "]"}], "]"}], 
+     "\[RuleDelayed]", 
+     RowBox[{"FormIntegrate", "[", 
+      RowBox[{"form", ",", 
+       RowBox[{"ManifoldBoundary", "[", "man", "]"}]}], "]"}]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"UseStokes", "[", 
+    RowBox[{"expr_", ",", "form_"}], "]"}], ":=", 
+   RowBox[{"expr", "/.", 
+    RowBox[{
+     RowBox[{"HoldPattern", "[", 
+      RowBox[{"FormIntegrate", "[", 
+       RowBox[{"form", ",", 
+        RowBox[{"ManifoldBoundary", "[", "man_", "]"}]}], "]"}], "]"}], 
+     "\[RuleDelayed]", 
+     RowBox[{"FormIntegrate", "[", 
+      RowBox[{
+       RowBox[{"Diff", "[", "form", "]"}], ",", "man"}], "]"}]}]}]}], 
+  ";"}]}], "Input",
+ InitializationCell->True],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Options", "[", "DefInertHead", "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"LinearQ", "\[Rule]", "False"}], ",", 
+   RowBox[{"ContractThrough", "\[Rule]", 
+    RowBox[{"{", "}"}]}], ",", 
+   RowBox[{"Master", "\[Rule]", "Null"}], ",", 
+   RowBox[{"PrintAs", "\[Rule]", "Identity"}], ",", 
+   RowBox[{"ProtectNewSymbol", "\[RuleDelayed]", "$ProtectNewSymbols"}], ",", 
+   
+   RowBox[{"DefInfo", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"\<\"inert head\"\>", ",", "\<\"\"\>"}], "}"}]}]}], 
+  "}"}]], "Output"]
+}, Open  ]]
 }, Closed]]
 }, Open  ]],
 
