@@ -1357,8 +1357,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
      RowBox[{"Unset", "[", 
-      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], "\n", 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1446,8 +1446,8 @@ Cell[BoxData[
              RowBox[{"(", 
               RowBox[{"DimOfManifold", "/@", 
                RowBox[{"DependenciesOf", "[", "expr", "]"}]}], ")"}]}], 
-            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", "\n",
-    "\[IndentingNewLine]", 
+            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1476,9 +1476,8 @@ Cell[BoxData[
         RowBox[{"HoldPattern", "@", 
          RowBox[{"Diff", "[", 
           RowBox[{"expr_", ",", "covd_"}], "]"}]}], "=."}], ";"}]}], "]"}]}], 
-   "\[IndentingNewLine]", "\n", 
-   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"xTension", "[", 
@@ -1650,13 +1649,12 @@ Cell[BoxData[{
       RowBox[{"Wedge", "@@", 
        RowBox[{"(", 
         RowBox[{"head", "/@", 
-         RowBox[{"Sort", "[", "indices", "]"}]}], ")"}]}]}]}], "]"}]}], "\n", 
-  "\[IndentingNewLine]", 
+         RowBox[{"Sort", "[", "indices", "]"}]}], ")"}]}]}]}], "]"}]}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
   RowBox[{"(*", " ", 
    RowBox[{
    "Wedge", " ", "product", " ", "of", " ", "general", " ", "CTensor", " ", 
-    "objects"}], " ", "*)"}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+    "objects"}], " ", "*)"}], "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"CTensorWedge", "[", "]"}], ":=", "1"}], ";"}], "\n", 
@@ -3097,63 +3095,104 @@ Cell[BoxData[
         RowBox[{"(", 
          RowBox[{"Coframe", "|", "dx"}], ")"}]}], ")"}], "[", 
       RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], ",", "met_"}], "]"}], ":=", 
-   
+   "\[IndentingNewLine]", 
    RowBox[{"expr", "/.", 
-    RowBox[{
-     RowBox[{"HoldPattern", "[", 
+    RowBox[{"{", 
+     RowBox[{
       RowBox[{
-       RowBox[{
-        RowBox[{"Hodge", "[", "met", "]"}], "[", 
-        RowBox[{"form", ":", 
-         RowBox[{"Wedge", "[", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"coframe", "[", "mani", "]"}], "[", "_", "]"}], ".."}], 
-          "]"}]}], "]"}], "|", 
-       RowBox[{"form", ":", 
+       RowBox[{"HoldPattern", "[", 
         RowBox[{
-         RowBox[{"Hodge", "[", "met", "]"}], "[", 
          RowBox[{
-          RowBox[{"coframe", "[", "mani", "]"}], "[", "_", "]"}], "]"}]}]}], 
-      "]"}], "\[RuleDelayed]", 
-     RowBox[{"With", "[", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"dim", "=", 
-          RowBox[{"DimOfMetric", "[", "met", "]"}]}], ",", 
-         RowBox[{"n", "=", 
-          RowBox[{"Length", "[", "form", "]"}]}], ",", 
-         RowBox[{"inds", "=", 
-          RowBox[{"Sequence", "@@@", 
-           RowBox[{"List", "@@", "form"}]}]}]}], "}"}], ",", 
-       "\[IndentingNewLine]", 
+          RowBox[{"Hodge", "[", "met", "]"}], "[", 
+          RowBox[{"form", ":", 
+           RowBox[{"Wedge", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"coframe", "[", "mani", "]"}], "[", "_", "]"}], ".."}], 
+            "]"}]}], "]"}], "|", 
+         RowBox[{"form", ":", 
+          RowBox[{
+           RowBox[{"Hodge", "[", "met", "]"}], "[", 
+           RowBox[{
+            RowBox[{"coframe", "[", "mani", "]"}], "[", "_", "]"}], "]"}]}]}],
+         "]"}], "\[RuleDelayed]", 
        RowBox[{"With", "[", 
         RowBox[{
          RowBox[{"{", 
-          RowBox[{"dummies", "=", 
-           RowBox[{"DummyIn", "/@", 
-            RowBox[{"ConstantArray", "[", 
-             RowBox[{
-              RowBox[{"VBundleOfMetric", "[", "met", "]"}], ",", 
-              RowBox[{"dim", "-", "n"}]}], "]"}]}]}], "}"}], ",", 
-         "\[IndentingNewLine]", 
-         RowBox[{
-          RowBox[{"1", "/", 
-           RowBox[{
-            RowBox[{"(", 
-             RowBox[{"dim", "-", "n"}], ")"}], "!"}]}], 
           RowBox[{
-           RowBox[{"epsilon", "[", "met", "]"}], "@@", 
-           RowBox[{"Join", "[", 
-            RowBox[{"inds", ",", 
-             RowBox[{"ChangeIndex", "/@", "dummies"}]}], "]"}]}], 
-          RowBox[{"Wedge", "@@", 
-           RowBox[{"(", 
+           RowBox[{"dim", "=", 
+            RowBox[{"DimOfMetric", "[", "met", "]"}]}], ",", 
+           RowBox[{"n", "=", 
+            RowBox[{"Length", "[", "form", "]"}]}], ",", 
+           RowBox[{"inds", "=", 
+            RowBox[{"Sequence", "@@@", 
+             RowBox[{"List", "@@", "form"}]}]}]}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"With", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"dummies", "=", 
+             RowBox[{"DummyIn", "/@", 
+              RowBox[{"ConstantArray", "[", 
+               RowBox[{
+                RowBox[{"VBundleOfMetric", "[", "met", "]"}], ",", 
+                RowBox[{"dim", "-", "n"}]}], "]"}]}]}], "}"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"1", "/", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"dim", "-", "n"}], ")"}], "!"}]}], 
             RowBox[{
-             RowBox[{"coframe", "[", "mani", "]"}], "/@", "dummies"}], 
-            ")"}]}]}]}], "\[IndentingNewLine]", "]"}]}], 
-      "\[IndentingNewLine]", "]"}]}]}]}], ";"}]], "Input",
+             RowBox[{"epsilon", "[", "met", "]"}], "@@", 
+             RowBox[{"Join", "[", 
+              RowBox[{"inds", ",", 
+               RowBox[{"ChangeIndex", "/@", "dummies"}]}], "]"}]}], 
+            RowBox[{"Wedge", "@@", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"coframe", "[", "mani", "]"}], "/@", "dummies"}], 
+              ")"}]}]}]}], "\[IndentingNewLine]", "]"}]}], 
+        "\[IndentingNewLine]", "]"}]}], ",", 
+      RowBox[{
+       RowBox[{"HoldPattern", "[", 
+        RowBox[{
+         RowBox[{"Hodge", "[", "met", "]"}], "[", "form_", "]"}], "]"}], 
+       "\[RuleDelayed]", 
+       RowBox[{
+        RowBox[{"With", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"dim", "=", 
+            RowBox[{"DimOfMetric", "[", "met", "]"}]}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"With", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"dummies", "=", 
+              RowBox[{"DummyIn", "/@", 
+               RowBox[{"ConstantArray", "[", 
+                RowBox[{
+                 RowBox[{"VBundleOfMetric", "[", "met", "]"}], ",", "dim"}], 
+                "]"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"form", "/", 
+              RowBox[{
+               RowBox[{"(", "dim", ")"}], "!"}]}], 
+             RowBox[{
+              RowBox[{"epsilon", "[", "met", "]"}], "@@", 
+              RowBox[{"(", 
+               RowBox[{"ChangeIndex", "/@", "dummies"}], ")"}]}], 
+             RowBox[{"Wedge", "@@", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"coframe", "[", "mani", "]"}], "/@", "dummies"}], 
+               ")"}]}]}]}], "\[IndentingNewLine]", "]"}]}], 
+         "\[IndentingNewLine]", "]"}], "/;", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"Deg", "[", "form", "]"}], "===", "0"}], ")"}]}]}]}], 
+     "}"}]}]}], ";"}]], "Input",
  InitializationCell->True],
 
 Cell[BoxData[
@@ -3183,7 +3222,7 @@ Cell[BoxData[
         RowBox[{"dx", "[", "#2", "]"}], ",", "met"}], "]"}], "&"}], ",", 
      "expr", ",", "$Manifolds"}], "]"}]}], ";"}]], "Input",
  InitializationCell->True]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -7982,12 +8021,12 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1280, 727},
-WindowMargins->{{Automatic, 293}, {Automatic, 130}},
+WindowMargins->{{13, Automatic}, {Automatic, 140}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
 Magnification->1.5,
-FrontEndVersion->"10.3 for Linux x86 (64-bit) (October 9, 2015)",
+FrontEndVersion->"10.4 for Linux x86 (64-bit) (February 25, 2016)",
 StyleDefinitions->"Default.nb"
 ]
 

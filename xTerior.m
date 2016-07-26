@@ -490,11 +490,16 @@ ExpandHodgeDual[expr_,dx[mani_?ManifoldQ],met_]:=ExpandHodgeDual1[(expr/.Reverse
 ExpandHodgeDual[expr_,(coframe:(Coframe|dx))[mani_?ManifoldQ],met_]:=ExpandHodgeDual1[expr,coframe[mani],met];
 
 
-ExpandHodgeDual1[expr_,(coframe:(Coframe|dx))[mani_?ManifoldQ],met_]:=expr/.HoldPattern[Hodge[met][form:Wedge[coframe[mani][_]..]]|form:Hodge[met][coframe[mani][_]]]:>With[{dim=DimOfMetric[met],n=Length[form],inds=Sequence@@@List@@form},
+ExpandHodgeDual1[expr_,(coframe:(Coframe|dx))[mani_?ManifoldQ],met_]:=
+expr/.{HoldPattern[Hodge[met][form:Wedge[coframe[mani][_]..]]|form:Hodge[met][coframe[mani][_]]]:>With[{dim=DimOfMetric[met],n=Length[form],inds=Sequence@@@List@@form},
 With[{dummies=DummyIn/@ConstantArray[VBundleOfMetric[met],dim-n]},
 1/(dim-n)!epsilon[met]@@Join[inds,ChangeIndex/@dummies]Wedge@@(coframe[mani]/@dummies)
 ]
-];
+],HoldPattern[Hodge[met][form_]]:>With[{dim=DimOfMetric[met]},
+With[{dummies=DummyIn/@ConstantArray[VBundleOfMetric[met],dim]},
+form/(dim)!epsilon[met]@@(ChangeIndex/@dummies)Wedge@@(coframe[mani]/@dummies)
+]
+]/;(Deg[form]===0)};
 
 
 ExpandHodgeDual1[expr_,Coframe,met_]:=Fold[ExpandHodgeDual1[#1,Coframe[#2],met]&,expr,$Manifolds];
