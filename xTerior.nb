@@ -1425,8 +1425,8 @@ Cell[BoxData[
   "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{"$UseDimensionsQ", "=", "False"}], ";"}], "\[IndentingNewLine]", 
-   "\n", 
+    RowBox[{"$UseDimensionsQ", "=", "False"}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"$DimensionsZeroForms", "=", 
      RowBox[{"{", "}"}]}], ";"}], "\n", 
@@ -1453,8 +1453,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
      RowBox[{"Unset", "[", 
-      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], "\n", 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1542,7 +1542,7 @@ Cell[BoxData[
              RowBox[{"(", 
               RowBox[{"DimOfManifold", "/@", 
                RowBox[{"DependenciesOf", "[", "expr", "]"}]}], ")"}]}], 
-            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", "\n",
+            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\n", "\[IndentingNewLine]",
     "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
@@ -1572,8 +1572,9 @@ Cell[BoxData[
         RowBox[{"HoldPattern", "@", 
          RowBox[{"Diff", "[", 
           RowBox[{"expr_", ",", "covd_"}], "]"}]}], "=."}], ";"}]}], "]"}]}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\n", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"xTension", "[", 
@@ -1586,8 +1587,8 @@ Cell[BoxData[
        RowBox[{"tensor_", "[", "inds___", "]"}], ",", "__"}], "]"}], ":=", 
      RowBox[{"If", "[", 
       RowBox[{"$UseDimensionsQ", ",", 
-       RowBox[{"SetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], "\n", 
-   "\[IndentingNewLine]", 
+       RowBox[{"SetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"xTension", "[", 
@@ -1714,7 +1715,7 @@ Cell[BoxData[{
       RowBox[{"DuplicateFreeQ", "[", "indices", "]"}], ",", 
       RowBox[{"Signature", "[", 
        RowBox[{"Ordering", "[", "indices", "]"}], "]"}], ",", "0"}], "]"}]}], 
-   ";"}], "\[IndentingNewLine]"}], "\n", 
+   ";"}], "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"simplifyBasisWedge", "[", "expr_", "]"}], ":=", 
@@ -1749,8 +1750,8 @@ Cell[BoxData[{
       RowBox[{"Wedge", "@@", 
        RowBox[{"(", 
         RowBox[{"head", "/@", 
-         RowBox[{"Sort", "[", "indices", "]"}]}], ")"}]}]}]}], "]"}]}], 
-  "\[IndentingNewLine]", "\n", 
+         RowBox[{"Sort", "[", "indices", "]"}]}], ")"}]}]}]}], "]"}]}], "\n", 
+  "\[IndentingNewLine]", 
   RowBox[{"(*", " ", 
    RowBox[{
    "Wedge", " ", "product", " ", "of", " ", "general", " ", "CTensor", " ", 
@@ -1780,7 +1781,7 @@ Cell[BoxData[{
    RowBox[{
     RowBox[{"CTensorWedge", "[", 
      RowBox[{"___", ",", "Zero", ",", "___"}], "]"}], ":=", "Zero"}], ";"}], 
-  "\n"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{"Wedge", "[", 
    RowBox[{
@@ -1825,7 +1826,7 @@ Cell[BoxData[{
       RowBox[{"Wedge", "[", 
        RowBox[{"basis", ",", "array"}], "]"}], ",", "bases", ",", 
       "addweight"}], "]"}], "[", "b", "]"}]}], 
-  "\[IndentingNewLine]"}], "\n", 
+  "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Wedge", "[", 
    RowBox[{
@@ -1874,7 +1875,7 @@ Cell[BoxData[{
         "frame"}], ",", 
        RowBox[{"{", 
         RowBox[{"0", ",", "Infinity"}], "}"}]}], "]"}]}], "]"}]}], 
-  "\[IndentingNewLine]"}], "\n", 
+  "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"Wedge", "[", 
@@ -1901,7 +1902,7 @@ Cell[BoxData[{
         RowBox[{"ctensor", "[", "inds", "]"}]}], "]"}], "/;", 
       RowBox[{
        RowBox[{"Length", "[", "frames", "]"}], "===", "1"}]}]}], "]"}]}], 
-  "\[IndentingNewLine]"}], "\n", 
+  "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Wedge", "[", 
    RowBox[{
@@ -2912,6 +2913,20 @@ Cell[BoxData[{
  InitializationCell->
   True,ExpressionUUID->"afe723d8-857d-4b38-8044-2fa5d6c1161f"],
 
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Unprotect", "@", "Dagger"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Dagger", "[", 
+    RowBox[{"Coframe", "[", 
+     RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "]"}], ":=", 
+   RowBox[{"Coframe", "[", "mani", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Protect", "@", "Dagger"}], ";"}]}], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"76437272-e51e-4c3f-9b74-031c36fd31e3"],
+
 Cell["Holonomic Co-frame", \
 "Text",ExpressionUUID->"6b04ed9f-f2ad-44c0-9570-e912d5fe68ca"],
 
@@ -2979,6 +2994,20 @@ Cell[BoxData[{
   ";"}]}], "Input",
  InitializationCell->
   True,ExpressionUUID->"11d88748-a161-47bc-b7ae-f50bca8ce361"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Unprotect", "@", "Dagger"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Dagger", "[", 
+    RowBox[{"dx", "[", 
+     RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "]"}], ":=", 
+   RowBox[{"dx", "[", "mani", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Protect", "@", "Dagger"}], ";"}]}], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"988e7c55-2b01-44e0-95ed-afa86bd81f05"],
 
 Cell["Condition of the co-frame being holonomic.", \
 "Text",ExpressionUUID->"8e82ec3d-3173-4f59-af32-fdbb5a0d546d"],
@@ -3408,7 +3437,7 @@ Cell[BoxData[
      "expr", ",", "$Manifolds"}], "]"}]}], ";"}]], "Input",
  InitializationCell->
   True,ExpressionUUID->"699cf669-5a02-42ef-b8bc-c75a2a45e579"]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -3656,7 +3685,7 @@ Cell[BoxData[
        RowBox[{"options", ":", 
         RowBox[{"OptionsPattern", "[", "Integrate", "]"}]}]}], "]"}], ":=", 
      RowBox[{"Part", "[", 
-      RowBox[{"expr", ",", "1"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+      RowBox[{"expr", ",", "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"FindPotential", "[", 
@@ -4059,8 +4088,8 @@ Cell[BoxData[{
     RowBox[{"StrongGenSet", "[", 
      RowBox[{
       RowBox[{"{", "}"}], ",", 
-      RowBox[{"GenSet", "[", "]"}]}], "]"}]}], ";"}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+      RowBox[{"GenSet", "[", "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]"}],
+ "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"Dagger", "[", 
@@ -4254,7 +4283,7 @@ Cell[BoxData[{
  InitializationCell->
   True,ExpressionUUID->"84ed4009-2306-4bd4-a403-8d4cd39ea6fb"],
 
-Cell["Connection form when the metric is given as a CTensor", \
+Cell["Christoffel form when the metric is given as a CTensor", \
 "Text",ExpressionUUID->"c3e52493-8e74-4561-b3b5-23f569750ea0"],
 
 Cell[BoxData[
@@ -4319,6 +4348,57 @@ Cell[BoxData[
      "]"}]}]}], ";"}]], "Input",
  InitializationCell->
   True,ExpressionUUID->"e92e2404-d587-475b-a6be-80a6d6c3e4b9"],
+
+Cell["\<\
+Connection form for a non-metric CCovD. In this case the last argument of the \
+CCovD is Null. \
+\>", "Text",ExpressionUUID->"2f666cad-fca5-44df-ae39-1ed35a8ce19e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ConnectionForm", "[", "exr_CCovD", "]"}], ":=", 
+   RowBox[{"Head", "@", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"ind", "=", 
+         RowBox[{"DummyIn", "@", 
+          RowBox[{"VBundleOfBasis", "[", 
+           RowBox[{"-", 
+            RowBox[{"Part", "[", 
+             RowBox[{"exr", ",", "2", ",", "2", ",", "2"}], "]"}]}], 
+           "]"}]}]}], ",", "a1", ",", "a2"}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"a1", ",", "a2"}], "}"}], "=", 
+        RowBox[{"GetIndicesOfVBundle", "[", 
+         RowBox[{
+          RowBox[{"VBundleOfBasis", "[", 
+           RowBox[{"Part", "[", 
+            RowBox[{"exr", ",", "2", ",", "2", ",", "1"}], "]"}], "]"}], ",", 
+          "2"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Part", "[", 
+          RowBox[{"exr", ",", "2"}], "]"}], "[", 
+         RowBox[{"a1", ",", 
+          RowBox[{"-", "ind"}], ",", 
+          RowBox[{"-", "a2"}]}], "]"}], " ", 
+        RowBox[{
+         RowBox[{"Coframe", "[", 
+          RowBox[{"BaseOfVBundle", "@", 
+           RowBox[{"VBundleOfBasis", "[", 
+            RowBox[{"-", 
+             RowBox[{"Part", "[", 
+              RowBox[{"exr", ",", "2", ",", "2", ",", "2"}], "]"}]}], "]"}]}],
+           "]"}], "[", "ind", "]"}]}]}]}], "\[IndentingNewLine]", "]"}]}]}], 
+  ";"}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"2f9a9cde-fa1f-45bf-b084-2aea8f2e64ed"],
 
 Cell["\<\
 Automatic replacement of the connection form by the Christoffel form when the \
@@ -4526,7 +4606,7 @@ Cell[BoxData[
         "]"}]}]}], "}"}]}]}]], "Input",
  InitializationCell->
   True,ExpressionUUID->"32eb75c1-4628-431f-b904-168f9c00ef8d"]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -8375,7 +8455,7 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1280, 727},
-WindowMargins->{{19, Automatic}, {132, Automatic}},
+WindowMargins->{{122, Automatic}, {141, Automatic}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,

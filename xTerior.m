@@ -491,6 +491,12 @@ PrintAs[Coframe[mani_?ManifoldQ]]^="\[Theta]";
 
 
 (* ::Input::Initialization:: *)
+Unprotect@Dagger;
+Dagger[Coframe[mani_?ManifoldQ]]:=Coframe[mani];
+Protect@Dagger;
+
+
+(* ::Input::Initialization:: *)
 xTensorQ@dx[mani_?ManifoldQ]^=True;
 SlotsOfTensor[dx[mani_?ManifoldQ]]^:={Tangent@mani};
 dx/:GradeOfTensor[dx[mani_?ManifoldQ],Wedge]=1;
@@ -500,6 +506,12 @@ DependenciesOfTensor[dx[mani_?ManifoldQ]]^:={mani};
 HostsOf[dx[mani_?ManifoldQ]]^={};
 TensorID[dx[mani_?ManifoldQ]]^={};
 PrintAs[dx[mani_?ManifoldQ]]^="dx";
+
+
+(* ::Input::Initialization:: *)
+Unprotect@Dagger;
+Dagger[dx[mani_?ManifoldQ]]:=dx[mani];
+Protect@Dagger;
 
 
 (* ::Input::Initialization:: *)
@@ -702,6 +714,13 @@ PrintAs[ChristoffelForm[PD]]^:=PrintAs[ChristoffelForm];
 ChristoffelForm[exr_CCovD]:=Head@Module[{ind=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],a1,a2},
 {a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[-First@Part[Last@exr,2]],2];
 Part[exr,2][a1,-ind,-a2] ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind]
+];
+
+
+(* ::Input::Initialization:: *)
+ConnectionForm[exr_CCovD]:=Head@Module[{ind=DummyIn@VBundleOfBasis[-Part[exr,2,2,2]],a1,a2},
+{a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[Part[exr,2,2,1]],2];
+Part[exr,2][a1,-ind,-a2] Coframe[BaseOfVBundle@VBundleOfBasis[-Part[exr,2,2,2]]][ind]
 ];
 
 
