@@ -4299,78 +4299,9 @@ Cell[BoxData[
          RowBox[{"DummyIn", "@", 
           RowBox[{"VBundleOfBasis", "[", 
            RowBox[{"-", 
-            RowBox[{"First", "@", 
-             RowBox[{"Part", "[", 
-              RowBox[{
-               RowBox[{"Last", "@", "exr"}], ",", "2"}], "]"}]}]}], "]"}]}]}],
-         ",", "a1", ",", "a2"}], "}"}], ",", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"{", 
-         RowBox[{"a1", ",", "a2"}], "}"}], "=", 
-        RowBox[{"GetIndicesOfVBundle", "[", 
-         RowBox[{
-          RowBox[{"VBundleOfBasis", "[", 
-           RowBox[{"-", 
-            RowBox[{"First", "@", 
-             RowBox[{"Part", "[", 
-              RowBox[{
-               RowBox[{"Last", "@", "exr"}], ",", "2"}], "]"}]}]}], "]"}], 
-          ",", "2"}], "]"}]}], ";", "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"Part", "[", 
-          RowBox[{"exr", ",", "2"}], "]"}], "[", 
-         RowBox[{"a1", ",", 
-          RowBox[{"-", "ind"}], ",", 
-          RowBox[{"-", "a2"}]}], "]"}], " ", 
-        RowBox[{
-         RowBox[{"ToCTensor", "[", 
-          RowBox[{
-           RowBox[{"Coframe", "[", 
-            RowBox[{"BaseOfVBundle", "@", 
-             RowBox[{"VBundleOfBasis", "[", 
-              RowBox[{"-", 
-               RowBox[{"First", "@", 
-                RowBox[{"Part", "[", 
-                 RowBox[{
-                  RowBox[{"Part", "[", 
-                   RowBox[{"exr", ",", "3"}], "]"}], ",", "2"}], "]"}]}]}], 
-              "]"}]}], "]"}], ",", 
-           RowBox[{"{", 
-            RowBox[{"-", 
-             RowBox[{"First", "@", 
-              RowBox[{"Part", "[", 
-               RowBox[{
-                RowBox[{"Part", "[", 
-                 RowBox[{"exr", ",", "3"}], "]"}], ",", "2"}], "]"}]}]}], 
-            "}"}]}], "]"}], "[", "ind", "]"}]}]}]}], "\[IndentingNewLine]", 
-     "]"}]}]}], ";"}]], "Input",
- InitializationCell->
-  True,ExpressionUUID->"e92e2404-d587-475b-a6be-80a6d6c3e4b9"],
-
-Cell["\<\
-Connection form for a non-metric CCovD. In this case the last argument of the \
-CCovD is Null. \
-\>", "Text",ExpressionUUID->"2f666cad-fca5-44df-ae39-1ed35a8ce19e"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{
-   RowBox[{"ConnectionForm", "[", "exr_CCovD", "]"}], ":=", 
-   RowBox[{"Head", "@", 
-    RowBox[{"Module", "[", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"ind", "=", 
-         RowBox[{"DummyIn", "@", 
-          RowBox[{"VBundleOfBasis", "[", 
-           RowBox[{"-", 
             RowBox[{"Part", "[", 
              RowBox[{"exr", ",", "2", ",", "2", ",", "2"}], "]"}]}], 
            "]"}]}]}], ",", "a1", ",", "a2"}], "}"}], ",", 
-      "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{
         RowBox[{"{", 
@@ -4395,8 +4326,57 @@ Cell[BoxData[
             RowBox[{"-", 
              RowBox[{"Part", "[", 
               RowBox[{"exr", ",", "2", ",", "2", ",", "2"}], "]"}]}], "]"}]}],
-           "]"}], "[", "ind", "]"}]}]}]}], "\[IndentingNewLine]", "]"}]}]}], 
-  ";"}]], "Input",
+           "]"}], "[", "ind", "]"}]}]}]}], "]"}]}]}], ";"}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"e92e2404-d587-475b-a6be-80a6d6c3e4b9"],
+
+Cell["\<\
+Connection form for a non-metric CCovD. In this case the last argument of the \
+CCovD is Null. \
+\>", "Text",ExpressionUUID->"2f666cad-fca5-44df-ae39-1ed35a8ce19e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ConnectionForm", "[", 
+    RowBox[{"exr_CCovD", ",", "vb_"}], "]"}], ":=", 
+   RowBox[{"Head", "@", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"ind", "=", 
+         RowBox[{"DummyIn", "@", 
+          RowBox[{"VBundleOfBasis", "[", 
+           RowBox[{"-", 
+            RowBox[{"Part", "[", 
+             RowBox[{"exr", ",", "2", ",", "2", ",", "2"}], "]"}]}], 
+           "]"}]}]}], ",", "a1", ",", "a2"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"a1", ",", "a2"}], "}"}], "=", 
+        RowBox[{"GetIndicesOfVBundle", "[", 
+         RowBox[{
+          RowBox[{"VBundleOfBasis", "[", 
+           RowBox[{"Part", "[", 
+            RowBox[{"exr", ",", "2", ",", "2", ",", "1"}], "]"}], "]"}], ",", 
+          "2"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Part", "[", 
+          RowBox[{"exr", ",", "2"}], "]"}], "[", 
+         RowBox[{"a1", ",", 
+          RowBox[{"-", "ind"}], ",", 
+          RowBox[{"-", "a2"}]}], "]"}], " ", 
+        RowBox[{
+         RowBox[{"Coframe", "[", 
+          RowBox[{"BaseOfVBundle", "@", 
+           RowBox[{"VBundleOfBasis", "[", 
+            RowBox[{"-", 
+             RowBox[{"Part", "[", 
+              RowBox[{"exr", ",", "2", ",", "2", ",", "2"}], "]"}]}], "]"}]}],
+           "]"}], "[", "ind", "]"}]}]}]}], "]"}]}]}], ";"}]], "Input",
  InitializationCell->
   True,ExpressionUUID->"2f9a9cde-fa1f-45bf-b084-2aea8f2e64ed"],
 
@@ -4606,7 +4586,7 @@ Cell[BoxData[
         "]"}]}]}], "}"}]}]}]], "Input",
  InitializationCell->
   True,ExpressionUUID->"32eb75c1-4628-431f-b904-168f9c00ef8d"]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -4834,7 +4814,7 @@ Cell[BoxData[{
  InitializationCell->
   True,ExpressionUUID->"978361af-e2b1-4a2f-9928-f85c0983ef4d"],
 
-Cell["Riemann form of a CTensor expression", \
+Cell["Riemann form of a CTensor expression:", \
 "Text",ExpressionUUID->"651a6d75-22c9-4321-99c6-8555150c1c2e"],
 
 Cell[BoxData[
@@ -4849,38 +4829,27 @@ Cell[BoxData[
       RowBox[{"Module", "[", 
        RowBox[{
         RowBox[{"{", 
-         RowBox[{
-          RowBox[{"ind1", "=", 
-           RowBox[{"DummyIn", "@", 
-            RowBox[{"VBundleOfBasis", "[", 
-             RowBox[{"-", 
-              RowBox[{"First", "@", 
-               RowBox[{"Part", "[", 
-                RowBox[{
-                 RowBox[{"Last", "@", "exr"}], ",", "2"}], "]"}]}]}], 
-             "]"}]}]}], ",", 
-          RowBox[{"ind2", "=", 
-           RowBox[{"DummyIn", "@", 
-            RowBox[{"VBundleOfBasis", "[", 
-             RowBox[{"-", 
-              RowBox[{"First", "@", 
-               RowBox[{"Part", "[", 
-                RowBox[{
-                 RowBox[{"Last", "@", "exr"}], ",", "2"}], "]"}]}]}], 
-             "]"}]}]}], ",", "a1", ",", "a2"}], "}"}], ",", 
-        "\[IndentingNewLine]", 
+         RowBox[{"tbundle", ",", "ind1", ",", "ind2", ",", "a1", ",", "a2"}], 
+         "}"}], ",", "\[IndentingNewLine]", 
         RowBox[{
+         RowBox[{"tbundle", "=", 
+          RowBox[{"VBundleOfBasis", "[", 
+           RowBox[{"-", 
+            RowBox[{"Part", "[", 
+             RowBox[{"exr", ",", "2", ",", "2", ",", "2"}], "]"}]}], "]"}]}], 
+         ";", "\[IndentingNewLine]", 
+         RowBox[{"ind1", "=", 
+          RowBox[{"DummyIn", "@", "tbundle"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"ind2", "=", 
+          RowBox[{"DummyIn", "@", "tbundle"}]}], ";", "\[IndentingNewLine]", 
          RowBox[{
           RowBox[{"{", 
            RowBox[{"a1", ",", "a2"}], "}"}], "=", 
           RowBox[{"GetIndicesOfVBundle", "[", 
            RowBox[{
             RowBox[{"VBundleOfBasis", "[", 
-             RowBox[{"-", 
-              RowBox[{"First", "@", 
-               RowBox[{"Part", "[", 
-                RowBox[{
-                 RowBox[{"Last", "@", "exr"}], ",", "2"}], "]"}]}]}], "]"}], 
+             RowBox[{"Part", "[", 
+              RowBox[{"exr", ",", "2", ",", "2", ",", "1"}], "]"}], "]"}], 
             ",", "2"}], "]"}]}], ";", "\[IndentingNewLine]", 
          RowBox[{
           RowBox[{
@@ -4888,55 +4857,80 @@ Cell[BoxData[
            RowBox[{
             RowBox[{"-", "ind1"}], ",", 
             RowBox[{"-", "ind2"}], ",", 
-            RowBox[{"-", "a1"}], ",", "a2"}], "]"}], " ", 
+            RowBox[{"-", "a1"}], ",", "a2"}], "]"}], "  ", 
           RowBox[{"Wedge", "[", 
            RowBox[{
             RowBox[{
-             RowBox[{"ToCTensor", "[", 
-              RowBox[{
-               RowBox[{"Coframe", "[", 
-                RowBox[{"BaseOfVBundle", "@", 
-                 RowBox[{"VBundleOfBasis", "[", 
-                  RowBox[{"-", 
-                   RowBox[{"First", "@", 
-                    RowBox[{"Part", "[", 
-                    RowBox[{
-                    RowBox[{"Part", "[", 
-                    RowBox[{"exr", ",", "3"}], "]"}], ",", "2"}], "]"}]}]}], 
-                  "]"}]}], "]"}], ",", 
-               RowBox[{"{", 
-                RowBox[{"-", 
-                 RowBox[{"First", "@", 
-                  RowBox[{"Part", "[", 
-                   RowBox[{
-                    RowBox[{"Part", "[", 
-                    RowBox[{"exr", ",", "3"}], "]"}], ",", "2"}], "]"}]}]}], 
-                "}"}]}], "]"}], "[", "ind1", "]"}], ",", 
+             RowBox[{"Coframe", "[", 
+              RowBox[{"BaseOfVBundle", "@", "tbundle"}], "]"}], "[", "ind1", 
+             "]"}], ",", 
             RowBox[{
-             RowBox[{"ToCTensor", "[", 
-              RowBox[{
-               RowBox[{"Coframe", "[", 
-                RowBox[{"BaseOfVBundle", "@", 
-                 RowBox[{"VBundleOfBasis", "[", 
-                  RowBox[{"-", 
-                   RowBox[{"First", "@", 
-                    RowBox[{"Part", "[", 
-                    RowBox[{
-                    RowBox[{"Part", "[", 
-                    RowBox[{"exr", ",", "3"}], "]"}], ",", "2"}], "]"}]}]}], 
-                  "]"}]}], "]"}], ",", 
-               RowBox[{"{", 
-                RowBox[{"-", 
-                 RowBox[{"First", "@", 
-                  RowBox[{"Part", "[", 
-                   RowBox[{
-                    RowBox[{"Part", "[", 
-                    RowBox[{"exr", ",", "3"}], "]"}], ",", "2"}], "]"}]}]}], 
-                "}"}]}], "]"}], "[", "ind2", "]"}]}], "]"}]}]}]}], 
-       "\[IndentingNewLine]", "]"}]}], ",", "Zero"}], "\[IndentingNewLine]", 
-    "]"}]}], ";"}]], "Input",
+             RowBox[{"Coframe", "[", 
+              RowBox[{"BaseOfVBundle", "@", "tbundle"}], "]"}], "[", "ind2", 
+             "]"}]}], "]"}]}]}]}], "\[IndentingNewLine]", "]"}]}], ",", 
+     "\[IndentingNewLine]", "Zero"}], "\[IndentingNewLine]", "]"}]}], 
+  ";"}]], "Input",
  InitializationCell->
   True,ExpressionUUID->"56e512ae-14da-4b5b-95f1-505689f6772f"],
+
+Cell[TextData[{
+ "Curvature form of a CTensor expression. ",
+ StyleBox["TODO: FRiemann doesn\[CloseCurlyQuote]t work with CCovD \
+connections.",
+  FontWeight->"Bold"]
+}], "Text",ExpressionUUID->"fe4bf957-0e91-4d65-9a9b-9c6e7870761f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"CurvatureForm", "[", 
+    RowBox[{"exr_CCovD", ",", "vbundle_"}], "]"}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"FRiemann", "[", "exr", "]"}], "=!=", "Zero"}], ",", 
+     RowBox[{"Head", "@", 
+      RowBox[{"Module", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"tbundle", ",", "ind1", ",", "ind2", ",", "a1", ",", "a2"}], 
+         "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"tbundle", "=", 
+          RowBox[{"VBundleOfBasis", "[", 
+           RowBox[{"-", 
+            RowBox[{"Part", "[", 
+             RowBox[{"exr", ",", "2", ",", "2", ",", "2"}], "]"}]}], "]"}]}], 
+         ";", "\[IndentingNewLine]", 
+         RowBox[{"ind1", "=", 
+          RowBox[{"DummyIn", "@", "tbundle"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"ind2", "=", 
+          RowBox[{"DummyIn", "@", "tbundle"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"a1", ",", "a2"}], "}"}], "=", 
+          RowBox[{"GetIndicesOfVBundle", "[", 
+           RowBox[{"vbundle", ",", "2"}], "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"FRiemann", "[", "exr", "]"}], "[", 
+           RowBox[{
+            RowBox[{"-", "ind1"}], ",", 
+            RowBox[{"-", "ind2"}], ",", 
+            RowBox[{"-", "a1"}], ",", "a2"}], "]"}], "  ", 
+          RowBox[{"Wedge", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Coframe", "[", 
+              RowBox[{"BaseOfVBundle", "@", "tbundle"}], "]"}], "[", "ind1", 
+             "]"}], ",", 
+            RowBox[{
+             RowBox[{"Coframe", "[", 
+              RowBox[{"BaseOfVBundle", "@", "tbundle"}], "]"}], "[", "ind2", 
+             "]"}]}], "]"}]}]}]}], "\[IndentingNewLine]", "]"}]}], ",", 
+     "Zero"}], "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"c1209398-d237-468a-8584-0a7b25190455"],
 
 Cell["\<\
 Automatic replacement of the curvature form if the covariant derivative \

@@ -711,17 +711,13 @@ PrintAs[ChristoffelForm[PD]]^:=PrintAs[ChristoffelForm];
 
 
 (* ::Input::Initialization:: *)
-ChristoffelForm[exr_CCovD]:=Head@Module[{ind=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],a1,a2},
-{a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[-First@Part[Last@exr,2]],2];
-Part[exr,2][a1,-ind,-a2] ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind]
-];
+ChristoffelForm[exr_CCovD]:=Head@Module[{ind=DummyIn@VBundleOfBasis[-Part[exr,2,2,2]],a1,a2},{a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[Part[exr,2,2,1]],2];
+Part[exr,2][a1,-ind,-a2] Coframe[BaseOfVBundle@VBundleOfBasis[-Part[exr,2,2,2]]][ind]];
 
 
 (* ::Input::Initialization:: *)
-ConnectionForm[exr_CCovD]:=Head@Module[{ind=DummyIn@VBundleOfBasis[-Part[exr,2,2,2]],a1,a2},
-{a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[Part[exr,2,2,1]],2];
-Part[exr,2][a1,-ind,-a2] Coframe[BaseOfVBundle@VBundleOfBasis[-Part[exr,2,2,2]]][ind]
-];
+ConnectionForm[exr_CCovD,vb_]:=Head@Module[{ind=DummyIn@VBundleOfBasis[-Part[exr,2,2,2]],a1,a2},{a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[Part[exr,2,2,1]],2];
+Part[exr,2][a1,-ind,-a2] Coframe[BaseOfVBundle@VBundleOfBasis[-Part[exr,2,2,2]]][ind]];
 
 
 (* ::Input::Initialization:: *)
@@ -782,9 +778,24 @@ PrintAs[RiemannForm]^="R";
 
 
 (* ::Input::Initialization:: *)
-RiemannForm[exr_CCovD]:=If[Riemann[exr]=!=Zero,Head@Module[{ind1=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],ind2=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],a1,a2},
-{a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[-First@Part[Last@exr,2]],2];
-Riemann[exr][-ind1,-ind2,-a1,a2] Wedge[ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind1],ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind2]]
+RiemannForm[exr_CCovD]:=If[Riemann[exr]=!=Zero,Head@Module[{tbundle,ind1,ind2,a1,a2},
+tbundle=VBundleOfBasis[-Part[exr,2,2,2]];
+ind1=DummyIn@tbundle;
+ind2=DummyIn@tbundle;
+{a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[Part[exr,2,2,1]],2];
+Riemann[exr][-ind1,-ind2,-a1,a2]  Wedge[Coframe[BaseOfVBundle@tbundle][ind1],Coframe[BaseOfVBundle@tbundle][ind2]]
+],
+Zero
+];
+
+
+(* ::Input::Initialization:: *)
+CurvatureForm[exr_CCovD,vbundle_]:=If[FRiemann[exr]=!=Zero,Head@Module[{tbundle,ind1,ind2,a1,a2},
+tbundle=VBundleOfBasis[-Part[exr,2,2,2]];
+ind1=DummyIn@tbundle;
+ind2=DummyIn@tbundle;
+{a1,a2}=GetIndicesOfVBundle[vbundle,2];
+FRiemann[exr][-ind1,-ind2,-a1,a2]  Wedge[Coframe[BaseOfVBundle@tbundle][ind1],Coframe[BaseOfVBundle@tbundle][ind2]]
 ],Zero
 ];
 
