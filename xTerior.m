@@ -19,10 +19,12 @@
 
 
 
+(* ::Input::Initialization:: *)
 xAct`xTerior`$xTensorVersionExpected={"1.1.2",{2015,8,23}};
 xAct`xTerior`$Version={"0.9.0",{2015,8,23}};
 
 
+(* ::Input::Initialization:: *)
 (* xTerior: exterior calculus in Differential Geometry *)
 
 (* Copyright (C) 2013 Alfonso Garcia-Parrado Gomez-Lobo and Leo C. Stein *)
@@ -36,6 +38,7 @@ You should have received a copy of the GNU General Public License along with thi
 *)
 
 
+(* ::Input::Initialization:: *)
 (* :Title: xTerior *)
 
 (* :Author: Alfonso Garcia-Parrado Gomez-Lobo and Leo C. Stein *)
@@ -68,31 +71,38 @@ You should have received a copy of the GNU General Public License along with thi
 	- ?? *)
 
 
+(* ::Input::Initialization:: *)
 With[{xAct`xTerior`Private`xTeriorSymbols=DeleteCases[Join[Names["xAct`xTerior`*"],Names["xAct`xTerior`Private`*"]],"$Version"|"xAct`xTerior`$Version"|"$xTensorVersionExpected"|"xAct`xTerior`$xTensorVersionExpected"]},
 Unprotect/@xAct`xTerior`Private`xTeriorSymbols;
 Clear/@xAct`xTerior`Private`xTeriorSymbols;
 ]
 
 
+(* ::Input::Initialization:: *)
 If[Unevaluated[xAct`xCore`Private`$LastPackage]===xAct`xCore`Private`$LastPackage,xAct`xCore`Private`$LastPackage="xAct`xTerior`"];
 
 
+(* ::Input::Initialization:: *)
 BeginPackage["xAct`xTerior`",{"xAct`xCoba`","xAct`xTensor`","xAct`xPerm`","xAct`xCore`"}]
 
 
+(* ::Input::Initialization:: *)
 If[Not@OrderedQ@Map[Last,{xAct`xTerior`$xTensorVersionExpected,xAct`xTensor`$Version}],Throw@Message[General::versions,"xTensor",xAct`xTensor`$Version,xAct`xTerior`$xTensorVersionExpected]]
 
 
+(* ::Input::Initialization:: *)
 Print[xAct`xCore`Private`bars]
 Print["Package xAct`xTerior`  version ",xAct`xTerior`$Version[[1]],", ",xAct`xTerior`$Version[[2]]];
 Print["CopyRight (C) 2013, Alfonso Garcia-Parrado Gomez-Lobo and Leo C. Stein, under the General Public License."];
 
 
+(* ::Input::Initialization:: *)
 Off[General::shdw]
 xAct`xTerior`Disclaimer[]:=Print["These are points 11 and 12 of the General Public License:\n\nBECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM `AS IS\.b4 WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.\n\nIN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES."]
 On[General::shdw]
 
 
+(* ::Input::Initialization:: *)
 If[xAct`xCore`Private`$LastPackage==="xAct`xTerior`",
 Unset[xAct`xCore`Private`$LastPackage];
 Print[xAct`xCore`Private`bars];
@@ -100,14 +110,17 @@ Print["These packages come with ABSOLUTELY NO WARRANTY; for details type Disclai
 Print[xAct`xCore`Private`bars]]
 
 
+(* ::Input::Initialization:: *)
 $PrePrint=ScreenDollarIndices;
 
 
+(* ::Input::Initialization:: *)
 Unprotect@PD;
 PD/:ManifoldOfCovD@PD=.
 Protect@PD;
 
 
+(* ::Input::Initialization:: *)
 (* Definition and undefinition of a differential form (just a wrapper for DefTensor with the option GradeOfTensor\[Rule]{Wedge})*)
 DefDiffForm::usage="DefDiffForm[form[inds], mani, Deg] defines a tensor valued differential form of degree deg on the manifold mani";
 UndefDiffForm::usage="UndefDiffForm[form] undefines the differential form form";
@@ -165,12 +178,15 @@ FormIntegrate::usage="FormIntegrate[form, M] represents the integration of the g
 UseStokes::usage="UseStokes[expr, M] converts subexpressions FormIntegrate[Diff[form], M] in expr into FormIntegrate[form, ManifoldBoundary[M]], reducing n-dimensional integration to (n-1)-integration. UseStokes[expr, form] converts subexpressions FormIntegrate[form, ManifoldBoundary[M]] in expr into FormIntegrate[Diff[form], M]. UseStokes[expr] performs UseStokes[expr, M] wherever possible in expr, to reduce dimensionality of integration.";
 
 
+(* ::Input::Initialization:: *)
 Begin["`Private`"]
 
 
+(* ::Input::Initialization:: *)
 $ContextPath
 
 
+(* ::Input::Initialization:: *)
 DefProduct[Wedge,
 AssociativeProductQ->True,
 CommutativityOfProduct->"SuperCommutative",
@@ -181,17 +197,21 @@ DefInfo->Null
 ];
 
 
+(* ::Input::Initialization:: *)
 Wedge/:GradeOfProduct[Times,Wedge]=0;
 
 
+(* ::Input::Initialization:: *)
 Deg[expr_]:=Grade[expr,Wedge];
 
 
+(* ::Input::Initialization:: *)
 Unprotect@Dagger;
 Dagger@expr_Wedge:=Dagger/@expr;
 Protect@Dagger;
 
 
+(* ::Input::Initialization:: *)
 (*Code added by Jos\[EAcute]*)
 $UseDimensionsQ=False;
 
@@ -225,6 +245,7 @@ UndefTensorUseDimensions[tensor_]:=If[$UseDimensionsQ,UnsetZeroForm[tensor]];
 
 
 
+(* ::Input::Initialization:: *)
 (* Contracted wedge product of CTensor objects *)
 Wedge[ctensor1_CTensor[left1___,a_,right1___],ctensor2_CTensor[left2___,-a_,right2___]]:=Module[{n1=Length[{left1,a}],n2=Length[{left2,-a}],res},res=xAct`xCoba`Private`CTensorContract[ctensor1,ctensor2,{n1,n2},Wedge];
 res[left1,right1,left2,right2]/;FreeQ[res,$Failed]];
@@ -233,6 +254,7 @@ Wedge[ctensor1_CTensor[left1___,-a_,right1___],ctensor2_CTensor[left2___,a_,righ
 res[left1,right1,left2,right2]/;FreeQ[res,$Failed]];
 
 
+(* ::Input::Initialization:: *)
 signatureOrZero[indices_]:=If[DuplicateFreeQ[indices],Signature[Ordering[indices]],0];
 
 simplifyBasisWedge[expr_]:=expr/.wed_Wedge:>simplifyBasisWedge1[wed];
@@ -247,11 +269,13 @@ CTensorWedge[___,Zero,___]:=Zero;
 Wedge[ctensor1_CTensor[inds1___],ctensor2_CTensor[inds2___]]:=CTensorWedge[ctensor1,ctensor2][inds1,inds2]/;xAct`xTensor`Private`TakePairs[{inds1,inds2}]==={}
 
 
+(* ::Input::Initialization:: *)
 Wedge[basis:(Coframe|dx)[_][_?CIndexQ],CTensor[array_,bases_List,addweight_][b__]]:=CTensor[Wedge[basis,array],bases,addweight][b]
 
 Wedge[CTensor[array_,bases_List,addweight_][b__],basis:(Coframe|dx)[_][_?CIndexQ]]:=CTensor[Wedge[array,basis],bases,addweight][b]
 
 
+(* ::Input::Initialization:: *)
 FormBases[CTensor[array_,__]]:=DeleteDuplicates[xAct`xPerm`Private`nosign/@Cases[array,(Coframe|dx)[_][{_,frame_}]:>frame,{0,Infinity}]]
 
 Wedge[(basis:(Coframe|dx)[_])[ind_],ctensor_CTensor[inds___]]:=With[{frames=FormBases[ctensor]},Wedge[ToCTensor[basis,frames][ind],ctensor[inds]]/;Length[frames]===1]
@@ -259,15 +283,19 @@ Wedge[(basis:(Coframe|dx)[_])[ind_],ctensor_CTensor[inds___]]:=With[{frames=Form
 Wedge[ctensor_CTensor[inds___],(basis:(Coframe|dx)[_])[ind_]]:=With[{frames=FormBases[ctensor]},Wedge[ctensor[inds],ToCTensor[basis,frames][ind]]/;Length[frames]===1]
 
 
+(* ::Input::Initialization:: *)
 CTensor/:(basis:(Coframe|dx)[_])[a_] (ctensor:CTensor[_,bases_List,_][l___,-a_,___]):=ToCTensor[basis,{-bases[[Length[{l,-a}]]]}][a] ctensor
 
 
+(* ::Input::Initialization:: *)
 CTensor/:HoldPattern[Wedge[lw___,(basis:(Coframe|dx)[_])[a_] ,rw___] (ctensor:CTensor[_,bases_List,_][l___,-a_,___])]:=Wedge[lw,ToCTensor[basis,{-bases[[Length[{l,-a}]]]}][a],rw] ctensor
 
 
+(* ::Input::Initialization:: *)
 $DefInfoQ=False;
 
 
+(* ::Input::Initialization:: *)
 DefProduct[CircleTimes,
 AssociativeProductQ->True,
 IdentityElementOfProduct->1,
@@ -277,53 +305,67 @@ PrintAs->"\[CircleTimes]"
 ]
 
 
+(* ::Input::Initialization:: *)
 $DefInfoQ=True;
 
 
+(* ::Input::Initialization:: *)
 CircleTimes/:GradeOfProduct[Times,CircleTimes]=0;
 
 
+(* ::Input::Initialization:: *)
 CircleTimes/:GradeOfTensor[head_,CircleTimes]:=GradeOfTensor[head,Wedge];
 
 
+(* ::Input::Initialization:: *)
 CircleTimes/:Grade[Diff[expr_,_],CircleTimes]:=Grade[expr,CircleTimes]+1;
 
 
+(* ::Input::Initialization:: *)
 CircleTimes/:Grade[Hodge[metricg_][expr_],CircleTimes]:=DimOfVBundle[VBundleOfMetric[metricg]]-Grade[expr,CircleTimes];
 
 
+(* ::Input::Initialization:: *)
 Unprotect@Dagger;
 Dagger@expr_CircleTimes:=Dagger/@expr;
 Protect@Dagger;
 
 
+(* ::Input::Initialization:: *)
 DefDiffForm[form_,mani_,deg_,options___?OptionQ]:=
 (DefTensor[form,mani,GradeOfTensor->{Wedge->deg},options];
 )
 
 
+(* ::Input::Initialization:: *)
 DefDiffForm[form_,mani_,deg_,sym_,options___?OptionQ]:=
 (DefTensor[form,mani,sym,GradeOfTensor->{Wedge->deg},options];
 )
 
 
+(* ::Input::Initialization:: *)
 Options@DefDiffForm:=Options@DefTensor;
 
 
+(* ::Input::Initialization:: *)
 UndefDiffForm:=UndefTensor;
 
 
+(* ::Input::Initialization:: *)
 Protect[DefDiffForm,UndefDiffForm];
 
 
+(* ::Input::Initialization:: *)
 Options[DefGradedDerivation]={
 PrintAs->Identity
 };
 
 
+(* ::Input::Initialization:: *)
 GradeOfDerivation[head_[v_,rest___],prod_]:=GradeOfDerivation[head,prod]+Grade[v,prod];
 
 
+(* ::Input::Initialization:: *)
 DefGradedDerivation[der_,prod_?ProductQ,dergrade_:0,options:OptionsPattern[]]:=With[{head=SubHead[der]},
 Module[{pa},
 
@@ -352,6 +394,7 @@ head/:MakeBoxes[head[v_][form_],StandardForm]:=xAct`xTensor`Private`interpretbox
 ];
 
 
+(* ::Input::Initialization:: *)
 MakeDerivation[head_,derL_,derR_,prod_,dergrade_]:=With[{grade=GradeOfDerivation[derR,prod]},
 (* Addition of grades in algebra *)
 head/:GradeOfDerivation[head,prod]:=dergrade;
@@ -373,26 +416,33 @@ head/:DependenciesOfInertHead[derL]:=DependenciesOf[First[derR]]
 ];
 
 
+(* ::Input::Initialization:: *)
 DefGradedDerivation[Diff,Wedge,+1,PrintAs->"d"];
 
 
+(* ::Input::Initialization:: *)
 Diff[expr_]:=Diff[expr,PD]
 
 
+(* ::Input::Initialization:: *)
 Diff/:MakeBoxes[Diff[form_,PD?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Diff[form,PD],RowBox[{PrintAs[Diff],"[",MakeBoxes[form,StandardForm],"]"}]];
 Diff/:MakeBoxes[Diff[form_,cd_?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Diff[form,cd],RowBox[{SuperscriptBox[PrintAs[Diff],Last@SymbolOfCovD[cd]],"[",MakeBoxes[form,StandardForm],"]"}]];
 
 
+(* ::Input::Initialization:: *)
 Diff[expr_?ArrayQ,cd_]:=Diff[#,cd]&/@expr;
 Diff[expr_Equal,cd_]:=Diff[#,cd]&/@expr;
 
 
+(* ::Input::Initialization:: *)
 Diff[expr_Diff,PD]:=0
 
 
+(* ::Input::Initialization:: *)
 Diff[_Basis,PD]:=0;
 
 
+(* ::Input::Initialization:: *)
 (* This produces expanded expressions and is much faster when there are many scalars *)
 Diff[expr_Times,cd_]:=Module[{grades=Grade[#,Wedge]&/@List@@expr,pos,scalar,form},
 pos=Position[grades,_?Positive,1,Heads->False];
@@ -416,15 +466,19 @@ diff0[scalar_Times,cd_,form_]:=Sum[MapAt[diff0[#,cd,form]&,scalar,i],{i,1,Length
 diff0[scalar_,cd_,form_]:=Wedge[Diff[scalar,cd],form];
 
 
+(* ::Input::Initialization:: *)
 Diff[x_?ConstantQ,cd_]:=0;
 
 
+(* ::Input::Initialization:: *)
 Diff/:HoldPattern[Dagger[Diff[expr_,cd_]]]:=Diff[Dagger[expr],cd];
 
 
+(* ::Input::Initialization:: *)
 Diff[CTensor[array_,bases_List,weight_][inds__],cd_]:=CTensor[Diff[array,cd],bases,weight][inds];
 
 
+(* ::Input::Initialization:: *)
 xTensorQ@Coframe[mani_?ManifoldQ]^=True;
 SlotsOfTensor[Coframe[mani_?ManifoldQ]]^:={Tangent@mani};
 Coframe/:GradeOfTensor[Coframe[mani_?ManifoldQ],Wedge]=1;
@@ -436,6 +490,7 @@ TensorID[Coframe[mani_?ManifoldQ]]^={};
 PrintAs[Coframe[mani_?ManifoldQ]]^="\[Theta]";
 
 
+(* ::Input::Initialization:: *)
 xTensorQ@dx[mani_?ManifoldQ]^=True;
 SlotsOfTensor[dx[mani_?ManifoldQ]]^:={Tangent@mani};
 dx/:GradeOfTensor[dx[mani_?ManifoldQ],Wedge]=1;
@@ -447,14 +502,17 @@ TensorID[dx[mani_?ManifoldQ]]^={};
 PrintAs[dx[mani_?ManifoldQ]]^="dx";
 
 
+(* ::Input::Initialization:: *)
 Diff[dx[mani_?ManifoldQ][ind_],PD]:=0;
 
 
+(* ::Input::Initialization:: *)
 (* xTensions *)
 xTension["xTerior`",DefChart,"End"]:=setdiffs;
 setdiffs[chartname_,__]:=Thread[ComponentValue[dx[ManifoldOfChart@chartname][{#,chartname}]&/@CNumbersOf@chartname,Diff/@ScalarsOfChart@chartname]];
 
 
+(* ::Input::Initialization:: *)
 DefInertHead[Hodge[metric_],
 LinearQ->True,
 ContractThrough->{delta},
@@ -462,34 +520,43 @@ DefInfo->Null
 ]
 
 
+(* ::Input::Initialization:: *)
 Hodge/:PrintAs@Hodge[metric_]:=If[Head[metric]===CTensor,"*","\!\(\*SubscriptBox[\(*\), \("<>PrintAs[metric]<>"\)]\)"];
 
 
+(* ::Input::Initialization:: *)
 Hodge[metric_][expr_List]:=Hodge[metric][#]&/@expr;
 Hodge[metric_][expr_Equal]:=Hodge[metric][#]&/@expr;
 
 
+(* ::Input::Initialization:: *)
 Hodge[metric_][CTensor[array_,bases_List,weight_][inds__]]:=CTensor[Hodge[metric][array],bases,weight][inds];
 
 
+(* ::Input::Initialization:: *)
 Hodge[metric_][x_ y_]:=x Hodge[metric][y]/;Grade[x,Wedge]===0
 
 
+(* ::Input::Initialization:: *)
 DimOfMetric[metric_]:=DimOfVBundle[VBundleOfMetric[metric]]
 
 
+(* ::Input::Initialization:: *)
 Hodge/:Grade[Hodge[metric_][expr_],Wedge]:=DimOfMetric[metric]-Grade[expr,Wedge]
 
 
+(* ::Input::Initialization:: *)
 Hodge[metric_]@Hodge[metric_][expr_]:=(-1)^(Grade[expr,Wedge](DimOfMetric[metric]-1)+SignatureOfMetric[metric][[2]])expr
 
 
+(* ::Input::Initialization:: *)
 (* Expand dual of differentials of coordinate elements *)
 ExpandHodgeDual[expr_,dx[mani_?ManifoldQ],met_]:=ExpandHodgeDual1[(expr/.Reverse/@Flatten[List@@TensorValues@dx[mani]]),dx[mani],met];
 (* Expand of the wedge product of canonical 1-forms *)
 ExpandHodgeDual[expr_,(coframe:(Coframe|dx))[mani_?ManifoldQ],met_]:=ExpandHodgeDual1[expr,coframe[mani],met];
 
 
+(* ::Input::Initialization:: *)
 ExpandHodgeDual1[expr_,(coframe:(Coframe|dx))[mani_?ManifoldQ],met_]:=
 expr/.{HoldPattern[Hodge[met][form:Wedge[coframe[mani][_]..]]|form:Hodge[met][coframe[mani][_]]]:>With[{dim=DimOfMetric[met],n=Length[form],inds=Sequence@@@List@@form},
 With[{dummies=DummyIn/@ConstantArray[VBundleOfMetric[met],dim-n]},
@@ -502,12 +569,15 @@ form/(dim)!epsilon[met]@@(ChangeIndex/@dummies)Wedge@@(coframe[mani]/@dummies)
 ]/;(Deg[form]===0)};
 
 
+(* ::Input::Initialization:: *)
 ExpandHodgeDual1[expr_,Coframe,met_]:=Fold[ExpandHodgeDual1[#1,Coframe[#2],met]&,expr,$Manifolds];
 
 
+(* ::Input::Initialization:: *)
 ExpandHodgeDual1[expr_,dx,met_]:=Fold[ExpandHodgeDual1[#1,dx[#2],met]&,expr,$Manifolds];
 
 
+(* ::Input::Initialization:: *)
 DefInertHead[Codiff[metric_],
 LinearQ->True,
 ContractThrough->delta,
@@ -515,36 +585,46 @@ DefInfo->Null
 ];
 
 
+(* ::Input::Initialization:: *)
 Codiff/:PrintAs@Codiff[metric_]:=If[Head@metric===CTensor,"\[Delta]","\!\(\*SubscriptBox[\(\[Delta]\), \("<>PrintAs[metric]<>"\)]\)"];
 
 
+(* ::Input::Initialization:: *)
 Codiff/:Grade[Codiff[metric_][expr_,___],Wedge]:=-1+Grade[expr,Wedge]
 
 
+(* ::Input::Initialization:: *)
 Codiff/:MakeBoxes[Codiff[metric_][form_,PD?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Codiff[metric][form,PD],RowBox[{PrintAs[Codiff[metric]],"[",MakeBoxes[form,StandardForm],"]"}]];
 Codiff/:MakeBoxes[Codiff[metric_][form_,cd_?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[Codiff[metric][form,cd],RowBox[{SuperscriptBox[PrintAs[Codiff[metric]],Last@SymbolOfCovD[cd]],"[",MakeBoxes[form,StandardForm],"]"}]];
 
 
+(* ::Input::Initialization:: *)
 HoldPattern[Codiff[met_][expr_]]:=Codiff[met][expr,PD];
 
 
+(* ::Input::Initialization:: *)
 CodiffToDiff[expr_]:=expr//.Codiff[met_][expr1_,covd_?CovDQ]:>(-1)^(DimOfMetric[met]Grade[expr1,Wedge]+DimOfMetric[met]+1+SignatureOfMetric[met][[2]]+1)Hodge[met]@Diff[Hodge[met]@expr1,covd]
 
 
+(* ::Input::Initialization:: *)
 Codiff[metric_][Codiff[metric_][expr_,PD]]:=0
 
 
+(* ::Input::Initialization:: *)
 Codiff[_Basis,covd_?CovDQ]:=0;
 
 
+(* ::Input::Initialization:: *)
 Codiff@expr_List:=Codiff/@expr;
 Codiff@expr_Equal:=Codiff/@expr;
 
 
+(* ::Input::Initialization:: *)
 FindPotential[expr_Plus,point_List,chart_?ChartQ,options:OptionsPattern[Integrate]]:=FindPotential[#,point,chart,options]&/@expr;
 FindPotential[expr_Times,point_List,chart_?ChartQ,options:OptionsPattern[Integrate]]:=FindPotential[Expand@expr,point,chart,options];
 
 
+(* ::Input::Initialization:: *)
 (*Simplest cases for grade 1 forms *)
 FindPotential[expr_Diff,point_List,chart_?ChartQ,options:OptionsPattern[Integrate]]:=Part[expr,1];
 
@@ -554,13 +634,16 @@ Integrate1/:HoldPattern@Plus[var__Integrate1]:=Integrate[Plus@@First/@{var},{t,0
 
 
 
+(* ::Input::Initialization:: *)
 (* Poincare Lemma for higher degree forms *)
 FindPotential[factor_. expr_Wedge,point_List,chart_?ChartQ,options:OptionsPattern[Integrate]]:=Integrate[(factor/.Thread[Rule[ScalarsOfChart@chart,Times[#,t]&/@(ScalarsOfChart@chart-point)+point]]) Sum[(-1)^(i-1)t^(Deg@expr-1) (Part[expr,i,1]-Part[point,First@Flatten@Position[ScalarsOfChart@chart,Part[expr,i,1]]])Delete[expr,{i}],{i,1,Length[expr]}],{t,0,1},options];
 
 
+(* ::Input::Initialization:: *)
 FormIntegrate::dim="Degree of form `1` is incompatible with dimension of manifold `2`.";
 
 
+(* ::Input::Initialization:: *)
 InertHeadQ[FormIntegrate]^:=True;
 LinearQ[FormIntegrate]^:=True;
 FormIntegrate[form_,EmptyManifold]:=0;
@@ -570,15 +653,18 @@ ToCanonical[FormIntegrate[form_,man_],opts___]^:=FormIntegrate[ToCanonical[form,
 FormIntegrate/:Grade[FormIntegrate[form_,man_],Wedge]:=0/;Deg[form]===DimOfManifold[man];
 
 
+(* ::Input::Initialization:: *)
 (* Formatting. Do not remove the ugly ?InertHeadQ check here. It would break typesetting *)
 MakeBoxes[FormIntegrate?InertHeadQ[form_,man_],StandardForm]:=RowBox[{SubscriptBox["\[Integral]",MakeBoxes[man,StandardForm]],MakeBoxes[form,StandardForm]}];
 
 
+(* ::Input::Initialization:: *)
 UseStokes[expr_]:=expr/.HoldPattern[FormIntegrate[Diff[form_,PD],man_]]:>FormIntegrate[form,ManifoldBoundary[man]];
 UseStokes[expr_,man_?ManifoldQ]:=expr/.HoldPattern[FormIntegrate[Diff[form_,PD],man]]:>FormIntegrate[form,ManifoldBoundary[man]];
 UseStokes[expr_,form_]:=expr/.HoldPattern[FormIntegrate[form,ManifoldBoundary[man_]]]:>FormIntegrate[Diff[form],man];
 
 
+(* ::Input::Initialization:: *)
 xTensorQ[ConnectionForm[cd_?CovDQ,_]]^=True;
 SlotsOfTensor[ConnectionForm[_,vb_?VBundleQ]]^:={vb,-vb};
 ConnectionForm/:GradeOfTensor[ConnectionForm[_,_],Wedge]=1;
@@ -595,6 +681,7 @@ PrintAs[ConnectionForm[cd1_,_]]^:=PrintAs[ConnectionForm]<>"["<>Last@SymbolOfCov
 PrintAs[ConnectionForm[PD,_]]^:=PrintAs[ConnectionForm];
 
 
+(* ::Input::Initialization:: *)
 xTensorQ[ChristoffelForm[cd1_?CovDQ]]^=True;
 SlotsOfTensor[ChristoffelForm[cd1_?CovDQ]]^:={Tangent@ManifoldOfCovD@cd1,-Tangent@ManifoldOfCovD@cd1};
 ChristoffelForm/:GradeOfTensor[ChristoffelForm[_],Wedge]=1;
@@ -611,31 +698,37 @@ PrintAs[ChristoffelForm]^="\[CapitalGamma]";
 PrintAs[ChristoffelForm[PD]]^:=PrintAs[ChristoffelForm];
 
 
+(* ::Input::Initialization:: *)
 ChristoffelForm[exr_CCovD]:=Head@Module[{ind=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],a1,a2},
 {a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[-First@Part[Last@exr,2]],2];
 Part[exr,2][a1,-ind,-a2] ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind]
 ];
 
 
+(* ::Input::Initialization:: *)
 ConnectionForm[cd1_,vb_]:=ChristoffelForm[cd1]/;(Tangent@ManifoldOfCovD@cd1===vb);
 ChristoffelForm[cd_,tangentbundle_]:=ChristoffelForm[cd];
 
 
+(* ::Input::Initialization:: *)
 ConnectionForm[PD,vb_]:=Zero;
 ChristoffelForm[PD]:=Zero;
 
 
+(* ::Input::Initialization:: *)
 ConnectionFormToTensor[expr_,covd_,frame:(Coframe|dx)]:=expr/.{ChristoffelForm[cd1_][ind1_,ind2_]:>Module[{a=DummyIn@First@VBundlesOfCovD@covd},
 If[xTensorQ@GiveSymbol[Christoffel,cd1,covd]===False,DefTensor[GiveSymbol[Christoffel,cd1,covd][ind1,-a,ind2],ManifoldOfCovD@covd]];
 GiveSymbol[Christoffel,cd1,covd][ind1,-a,ind2]frame[ManifoldOfCovD@covd][a]]/;covd=!=PD,ConnectionForm[cd1_,vbundle_][ind1_,ind2_]:>Module[{a=DummyIn@Tangent@BaseOfVBundle@vbundle},If[xTensorQ@GiveSymbol[AChristoffel,covd,cd1]===False,DefTensor[GiveSymbol[AChristoffel,covd,cd1][ind1,-a,ind2],BaseOfVBundle@vbundle]];
 GiveSymbol[AChristoffel,covd,cd1][ind1,-a,ind2]frame[BaseOfVBundle@vbundle][a]]/;covd=!=PD};
 
 
+(* ::Input::Initialization:: *)
 ConnectionFormToTensor[expr_,PD,frame:(Coframe|dx)]:=expr/.{ChristoffelForm[cd1_][ind1_,ind2_]:>Module[{a=DummyIn@First@VBundlesOfCovD@cd1},
 GiveSymbol[Christoffel,cd1][ind1,-a,ind2]frame[ManifoldOfCovD@cd1][a]],ConnectionForm[cd1_,_][ind1_,ind2_]:>Module[{a=DummyIn@First@VBundlesOfCovD@cd1},
 GiveSymbol[AChristoffel,cd1][ind1,-a,ind2]frame[ManifoldOfCovD@cd1][a]]}
 
 
+(* ::Input::Initialization:: *)
 xTensorQ[CurvatureForm[_,_]]^=True;
 SlotsOfTensor[CurvatureForm[_,vb_?VBundleQ]]^:={vb,-vb};
 CurvatureForm/:GradeOfTensor[CurvatureForm[_,_],Wedge]=2;
@@ -651,6 +744,7 @@ PrintAs[CurvatureForm]^="F";
 PrintAs[CurvatureForm[cd_,_]]^:=PrintAs[CurvatureForm]<>"["<>Last@SymbolOfCovD[cd]<>"]";
 
 
+(* ::Input::Initialization:: *)
 xTensorQ[RiemannForm[_]]^=True;
 SlotsOfTensor[RiemannForm[cd_?CovDQ]]^:={Tangent@ManifoldOfCovD@cd,-Tangent@ManifoldOfCovD@cd};
 RiemannForm/:GradeOfTensor[RiemannForm[_],Wedge]=2;
@@ -668,6 +762,7 @@ PrintAs[RiemannForm]^="R";
 (PrintAs[RiemannForm[cd_]]/;Head@cd=!=CCovD)^:=PrintAs[RiemannForm]<>"["<>Last@SymbolOfCovD[cd]<>"]";
 
 
+(* ::Input::Initialization:: *)
 RiemannForm[exr_CCovD]:=If[Riemann[exr]=!=Zero,Head@Module[{ind1=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],ind2=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],a1,a2},
 {a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[-First@Part[Last@exr,2]],2];
 Riemann[exr][-ind1,-ind2,-a1,a2] Wedge[ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind1],ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind2]]
@@ -675,15 +770,18 @@ Riemann[exr][-ind1,-ind2,-a1,a2] Wedge[ToCTensor[Coframe[BaseOfVBundle@VBundleOf
 ];
 
 
+(* ::Input::Initialization:: *)
 CurvatureForm[cd_?CovDQ,vbundle_]:=RiemannForm[cd]/;vbundle===Tangent@ManifoldOfCovD@cd;
 RiemannForm[cd_,vbundle_]:=RiemannForm[cd];
 
 
+(* ::Input::Initialization:: *)
 CurvatureFormToTensor[expr_,frame:(Coframe|dx)]:=expr/.{HoldPattern@CurvatureForm[cd1_,vbundle1_?VBundleQ][inds__]:>Module[{a=DummyIn@First@VBundlesOfCovD@cd1,b=DummyIn@First@VBundlesOfCovD@cd1},
 1/2GiveSymbol[FRiemann,cd1][-a,-b,Sequence@@Reverse@List@inds]Wedge[frame[ManifoldOfCovD@cd1][a],frame[ManifoldOfCovD@cd1][b]]],RiemannForm[cd1_][inds__]:>Module[{a=DummyIn@First@VBundlesOfCovD@cd1,b=DummyIn@First@VBundlesOfCovD@cd1},
 -$RiemannSign 1/2GiveSymbol[Riemann,cd1][-a,-b,Sequence@@Reverse@List@inds]Wedge[frame[ManifoldOfCovD@cd1][a],frame[ManifoldOfCovD@cd1][b]]]}
 
 
+(* ::Input::Initialization:: *)
 xTensorQ[TorsionForm[_]]^=True;
 SlotsOfTensor[TorsionForm[cd_]]^:={Tangent@ManifoldOfCovD@cd};
 TorsionForm/:GradeOfTensor[TorsionForm[_],Wedge]=2;
@@ -696,19 +794,23 @@ HostsOf[TorsionForm[cd_]]^:=HostsOf@cd;(* Should we put HostsOf@cd here? OK*)
 TensorID[TorsionForm[_]]^={};
 
 
+(* ::Input::Initialization:: *)
 PrintAs[TorsionForm]^="\[GothicCapitalT]";
 (PrintAs[TorsionForm[cd_]]/;Head@cd=!=CCovD)^:=PrintAs[TorsionForm]<>"["<>Last@SymbolOfCovD[cd]<>"]";
 
 
+(* ::Input::Initialization:: *)
 TorsionForm[exr_CCovD]:=Head@Module[{ind1=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],ind2=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],a1},
 {a1}=GetIndicesOfVBundle[VBundleOfBasis[-First@Part[Last@exr,2]],1];
 Torsion[exr][a1,-ind1,-ind2] ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind1]\[Wedge]ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind2]
 ];
 
 
+(* ::Input::Initialization:: *)
 ConnectionForm[cd1_,cd2_,vbundle_][inds__]:=ConnectionForm[cd1,vbundle][inds]-ConnectionForm[cd2,vbundle][inds];
 
 
+(* ::Input::Initialization:: *)
 ChangeExtD[expr_,cd_?CovDQ,cd_]:=expr;
 ChangeExtD[expr_,cd1_?CovDQ,cd2_:PD]:=expr/.HoldPattern[Diff[expr1_,cd1]]:>
 makeChangeExtD[ChangeExtD[expr1,cd1,cd2],cd1,cd2];
@@ -718,37 +820,46 @@ ChangeExtD[expr_,x_,_:PD]:=Throw@Message[ChangeExtD::unknown,"covariant derivati
 ChangeExtD[expr_]:=ChangeExtD[expr,$CovDs];
 
 
+(* ::Input::Initialization:: *)
 makeChangeExtD[expr_,cd1_,cd2_]:=With[{vbs=Apply[Union,VBundlesOfCovD/@DeleteCases[{cd1,cd2},PD]]},
 Diff[expr,cd2]+Plus@@Map[addAChr1[expr,cd1,cd2],xAct`xTensor`Private`selecton[Select[FindFreeIndices@expr,GIndexQ],vbs]]//ReduceAChr1
 ];
 
 
+(* ::Input::Initialization:: *)
 addAChr1[expr_,cd1_,cd2_][{oldind_?xAct`xTensor`Private`upQ,dummy_}]:=Wedge[ConnectionForm[cd1,cd2,VBundleOfIndex@oldind][oldind,-dummy],ReplaceIndex[expr,oldind->dummy]]
 addAChr1[expr_,cd1_,cd2_][{oldind_?xAct`xTensor`Private`downQ,dummy_}]:=-Wedge[ConnectionForm[cd1,cd2,VBundleOfIndex@oldind][dummy,oldind],ReplaceIndex[expr,oldind->-dummy]]
 
 
+(* ::Input::Initialization:: *)
 ReduceAChr1[expr_]:=expr//.{ConnectionForm[cd1_,cd2_,vb_][a_,b_]:>ConnectionForm[cd1,PD,vb][a,b]/;(cd2=!=PD&&FreeQ[VBundlesOfCovD@cd2,vb]),
 ConnectionForm[cd1_,cd2_,vb_][a_,b_]:>ConnectionForm[PD,cd2,vb][a,b]/;(cd1=!=PD&&FreeQ[VBundlesOfCovD@cd1,vb])}
 
 
+(* ::Input::Initialization:: *)
 Diff[Diff[expr_,PD],PD]:=0
 
 
+(* ::Input::Initialization:: *)
 HoldPattern@Diff[HoldPattern[Diff[expr_,cd_]],cd_]:=
 Plus@@Map[addFRiem2[expr,cd],xAct`xTensor`Private`selecton[Select[FindFreeIndices@expr,AIndexQ],VBundlesOfCovD@cd]];
 
 
+(* ::Input::Initialization:: *)
 addFRiem2[expr_,cd_][{oldind_?xAct`xTensor`Private`upQ,dummy_}]:=Wedge[CurvatureForm[cd,VBundleOfIndex[oldind]][oldind,-dummy],ReplaceIndex[expr,oldind->dummy]];
 
 addFRiem2[expr_,cd_][{oldind_?xAct`xTensor`Private`downQ,dummy_}]:=-Wedge[CurvatureForm[cd,VBundleOfIndex[oldind]][dummy,oldind],ReplaceIndex[expr,oldind->-dummy]]
 
 
+(* ::Input::Initialization:: *)
 CurvatureForm[PD,_]:=Zero;
 
 
+(* ::Input::Initialization:: *)
 RiemannForm[PD]:=Zero;
 
 
+(* ::Input::Initialization:: *)
 ChangeCurvatureForm[expr_,cd_,cd_]:=expr;
 ChangeCurvatureForm[expr_,cd1_?CurvatureQ,cd2_:PD]:=ReduceAChr1[expr/.changeCurvatureFormRules[cd1,cd2]];
 ChangeCurvatureForm[expr_,list_List,cd2_:PD]:=Fold[ChangeCurvatureForm[#1,#2,cd2]&,expr,list];
@@ -756,11 +867,13 @@ ChangeCurvatureForm[expr_,_,_:PD]:=expr;
 ChangeCurvatureForm[expr_]:=ChangeCurvatureForm[expr,$CovDs];
 
 
+(* ::Input::Initialization:: *)
 changeCurvatureFormRules[cd2_,cd1_]:={CurvatureForm[cd2,vb_?VBundleQ][a_,b_]:>
 With[{c=DummyIn@vb,A1=ConnectionForm[cd2,cd1,vb]},CurvatureForm[cd1,vb][a,b]+Diff[A1[a,b],cd1]+Wedge[A1[a,-c],A1[c,b]]],RiemannForm[cd2][a_,b_]:>
 With[{c=DummyIn@Tangent@ManifoldOfCovD@cd2,A1=ChristoffelForm[cd2,cd1]},RiemannForm[cd1][a,b]+Diff[A1[a,b],cd1]+Wedge[A1[a,-c],A1[c,b]]]};
 
 
+(* ::Input::Initialization:: *)
 (* Thread over equations and lists *)
 UseCartan[expr_List,covd_]:=UseCartan[#,covd]&/@expr;
 UseCartan[expr_List,PD,{mani__?ManifoldQ}]:=UseCartan[#,PD,{mani}]&/@expr;
@@ -768,11 +881,13 @@ UseCartan[expr_Equal,covd_]:=UseCartan[#,covd]&/@expr;
 UseCartan[expr_Equal,PD,{mani__?ManifoldQ}]:=UseCartan[#,PD,{mani}]&/@expr;
 
 
+(* ::Input::Initialization:: *)
 (* Exterior derivative when covd is PD *)
 UseCartan[expr_,PD,{mani__?ManifoldQ}]:=(expr/.Diff@expr1_:>Module[{a=DummyIn/@(Tangent/@{mani})},Inner[dx[#1][#2]PD[-#2]@expr1&,{mani},a,Plus]]/;Deg@expr1===0);
 UseCartan[expr_,PD]:=(expr/.Diff@expr1_:>Module[{a=DummyIn/@(Tangent/@ManifoldsOf@expr)},Inner[dx[#1][#2]PD[-#2]@expr1&,ManifoldsOf@expr,a,Plus]]/;Deg@expr1===0);
 
 
+(* ::Input::Initialization:: *)
 UseCartan[expr_,covd_]:=With[{metric=MetricOfCovD[covd],basis=BasisOfCovD[covd]},
 expr/.Flatten@
 (* Exterior derivative of the coframe *)
@@ -799,9 +914,11 @@ HoldPattern[Diff[eps[inds__?DownIndexQ],PD]]:>Module[{a=DummyIn[VBundleOfMetric[
 ];
 
 
+(* ::Input::Initialization:: *)
 DefGradedDerivation[Int[v_],Wedge,-1,PrintAs->"\[Iota]"];
 
 
+(* ::Input::Initialization:: *)
 Int[v_][f_ form_]:=f Int[v][form]/;Deg@f===0;
 Int[v_][f_]:=0/;Deg@f===0;
 Int[f_?ScalarQ v_][form_]:=f Int[v][form];
@@ -815,25 +932,32 @@ Int[Basis[{cnumber1_?IntegerQ,-basisname_?BasisQ},ind_Symbol]][Coframe[mani_][{c
 Int[Basis[{cnumber1_?IntegerQ,-basisname_?BasisQ},ind_Symbol]][Coframe[mani_][{cnumber2_?IntegerQ,basisname_?BasisQ}]]:=1/;cnumber1===cnumber2;
 
 
+(* ::Input::Initialization:: *)
 Int[v_][_Basis]:=0;
 
 
+(* ::Input::Initialization:: *)
 DefGradedDerivation[CartanD[v_],Wedge,0,PrintAs->"L"];
 
 
+(* ::Input::Initialization:: *)
 CartanD[v_][_Basis]:=0;
 
 
+(* ::Input::Initialization:: *)
 CartanD[v_][_Basis,_]:=0;
 
 
+(* ::Input::Initialization:: *)
 CartanD/:MakeBoxes[CartanD[v_][form_,PD?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[CartanD[v][form,PD],RowBox[{SubscriptBox["L",MakeBoxes[v,StandardForm]],"[",MakeBoxes[form,StandardForm],"]"}]];
 CartanD/:MakeBoxes[CartanD[v_][form_,cd_?CovDQ],StandardForm]:=xAct`xTensor`Private`interpretbox[CartanD[v][form,cd],RowBox[{SubsuperscriptBox["L",MakeBoxes[v,StandardForm],Last@SymbolOfCovD[cd]],"[",MakeBoxes[form,StandardForm],"]"}]];
 
 
+(* ::Input::Initialization:: *)
 CartanD[f_?ScalarQ v_][form_]:=f CartanD[v]@form+Wedge[Diff@f,Int[v]@form];
 
 
+(* ::Input::Initialization:: *)
 (* This produces expanded expressions and is much faster when there are many scalars *)
 CartanD[v_][expr_Times]:=Module[{grades=Grade[#,Wedge]&/@List@@expr,pos,scalar,form},
 pos=Position[grades,_?(#=!=0&),1,Heads->False];
@@ -857,39 +981,48 @@ lie0[v_][expr_Times,form_]:=Sum[MapAt[lie0[v][#,form]&,expr,i],{i,1,Length[expr]
 lie0[v_][expr_,form_]:=Wedge[CartanD[v][expr],form];
 
 
+(* ::Input::Initialization:: *)
 CartanD[v_][expr_?ConstantQ]:=0;
 
 
+(* ::Input::Initialization:: *)
 Unprotect@LieD;
 LieD[v_]@expr_Wedge:=(CartanD[v]@expr/.CartanD->LieD);
 Protect@LieD;
 
 
+(* ::Input::Initialization:: *)
 CartanDToDiff[expr_]:=expr/.{CartanD[v_][form_]:>Diff@Int[v]@form+Int[v]@Diff@form,CartanD[v_][form_,covd_?CovDQ]:>Diff[Int[v]@form,covd]+Int[v]@Diff[form,covd]};
 
 
+(* ::Input::Initialization:: *)
 LieDForm[v_[ind_],covd_?CovDQ]@ten_:=Module[{a=DummyIn@VBundleOfIndex@ind},ToCanonical[LieD[v[ind],covd]@ten+CartanD[v[ind]][ten,covd]-v[a]covd[-a]@ten,UseMetricOnVBundle->None]];
 LieDFormToCovD[expr_,covd_]:=expr//.LieD[vector_]:>LieDForm[vector,covd];
 
 
+(* ::Input::Initialization:: *)
 Unprotect@LieDToCovD;
 LieDToCovD[expr_,arg_:PD]:=LieDFormToCovD[expr,arg]/;Deg@expr>=1
 Protect@LieDToCovD;
 
 
+(* ::Input::Initialization:: *)
 SortDerivationsRule[Diff,Diff]={};
 
 
+(* ::Input::Initialization:: *)
 SortDerivationsRule[Int,Int]={
 HoldPattern[Int[v_]@Int[w_]@form_]:>-Int[w]@Int[v]@form/;!OrderedQ[{v,w}]
 };
 
 
+(* ::Input::Initialization:: *)
 SortDerivationsRule[CartanD,CartanD]={
 HoldPattern[CartanD[v_]@CartanD[w_]@form_]:>Module[{a=First@FindFreeIndices[v]},CartanD[w]@CartanD[v]@form+CartanD[Bracket[v,w][a]]@form]/;!OrderedQ[{v,w}],HoldPattern[CartanD[v_][CartanD[w_][form_,covd_?CovDQ],covd_?CovDQ]]:>Module[{a=First@FindFreeIndices[v]},CartanD[w][CartanD[v][form,covd],covd]+CartanD[Bracket[v,w][a]][form,covd]]/;!OrderedQ[{v,w}]
 };
 
 
+(* ::Input::Initialization:: *)
 SortDerivationsRule[Int,CartanD]={
 HoldPattern[CartanD[w_]@Int[v_]@form_]:>Module[{a=First@FindFreeIndices[w]},Int[v]@CartanD[w]@form+Int[Bracket[w,v][a]]@form],HoldPattern[CartanD[w_][Int[v_]@form_,covd_?CovDQ]]:>Module[{a=First@FindFreeIndices[w]},Int[v]@CartanD[w][form,covd]+Int[Bracket[w,v][a]]@form]
 };
@@ -898,6 +1031,7 @@ HoldPattern[Int[v_]@CartanD[w_]@form_]:>Module[{a=First@FindFreeIndices[w]},Cart
 };
 
 
+(* ::Input::Initialization:: *)
 SortDerivationsRule[Int,Diff]={
 HoldPattern[Diff[Int[v_]@form_,covd_?CovDQ]]:>-Int[v]@Diff[form,covd]+CartanD[v][form,covd]
 };
@@ -906,6 +1040,7 @@ HoldPattern[Int[v_]@Diff[form_,covd_?CovDQ]]:>-Diff[Int[v]@form,covd]+CartanD[v]
 };
 
 
+(* ::Input::Initialization:: *)
 SortDerivationsRule[CartanD,Diff]={
 HoldPattern[Diff[CartanD[v_]@form_,PD]]:>CartanD[v]@Diff@form,HoldPattern[Diff[CartanD[v_][form_,covd_?CovDQ],covd_?CovDQ]]:>CartanD[v][Diff[form,covd],covd]
 };
@@ -914,10 +1049,12 @@ HoldPattern[CartanD[v_]@Diff[form_,PD]]:>Diff@CartanD[v]@form,HoldPattern[Cartan
 };
 
 
+(* ::Input::Initialization:: *)
 $Derivations={CartanD,Int,Diff};
 $DerivationSortOrder=$Derivations;
 
 
+(* ::Input::Initialization:: *)
 SortDerivations[expr_]:=SortDerivations[expr,$DerivationSortOrder]
 SortDerivations[expr_,order_List]:=Module[{},
 
@@ -928,6 +1065,7 @@ expr//.Join@@Table[Join@@(SortDerivationsRule[order[[i]],#]&/@Drop[order,i]),{i,
 ];
 
 
+(* ::Input::Initialization:: *)
 TopRankQ[form_]:=With[{manifolds=Select[DependenciesOf@form,ManifoldQ]},
 If[Length@manifolds != 1,
 Throw@Message[TopRankQ::error1,"Forms must have exactly 1 manifold in dependencies."],
@@ -935,10 +1073,12 @@ TopRankQ[form,First@manifolds]]];
 TopRankQ[form_,mani_?ManifoldQ]:=Grade[form,Wedge]===DimOfManifold@mani;
 
 
+(* ::Input::Initialization:: *)
 InvHodge[metric_][expr_]:=With[{k=Grade[expr,Wedge],n=DimOfMetric@metric,s=SignDetOfMetric@metric},
 (-1)^(k(n-k))s Hodge[metric]@expr];
 
 
+(* ::Input::Initialization:: *)
 (* TODO:More checks that form is actually on same manifold as metric, etc. *)
 (* Generate rest. Replace dummies in expr. This does not act on scalar arguments of functions *)
 FormVarD[form_,met_][expr_]:=If[TopRankQ[expr]&&ScalarQ[expr],
@@ -984,5 +1124,6 @@ FormVarD[form_,met_][Diff[expr_,PD],rest_]:=-FormVarD[form,met][expr,Hodge[met]@
 FormVarD[form_,met_][Codiff[met_][expr_,covd_?CovDQ],rest_]:=-FormVarD[form,met][expr,Hodge[met]@Diff[InvHodge[met]@rest,covd]];
 
 
+(* ::Input::Initialization:: *)
 End[];
 EndPackage[];
