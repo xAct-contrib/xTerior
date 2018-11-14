@@ -789,12 +789,15 @@ xTension["xTerior`",DefCovD,"End"]:=defKoszulCovD;
 (* ::Input::Initialization:: *)
 defKoszulCovD[covd_?CovDQ[_],__]:=With[{covdsymbol=GiveSymbol[Koszul,covd],covdsymbolf=GiveSymbol[CovD,covd]},
 xAct`xTerior`Private`DefGradedDerivation[covdsymbol[v_],CircleTimes,0,PrintAs->Last@SymbolOfCovD[covd]];
-xAct`xTerior`Private`DefGradedDerivation[covdsymbolf,CircleTimes,1,PrintAs->Last@SymbolOfCovD[covd]];
+DefInertHead[covdsymbolf,PrintAs->Last@SymbolOfCovD[covd]];
 HoldPattern[covdsymbol[v_][expr_?ConstantQ]]:=0;
 HoldPattern[covdsymbol[factor_ v_][expr_]]:=factor covdsymbol[v][expr]/;Grade[factor,CircleTimes]==0;
 HoldPattern[covdsymbol[v_][expr1_ expr2_]]:=expr2 covdsymbol[v][expr1]+expr1 covdsymbol[v][expr2];
 HoldPattern[covdsymbolf[expr_?ConstantQ]]:=0;
 HoldPattern[covdsymbolf[expr1_ expr2_]]:=CircleTimes[expr2,covdsymbolf[expr1]]+CircleTimes[expr1, covdsymbolf[expr2]];
+HoldPattern[covdsymbolf@CircleTimes[expr1_ ,expr2_]]:=CircleTimes[expr2,covdsymbolf[expr1]]+CircleTimes[expr1, covdsymbolf[expr2]];
+CircleTimes/:Grade[covdsymbolf[expr_],CircleTimes]:=Grade[expr,CircleTimes]+1;
+Wedge/:Grade[covdsymbolf[expr_],Wedge]:=Grade[expr,Wedge]+1;
 HoldPattern[covd[{a_?NumberQ,basis_}]@expr_]:=
 Which[
 ChartQ[basis]&&Grade[expr,CircleTimes]>=1,
