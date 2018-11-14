@@ -310,6 +310,14 @@ Wedge[ten_,CTensor[array_,bases_List,addweight_][b__]]:=CTensor[Wedge[ten,array]
 
 Wedge[CTensor[array_,bases_List,addweight_][b__],ten_]:=CTensor[Wedge[array,ten],bases,addweight][b]/;FindFreeIndices@ten===IndexList[]
 
+Wedge[ten_, CTensor[array_, bases_List, addweight_]] := 
+ CTensor[Wedge[ten, array], bases, addweight] /; 
+  FindFreeIndices@ten === IndexList[]
+
+Wedge[CTensor[array_, bases_List, addweight_], ten_] := 
+ CTensor[Wedge[array, ten], bases, addweight] /; 
+  FindFreeIndices@ten === IndexList[]
+
 
 (* ::Input::Initialization:: *)
 $DefInfoQ=False;
@@ -394,6 +402,14 @@ CircleTimes[ctensor1_CTensor,ctensor2_CTensor]:=CTensorCircleTimes[ctensor1,cten
 CircleTimes[ten_,CTensor[array_,bases_List,addweight_][b__]]:=CTensor[CircleTimes[ten,array],bases,addweight][b]/;FindFreeIndices@ten===IndexList[]
 
 CircleTimes[CTensor[array_,bases_List,addweight_][b__],ten_]:=CTensor[CircleTimes[array,ten],bases,addweight][b]/;FindFreeIndices@ten===IndexList[]
+
+CircleTimes[ten_, CTensor[array_, bases_List, addweight_]] := 
+ CTensor[CircleTimes[ten, array], bases, addweight] /; 
+  FindFreeIndices@ten === IndexList[]
+
+CircleTimes[CTensor[array_, bases_List, addweight_], ten_] := 
+ CTensor[CircleTimes[array, ten], bases, addweight] /; 
+  FindFreeIndices@ten === IndexList[]
 
 
 (* ::Input::Initialization:: *)
