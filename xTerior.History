@@ -153,9 +153,6 @@ last lines of the code of FormVarD.
 
 21 Oct 2015: Fix in FindPotential for the case of 1-degree forms.
 
-------------------------------------------------------------------
-2016
-
 11 Feb. 2016: Added FormIntegrate and UseStokes by José.
 
 26 Jul. Added code to compute the Hodge dual of scalar 0-forms.

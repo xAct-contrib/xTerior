@@ -246,6 +246,15 @@ UndefTensorUseDimensions[tensor_]:=If[$UseDimensionsQ,UnsetZeroForm[tensor]];
 
 
 (* ::Input::Initialization:: *)
+(* Grade of a CTensor with respect to Wedge *)
+CTensor/:Grade[expr_CTensor,Wedge]:=Module[{list,grades,comps=First@expr},
+list=Flatten[{comps}];
+grades=Grade[#,Wedge]&/@list;
+If[Length@Tally[grades]==1,grades[[1]],$Failed]
+];
+
+
+(* ::Input::Initialization:: *)
 (* Contracted wedge product of CTensor objects *)
 Wedge[ctensor1_CTensor[left1___,a_,right1___],ctensor2_CTensor[left2___,-a_,right2___]]:=Module[{n1=Length[{left1,a}],n2=Length[{left2,-a}],res},res=xAct`xCoba`Private`CTensorContract[ctensor1,ctensor2,{n1,n2},Wedge];
 res[left1,right1,left2,right2]/;FreeQ[res,$Failed]];
@@ -255,10 +264,13 @@ res[left1,right1,left2,right2]/;FreeQ[res,$Failed]];
 
 
 (* ::Input::Initialization:: *)
-signatureOrZero[indices_]:=If[DuplicateFreeQ[indices],Signature[Ordering[indices]],0];
+(*signatureOrZero[indices_]:=If[DuplicateFreeQ[indices],Signature[Ordering[indices]],0];*)
 
 simplifyBasisWedge[expr_]:=expr/.wed_Wedge:>simplifyBasisWedge1[wed];
-simplifyBasisWedge1[HoldPattern[Wedge[factors:((head:((xAct`xTerior`Coframe|xAct`xTerior`dx)[_]))[_]..)]]]:=With[{indices=First/@{factors}},signatureOrZero[indices] Wedge@@(head/@Sort[indices])]
+
+(*simplifyBasisWedge1[HoldPattern[Wedge[factors:((head:((xAct`xTerior`Coframe|xAct`xTerior`dx)[_]))[_]..)]]]:=With[{indices=First/@{factors}},signatureOrZero[indices] Wedge@@(head/@Sort[indices])];*)
+
+simplifyBasisWedge1[HoldPattern[expr:Wedge[factors:Blank[] ..]]]:=Module[{indices=FindFreeIndices[expr]},If[indices===IndexList[],expr,$Failed]];
 
 (* Wedge product of general CTensor objects *)
 
@@ -267,6 +279,8 @@ CTensorWedge[ctensors__CTensor]:=CTensor[simplifyBasisWedge[xAct`xCoba`Private`t
 CTensorWedge[___,Zero,___]:=Zero;
 
 Wedge[ctensor1_CTensor[inds1___],ctensor2_CTensor[inds2___]]:=CTensorWedge[ctensor1,ctensor2][inds1,inds2]/;xAct`xTensor`Private`TakePairs[{inds1,inds2}]==={}
+
+Wedge[ctensor1_CTensor,ctensor2_CTensor]:=CTensorWedge[ctensor1,ctensor2]
 
 
 (* ::Input::Initialization:: *)
@@ -289,6 +303,12 @@ CTensor/:(basis:(Coframe|dx)[_])[a_] (ctensor:CTensor[_,bases_List,_][l___,-a_,_
 
 (* ::Input::Initialization:: *)
 CTensor/:HoldPattern[Wedge[lw___,(basis:(Coframe|dx)[_])[a_] ,rw___] (ctensor:CTensor[_,bases_List,_][l___,-a_,___])]:=Wedge[lw,ToCTensor[basis,{-bases[[Length[{l,-a}]]]}][a],rw] ctensor
+
+
+(* ::Input::Initialization:: *)
+Wedge[ten_,CTensor[array_,bases_List,addweight_][b__]]:=CTensor[Wedge[ten,array],bases,addweight][b]/;FindFreeIndices@ten===IndexList[]
+
+Wedge[CTensor[array_,bases_List,addweight_][b__],ten_]:=CTensor[Wedge[array,ten],bases,addweight][b]/;FindFreeIndices@ten===IndexList[]
 
 
 (* ::Input::Initialization:: *)
@@ -329,6 +349,51 @@ CircleTimes/:Grade[Hodge[metricg_][expr_],CircleTimes]:=DimOfVBundle[VBundleOfMe
 Unprotect@Dagger;
 Dagger@expr_CircleTimes:=Dagger/@expr;
 Protect@Dagger;
+
+
+(* ::Input::Initialization:: *)
+(* Grade of a CTensor with respect to CircleTimes *)
+CTensor/:Grade[expr_CTensor,CircleTimes]:=Module[{list,grades,comps=First@expr},
+list=Flatten[{comps}];
+grades=Grade[#,CircleTimes]&/@list;
+If[Length@Tally[grades]==1,grades[[1]],$Failed]
+];
+
+
+(* ::Input::Initialization:: *)
+(* Algebra with unit element *)
+xAct`xCoba`Private`tensorproduct[CircleTimes][]=1;
+
+
+(* ::Input::Initialization:: *)
+(* Contracted CircleTimes product of CTensor objects *)
+CircleTimes[ctensor1_CTensor[left1___,a_,right1___],ctensor2_CTensor[left2___,-a_,right2___]]:=Module[{n1=Length[{left1,a}],n2=Length[{left2,-a}],res},res=xAct`xCoba`Private`CTensorContract[ctensor1,ctensor2,{n1,n2},CircleTimes];
+res[left1,right1,left2,right2]/;FreeQ[res,$Failed]];
+
+CircleTimes[ctensor1_CTensor[left1___,-a_,right1___],ctensor2_CTensor[left2___,a_,right2___]]:=Module[{n1=Length[{left1,a}],n2=Length[{left2,-a}],res},res=xAct`xCoba`Private`CTensorContract[ctensor1,ctensor2,{n1,n2},CircleTimes];
+res[left1,right1,left2,right2]/;FreeQ[res,$Failed]];
+
+
+(* ::Input::Initialization:: *)
+simplifyBasisCircleTimes[expr_]:=expr/.wed_CircleTimes:>simplifyBasisCircleTimes1[wed];
+
+simplifyBasisCircleTimes1[HoldPattern[expr:CircleTimes[factors:Blank[] ..]]]:=Module[{indices=FindFreeIndices[expr]},If[indices===IndexList[],expr,$Failed]];
+
+(* CircelTimes product of general CTensor objects *)
+
+CTensorCircleTimes[]:=1;
+CTensorCircleTimes[ctensors__CTensor]:=CTensor[simplifyBasisCircleTimes[xAct`xCoba`Private`tensorproduct[CircleTimes]@@#1],Join@@#2,Plus@@#3]&@@Transpose[List@@@{ctensors}];
+CTensorCircleTimes[___,Zero,___]:=Zero;
+
+CircleTimes[ctensor1_CTensor[inds1___],ctensor2_CTensor[inds2___]]:=CTensorCircleTimes[ctensor1,ctensor2][inds1,inds2]/;xAct`xTensor`Private`TakePairs[{inds1,inds2}]==={}
+
+CircleTimes[ctensor1_CTensor,ctensor2_CTensor]:=CTensorCircleTimes[ctensor1,ctensor2]
+
+
+(* ::Input::Initialization:: *)
+CircleTimes[ten_,CTensor[array_,bases_List,addweight_][b__]]:=CTensor[CircleTimes[ten,array],bases,addweight][b]/;FindFreeIndices@ten===IndexList[]
+
+CircleTimes[CTensor[array_,bases_List,addweight_][b__],ten_]:=CTensor[CircleTimes[array,ten],bases,addweight][b]/;FindFreeIndices@ten===IndexList[]
 
 
 (* ::Input::Initialization:: *)
@@ -491,12 +556,6 @@ PrintAs[Coframe[mani_?ManifoldQ]]^="\[Theta]";
 
 
 (* ::Input::Initialization:: *)
-Unprotect@Dagger;
-Dagger[Coframe[mani_?ManifoldQ]]:=Coframe[mani];
-Protect@Dagger;
-
-
-(* ::Input::Initialization:: *)
 xTensorQ@dx[mani_?ManifoldQ]^=True;
 SlotsOfTensor[dx[mani_?ManifoldQ]]^:={Tangent@mani};
 dx/:GradeOfTensor[dx[mani_?ManifoldQ],Wedge]=1;
@@ -506,12 +565,6 @@ DependenciesOfTensor[dx[mani_?ManifoldQ]]^:={mani};
 HostsOf[dx[mani_?ManifoldQ]]^={};
 TensorID[dx[mani_?ManifoldQ]]^={};
 PrintAs[dx[mani_?ManifoldQ]]^="dx";
-
-
-(* ::Input::Initialization:: *)
-Unprotect@Dagger;
-Dagger[dx[mani_?ManifoldQ]]:=dx[mani];
-Protect@Dagger;
 
 
 (* ::Input::Initialization:: *)
@@ -711,13 +764,10 @@ PrintAs[ChristoffelForm[PD]]^:=PrintAs[ChristoffelForm];
 
 
 (* ::Input::Initialization:: *)
-ChristoffelForm[exr_CCovD]:=Head@Module[{ind=DummyIn@VBundleOfBasis[-Part[exr,2,2,2]],a1,a2},{a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[Part[exr,2,2,1]],2];
-Part[exr,2][a1,-ind,-a2] Coframe[BaseOfVBundle@VBundleOfBasis[-Part[exr,2,2,2]]][ind]];
-
-
-(* ::Input::Initialization:: *)
-ConnectionForm[exr_CCovD,vb_]:=Head@Module[{ind=DummyIn@VBundleOfBasis[-Part[exr,2,2,2]],a1,a2},{a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[Part[exr,2,2,1]],2];
-Part[exr,2][a1,-ind,-a2] Coframe[BaseOfVBundle@VBundleOfBasis[-Part[exr,2,2,2]]][ind]];
+ChristoffelForm[exr_CCovD]:=Head@Module[{ind=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],a1,a2},
+{a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[-First@Part[Last@exr,2]],2];
+Part[exr,2][a1,-ind,-a2] ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind]
+];
 
 
 (* ::Input::Initialization:: *)
@@ -778,24 +828,9 @@ PrintAs[RiemannForm]^="R";
 
 
 (* ::Input::Initialization:: *)
-RiemannForm[exr_CCovD]:=If[Riemann[exr]=!=Zero,Head@Module[{tbundle,ind1,ind2,a1,a2},
-tbundle=VBundleOfBasis[-Part[exr,2,2,2]];
-ind1=DummyIn@tbundle;
-ind2=DummyIn@tbundle;
-{a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[Part[exr,2,2,1]],2];
-Riemann[exr][-ind1,-ind2,-a1,a2]  Wedge[Coframe[BaseOfVBundle@tbundle][ind1],Coframe[BaseOfVBundle@tbundle][ind2]]
-],
-Zero
-];
-
-
-(* ::Input::Initialization:: *)
-CurvatureForm[exr_CCovD,vbundle_]:=If[FRiemann[exr]=!=Zero,Head@Module[{tbundle,ind1,ind2,a1,a2},
-tbundle=VBundleOfBasis[-Part[exr,2,2,2]];
-ind1=DummyIn@tbundle;
-ind2=DummyIn@tbundle;
-{a1,a2}=GetIndicesOfVBundle[vbundle,2];
-FRiemann[exr][-ind1,-ind2,-a1,a2]  Wedge[Coframe[BaseOfVBundle@tbundle][ind1],Coframe[BaseOfVBundle@tbundle][ind2]]
+RiemannForm[exr_CCovD]:=If[Riemann[exr]=!=Zero,Head@Module[{ind1=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],ind2=DummyIn@VBundleOfBasis[-First@Part[Last@exr,2]],a1,a2},
+{a1,a2}=GetIndicesOfVBundle[VBundleOfBasis[-First@Part[Last@exr,2]],2];
+Riemann[exr][-ind1,-ind2,-a1,a2] Wedge[ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind1],ToCTensor[Coframe[BaseOfVBundle@VBundleOfBasis[-First@Part[Part[exr,3],2]]],{-First@Part[Part[exr,3],2]}][ind2]]
 ],Zero
 ];
 
