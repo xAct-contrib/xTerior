@@ -153,6 +153,11 @@ FormVarD::usage="FormVarD[form,metric][expr] computes the variational derivative
 (* Canonical forms on the frame bundle *)
 Coframe::usage="Coframe[mani] is the set of canonical 1-forms defined in the frame bundle arising from the manifold mani";
 dx::usage="dx[mani] represents a holonomic co-frame in the manifold mani.";
+(* Holonomic & anholonomic frames *)
+PDFrame::usage="PDFrame[mani] represents a holonomic frame in the manifold mani.";
+eFrame::usage="eFrame[mani] represents a frame in the manifold mani.";
+(* Koszul connection *)
+Koszul::usage="Koszul is the head used to introduce the Koszul operator. The latter is constructed by appending this head to the xTensor symbol used to represent a covariant derivative";
 (* The connection 1-form *)
 ConnectionForm::usage="ConnectionForm[cd,vbundle] represents the connection 1-form associated to the covariant derivatives cd defined in the bundle vbundle. If vbundle is the tangent bundle of a differentiable manifold then ConnectionForm is automatically replaced by ChristoffelForm (see the on-line help of ChristoffelForm for further details).";
 (* The curvature 2-form *)
@@ -572,9 +577,56 @@ Diff[dx[mani_?ManifoldQ][ind_],PD]:=0;
 
 
 (* ::Input::Initialization:: *)
+xTensorQ@eFrame[mani_?ManifoldQ]^=True;
+SlotsOfTensor[eFrame[mani_?ManifoldQ]]^:={-Tangent@mani};
+eFrame/:GradeOfTensor[eFrame[mani_?ManifoldQ],CircleTimes]=1;
+SymmetryGroupOfTensor[eFrame[mani_?ManifoldQ]]^=StrongGenSet[{},GenSet[]];
+DefInfo[eFrame[mani_?ManifoldQ]]^={"General frame",""};
+DependenciesOfTensor[eFrame[mani_?ManifoldQ]]^:={mani};
+HostsOf[eFrame[mani_?ManifoldQ]]^={};
+TensorID[eFrame[mani_?ManifoldQ]]^={};
+PrintAs[eFrame[mani_?ManifoldQ]]^="e";
+
+
+(* ::Input::Initialization:: *)
+xTensorQ@PDFrame[mani_?ManifoldQ]^=True;
+SlotsOfTensor[PDFrame[mani_?ManifoldQ]]^:={-Tangent@mani};
+PDFrame/:GradeOfTensor[PDFrame[mani_?ManifoldQ],CircleTimes]=1;
+SymmetryGroupOfTensor[PDFrame[mani_?ManifoldQ]]^=StrongGenSet[{},GenSet[]];
+DefInfo[PDFrame[mani_?ManifoldQ]]^={"General frame",""};
+DependenciesOfTensor[PDFrame[mani_?ManifoldQ]]^:={mani};
+HostsOf[PDFrame[mani_?ManifoldQ]]^={};
+TensorID[PDFrame[mani_?ManifoldQ]]^={};
+PrintAs[PDFrame[mani_?ManifoldQ]]^="\!\(\*FractionBox[\(\[PartialD]\),\(\[PartialD]x\)]\)";
+
+
+(* ::Input::Initialization:: *)
 (* xTensions *)
 xTension["xTerior`",DefChart,"End"]:=setdiffs;
 setdiffs[chartname_,__]:=Thread[ComponentValue[dx[ManifoldOfChart@chartname][{#,chartname}]&/@CNumbersOf@chartname,Diff/@ScalarsOfChart@chartname]];
+
+
+(* ::Input::Initialization:: *)
+xTension["xTerior`",DefChart,"End"]:=defFreeAlgebraChart;
+defFreeAlgebraChart[basis_,__]:=With[{scalars=ScalarsOfChart[basis],numbers=CNumbersOf@basis,mani=ManifoldOfChart@basis},
+(* Define the algebra elements forming the basis of the free algebra *)				 MapThread[DefTensor[GiveSymbol[basis,#1][],mani,PrintAs->ColorString["\!\(\*FractionBox[\(\[PartialD]\), \(\[PartialD]"<>PrintAs[Evaluate@(Head@#2)]<>"\)]\)",BasisColor@basis],GradeOfTensor->{CircleTimes->1}]&,{numbers,scalars}];
+(* Assign values *)
+Thread[ComponentValue[dx[ManifoldOfChart@basis][{#,basis}]&/@CNumbersOf@basis,Diff/@ScalarsOfChart@basis]];
+Thread[ComponentValue[PDFrame[mani][{#,-basis}]&/@numbers,GiveSymbol[basis,#][]&/@numbers]]
+]
+
+
+(* ::Input::Initialization:: *)
+xTension["xTerior`",DefBasis,"End"]:=defFreeAlgebraBasis;
+defFreeAlgebraBasis[basis_,__]:=With[{numbers=CNumbersOf@basis,
+mani=ManifoldOfChart@basis},
+If[Not@ChartQ@basis,
+(* Define the algebra elements forming the basis of the free algebra *)				 
+DefTensor[GiveSymbol[basis,#][],mani,GradeOfTensor->{CircleTimes->1}]&/@numbers;
+(* Assign values *)
+Thread[ComponentValue[eFrame[mani][{#,-basis}]&/@numbers,GiveSymbol[basis,#][]&/@numbers]]
+]
+]
 
 
 (* ::Input::Initialization:: *)
@@ -727,6 +779,41 @@ MakeBoxes[FormIntegrate?InertHeadQ[form_,man_],StandardForm]:=RowBox[{SubscriptB
 UseStokes[expr_]:=expr/.HoldPattern[FormIntegrate[Diff[form_,PD],man_]]:>FormIntegrate[form,ManifoldBoundary[man]];
 UseStokes[expr_,man_?ManifoldQ]:=expr/.HoldPattern[FormIntegrate[Diff[form_,PD],man]]:>FormIntegrate[form,ManifoldBoundary[man]];
 UseStokes[expr_,form_]:=expr/.HoldPattern[FormIntegrate[form,ManifoldBoundary[man_]]]:>FormIntegrate[Diff[form],man];
+
+
+(* ::Input::Initialization:: *)
+(* xTensions *)
+xTension["xTerior`",DefCovD,"End"]:=defKoszulCovD;
+
+
+(* ::Input::Initialization:: *)
+defKoszulCovD[covd_?CovDQ[_],__]:=With[{covdsymbol=GiveSymbol[Koszul,covd],covdsymbolf=GiveSymbol[CovD,covd]},
+xAct`xTerior`Private`DefGradedDerivation[covdsymbol[v_],CircleTimes,0,PrintAs->Last@SymbolOfCovD[covd]];
+xAct`xTerior`Private`DefGradedDerivation[covdsymbolf,CircleTimes,1,PrintAs->Last@SymbolOfCovD[covd]];
+HoldPattern[covdsymbol[v_][expr_?ConstantQ]]:=0;
+HoldPattern[covdsymbol[factor_ v_][expr_]]:=factor covdsymbol[v][expr]/;Grade[factor,CircleTimes]==0;
+HoldPattern[covdsymbol[v_][expr1_ expr2_]]:=expr2 covdsymbol[v][expr1]+expr1 covdsymbol[v][expr2];
+HoldPattern[covdsymbolf[expr_?ConstantQ]]:=0;
+HoldPattern[covdsymbolf[expr1_ expr2_]]:=CircleTimes[expr2,covdsymbolf[expr1]]+CircleTimes[expr1, covdsymbolf[expr2]];
+HoldPattern[covd[{a_?NumberQ,basis_}]@expr_]:=
+Which[
+ChartQ[basis]&&Grade[expr,CircleTimes]>=1,
+	covdsymbol[PDFrame[ManifoldOfCovD@covd][{a,basis}]][expr],
+BasisQ[basis]&&Grade[expr,CircleTimes]>=1,
+	covdsymbol[eFrame[ManifoldOfCovD@covd][{a,basis}]][expr],
+True,
+	$Failed
+];
+HoldPattern[covd[{a_?NumberQ,-basis_}]@expr_]:=
+Which[
+ChartQ[basis]&&Grade[expr,CircleTimes]>=1,
+	covdsymbol[PDFrame[ManifoldOfCovD@covd][{a,-basis}]][expr],
+BasisQ[basis]&&Grade[expr,CircleTimes]>=1,
+	covdsymbol[eFrame[ManifoldOfCovD@covd][{a,-basis}]][expr],
+True,
+	$Failed
+]
+]
 
 
 (* ::Input::Initialization:: *)
