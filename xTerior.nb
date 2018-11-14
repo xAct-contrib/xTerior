@@ -1460,8 +1460,8 @@ Cell[BoxData[
   "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{"$UseDimensionsQ", "=", "False"}], ";"}], "\[IndentingNewLine]", 
-   "\n", 
+    RowBox[{"$UseDimensionsQ", "=", "False"}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"$DimensionsZeroForms", "=", 
      RowBox[{"{", "}"}]}], ";"}], "\n", 
@@ -1488,8 +1488,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
      RowBox[{"Unset", "[", 
-      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], "\n", 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1577,7 +1577,7 @@ Cell[BoxData[
              RowBox[{"(", 
               RowBox[{"DimOfManifold", "/@", 
                RowBox[{"DependenciesOf", "[", "expr", "]"}]}], ")"}]}], 
-            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", "\n",
+            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\n", "\[IndentingNewLine]",
     "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
@@ -1607,8 +1607,9 @@ Cell[BoxData[
         RowBox[{"HoldPattern", "@", 
          RowBox[{"Diff", "[", 
           RowBox[{"expr_", ",", "covd_"}], "]"}]}], "=."}], ";"}]}], "]"}]}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\n", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", " ", "xTensions", " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"xTension", "[", 
@@ -1621,8 +1622,8 @@ Cell[BoxData[
        RowBox[{"tensor_", "[", "inds___", "]"}], ",", "__"}], "]"}], ":=", 
      RowBox[{"If", "[", 
       RowBox[{"$UseDimensionsQ", ",", 
-       RowBox[{"SetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], "\n", 
-   "\[IndentingNewLine]", 
+       RowBox[{"SetZeroForm", "[", "tensor", "]"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"xTension", "[", 
@@ -1796,8 +1797,8 @@ Cell[BoxData[
      RowBox[{"simplifyBasisWedge", "[", "expr_", "]"}], ":=", 
      RowBox[{"expr", "/.", 
       RowBox[{"wed_Wedge", "\[RuleDelayed]", 
-       RowBox[{"simplifyBasisWedge1", "[", "wed", "]"}]}]}]}], ";"}], 
-   "\[IndentingNewLine]", "\n", 
+       RowBox[{"simplifyBasisWedge1", "[", "wed", "]"}]}]}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -1828,7 +1829,7 @@ Cell[BoxData[
           RowBox[{"(", 
            RowBox[{"head", "/@", 
             RowBox[{"Sort", "[", "indices", "]"}]}], ")"}]}]}]}], "]"}]}], 
-     ";"}], "*)"}], "\[IndentingNewLine]", "\n", 
+     ";"}], "*)"}], "\n", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"simplifyBasisWedge1", "[", 
@@ -1876,7 +1877,7 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"CTensorWedge", "[", 
       RowBox[{"___", ",", "Zero", ",", "___"}], "]"}], ":=", "Zero"}], ";"}], 
-   "\n", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"Wedge", "[", 
      RowBox[{
@@ -1927,7 +1928,7 @@ Cell[BoxData[{
       RowBox[{"Wedge", "[", 
        RowBox[{"basis", ",", "array"}], "]"}], ",", "bases", ",", 
       "addweight"}], "]"}], "[", "b", "]"}]}], 
-  "\[IndentingNewLine]"}], "\n", 
+  "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Wedge", "[", 
    RowBox[{
@@ -1976,7 +1977,7 @@ Cell[BoxData[{
         "frame"}], ",", 
        RowBox[{"{", 
         RowBox[{"0", ",", "Infinity"}], "}"}]}], "]"}]}], "]"}]}], 
-  "\[IndentingNewLine]"}], "\n", 
+  "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"Wedge", "[", 
@@ -2003,7 +2004,7 @@ Cell[BoxData[{
         RowBox[{"ctensor", "[", "inds", "]"}]}], "]"}], "/;", 
       RowBox[{
        RowBox[{"Length", "[", "frames", "]"}], "===", "1"}]}]}], "]"}]}], 
-  "\[IndentingNewLine]"}], "\n", 
+  "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Wedge", "[", 
    RowBox[{
@@ -2132,7 +2133,7 @@ Cell[BoxData[{
        "addweight"}], "]"}], "[", "b", "]"}], "/;", 
     RowBox[{
      RowBox[{"FindFreeIndices", "@", "ten"}], "===", 
-     RowBox[{"IndexList", "[", "]"}]}]}]}], "\[IndentingNewLine]"}], "\n", 
+     RowBox[{"IndexList", "[", "]"}]}]}]}], "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Wedge", "[", 
    RowBox[{
@@ -2495,7 +2496,7 @@ Cell[BoxData[{
    RowBox[{
     RowBox[{"CTensorCircleTimes", "[", 
      RowBox[{"___", ",", "Zero", ",", "___"}], "]"}], ":=", "Zero"}], ";"}], 
-  "\n"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{"CircleTimes", "[", 
@@ -2542,7 +2543,7 @@ Cell[BoxData[{
        "addweight"}], "]"}], "[", "b", "]"}], "/;", 
     RowBox[{
      RowBox[{"FindFreeIndices", "@", "ten"}], "===", 
-     RowBox[{"IndexList", "[", "]"}]}]}]}], "\[IndentingNewLine]"}], "\n", 
+     RowBox[{"IndexList", "[", "]"}]}]}]}], "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"CircleTimes", "[", 
    RowBox[{
@@ -4390,7 +4391,7 @@ Cell[BoxData[
        RowBox[{"options", ":", 
         RowBox[{"OptionsPattern", "[", "Integrate", "]"}]}]}], "]"}], ":=", 
      RowBox[{"Part", "[", 
-      RowBox[{"expr", ",", "1"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+      RowBox[{"expr", ",", "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"FindPotential", "[", 
@@ -5053,7 +5054,7 @@ Cell[BoxData[
  
  InitializationCell->
   True,ExpressionUUID->"cff7f534-0169-45e8-9414-3cf953b7493d"]
-}, Open  ]]
+}, Closed]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -10006,7 +10007,7 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1280, 727},
-WindowMargins->{{121, Automatic}, {Automatic, 82}},
+WindowMargins->{{127, Automatic}, {Automatic, 123}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
