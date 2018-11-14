@@ -786,7 +786,10 @@ UseStokes[expr_,form_]:=expr/.HoldPattern[FormIntegrate[form,ManifoldBoundary[ma
 
 (* ::Input::Initialization:: *)
 (* xTensions *)
+(* Actual definition of the Koszul operator *)
 xTension["xTerior`",DefCovD,"End"]:=defKoszulCovD;
+(* Properties of the Koszul operator when acting on the elements of a chart *)
+xTension["xCoba`",DefChart,"End"]:=setKoszulValue;
 
 
 (* ::Input::Initialization:: *)
@@ -819,6 +822,16 @@ BasisQ[basis]&&Grade[expr,CircleTimes]>=1,
 	covdsymbol[eFrame[ManifoldOfCovD@covd][{a,-basis}]][expr],
 True,
 	$Failed
+]
+]
+
+
+(* ::Input::Initialization:: *)
+setKoszulValue[chart_?ChartQ,__]:=
+With[{covd=PDOfBasis[chart]},
+With[{sym0=GiveSymbol[Koszul,covd],sym1=GiveSymbol[PD,chart],mani=ManifoldOfChart[chart]},
+Outer[Set[sym0[PDFrame[mani][{#1,-chart}]]@Part[ScalarsOfChart[chart],#2],sym1[{#1,-chart}][Part[ScalarsOfChart[chart],#2]]]&,CNumbersOf@chart,Range[1,Length@ScalarsOfChart@chart]];
+Outer[Set[sym0[GiveSymbol[chart,#1][]]@Part[ScalarsOfChart[chart],#2],sym1[{#1,-chart}][Part[ScalarsOfChart[chart],#2]]]&,CNumbersOf@chart,Range[1,Length@ScalarsOfChart@chart]]
 ]
 ]
 
