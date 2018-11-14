@@ -132,6 +132,8 @@ Diff::usage="Diff[form] computes the exterior derivative of form. Diff[form,covd
 FindPotential::usage="FindPotential[form, point, chart] uses the Poincar\[EAcute] lemma to compute a potential for a closed form form (no checks are carried out to ensure that the form is actually closed). The form must be written in some explicit coordinates belonging to chart and the argument point is the point, assumed to be in the same coordinate chart as form, which defines a star-shaped region where the potential is differentiable. A change in the point will give in general a different potential";
 (* Computation of the exterior covariant derivative *)
 ChangeExtD::usage="ChangeExtD[expr,cd1,cd2] expresses the exterior covariant derivative taken with respect to the connection defined by the covariant derivative cd1 in terms of the exterior covariant derivative taken with respect to the connection defined by the covariant derivative cd2";
+(* Computation of the generalized (index-free) covariant derivative *)
+ChangeGenCovD::usage="ChangeGenCovD[expr,cd1,cd2] expresses the generalized covariant derivative taken with respect to the connection defined by the covariant derivative cd1 in terms of the generalized covariant derivative taken with respect to the connection defined by the covariant derivative cd2";
 (* Hodge dual *)
 Hodge::usage="Hodge[metric][expr] is the Hodge dual of expr defined with respect to metric";
 ExpandHodgeDual::usage="ExpandHodgeDual[expr,Coframe[mani],g] expands out all the Hodge duals of the exterior powers of Coframe[mani], defined with respect to the metric g. If the manifold tag mani is dropped, then all the instances of Coframe are expanded. The Coframe label can be replaced by dx if we are using the holonomic coframe.";
@@ -619,7 +621,7 @@ Thread[ComponentValue[PDFrame[mani][{#,-basis}]&/@numbers,GiveSymbol[basis,#][]&
 (* ::Input::Initialization:: *)
 xTension["xTerior`",DefBasis,"End"]:=defFreeAlgebraBasis;
 defFreeAlgebraBasis[basis_,__]:=With[{numbers=CNumbersOf@basis,
-mani=ManifoldOfChart@basis},
+mani=BaseOfVBundle@VBundleOfBasis@basis},
 If[Not@ChartQ@basis,
 (* Define the algebra elements forming the basis of the free algebra *)				 
 DefTensor[GiveSymbol[basis,#][],mani,GradeOfTensor->{CircleTimes->1}]&/@numbers;
@@ -789,15 +791,16 @@ xTension["xTerior`",DefCovD,"End"]:=defKoszulCovD;
 (* ::Input::Initialization:: *)
 defKoszulCovD[covd_?CovDQ[_],__]:=With[{covdsymbol=GiveSymbol[Koszul,covd],covdsymbolf=GiveSymbol[CovD,covd]},
 xAct`xTerior`Private`DefGradedDerivation[covdsymbol[v_],CircleTimes,0,PrintAs->Last@SymbolOfCovD[covd]];
-DefInertHead[covdsymbolf,PrintAs->Last@SymbolOfCovD[covd]];
+DefInertHead[covdsymbolf,PrintAs->Last@SymbolOfCovD[covd],LinearQ->True];
 HoldPattern[covdsymbol[v_][expr_?ConstantQ]]:=0;
-HoldPattern[covdsymbol[factor_ v_][expr_]]:=factor covdsymbol[v][expr]/;Grade[factor,CircleTimes]==0;
+HoldPattern[covdsymbol[factor_ v_][expr_]]:=factor covdsymbol[v][expr]/;Grade[factor,CircleTimes]===0;
 HoldPattern[covdsymbol[v_][expr1_ expr2_]]:=expr2 covdsymbol[v][expr1]+expr1 covdsymbol[v][expr2];
 HoldPattern[covdsymbolf[expr_?ConstantQ]]:=0;
-HoldPattern[covdsymbolf[expr1_ expr2_]]:=CircleTimes[expr2,covdsymbolf[expr1]]+CircleTimes[expr1, covdsymbolf[expr2]];
-HoldPattern[covdsymbolf@CircleTimes[expr1_ ,expr2_]]:=CircleTimes[expr2,covdsymbolf[expr1]]+CircleTimes[expr1, covdsymbolf[expr2]];
-CircleTimes/:Grade[covdsymbolf[expr_],CircleTimes]:=Grade[expr,CircleTimes]+1;
+HoldPattern[covdsymbolf[expr_]]:=Diff[expr]/;Grade[expr,CircleTimes]===0;
+ HoldPattern[covdsymbolf[expr1_ expr2_]]:=CircleTimes[covdsymbolf[expr1],expr2]+CircleTimes[covdsymbolf[expr2],expr1];
+CircleTimes/:HoldPattern@Grade[covdsymbolf[expr_],CircleTimes]:=Grade[expr,CircleTimes]+1;
 Wedge/:Grade[covdsymbolf[expr_],Wedge]:=Grade[expr,Wedge]+1;
+CircleTimes/:Grade[covdsymbolf[expr_],CircleTimes]:=Grade[expr,CircleTimes]+1;
 HoldPattern[covd[{a_?NumberQ,basis_}]@expr_]:=
 Which[
 ChartQ[basis]&&Grade[expr,CircleTimes]>=1,
@@ -871,9 +874,14 @@ ChristoffelForm[PD]:=Zero;
 
 
 (* ::Input::Initialization:: *)
-ConnectionFormToTensor[expr_,covd_,frame:(Coframe|dx)]:=expr/.{ChristoffelForm[cd1_][ind1_,ind2_]:>Module[{a=DummyIn@First@VBundlesOfCovD@covd},
-If[xTensorQ@GiveSymbol[Christoffel,cd1,covd]===False,DefTensor[GiveSymbol[Christoffel,cd1,covd][ind1,-a,ind2],ManifoldOfCovD@covd]];
-GiveSymbol[Christoffel,cd1,covd][ind1,-a,ind2]frame[ManifoldOfCovD@covd][a]]/;covd=!=PD,ConnectionForm[cd1_,vbundle_][ind1_,ind2_]:>Module[{a=DummyIn@Tangent@BaseOfVBundle@vbundle},If[xTensorQ@GiveSymbol[AChristoffel,covd,cd1]===False,DefTensor[GiveSymbol[AChristoffel,covd,cd1][ind1,-a,ind2],BaseOfVBundle@vbundle]];
+ConnectionFormToTensor[expr_,covd_,frame:(Coframe|dx)]:=expr/.{ChristoffelForm[cd1_][ind1_,ind2_]:>Module[{a=DummyIn@First@VBundlesOfCovD@covd,i1,i2},
+i1=NewIndexIn[VBundleOfIndex[ind1]];
+i2=NewIndexIn[VBundleOfIndex[ind2]];
+If[xTensorQ@GiveSymbol[Christoffel,cd1,covd]===False,DefTensor[GiveSymbol[Christoffel,cd1,covd][i1,-a,i2],ManifoldOfCovD@covd]];
+GiveSymbol[Christoffel,cd1,covd][ind1,-a,ind2]frame[ManifoldOfCovD@covd][a]]/;covd=!=PD,ConnectionForm[cd1_,vbundle_][ind1_,ind2_]:>Module[{a=DummyIn@Tangent@BaseOfVBundle@vbundle,i1,i2},
+i1=NewIndexIn[VBundleOfIndex[ind1]];
+i2=NewIndexIn[VBundleOfIndex[ind2]];
+If[xTensorQ@GiveSymbol[AChristoffel,covd,cd1]===False,DefTensor[GiveSymbol[AChristoffel,covd,cd1][i1,-a,i2],BaseOfVBundle@vbundle]];
 GiveSymbol[AChristoffel,covd,cd1][ind1,-a,ind2]frame[BaseOfVBundle@vbundle][a]]/;covd=!=PD};
 
 
@@ -976,14 +984,40 @@ ChangeExtD[expr_]:=ChangeExtD[expr,$CovDs];
 
 
 (* ::Input::Initialization:: *)
+ChangeGenCovD[expr_,cd_?CovDQ,cd_]:=expr;
+ChangeGenCovD[expr_,cd1_?CovDQ,cd2_:PD]:=With[{covdf=GiveSymbol[CovD,cd1]},
+Module[{epk},
+epk=SeparateBasis[AIndex][expr];
+epk/.HoldPattern[covdf[expr1_]]:>
+makeChangeCovD[expr1,cd1,cd2]
+]
+];
+
+ChangeGenCovD[expr_,list_List,covd2_:PD]:=Fold[ChangeGenCovD[#1,#2,covd2]&,expr,list];
+ChangeGenCovD[expr_,x_,_:PD]:=Throw@Message[ChangeGenCovD::unknown,"covariant derivative",x];
+ChangeGenCovD[expr_]:=ChangeGenCovD[expr,$CovDs];
+
+
+(* ::Input::Initialization:: *)
 makeChangeExtD[expr_,cd1_,cd2_]:=With[{vbs=Apply[Union,VBundlesOfCovD/@DeleteCases[{cd1,cd2},PD]]},
 Diff[expr,cd2]+Plus@@Map[addAChr1[expr,cd1,cd2],xAct`xTensor`Private`selecton[Select[FindFreeIndices@expr,GIndexQ],vbs]]//ReduceAChr1
 ];
 
 
 (* ::Input::Initialization:: *)
+makeChangeCovD[expr_,cd1_,cd2_]:=With[{vbs=Apply[Union,VBundlesOfCovD/@DeleteCases[{cd1,cd2},PD]]},
+Plus@@Map[addAChr2[expr,cd1,cd2],xAct`xTensor`Private`selecton[Select[IndexList@@DeleteCases[List@@FindIndices@expr,Alternatives@@List@FindDummyIndices@expr],GIndexQ],vbs]]//ReduceAChr1
+];
+
+
+(* ::Input::Initialization:: *)
 addAChr1[expr_,cd1_,cd2_][{oldind_?xAct`xTensor`Private`upQ,dummy_}]:=Wedge[ConnectionForm[cd1,cd2,VBundleOfIndex@oldind][oldind,-dummy],ReplaceIndex[expr,oldind->dummy]]
 addAChr1[expr_,cd1_,cd2_][{oldind_?xAct`xTensor`Private`downQ,dummy_}]:=-Wedge[ConnectionForm[cd1,cd2,VBundleOfIndex@oldind][dummy,oldind],ReplaceIndex[expr,oldind->-dummy]]
+
+
+(* ::Input::Initialization:: *)
+addAChr2[expr_,cd1_,cd2_][{oldind_?xAct`xTensor`Private`upQ,dummy_}]:=-CircleTimes[ConnectionForm[cd1,cd2,VBundleOfIndex@oldind][oldind,-dummy],ReplaceIndex[expr,oldind->dummy]]
+addAChr2[expr_,cd1_,cd2_][{oldind_?xAct`xTensor`Private`downQ,dummy_}]:=CircleTimes[ConnectionForm[cd1,cd2,VBundleOfIndex@oldind][dummy,oldind],ReplaceIndex[expr,oldind->-dummy]]
 
 
 (* ::Input::Initialization:: *)
