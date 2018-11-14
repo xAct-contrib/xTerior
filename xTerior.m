@@ -429,7 +429,8 @@ Protect[DefDiffForm,UndefDiffForm];
 
 (* ::Input::Initialization:: *)
 Options[DefGradedDerivation]={
-PrintAs->Identity
+PrintAs->Identity,
+Master->Null
 };
 
 
@@ -611,7 +612,7 @@ setdiffs[chartname_,__]:=Thread[ComponentValue[dx[ManifoldOfChart@chartname][{#,
 (* ::Input::Initialization:: *)
 xTension["xTerior`",DefChart,"End"]:=defFreeAlgebraChart;
 defFreeAlgebraChart[basis_,__]:=With[{scalars=ScalarsOfChart[basis],numbers=CNumbersOf@basis,mani=ManifoldOfChart@basis},
-(* Define the algebra elements forming the basis of the free algebra *)				 MapThread[DefTensor[GiveSymbol[basis,#1][],mani,PrintAs->ColorString["\!\(\*FractionBox[\(\[PartialD]\), \(\[PartialD]"<>PrintAs[Evaluate@(Head@#2)]<>"\)]\)",BasisColor@basis],GradeOfTensor->{CircleTimes->1}]&,{numbers,scalars}];
+(* Define the algebra elements forming the basis of the free algebra *)				 MapThread[DefTensor[GiveSymbol[basis,Abs@#1][],mani,PrintAs->ColorString["\!\(\*FractionBox[\(\[PartialD]\), \(\[PartialD]"<>PrintAs[Evaluate@(Head@#2)]<>"\)]\)",BasisColor@basis],GradeOfTensor->{CircleTimes->1},Master->basis]&,{numbers,scalars}];
 (* Assign values *)
 Thread[ComponentValue[dx[ManifoldOfChart@basis][{#,basis}]&/@CNumbersOf@basis,Diff/@ScalarsOfChart@basis]];
 Thread[ComponentValue[PDFrame[mani][{#,-basis}]&/@numbers,GiveSymbol[basis,#][]&/@numbers]]
@@ -624,7 +625,7 @@ defFreeAlgebraBasis[basis_,__]:=With[{numbers=CNumbersOf@basis,
 mani=BaseOfVBundle@VBundleOfBasis@basis},
 If[Not@ChartQ@basis,
 (* Define the algebra elements forming the basis of the free algebra *)				 
-DefTensor[GiveSymbol[basis,#][],mani,GradeOfTensor->{CircleTimes->1}]&/@numbers;
+DefTensor[GiveSymbol[basis,Abs@#][],mani,GradeOfTensor->{CircleTimes->1},Master->basis]&/@numbers;
 (* Assign values *)
 Thread[ComponentValue[eFrame[mani][{#,-basis}]&/@numbers,GiveSymbol[basis,#][]&/@numbers]]
 ]
@@ -790,8 +791,8 @@ xTension["xTerior`",DefCovD,"End"]:=defKoszulCovD;
 
 (* ::Input::Initialization:: *)
 defKoszulCovD[covd_?CovDQ[_],__]:=With[{covdsymbol=GiveSymbol[Koszul,covd],covdsymbolf=GiveSymbol[CovD,covd]},
-xAct`xTerior`Private`DefGradedDerivation[covdsymbol[v_],CircleTimes,0,PrintAs->Last@SymbolOfCovD[covd]];
-DefInertHead[covdsymbolf,PrintAs->Last@SymbolOfCovD[covd],LinearQ->True];
+xAct`xTerior`Private`DefGradedDerivation[covdsymbol[v_],CircleTimes,0,PrintAs->Last@SymbolOfCovD[covd],Master->covd];
+DefInertHead[covdsymbolf,PrintAs->Last@SymbolOfCovD[covd],LinearQ->True,Master->covd];
 HoldPattern[covdsymbol[v_][expr_?ConstantQ]]:=0;
 HoldPattern[covdsymbol[factor_ v_][expr_]]:=factor covdsymbol[v][expr]/;Grade[factor,CircleTimes]===0;
 HoldPattern[covdsymbol[v_][expr1_ expr2_]]:=expr2 covdsymbol[v][expr1]+expr1 covdsymbol[v][expr2];
@@ -984,14 +985,16 @@ ChangeExtD[expr_]:=ChangeExtD[expr,$CovDs];
 
 
 (* ::Input::Initialization:: *)
+(* This only gives a correct result for an expression which is a sum of simple tensor monomials, each simple term being the product of rank 1 basis elements   *)
 ChangeGenCovD[expr_,cd_?CovDQ,cd_]:=expr;
 ChangeGenCovD[expr_,cd1_?CovDQ,cd2_:PD]:=With[{covdf=GiveSymbol[CovD,cd1]},
 Module[{epk},
 epk=SeparateBasis[AIndex][expr];
+If[FindIndices[expr]==IndexList[],Return[expr]];
 epk/.HoldPattern[covdf[expr1_]]:>
 makeChangeCovD[expr1,cd1,cd2]
 ]
-];
+]
 
 ChangeGenCovD[expr_,list_List,covd2_:PD]:=Fold[ChangeGenCovD[#1,#2,covd2]&,expr,list];
 ChangeGenCovD[expr_,x_,_:PD]:=Throw@Message[ChangeGenCovD::unknown,"covariant derivative",x];
@@ -1005,8 +1008,8 @@ Diff[expr,cd2]+Plus@@Map[addAChr1[expr,cd1,cd2],xAct`xTensor`Private`selecton[Se
 
 
 (* ::Input::Initialization:: *)
-makeChangeCovD[expr_,cd1_,cd2_]:=With[{vbs=Apply[Union,VBundlesOfCovD/@DeleteCases[{cd1,cd2},PD]]},
-Plus@@Map[addAChr2[expr,cd1,cd2],xAct`xTensor`Private`selecton[Select[IndexList@@DeleteCases[List@@FindIndices@expr,Alternatives@@List@FindDummyIndices@expr],GIndexQ],vbs]]//ReduceAChr1
+makeChangeCovD[expr_,cd1_,cd2_]:=With[{vbs=Apply[Union,VBundlesOfCovD/@DeleteCases[{cd1,cd2},PD]],covd2=GiveSymbol[CovD,cd2]},
+covd2[expr]+Plus@@Map[addAChr2[expr,cd1,cd2],xAct`xTensor`Private`selecton[Select[IndexList@@DeleteCases[List@@FindIndices@expr,Alternatives@@List@FindDummyIndices@expr],GIndexQ],vbs]]//ReduceAChr1
 ];
 
 
