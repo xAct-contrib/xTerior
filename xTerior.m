@@ -160,6 +160,8 @@ PDFrame::usage="PDFrame[mani] represents a holonomic frame in the manifold mani.
 eFrame::usage="eFrame[mani] represents a frame in the manifold mani.";
 (* Koszul connection *)
 Koszul::usage="Koszul is the head used to introduce the Koszul operator. The latter is constructed by appending this head to the xTensor symbol used to represent a covariant derivative";
+ExpandKoszul::usage="ExpandKoszul[expr,cd1,cd2] expands Koszul derivations of frame or co-frame elements with respect to cd1 into Christoffel tensors relating the covariant derivatives cd1 and cd2";
+ExpandCovD::usage="ExpandCovD[expr,cd,chart] expands all the generalized covariant derivatives of rank 1 tensors in terms of the Koszul derivatives with respect to elements of a holonomic frame associated to a coordinate chart";
 (* The connection 1-form *)
 ConnectionForm::usage="ConnectionForm[cd,vbundle] represents the connection 1-form associated to the covariant derivatives cd defined in the bundle vbundle. If vbundle is the tangent bundle of a differentiable manifold then ConnectionForm is automatically replaced by ChristoffelForm (see the on-line help of ChristoffelForm for further details).";
 (* The curvature 2-form *)
@@ -766,16 +768,22 @@ FormIntegrate::dim="Degree of form `1` is incompatible with dimension of manifol
 (* ::Input::Initialization:: *)
 InertHeadQ[FormIntegrate]^:=True;
 LinearQ[FormIntegrate]^:=True;
+FormIntegrate[expr_Plus,man_?ManifoldQ]:=FormIntegrate[#,man]&/@expr;
 FormIntegrate[form_,EmptyManifold]:=0;
 FormIntegrate[c_?ConstantQ,man_?ManifoldQ]:=c/;DimOfManifold[man]==0;
-FormIntegrate[form_,man_?ManifoldQ]:=Throw[Message[FormIntegrate::dim,form,man];$Failed]/;Deg[form]=!=DimOfManifold[man];
+FormIntegrate[form_,man_?ManifoldQ]:=If[
+form===0,0,
+Throw[Message[FormIntegrate::dim,form,man]];$Failed
+]/;Deg[form]=!=DimOfManifold[man];
 ToCanonical[FormIntegrate[form_,man_],opts___]^:=FormIntegrate[ToCanonical[form,opts],man];
 FormIntegrate/:Grade[FormIntegrate[form_,man_],Wedge]:=0/;Deg[form]===DimOfManifold[man];
 
 
 (* ::Input::Initialization:: *)
 (* Formatting. Do not remove the ugly ?InertHeadQ check here. It would break typesetting *)
-MakeBoxes[FormIntegrate?InertHeadQ[form_,man_],StandardForm]:=RowBox[{SubscriptBox["\[Integral]",MakeBoxes[man,StandardForm]],MakeBoxes[form,StandardForm]}];
+FormIntegrate/:MakeBoxes[FormIntegrate?InertHeadQ[form_,man_],StandardForm]:=RowBox[{SubscriptBox["\[Integral]",MakeBoxes[man,StandardForm]],MakeBoxes[form,StandardForm]}];
+(* This doesn't work *)
+MakeExpression[RowBox[{SubscriptBox["\[Integral]",man_],form_}],StandardForm]:=FormIntegrate[MakeExpression[form,StandardForm],MakeExpression[man,StandardForm]];
 
 
 (* ::Input::Initialization:: *)
@@ -803,8 +811,8 @@ HoldPattern[covdsymbolf[expr_?ConstantQ]]:=0;
 HoldPattern[covdsymbolf[expr_]]:=Diff[expr]/;Grade[expr,CircleTimes]===0;
  HoldPattern[covdsymbolf[expr1_ expr2_]]:=CircleTimes[covdsymbolf[expr1],expr2]+CircleTimes[covdsymbolf[expr2],expr1];
 CircleTimes/:HoldPattern@Grade[covdsymbolf[expr_],CircleTimes]:=Grade[expr,CircleTimes]+1;
-Wedge/:Grade[covdsymbolf[expr_],Wedge]:=Grade[expr,Wedge]+1;
-CircleTimes/:Grade[covdsymbolf[expr_],CircleTimes]:=Grade[expr,CircleTimes]+1;
+Wedge/:HoldPattern[Grade[covdsymbolf[expr_],Wedge]]:=Grade[expr,Wedge]+1;
+CircleTimes/:HoldPattern[Grade[covdsymbolf[expr_],CircleTimes]]:=Grade[expr,CircleTimes]+1;
 HoldPattern[covd[{a_?NumberQ,basis_}]@expr_]:=
 Which[
 ChartQ[basis]&&Grade[expr,CircleTimes]>=1,
@@ -833,6 +841,19 @@ With[{sym0=GiveSymbol[Koszul,covd],sym1=GiveSymbol[PD,chart],mani=ManifoldOfChar
 Outer[Set[sym0[PDFrame[mani][{#1,-chart}]]@Part[ScalarsOfChart[chart],#2],sym1[{#1,-chart}][Part[ScalarsOfChart[chart],#2]]]&,CNumbersOf@chart,Range[1,Length@ScalarsOfChart@chart]];
 Outer[Set[sym0[GiveSymbol[chart,#1][]]@Part[ScalarsOfChart[chart],#2],sym1[{#1,-chart}][Part[ScalarsOfChart[chart],#2]]]&,CNumbersOf@chart,Range[1,Length@ScalarsOfChart@chart]]
 ]
+]
+
+
+(* ::Input::Initialization:: *)
+ExpandKoszul[expr_,covd1_?CovDQ,covd2_?CovDQ]:=expr/.{GiveSymbol[Koszul,covd1][eFrame[mani_?ManifoldQ][a_]][eFrame[mani_?ManifoldQ][b_]]:>
+Module[{c=DummyIn[Tangent[mani]]},Christoffel[covd1,covd2][c,a,b]eFrame[mani][-c]],GiveSymbol[Koszul,covd1][eFrame[mani_?ManifoldQ][a_]][Coframe[mani_?ManifoldQ][b_]]:>Module[{c=DummyIn[Tangent[mani]]},-Christoffel[covd1,covd2][b,a,-c]Coframe[mani][c]],GiveSymbol[Koszul,covd1][PDFrame[mani_?ManifoldQ][a_]][PDFrame[mani_?ManifoldQ][b_]]:>
+Module[{c=DummyIn[Tangent[mani]]},Christoffel[covd1,covd2][c,a,b]PDFrame[mani][-c]],GiveSymbol[Koszul,covd1][PDFrame[mani_?ManifoldQ][a_]][dx[mani_?ManifoldQ][b_]]:>Module[{c=DummyIn[Tangent[mani]]},-Christoffel[covd1,covd2][b,a,-c]dx[mani][c]]};
+
+
+(* ::Input::Initialization:: *)
+ExpandCovD[expr_,covd_?CovDQ,chart_?ChartQ]:=
+With[{covdf=GiveSymbol[CovD,covd],M=ManifoldOfChart[chart],covdk=GiveSymbol[Koszul,covd]},
+(expr/.HoldPattern[covdf[expr1_]]:>Plus@@(dx[M][{#,chart}]\[CircleTimes]covdk[PDFrame[M][{#,-chart}]][expr1]&/@CNumbersOf@chart)/;Grade[expr1,CircleTimes]===1)
 ]
 
 

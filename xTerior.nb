@@ -1014,6 +1014,19 @@ mani.\>\""}], ";"}], "\[IndentingNewLine]",
      "\"\<Koszul is the head used to introduce the Koszul operator. The \
 latter is constructed by appending this head to the xTensor symbol used to \
 represent a covariant derivative\>\""}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ExpandKoszul", "::", "usage"}], "=", 
+     "\"\<ExpandKoszul[expr,cd1,cd2] expands Koszul derivations of frame or \
+co-frame elements with respect to cd1 into Christoffel tensors relating the \
+covariant derivatives cd1 and cd2\>\""}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ExpandCovD", "::", "usage"}], "=", 
+     "\"\<ExpandCovD[expr,cd,chart] expands all the generalized covariant \
+derivatives of rank 1 tensors in terms of the Koszul derivatives with respect \
+to elements of a holonomic frame associated to a coordinate chart\>\""}], 
+    ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
      RowBox[{"The", " ", "connection", " ", "1"}], "-", "form"}], " ", "*)"}],
@@ -1489,7 +1502,7 @@ Cell[BoxData[
      RowBox[{"UnsetZeroForm", "[", "form_", "]"}], ":=", 
      RowBox[{"Unset", "[", 
       RowBox[{"form", "[", "___", "]"}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", "\n", 
+   "\[IndentingNewLine]", "\n", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"UseDimensionStart", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -1577,8 +1590,8 @@ Cell[BoxData[
              RowBox[{"(", 
               RowBox[{"DimOfManifold", "/@", 
                RowBox[{"DependenciesOf", "[", "expr", "]"}]}], ")"}]}], 
-            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\n", "\[IndentingNewLine]",
-    "\[IndentingNewLine]", 
+            ")"}]}], ")"}]}]}], ";"}]}], "]"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"UseDimensionStop", "[", "]"}], ":=", 
     RowBox[{"Module", "[", 
@@ -4553,6 +4566,16 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"FormIntegrate", "[", 
+    RowBox[{"expr_Plus", ",", 
+     RowBox[{"man_", "?", "ManifoldQ"}]}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"FormIntegrate", "[", 
+      RowBox[{"#", ",", "man"}], "]"}], "&"}], "/@", "expr"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FormIntegrate", "[", 
     RowBox[{"form_", ",", "EmptyManifold"}], "]"}], ":=", "0"}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
@@ -4571,12 +4594,15 @@ Cell[BoxData[{
     RowBox[{"form_", ",", 
      RowBox[{"man_", "?", "ManifoldQ"}]}], "]"}], ":=", 
    RowBox[{
-    RowBox[{"Throw", "[", 
+    RowBox[{"If", "[", "\[IndentingNewLine]", 
      RowBox[{
-      RowBox[{"Message", "[", 
-       RowBox[{
-        RowBox[{"FormIntegrate", "::", "dim"}], ",", "form", ",", "man"}], 
-       "]"}], ";", "$Failed"}], "]"}], "/;", 
+      RowBox[{"form", "===", "0"}], ",", "0", ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Throw", "[", 
+        RowBox[{"Message", "[", 
+         RowBox[{
+          RowBox[{"FormIntegrate", "::", "dim"}], ",", "form", ",", "man"}], 
+         "]"}], "]"}], ";", "$Failed"}]}], "\[IndentingNewLine]", "]"}], "/;", 
     RowBox[{
      RowBox[{"Deg", "[", "form", "]"}], "=!=", 
      RowBox[{"DimOfManifold", "[", "man", "]"}]}]}]}], 
@@ -4616,21 +4642,43 @@ Cell[BoxData[
     "typesetting"}], " ", "*)"}], "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{"MakeBoxes", "[", 
-     RowBox[{
+    RowBox[{"FormIntegrate", "/:", 
+     RowBox[{"MakeBoxes", "[", 
       RowBox[{
-       RowBox[{"FormIntegrate", "?", "InertHeadQ"}], "[", 
-       RowBox[{"form_", ",", "man_"}], "]"}], ",", "StandardForm"}], "]"}], ":=", 
-    RowBox[{"RowBox", "[", 
-     RowBox[{"{", 
+       RowBox[{
+        RowBox[{"FormIntegrate", "?", "InertHeadQ"}], "[", 
+        RowBox[{"form_", ",", "man_"}], "]"}], ",", "StandardForm"}], "]"}], ":=", 
+     RowBox[{"RowBox", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"SubscriptBox", "[", 
+         RowBox[{"\"\<\[Integral]\>\"", ",", 
+          RowBox[{"MakeBoxes", "[", 
+           RowBox[{"man", ",", "StandardForm"}], "]"}]}], "]"}], ",", 
+        RowBox[{"MakeBoxes", "[", 
+         RowBox[{"form", ",", "StandardForm"}], "]"}]}], "}"}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"This", " ", 
+     RowBox[{"doesn", "'"}], "t", " ", "work"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MakeExpression", "[", 
       RowBox[{
-       RowBox[{"SubscriptBox", "[", 
-        RowBox[{"\"\<\[Integral]\>\"", ",", 
-         RowBox[{"MakeBoxes", "[", 
-          RowBox[{"man", ",", "StandardForm"}], "]"}]}], "]"}], ",", 
-       RowBox[{"MakeBoxes", "[", 
-        RowBox[{"form", ",", "StandardForm"}], "]"}]}], "}"}], "]"}]}], 
-   ";"}]}]], "Input",
+       RowBox[{"RowBox", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"SubscriptBox", "[", 
+           RowBox[{"\"\<\[Integral]\>\"", ",", "man_"}], "]"}], ",", 
+          "form_"}], "}"}], "]"}], ",", "StandardForm"}], "]"}], ":=", 
+     RowBox[{"FormIntegrate", "[", 
+      RowBox[{
+       RowBox[{"MakeExpression", "[", 
+        RowBox[{"form", ",", "StandardForm"}], "]"}], ",", 
+       RowBox[{"MakeExpression", "[", 
+        RowBox[{"man", ",", "StandardForm"}], "]"}]}], "]"}]}], 
+    ";"}]}]}]], "Input",
  InitializationCell->
   True,ExpressionUUID->"063a4701-0410-4b57-8bdb-77e4f02e081c"],
 
@@ -4712,11 +4760,11 @@ Cell[BoxData[
      RowBox[{"\<\"inert head\"\>", ",", "\<\"\"\>"}], "}"}]}]}], 
   "}"}]], "Output",ExpressionUUID->"1ef6f8bd-7f05-470c-ac3b-bbc5d8c0d6b2"]
 }, Open  ]]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["2.12 Koszul operator", \
+Cell["2.12 Koszul operator and its properties", \
 "Subsubsection",ExpressionUUID->"0a00c2ef-0242-486a-ab3f-5982fda9a047"],
 
 Cell[TextData[{
@@ -4863,18 +4911,21 @@ Cell[BoxData[
         RowBox[{"expr", ",", "CircleTimes"}], "]"}], "+", "1"}]}], ";", 
      "\[IndentingNewLine]", 
      RowBox[{"Wedge", "/:", 
-      RowBox[{"Grade", "[", 
-       RowBox[{
-        RowBox[{"covdsymbolf", "[", "expr_", "]"}], ",", "Wedge"}], "]"}], ":=", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"Grade", "[", 
+        RowBox[{
+         RowBox[{"covdsymbolf", "[", "expr_", "]"}], ",", "Wedge"}], "]"}], 
+       "]"}], ":=", 
       RowBox[{
        RowBox[{"Grade", "[", 
         RowBox[{"expr", ",", "Wedge"}], "]"}], "+", "1"}]}], ";", 
      "\[IndentingNewLine]", 
      RowBox[{"CircleTimes", "/:", 
-      RowBox[{"Grade", "[", 
-       RowBox[{
-        RowBox[{"covdsymbolf", "[", "expr_", "]"}], ",", "CircleTimes"}], 
-       "]"}], ":=", 
+      RowBox[{"HoldPattern", "[", 
+       RowBox[{"Grade", "[", 
+        RowBox[{
+         RowBox[{"covdsymbolf", "[", "expr_", "]"}], ",", "CircleTimes"}], 
+        "]"}], "]"}], ":=", 
       RowBox[{
        RowBox[{"Grade", "[", 
         RowBox[{"expr", ",", "CircleTimes"}], "]"}], "+", "1"}]}], ";", 
@@ -4965,6 +5016,11 @@ Cell[BoxData[
  InitializationCell->
   True,ExpressionUUID->"020f9ecd-a13c-4bec-9bdb-fe7a2e95f99f"],
 
+Cell["\<\
+Action of the Koszul operator on the holonomic elements of a coordinate \
+chart: \
+\>", "Text",ExpressionUUID->"30181443-2dc8-4c6b-856a-ef1c1a29f963"],
+
 Cell[BoxData[
  RowBox[{
   RowBox[{"setKoszulValue", "[", 
@@ -5053,7 +5109,191 @@ Cell[BoxData[
      "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
  
  InitializationCell->
-  True,ExpressionUUID->"cff7f534-0169-45e8-9414-3cf953b7493d"]
+  True,ExpressionUUID->"cff7f534-0169-45e8-9414-3cf953b7493d"],
+
+Cell["\<\
+Expansion of the action of Koszul operator on frame elements:\
+\>", "Text",ExpressionUUID->"2b5d394a-0215-4e94-a6e0-0a15598e679c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ExpandKoszul", "[", 
+    RowBox[{"expr_", ",", 
+     RowBox[{"covd1_", "?", "CovDQ"}], ",", 
+     RowBox[{"covd2_", "?", "CovDQ"}]}], "]"}], ":=", 
+   RowBox[{"expr", "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"GiveSymbol", "[", 
+          RowBox[{"Koszul", ",", "covd1"}], "]"}], "[", 
+         RowBox[{
+          RowBox[{"eFrame", "[", 
+           RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "[", "a_", "]"}], 
+         "]"}], "[", 
+        RowBox[{
+         RowBox[{"eFrame", "[", 
+          RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "[", "b_", "]"}], "]"}],
+        "\[RuleDelayed]", "\[IndentingNewLine]", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"c", "=", 
+           RowBox[{"DummyIn", "[", 
+            RowBox[{"Tangent", "[", "mani", "]"}], "]"}]}], "}"}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Christoffel", "[", 
+            RowBox[{"covd1", ",", "covd2"}], "]"}], "[", 
+           RowBox[{"c", ",", "a", ",", "b"}], "]"}], 
+          RowBox[{
+           RowBox[{"eFrame", "[", "mani", "]"}], "[", 
+           RowBox[{"-", "c"}], "]"}]}]}], "]"}]}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"GiveSymbol", "[", 
+          RowBox[{"Koszul", ",", "covd1"}], "]"}], "[", 
+         RowBox[{
+          RowBox[{"eFrame", "[", 
+           RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "[", "a_", "]"}], 
+         "]"}], "[", 
+        RowBox[{
+         RowBox[{"Coframe", "[", 
+          RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "[", "b_", "]"}], "]"}],
+        "\[RuleDelayed]", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"c", "=", 
+           RowBox[{"DummyIn", "[", 
+            RowBox[{"Tangent", "[", "mani", "]"}], "]"}]}], "}"}], ",", 
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{
+            RowBox[{"Christoffel", "[", 
+             RowBox[{"covd1", ",", "covd2"}], "]"}], "[", 
+            RowBox[{"b", ",", "a", ",", 
+             RowBox[{"-", "c"}]}], "]"}]}], 
+          RowBox[{
+           RowBox[{"Coframe", "[", "mani", "]"}], "[", "c", "]"}]}]}], 
+        "]"}]}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"GiveSymbol", "[", 
+          RowBox[{"Koszul", ",", "covd1"}], "]"}], "[", 
+         RowBox[{
+          RowBox[{"PDFrame", "[", 
+           RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "[", "a_", "]"}], 
+         "]"}], "[", 
+        RowBox[{
+         RowBox[{"PDFrame", "[", 
+          RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "[", "b_", "]"}], "]"}],
+        "\[RuleDelayed]", "\[IndentingNewLine]", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"c", "=", 
+           RowBox[{"DummyIn", "[", 
+            RowBox[{"Tangent", "[", "mani", "]"}], "]"}]}], "}"}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Christoffel", "[", 
+            RowBox[{"covd1", ",", "covd2"}], "]"}], "[", 
+           RowBox[{"c", ",", "a", ",", "b"}], "]"}], 
+          RowBox[{
+           RowBox[{"PDFrame", "[", "mani", "]"}], "[", 
+           RowBox[{"-", "c"}], "]"}]}]}], "]"}]}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"GiveSymbol", "[", 
+          RowBox[{"Koszul", ",", "covd1"}], "]"}], "[", 
+         RowBox[{
+          RowBox[{"PDFrame", "[", 
+           RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "[", "a_", "]"}], 
+         "]"}], "[", 
+        RowBox[{
+         RowBox[{"dx", "[", 
+          RowBox[{"mani_", "?", "ManifoldQ"}], "]"}], "[", "b_", "]"}], "]"}],
+        "\[RuleDelayed]", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"c", "=", 
+           RowBox[{"DummyIn", "[", 
+            RowBox[{"Tangent", "[", "mani", "]"}], "]"}]}], "}"}], ",", 
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{
+            RowBox[{"Christoffel", "[", 
+             RowBox[{"covd1", ",", "covd2"}], "]"}], "[", 
+            RowBox[{"b", ",", "a", ",", 
+             RowBox[{"-", "c"}]}], "]"}]}], 
+          RowBox[{
+           RowBox[{"dx", "[", "mani", "]"}], "[", "c", "]"}]}]}], "]"}]}]}], 
+     "}"}]}]}], ";"}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"92abb1f2-1f95-4d4d-8602-59d0d94b22df"],
+
+Cell["\<\
+Expansion with respect to a coordinate chart of the generalized covariant \
+derivative of rank 1 tensors\
+\>", "Text",ExpressionUUID->"b7be2a6a-e5c5-4723-bc78-d21287a46245"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ExpandCovD", "[", 
+   RowBox[{"expr_", ",", 
+    RowBox[{"covd_", "?", "CovDQ"}], ",", 
+    RowBox[{"chart_", "?", "ChartQ"}]}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"covdf", "=", 
+       RowBox[{"GiveSymbol", "[", 
+        RowBox[{"CovD", ",", "covd"}], "]"}]}], ",", 
+      RowBox[{"M", "=", 
+       RowBox[{"ManifoldOfChart", "[", "chart", "]"}]}], ",", 
+      RowBox[{"covdk", "=", 
+       RowBox[{"GiveSymbol", "[", 
+        RowBox[{"Koszul", ",", "covd"}], "]"}]}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(", 
+     RowBox[{"expr", "/.", 
+      RowBox[{
+       RowBox[{"HoldPattern", "[", 
+        RowBox[{"covdf", "[", "expr1_", "]"}], "]"}], ":>", 
+       RowBox[{
+        RowBox[{"Plus", "@@", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"dx", "[", "M", "]"}], "[", 
+              RowBox[{"{", 
+               RowBox[{"#", ",", "chart"}], "}"}], "]"}], "\[CircleTimes]", 
+             RowBox[{
+              RowBox[{"covdk", "[", 
+               RowBox[{
+                RowBox[{"PDFrame", "[", "M", "]"}], "[", 
+                RowBox[{"{", 
+                 RowBox[{"#", ",", 
+                  RowBox[{"-", "chart"}]}], "}"}], "]"}], "]"}], "[", "expr1",
+               "]"}]}], "&"}], "/@", 
+           RowBox[{"CNumbersOf", "@", "chart"}]}], ")"}]}], "/;", 
+        RowBox[{
+         RowBox[{"Grade", "[", 
+          RowBox[{"expr1", ",", "CircleTimes"}], "]"}], "===", "1"}]}]}]}], 
+     ")"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"b1d04cd9-2e79-4eb7-a095-d35f72c91038"]
 }, Closed]]
 }, Open  ]],
 
@@ -10007,7 +10247,7 @@ Cell[BoxData[{
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1280, 727},
-WindowMargins->{{127, Automatic}, {Automatic, 123}},
+WindowMargins->{{154, Automatic}, {61, Automatic}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
