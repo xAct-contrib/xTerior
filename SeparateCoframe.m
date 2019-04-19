@@ -2,7 +2,7 @@
 
 (* ::Input::Initialization:: *)
 SeparateCoframeAux[form_, list_IndexList:IndexList[]] := 
-	Module[{auxind, formind, lengthformind, compind, deg, tensorhead, mfd, i, j, tensor, tensorind, result},
+	Module[{auxind, formind, lengthformind, compind, deg, tensorhead, mfd, i, j, tensor, tensorind, result, genset, sym},
 		formind = FindIndices[form];
 		lengthformind = Length@formind;
 		If[list =!= IndexList[],
@@ -37,20 +37,11 @@ SeparateCoframeAux[form_, list_IndexList:IndexList[]] :=
 					StandardForm
 				]
 			];
-
+		];
 		(*Inherit symmetry from form and respect the antisymmetry in the "component indices"*)
-			xUpSet[SymmetryGroupOfTensor[tensorhead], 
-					StrongGenSet[Range[lengthformind + deg],
-						Join[SymmetryGroupOfTensor[Head@ form][[2]],
-							Replace[
-								Table[
-									Times[-1, Cycles[List[j, j + 1]]], {j, lengthformind + 1, lengthformind + deg - 1}
-								] // OutputForm, head_[arg__]:> GenSet[arg], {0,1}
-							]
-						] //.{}->Sequence[]
-					]
-				]
-			];
+		genset = GenSet@@ Table[ Times[-1, Cycles[List[j, j + 1]]], {j, lengthformind + 1, lengthformind + deg - 1}]; 
+		sym = Join[SymmetryGroupOfTensor[Head@ form][[2]], genset];
+		xUpSet[SymmetryGroupOfTensor[tensorhead], StrongGenSet[Range[lengthformind + deg], sym]];
 
 		(*Redefine tensor for return*)
 		tensor = tensorhead@@ Join[formind, -#&/@ compind];
