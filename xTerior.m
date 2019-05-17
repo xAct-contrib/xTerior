@@ -519,8 +519,9 @@ Diff[_Basis,PD]:=0;
 
 (* ::Input::Initialization:: *)
 (* This produces expanded expressions and is much faster when there are many scalars *)
+notZero=0=!=#&
 Diff[expr_Times,cd_]:=Module[{grades=Grade[#,Wedge]&/@List@@expr,pos,scalar,form},
-pos=Position[grades,_?Positive,1,Heads->False];
+pos=Position[grades,_?notZero,1,Heads->False];
 Which[
 Length[pos]>1,
 	Throw[Message[Diff::error1,"Found Times product of nonscalar forms: ",expr]],
