@@ -21,13 +21,13 @@
 
 (* ::Input::Initialization:: *)
 xAct`xTerior`$xTensorVersionExpected={"1.1.2",{2015,8,23}};
-xAct`xTerior`$Version={"0.9.0",{2015,8,23}};
+xAct`xTerior`$Version={"0.9.1",{2019,5,17}};
 
 
 (* ::Input::Initialization:: *)
 (* xTerior: exterior calculus in Differential Geometry *)
 
-(* Copyright (C) 2013 Alfonso Garcia-Parrado Gomez-Lobo and Leo C. Stein *)
+(* Copyright (C) 2013-2019 Alfonso Garcia-Parrado Gomez-Lobo and Leo C. Stein *)
 
 (* This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License,or (at your option) any later version.
 
@@ -53,9 +53,9 @@ You should have received a copy of the GNU General Public License along with thi
   
 (* :Context: xAct`xTerior` *)
 
-(* :Package Version: 0.8.5 *)
+(* :Package Version: 0.9.1 *)
 
-(* :Copyright: Alfonso Garcia-Parrado Gomez-Lobo and Leo C. Stein (2013) *)
+(* :Copyright: Alfonso Garcia-Parrado Gomez-Lobo and Leo C. Stein (2013-2019) *)
 
 (* :History: See xTerior.History *)
 
@@ -93,7 +93,7 @@ If[Not@OrderedQ@Map[Last,{xAct`xTerior`$xTensorVersionExpected,xAct`xTensor`$Ver
 (* ::Input::Initialization:: *)
 Print[xAct`xCore`Private`bars]
 Print["Package xAct`xTerior`  version ",xAct`xTerior`$Version[[1]],", ",xAct`xTerior`$Version[[2]]];
-Print["CopyRight (C) 2013, Alfonso Garcia-Parrado Gomez-Lobo and Leo C. Stein, under the General Public License."];
+Print["Copyright (C) 2013-2019, Alfonso Garcia-Parrado Gomez-Lobo and Leo C. Stein, under the General Public License."];
 
 
 (* ::Input::Initialization:: *)
@@ -519,8 +519,9 @@ Diff[_Basis,PD]:=0;
 
 (* ::Input::Initialization:: *)
 (* This produces expanded expressions and is much faster when there are many scalars *)
+notZero=0=!=#&
 Diff[expr_Times,cd_]:=Module[{grades=Grade[#,Wedge]&/@List@@expr,pos,scalar,form},
-pos=Position[grades,_?Positive,1,Heads->False];
+pos=Position[grades,_?notZero,1,Heads->False];
 Which[
 Length[pos]>1,
 	Throw[Message[Diff::error1,"Found Times product of nonscalar forms: ",expr]],
