@@ -207,6 +207,10 @@ DefInfo->Null
 
 
 (* ::Input::Initialization:: *)
+xAct`xTensor`Private`ToObject[xAct`xTensor`Private`AddedSign[(-1)^(deg_),expr_]]:=MapAt[xAct`xTensor`Private`VerbatimProduct[Times][(-1)^(deg),#1]&,xAct`xTensor`Private`ToObject[expr],1];
+
+
+(* ::Input::Initialization:: *)
 Wedge/:GradeOfProduct[Times,Wedge]=0;
 
 
@@ -407,7 +411,10 @@ CircleTimes[CTensor[array_,bases_List,addweight_][b__],ten_]:=CTensor[CircleTime
 
 (* ::Input::Initialization:: *)
 DefDiffForm[form_,mani_,deg_,options___?OptionQ]:=
-(DefTensor[form,mani,GradeOfTensor->{Wedge->deg},options];
+(
+(* Hack to be able to define forms with symbolic degree *)
+xAct`xTensor`Private`checkgrade[Wedge->deg]:=Null;
+DefTensor[form,mani,GradeOfTensor->{Wedge->deg},options]
 )
 
 
