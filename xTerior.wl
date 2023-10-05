@@ -243,7 +243,7 @@ PDFrame::usage = "PDFrame[mani] represents a holonomic frame in the manifold man
 eFrame::usage = "eFrame[mani] represents a frame in the manifold mani.";
 
 (* Koszul connection *)
-Koszul::usage = "Koszul is the head used to introduce the Koszul operator. The latter is constructed by appending this head to the xTensor symbol used to represent a covariant derivative";
+Koszul::usage = "Koszul is the head used to introduce the Koszul operator. The latter is constructed by prepending this head to the xTensor symbol used to represent a covariant derivative";
 
 ExpandKoszul::usage="ExpandKoszul[expr,cd1,cd2] expands Koszul derivations of frame or co-frame elements with respect to cd1 into Christoffel tensors relating the covariant 
 derivatives cd1 and cd2";
@@ -702,14 +702,13 @@ MakeDerivation[head_, derL_, derR_, prod_, dergrade_] :=
 		head /: Grade[derL[expr_, ___], prod] := Grade[expr, prod] + grade;
 			(* The (graded) Leibniz rule *)
 		derL[expr_prod, rest___] :=
-			With[{sumgrades = FoldList[Plus, 0, Grade[#, Wedge]& /@ List @@ expr
-				]},
+			With[{sumgrades = FoldList[Plus, 0, Grade[#, Wedge]& /@ List @@ expr]},
 				Sum[(-1)^(grade * sumgrades[[i]]) MapAt[derR[#, rest]&, expr, i],
 					 {i, 1, Length[expr]}]
 			];
 	(* QUESTION: Agreement with a regular derivative when acting on scalar functions?? *)
-		derL[func_?ScalarFunctionQ[args__], rest___] := xAct`xTensor`Private`multiD[
-			derR[#, rest]&, func[args]]; 
+		derL[func_?ScalarFunctionQ[args__], rest___] := 
+			xAct`xTensor`Private`multiD[derR[#, rest]&, func[args]]; 
 		(* Dependencies *)
 		If[!AtomQ[derR],
 			head /: DependenciesOfInertHead[derL] := DependenciesOf[First[derR]]
@@ -1124,12 +1123,12 @@ Integrate1 /: HoldPattern @ Plus[var__Integrate1] :=
 
 FindPotential[factor_. expr_Wedge, point_List, chart_?ChartQ, options:OptionsPattern[Integrate]] :=
 	Integrate[(factor /. Thread[Rule[ScalarsOfChart @ chart, Times[#, t]& /@ (ScalarsOfChart @ chart - point) + point]]) 
-		Sum[(-1)^(i - 1) t^(Deg @ expr - 1) 
+		Sum[(-1)^(i - 1) t^(Deg @ expr - 1) *
 			(Part[expr, i, 1] - 
 			Part[
 				point, First @ Flatten @ Position[ScalarsOfChart @ chart, 
 				Part[expr, i, 1]]
-			]) 
+			]) *
 			Delete[expr, {i}], {i, 1, Length[expr]}
 		], 
 		{t, 0, 1}, 
@@ -1215,17 +1214,28 @@ xTension["xCoba`", DefChart, "End"] :=
 (* Actual definition of the Koszul operator. In addition we also define the corresponding "index free covariant derivative": *)
 defKoszulCovD[covd_?CovDQ[_], __] :=
 	With[{covdsymbol = GiveSymbol[Koszul, covd], covdsymbolf = GiveSymbol[CovD, covd]},
+
+		(* Definition of Koszul operator *)
 		xAct`xTerior`Private`DefGradedDerivation[covdsymbol[v_], CircleTimes, 0, PrintAs -> Last @ SymbolOfCovD[covd], Master -> covd];
+
+		(* Definition of the "index free covariant derivative"*)
 		DefInertHead[covdsymbolf, PrintAs -> Last @ SymbolOfCovD[covd], LinearQ-> True, Master -> covd];
+
+		(* Properties of the Koszul operator *)
 		HoldPattern[covdsymbol[v_][expr_?ConstantQ]] := 0;
 		HoldPattern[covdsymbol[factor_ v_][expr_]] := factor covdsymbol[v][expr] /; Grade[factor, CircleTimes] === 0;
 		HoldPattern[covdsymbol[v_][expr1_ expr2_]] := expr2 covdsymbol[v][expr1] + expr1 covdsymbol[v][expr2];
+
+		(* Properties of the "index free covariant derivative" *)
 		HoldPattern[covdsymbolf[expr_?ConstantQ]] := 0;
 		HoldPattern[covdsymbolf[expr_]] := Diff[expr] /; Grade[expr, CircleTimes] === 0;
 		HoldPattern[covdsymbolf[expr1_ expr2_]] := CircleTimes[covdsymbolf[expr1], expr2] + CircleTimes[covdsymbolf[expr2], expr1];
+		HoldPattern[covdsymbolf[CircleTimes[expr1_, expr2_]]] := CircleTimes[covdsymbolf[expr1], expr2] + CircleTimes[expr1, covdsymbolf[expr2]]; 
+		
 		CircleTimes /: HoldPattern @ Grade[covdsymbolf[expr_], CircleTimes]:= Grade[expr, CircleTimes] + 1;
 		Wedge /: HoldPattern[Grade[covdsymbolf[expr_], Wedge]] := Grade[expr,Wedge] + 1;
 		CircleTimes /: HoldPattern[Grade[covdsymbolf[expr_], CircleTimes]] := Grade[expr, CircleTimes] + 1;
+
 		HoldPattern[covd[{a_?NumberQ, basis_}] @ expr_] :=
 			Which[
 				ChartQ[basis] && Grade[expr, CircleTimes] >= 1,
