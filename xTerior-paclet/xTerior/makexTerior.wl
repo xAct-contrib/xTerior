@@ -1,5 +1,5 @@
 (* ::Package:: *)
 
-PacletUninstall["xTerior"]
-xTerior=CreatePacletArchive[NotebookDirectory[]]
-PacletInstall[xTerior]
+PacletUninstall["xTerior"];
+xTerior = CreatePacletArchive[DirectoryName[$InputFileName]];
+PacletInstall[xTerior];
