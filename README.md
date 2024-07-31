@@ -1,6 +1,6 @@
-# xIdeal: IDEAL characterizations for xAct
+# xTerior: exterior calculus in xAct
 
-``xTerior` `` is the `` xAct` `` package for working with differential forms.
+``xTerior` `` is the `` xAct` `` package for working with differential forms in xAct.
 
 # Prerequisites
 
