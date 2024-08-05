@@ -1218,6 +1218,8 @@ xTension["xCoba`", DefChart, "End"] :=
 defKoszulCovD[covd_?CovDQ[_], __] :=
 	With[{covdsymbol = GiveSymbol[Koszul, covd], covdsymbolf = GiveSymbol[CovD, covd]},
 
+		(* Leibnitz rule of a covariant derivative acting on Wedge *)
+		covd[ind_][scalar_Wedge] := Sum[MapAt[covd[ind][#] &, scalar, i], {i, 1, Length[scalar]}];
 		(* Definition of Koszul operator *)
 		xAct`xTerior`Private`DefGradedDerivation[covdsymbol[v_], CircleTimes, 0, PrintAs -> Last @ SymbolOfCovD[covd], Master -> covd];
 
