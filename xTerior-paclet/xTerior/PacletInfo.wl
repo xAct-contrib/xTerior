@@ -6,7 +6,7 @@ PacletObject[
 			{
 				"Kernel",
 				Root -> "Kernel",
-				Context -> "xAct`xTerior`"
+				Context -> {"xAct`xTerior`","xAct`FormsToTensors`"}
 			}
 		},
 		"URL" -> "http://www.xact.es/xTerior",

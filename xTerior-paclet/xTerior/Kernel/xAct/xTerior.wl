@@ -105,7 +105,7 @@ If[Unevaluated[xAct`xCore`Private`$LastPackage] === xAct`xCore`Private`$LastPack
 xAct`xTerior`Diff;
 
 (* Explicit (not hidden) import of xTensor, xPerm and xCore: Alfonso: do we need xCoba ? *)
-BeginPackage["xAct`xTerior`", {"xAct`xCoba`", "xAct`xTensor`", "xAct`xPerm`", "xAct`xCore`"}]
+BeginPackage["xAct`xTerior`", {"xAct`xCoba`", "xAct`xTensor`", "xAct`xPerm`", "xAct`xCore`", "xAct`FormsToTensors`"}]
 
 
 
