@@ -1,0 +1,156 @@
+Notebook[{Cell[CellGroupData[{Cell["SortDerivations", "ObjectName", 
+      CellID -> 116007], Cell[TextData[{Cell["   ", "ModInfo"], 
+        Cell[BoxData[RowBox[{"SortDerivations", "[", StyleBox["expr", "TI"], 
+            "]"}]], "InlineFormula"], " \[LineSeparator]orders Cartan \
+derivatives, contractions, and exterior derivatives according to \
+$DerivationSortOrder.", "\n", Cell["   ", "ModInfo"], 
+        Cell[BoxData[RowBox[{"SortDerivations", "[", 
+            RowBox[{StyleBox["expr", "TI"], ",", StyleBox["order", "TI"]}], 
+            "]"}]], "InlineFormula"], " \[LineSeparator]uses the specified \
+left-to-right operator order."}], "Usage", CellID -> 116008], 
+     Cell["order must be a permutation of {CartanD, Int, Diff}. The default \
+in the supplied source is {CartanD, Int, Diff}.", "Notes", CellID -> 116009], 
+     Cell["The function uses graded commutation identities and may introduce \
+Cartan derivatives or vector Lie brackets.", "Notes", CellID -> 116010], 
+     Cell["Use ordinary exterior derivatives for the standard Cartan-calculus \
+identities. The supplied source also contains rules with covariant \
+derivatives; curvature can obstruct naive commutation identities in that \
+setting.", "Notes", CellID -> 116011]}, Open]], 
+  Cell[CellGroupData[{Cell["See Also", "SeeAlsoSection", CellID -> 116012], 
+     Cell[TextData[{Cell[BoxData[ButtonBox["$DerivationSortOrder", 
+           BaseStyle -> "Link", ButtonData -> 
+            "paclet:xTerior/ref/$DerivationSortOrder"]], 
+         "InlineSeeAlsoFunction"], " \[FilledVerySmallSquare] ", 
+        Cell[BoxData[ButtonBox["CartanD", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/CartanD"]], 
+         "InlineSeeAlsoFunction"], " \[FilledVerySmallSquare] ", 
+        Cell[BoxData[ButtonBox["Int", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/Int"]], 
+         "InlineSeeAlsoFunction"], " \[FilledVerySmallSquare] ", 
+        Cell[BoxData[ButtonBox["Diff", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/Diff"]], 
+         "InlineSeeAlsoFunction"]}], "SeeAlso", CellID -> 116013]}, Open]], 
+  Cell[CellGroupData[{Cell["Related Guides", "MoreAboutSection", 
+      CellID -> 116014], 
+     Cell[TextData[{ButtonBox["xTerior: Exterior Calculus", 
+         BaseStyle -> "Link", ButtonData -> 
+          "paclet:xTerior/guide/xTerior"]}], "MoreAbout", CellID -> 116015]}, 
+    Open]], Cell[CellGroupData[{Cell["Related Links", "RelatedLinksSection", 
+      CellID -> 116016], Cell[TextData[{ButtonBox["xTerior project", 
+         BaseStyle -> "Link", ButtonData -> 
+          "https://www.xact.es/xTerior/"]}], "RelatedLinks", 
+      CellID -> 116017], 
+     Cell[TextData[{ButtonBox["xAct tensor algebra packages", 
+         BaseStyle -> "Link", ButtonData -> "https://www.xact.es/"]}], 
+      "RelatedLinks", CellID -> 116018]}, Open]], 
+  Cell[CellGroupData[{Cell["Examples Initialization", 
+      "ExamplesInitializationSection", CellID -> 116019], 
+     Cell[BoxData[RowBox[{"Needs", "[", "\"xAct`xTerior`\"", "]"}]], 
+      "ExampleInitialization", CellID -> 116020]}, Open]], 
+  Cell[CellGroupData[{Cell["Basic Examples", "PrimaryExamplesSection", 
+      CellID -> 116021], Cell["Set up the geometric objects used in this page \
+(evaluate once in a fresh kernel):", "ExampleText", CellID -> 116022], 
+     Cell[BoxData[RowBox[{RowBox[{RowBox[{"DefManifold", "[", 
+             RowBox[{"M", ",", "4", ",", RowBox[{"{", RowBox[{"a", ",", "b", 
+                   ",", "c", ",", "d", ",", "e", ",", "f", ",", "h", ",", 
+                   "i", ",", "j", ",", "k"}], "}"}]}], "]"}], ";"}], 
+         "\[IndentingNewLine]", RowBox[{RowBox[{"DefTensor", "[", 
+             RowBox[{RowBox[{"v", "[", "a", "]"}], ",", "M"}], "]"}], ";"}], 
+         "\[IndentingNewLine]", RowBox[{RowBox[{"DefDiffForm", "[", 
+             RowBox[{RowBox[{"alpha", "[", "]"}], ",", "M", ",", "1"}], 
+             "]"}], ";"}], "\[IndentingNewLine]", 
+         RowBox[{RowBox[{"DefDiffForm", "[", RowBox[{RowBox[{"beta", "[", 
+                 "]"}], ",", "M", ",", "2"}], "]"}], ";"}]}]], "Input", 
+      CellID -> 116023], 
+     Cell["Move an exterior derivative through an interior contraction:", 
+      "ExampleText", CellID -> 116001], 
+     Cell[CellGroupData[{Cell[BoxData[RowBox[{"SortDerivations", "[", 
+            RowBox[{"Diff", "[", RowBox[{RowBox[{"Int", "[", RowBox[
+                   {"v", "[", "a", "]"}], "]"}], "[", RowBox[{"beta", "[", 
+                  "]"}], "]"}], "]"}], "]"}]], "Input", CellID -> 116002], 
+        Cell[BoxData[RowBox[{InterpretationBox[StyleBox[RowBox[{SubscriptBox[
+                 "L", InterpretationBox[StyleBox[GridBox[{{"v", StyleBox[
+                       GridBox[{{"a"}, {" "}}, RowSpacings -> 0, 
+                        ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, 
+                          {0, 0}}], FontSize -> 9]}}, ColumnSpacings -> 0.05, 
+                    RowAlignments -> Center], AutoSpacing -> False, 
+                   ShowAutoStyles -> False], v[a], Editable -> False]], "[", 
+                InterpretationBox[StyleBox["beta", AutoSpacing -> False, 
+                  ShowAutoStyles -> False], beta[], Editable -> False], 
+                "]"}], AutoSpacing -> False, ShowAutoStyles -> False], 
+             xAct`xTerior`CartanD[v[a]][beta[], xAct`xTensor`PD], 
+             Editable -> False], "-", InterpretationBox[
+             StyleBox[RowBox[{SubscriptBox["\[Iota]", InterpretationBox[
+                  StyleBox[GridBox[{{"v", StyleBox[GridBox[{{"a"}, {" "}}, 
+                        RowSpacings -> 0, ColumnSpacings -> 0.05, 
+                        GridFrameMargins -> {{0, 0}, {0, 0}}], FontSize -> 
+                        9]}}, ColumnSpacings -> 0.05, RowAlignments -> 
+                     Center], AutoSpacing -> False, ShowAutoStyles -> False], 
+                  v[a], Editable -> False]], "[", InterpretationBox[
+                 StyleBox[RowBox[{"d", "[", InterpretationBox[StyleBox[
+                      "beta", AutoSpacing -> False, ShowAutoStyles -> False], 
+                     beta[], Editable -> False], "]"}], AutoSpacing -> False, 
+                  ShowAutoStyles -> False], xAct`xTerior`Diff[beta[], 
+                  xAct`xTensor`PD], Editable -> False], "]"}], 
+              AutoSpacing -> False, ShowAutoStyles -> False], 
+             xAct`xTerior`Int[v[a]][xAct`xTerior`Diff[beta[], 
+               xAct`xTensor`PD]], Editable -> False]}]], "Output", 
+         CellID -> 116003]}, Open]], Cell["Choose an explicit order:", 
+      "ExampleText", CellID -> 116004], 
+     Cell[CellGroupData[{Cell[BoxData[RowBox[{"SortDerivations", "[", 
+            RowBox[{RowBox[{RowBox[{"Int", "[", RowBox[{"v", "[", "a", "]"}], 
+                  "]"}], "[", RowBox[{"Diff", "[", RowBox[{"beta", "[", 
+                    "]"}], "]"}], "]"}], ",", RowBox[{"{", RowBox[
+                 {"Diff", ",", "Int", ",", "CartanD"}], "}"}]}], "]"}]], 
+         "Input", CellID -> 116005], 
+        Cell[BoxData[RowBox[{RowBox[{"-", InterpretationBox[StyleBox[
+                RowBox[{"d", "[", InterpretationBox[StyleBox[RowBox[
+                     {SubscriptBox["\[Iota]", InterpretationBox[StyleBox[
+                         GridBox[{{"v", StyleBox[GridBox[{{"a"}, {" "}}, 
+                          RowSpacings -> 0, ColumnSpacings -> 0.05, 
+                          GridFrameMargins -> {{0, 0}, {0, 0}}], FontSize -> 
+                          9]}}, ColumnSpacings -> 0.05, RowAlignments -> 
+                          Center], AutoSpacing -> False, ShowAutoStyles -> 
+                          False], v[a], Editable -> False]], "[", 
+                      InterpretationBox[StyleBox["beta", AutoSpacing -> 
+                         False, ShowAutoStyles -> False], beta[], Editable -> 
+                        False], "]"}], AutoSpacing -> False, 
+                    ShowAutoStyles -> False], xAct`xTerior`Int[v[a]][beta[]], 
+                   Editable -> False], "]"}], AutoSpacing -> False, 
+                ShowAutoStyles -> False], xAct`xTerior`Diff[
+                xAct`xTerior`Int[v[a]][beta[]], xAct`xTensor`PD], Editable -> 
+                False]}], "+", InterpretationBox[StyleBox[
+              RowBox[{SubscriptBox["L", InterpretationBox[StyleBox[
+                   GridBox[{{"v", StyleBox[GridBox[{{"a"}, {" "}}, 
+                        RowSpacings -> 0, ColumnSpacings -> 0.05, 
+                        GridFrameMargins -> {{0, 0}, {0, 0}}], FontSize -> 
+                        9]}}, ColumnSpacings -> 0.05, RowAlignments -> 
+                     Center], AutoSpacing -> False, ShowAutoStyles -> False], 
+                  v[a], Editable -> False]], "[", InterpretationBox[
+                 StyleBox["beta", AutoSpacing -> False, ShowAutoStyles -> 
+                   False], beta[], Editable -> False], "]"}], 
+              AutoSpacing -> False, ShowAutoStyles -> False], 
+             xAct`xTerior`CartanD[v[a]][beta[], xAct`xTensor`PD], 
+             Editable -> False]}]], "Output", CellID -> 116006]}, Open]]}, 
+    Open]], Cell[CellGroupData[{Cell["Metadata", "MetadataSection", 
+      CellID -> 116024], Cell[TextData[{"New in: ", Cell[" ", "HistoryData", 
+         CellTags -> "New"], " | Modified in: ", Cell[" ", "HistoryData", 
+         CellTags -> "Modified"], " | Obsolete in: ", 
+        Cell[" ", "HistoryData", CellTags -> "Obsolete"]}], "History", 
+      CellID -> 116025], Cell[CellGroupData[
+       {Cell["Categorization", "CategorizationSection", CellID -> 116026], 
+        Cell["Symbol", "Categorization", CellLabel -> "Entity Type", 
+         CellID -> 116027], Cell["xTerior", "Categorization", 
+         CellLabel -> "Paclet Name", CellID -> 116028], 
+        Cell["xAct`xTerior`", "Categorization", CellLabel -> "Context", 
+         CellID -> 116029], Cell["xTerior/ref/SortDerivations", 
+         "Categorization", CellLabel -> "URI", CellID -> 116030]}, Closed]], 
+     Cell[CellGroupData[{Cell["Keywords", "KeywordsSection", 
+         CellID -> 116035], Cell["SortDerivations", "Keywords", 
+         CellID -> 116031], Cell["xTerior", "Keywords", CellID -> 116032], 
+        Cell["exterior calculus", "Keywords", CellID -> 116033], 
+        Cell["Derivatives and contractions", "Keywords", CellID -> 116034]}, 
+       Closed]]}, Closed]]}, WindowSize -> {800, 900}, 
+ TaggingRules -> <|"Paclet" -> "xTerior"|>, CellContext -> "Global`", 
+ StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, 
+   "FunctionPageStylesExt.nb", CharacterEncoding -> "UTF-8"]]

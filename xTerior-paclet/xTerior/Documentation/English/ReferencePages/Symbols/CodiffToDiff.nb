@@ -1,0 +1,101 @@
+Notebook[{Cell[CellGroupData[{Cell["CodiffToDiff", "ObjectName", 
+      CellID -> 112004], Cell[TextData[{Cell["   ", "ModInfo"], 
+        Cell[BoxData[RowBox[{"CodiffToDiff", "[", StyleBox["expr", "TI"], 
+            "]"}]], "InlineFormula"], " \[LineSeparator]expands \
+codifferentials in expr into Hodge duals and exterior derivatives."}], 
+      "Usage", CellID -> 112005], Cell["For a p-form in dimension n, the \
+implemented sign is (-1)^(n p + n + q), where q is the number of negative \
+metric directions from SignatureOfMetric.", "Notes", CellID -> 112006], 
+     Cell["The resulting expression has the form (-1)^(n p + n + q) \
+Hodge[metric][Diff[Hodge[metric][form], covd]]. The covariant derivative is \
+preserved.", "Notes", CellID -> 112007], 
+     Cell["Replacement is repeated, so nested codifferentials are expanded as \
+well.", "Notes", CellID -> 112008]}, Open]], 
+  Cell[CellGroupData[{Cell["See Also", "SeeAlsoSection", CellID -> 112009], 
+     Cell[TextData[{Cell[BoxData[ButtonBox["Codiff", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/Codiff"]], 
+         "InlineSeeAlsoFunction"], " \[FilledVerySmallSquare] ", 
+        Cell[BoxData[ButtonBox["Diff", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/Diff"]], 
+         "InlineSeeAlsoFunction"], " \[FilledVerySmallSquare] ", 
+        Cell[BoxData[ButtonBox["Hodge", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/Hodge"]], 
+         "InlineSeeAlsoFunction"]}], "SeeAlso", CellID -> 112010]}, Open]], 
+  Cell[CellGroupData[{Cell["Related Guides", "MoreAboutSection", 
+      CellID -> 112011], 
+     Cell[TextData[{ButtonBox["xTerior: Exterior Calculus", 
+         BaseStyle -> "Link", ButtonData -> 
+          "paclet:xTerior/guide/xTerior"]}], "MoreAbout", CellID -> 112012]}, 
+    Open]], Cell[CellGroupData[{Cell["Related Links", "RelatedLinksSection", 
+      CellID -> 112013], Cell[TextData[{ButtonBox["xTerior project", 
+         BaseStyle -> "Link", ButtonData -> 
+          "https://www.xact.es/xTerior/"]}], "RelatedLinks", 
+      CellID -> 112014], 
+     Cell[TextData[{ButtonBox["xAct tensor algebra packages", 
+         BaseStyle -> "Link", ButtonData -> "https://www.xact.es/"]}], 
+      "RelatedLinks", CellID -> 112015]}, Open]], 
+  Cell[CellGroupData[{Cell["Examples Initialization", 
+      "ExamplesInitializationSection", CellID -> 112016], 
+     Cell[BoxData[RowBox[{"Needs", "[", "\"xAct`xTerior`\"", "]"}]], 
+      "ExampleInitialization", CellID -> 112017]}, Open]], 
+  Cell[CellGroupData[{Cell["Basic Examples", "PrimaryExamplesSection", 
+      CellID -> 112018], Cell["Set up the geometric objects used in this page \
+(evaluate once in a fresh kernel):", "ExampleText", CellID -> 112019], 
+     Cell[BoxData[RowBox[{RowBox[{RowBox[{"DefManifold", "[", 
+             RowBox[{"M", ",", "4", ",", RowBox[{"{", RowBox[{"a", ",", "b", 
+                   ",", "c", ",", "d", ",", "e", ",", "f", ",", "h", ",", 
+                   "i", ",", "j", ",", "k"}], "}"}]}], "]"}], ";"}], 
+         "\[IndentingNewLine]", RowBox[{RowBox[{"DefMetric", "[", 
+             RowBox[{RowBox[{"{", RowBox[{"4", ",", "0", ",", "0"}], "}"}], 
+               ",", RowBox[{"g", "[", RowBox[{RowBox[{"-", "a"}], ",", 
+                   RowBox[{"-", "b"}]}], "]"}], ",", "CD"}], "]"}], ";"}], 
+         "\[IndentingNewLine]", RowBox[{RowBox[{"DefDiffForm", "[", 
+             RowBox[{RowBox[{"alpha", "[", "]"}], ",", "M", ",", "1"}], 
+             "]"}], ";"}], "\[IndentingNewLine]", 
+         RowBox[{RowBox[{"DefDiffForm", "[", RowBox[{RowBox[{"beta", "[", 
+                 "]"}], ",", "M", ",", "2"}], "]"}], ";"}]}]], "Input", 
+      CellID -> 112020], 
+     Cell["Expand a codifferential in four Euclidean dimensions:", 
+      "ExampleText", CellID -> 112001], 
+     Cell[CellGroupData[{Cell[BoxData[RowBox[{"CodiffToDiff", "[", 
+            RowBox[{RowBox[{"Codiff", "[", "g", "]"}], "[", RowBox[{"beta", 
+                "[", "]"}], "]"}], "]"}]], "Input", CellID -> 112002], 
+        Cell[BoxData[InterpretationBox[StyleBox[RowBox[
+             {"\!\(\*SubscriptBox[\(*\), \(g\)]\)", "[", RowBox[{
+                InterpretationBox[StyleBox[RowBox[{"d", "[", 
+                    InterpretationBox[StyleBox[RowBox[
+                       {"\!\(\*SubscriptBox[\(*\), \(g\)]\)", "[", RowBox[
+                         {InterpretationBox[StyleBox["beta", AutoSpacing -> 
+                          False, ShowAutoStyles -> False], beta[], 
+                          Editable -> False]}], "]"}], AutoSpacing -> False, 
+                      ShowAutoStyles -> False], xAct`xTerior`Hodge[g][
+                      beta[]], Editable -> False], "]"}], AutoSpacing -> 
+                   False, ShowAutoStyles -> False], xAct`xTerior`Diff[
+                  xAct`xTerior`Hodge[g][beta[]], xAct`xTensor`PD], 
+                 Editable -> False]}], "]"}], AutoSpacing -> False, 
+            ShowAutoStyles -> False], xAct`xTerior`Hodge[g][
+            xAct`xTerior`Diff[xAct`xTerior`Hodge[g][beta[]], 
+             xAct`xTensor`PD]], Editable -> False]], "Output", 
+         CellID -> 112003]}, Open]]}, Open]], 
+  Cell[CellGroupData[{Cell["Metadata", "MetadataSection", CellID -> 112021], 
+     Cell[TextData[{"New in: ", Cell[" ", "HistoryData", CellTags -> "New"], 
+        " | Modified in: ", Cell[" ", "HistoryData", CellTags -> "Modified"], 
+        " | Obsolete in: ", Cell[" ", "HistoryData", 
+         CellTags -> "Obsolete"]}], "History", CellID -> 112022], 
+     Cell[CellGroupData[{Cell["Categorization", "CategorizationSection", 
+         CellID -> 112023], Cell["Symbol", "Categorization", 
+         CellLabel -> "Entity Type", CellID -> 112024], 
+        Cell["xTerior", "Categorization", CellLabel -> "Paclet Name", 
+         CellID -> 112025], Cell["xAct`xTerior`", "Categorization", 
+         CellLabel -> "Context", CellID -> 112026], 
+        Cell["xTerior/ref/CodiffToDiff", "Categorization", 
+         CellLabel -> "URI", CellID -> 112027]}, Closed]], 
+     Cell[CellGroupData[{Cell["Keywords", "KeywordsSection", 
+         CellID -> 112032], Cell["CodiffToDiff", "Keywords", 
+         CellID -> 112028], Cell["xTerior", "Keywords", CellID -> 112029], 
+        Cell["exterior calculus", "Keywords", CellID -> 112030], 
+        Cell["Hodge duality and variations", "Keywords", CellID -> 112031]}, 
+       Closed]]}, Closed]]}, WindowSize -> {800, 900}, 
+ TaggingRules -> <|"Paclet" -> "xTerior"|>, CellContext -> "Global`", 
+ StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, 
+   "FunctionPageStylesExt.nb", CharacterEncoding -> "UTF-8"]]

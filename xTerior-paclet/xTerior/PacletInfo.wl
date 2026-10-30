@@ -6,7 +6,13 @@ PacletObject[
 			{
 				"Kernel",
 				Root -> "Kernel",
-				Context -> "xAct`xTerior`"
+				Context -> {"xAct`xTerior`"}
+			},
+			{
+				"Documentation",
+				"Language" -> "English",
+				"MainPage" -> "Guides/xTerior",
+				"LinkBase" -> "xTerior"
 			}
 		},
 		"URL" -> "http://www.xact.es/xTerior",

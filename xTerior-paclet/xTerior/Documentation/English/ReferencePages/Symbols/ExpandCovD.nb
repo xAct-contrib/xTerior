@@ -1,0 +1,210 @@
+Notebook[{Cell[CellGroupData[{Cell["ExpandCovD", "ObjectName", 
+      CellID -> 125004], Cell[TextData[{Cell["   ", "ModInfo"], 
+        Cell[BoxData[RowBox[{"ExpandCovD", "[", RowBox[
+             {StyleBox["expr", "TI"], ",", StyleBox["covd", "TI"], ",", 
+              StyleBox["chart", "TI"]}], "]"}]], "InlineFormula"], " \
+\[LineSeparator]expands index-free covariant derivatives of tensor-product \
+degree one using the coordinate frame of chart."}], "Usage", 
+      CellID -> 125005], Cell["DefCovD creates the index-free derivative \
+GiveSymbol[CovD, covd], distinct from the indexed operator covd[-a].", 
+      "Notes", CellID -> 125006], Cell["Each supported derivative becomes a \
+sum of dx[mani][{i, chart}] CircleTimes a Koszul derivative along \
+PDFrame[mani][{i, -chart}].", "Notes", CellID -> 125007], 
+     Cell["chart must be an xCoba chart. The expansion rule requires degree \
+one with respect to CircleTimes.", "Notes", CellID -> 125008]}, Open]], 
+  Cell[CellGroupData[{Cell["See Also", "SeeAlsoSection", CellID -> 125009], 
+     Cell[TextData[{Cell[BoxData[ButtonBox["ChangeGenCovD", 
+           BaseStyle -> "Link", ButtonData -> 
+            "paclet:xTerior/ref/ChangeGenCovD"]], "InlineSeeAlsoFunction"], 
+        " \[FilledVerySmallSquare] ", Cell[BoxData[ButtonBox["Koszul", 
+           BaseStyle -> "Link", ButtonData -> "paclet:xTerior/ref/Koszul"]], 
+         "InlineSeeAlsoFunction"], " \[FilledVerySmallSquare] ", 
+        Cell[BoxData[ButtonBox["ExpandKoszul", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/ExpandKoszul"]], 
+         "InlineSeeAlsoFunction"], " \[FilledVerySmallSquare] ", 
+        Cell[BoxData[ButtonBox["PDFrame", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/PDFrame"]], 
+         "InlineSeeAlsoFunction"], " \[FilledVerySmallSquare] ", 
+        Cell[BoxData[ButtonBox["dx", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/dx"]], 
+         "InlineSeeAlsoFunction"]}], "SeeAlso", CellID -> 125010]}, Open]], 
+  Cell[CellGroupData[{Cell["Related Guides", "MoreAboutSection", 
+      CellID -> 125011], 
+     Cell[TextData[{ButtonBox["xTerior: Exterior Calculus", 
+         BaseStyle -> "Link", ButtonData -> 
+          "paclet:xTerior/guide/xTerior"]}], "MoreAbout", CellID -> 125012]}, 
+    Open]], Cell[CellGroupData[{Cell["Related Links", "RelatedLinksSection", 
+      CellID -> 125013], Cell[TextData[{ButtonBox["xTerior project", 
+         BaseStyle -> "Link", ButtonData -> 
+          "https://www.xact.es/xTerior/"]}], "RelatedLinks", 
+      CellID -> 125014], 
+     Cell[TextData[{ButtonBox["xAct tensor algebra packages", 
+         BaseStyle -> "Link", ButtonData -> "https://www.xact.es/"]}], 
+      "RelatedLinks", CellID -> 125015]}, Open]], 
+  Cell[CellGroupData[{Cell["Examples Initialization", 
+      "ExamplesInitializationSection", CellID -> 125016], 
+     Cell[BoxData[RowBox[{"Needs", "[", "\"xAct`xTerior`\"", "]"}]], 
+      "ExampleInitialization", CellID -> 125017]}, Open]], 
+  Cell[CellGroupData[{Cell["Basic Examples", "PrimaryExamplesSection", 
+      CellID -> 125018], Cell["Set up the geometric objects used in this page \
+(evaluate once in a fresh kernel):", "ExampleText", CellID -> 125019], 
+     Cell[BoxData[RowBox[{RowBox[{RowBox[{"DefManifold", "[", 
+             RowBox[{"M", ",", "4", ",", RowBox[{"{", RowBox[{"a", ",", "b", 
+                   ",", "c", ",", "d", ",", "e", ",", "f", ",", "h", ",", 
+                   "i", ",", "j", ",", "k"}], "}"}]}], "]"}], ";"}], 
+         "\[IndentingNewLine]", RowBox[{RowBox[{"DefMetric", "[", 
+             RowBox[{RowBox[{"{", RowBox[{"4", ",", "0", ",", "0"}], "}"}], 
+               ",", RowBox[{"g", "[", RowBox[{RowBox[{"-", "a"}], ",", 
+                   RowBox[{"-", "b"}]}], "]"}], ",", "CD"}], "]"}], ";"}], 
+         "\[IndentingNewLine]", RowBox[{RowBox[{"DefChart", "[", 
+             RowBox[{"ch", ",", "M", ",", RowBox[{"{", RowBox[{"1", ",", "2", 
+                   ",", "3", ",", "4"}], "}"}], ",", RowBox[{"{", 
+                 RowBox[{RowBox[{"x1", "[", "]"}], ",", RowBox[{"x2", "[", 
+                     "]"}], ",", RowBox[{"x3", "[", "]"}], ",", RowBox[
+                    {"x4", "[", "]"}]}], "}"}]}], "]"}], ";"}]}]], "Input", 
+      CellID -> 125020], Cell["Expand the generalized derivative of a coframe \
+element in a coordinate chart:", "ExampleText", CellID -> 125001], 
+     Cell[CellGroupData[{Cell[BoxData[RowBox[{"ExpandCovD", "[", 
+            RowBox[{RowBox[{RowBox[{"GiveSymbol", "[", RowBox[{"CovD", ",", 
+                    "CD"}], "]"}], "[", RowBox[{RowBox[{"dx", "[", "M", 
+                    "]"}], "[", "a", "]"}], "]"}], ",", "CD", ",", "ch"}], 
+            "]"}]], "Input", CellID -> 125002], 
+        Cell[BoxData[RowBox[{RowBox[{InterpretationBox[StyleBox[
+                GridBox[{{"dx", StyleBox[GridBox[
+                     {{"\!\(\*StyleBox[\"1\",FontColor->RGBColor[1., 0., \
+0.]]\)"}, {" "}}, RowSpacings -> 0, ColumnSpacings -> 0.05, 
+                     GridFrameMargins -> {{0, 0}, {0, 0}}], FontSize -> 9]}}, 
+                 ColumnSpacings -> 0.05, RowAlignments -> Center], 
+                AutoSpacing -> False, ShowAutoStyles -> False], 
+               xAct`xTerior`dx[M][{1, ch}], Editable -> False], 
+              "\[CircleTimes]", InterpretationBox[StyleBox[RowBox[
+                 {SubscriptBox["\[EmptyDownTriangle]", InterpretationBox[
+                    StyleBox[GridBox[
+                      {{
+                        "\!\(\*FractionBox[\(\[PartialD]\),\(\[PartialD]x\)]\
+\)", StyleBox[GridBox[{{" "}, {
+                          "\!\(\*StyleBox[\"1\",FontColor->RGBColor[1., 0., \
+0.]]\)"}}, RowSpacings -> 0, ColumnSpacings -> 0.05, GridFrameMargins -> 
+                          {{0, 0}, {0, 0}}], FontSize -> 9]}}, 
+                      ColumnSpacings -> 0.05, RowAlignments -> Center], 
+                     AutoSpacing -> False, ShowAutoStyles -> False], 
+                    xAct`xTerior`PDFrame[M][{1, -ch}], Editable -> False]], 
+                  "[", InterpretationBox[StyleBox[GridBox[{{"dx", StyleBox[
+                        GridBox[{{"a"}, {" "}}, RowSpacings -> 0, 
+                         ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, 
+                          {0, 0}}], FontSize -> 9]}}, ColumnSpacings -> 0.05, 
+                     RowAlignments -> Center], AutoSpacing -> False, 
+                    ShowAutoStyles -> False], xAct`xTerior`dx[M][a], 
+                   Editable -> False], "]"}], AutoSpacing -> False, 
+                ShowAutoStyles -> False], KoszulCD[xAct`xTerior`PDFrame[M][
+                  {1, -ch}]][xAct`xTerior`dx[M][a]], Editable -> False]}], 
+            "+", RowBox[{InterpretationBox[StyleBox[GridBox[
+                 {{"dx", StyleBox[GridBox[
+                     {{"\!\(\*StyleBox[\"2\",FontColor->RGBColor[1., 0., \
+0.]]\)"}, {" "}}, RowSpacings -> 0, ColumnSpacings -> 0.05, 
+                     GridFrameMargins -> {{0, 0}, {0, 0}}], FontSize -> 9]}}, 
+                 ColumnSpacings -> 0.05, RowAlignments -> Center], 
+                AutoSpacing -> False, ShowAutoStyles -> False], 
+               xAct`xTerior`dx[M][{2, ch}], Editable -> False], 
+              "\[CircleTimes]", InterpretationBox[StyleBox[RowBox[
+                 {SubscriptBox["\[EmptyDownTriangle]", InterpretationBox[
+                    StyleBox[GridBox[
+                      {{
+                        "\!\(\*FractionBox[\(\[PartialD]\),\(\[PartialD]x\)]\
+\)", StyleBox[GridBox[{{" "}, {
+                          "\!\(\*StyleBox[\"2\",FontColor->RGBColor[1., 0., \
+0.]]\)"}}, RowSpacings -> 0, ColumnSpacings -> 0.05, GridFrameMargins -> 
+                          {{0, 0}, {0, 0}}], FontSize -> 9]}}, 
+                      ColumnSpacings -> 0.05, RowAlignments -> Center], 
+                     AutoSpacing -> False, ShowAutoStyles -> False], 
+                    xAct`xTerior`PDFrame[M][{2, -ch}], Editable -> False]], 
+                  "[", InterpretationBox[StyleBox[GridBox[{{"dx", StyleBox[
+                        GridBox[{{"a"}, {" "}}, RowSpacings -> 0, 
+                         ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, 
+                          {0, 0}}], FontSize -> 9]}}, ColumnSpacings -> 0.05, 
+                     RowAlignments -> Center], AutoSpacing -> False, 
+                    ShowAutoStyles -> False], xAct`xTerior`dx[M][a], 
+                   Editable -> False], "]"}], AutoSpacing -> False, 
+                ShowAutoStyles -> False], KoszulCD[xAct`xTerior`PDFrame[M][
+                  {2, -ch}]][xAct`xTerior`dx[M][a]], Editable -> False]}], 
+            "+", RowBox[{InterpretationBox[StyleBox[GridBox[
+                 {{"dx", StyleBox[GridBox[
+                     {{"\!\(\*StyleBox[\"3\",FontColor->RGBColor[1., 0., \
+0.]]\)"}, {" "}}, RowSpacings -> 0, ColumnSpacings -> 0.05, 
+                     GridFrameMargins -> {{0, 0}, {0, 0}}], FontSize -> 9]}}, 
+                 ColumnSpacings -> 0.05, RowAlignments -> Center], 
+                AutoSpacing -> False, ShowAutoStyles -> False], 
+               xAct`xTerior`dx[M][{3, ch}], Editable -> False], 
+              "\[CircleTimes]", InterpretationBox[StyleBox[RowBox[
+                 {SubscriptBox["\[EmptyDownTriangle]", InterpretationBox[
+                    StyleBox[GridBox[
+                      {{
+                        "\!\(\*FractionBox[\(\[PartialD]\),\(\[PartialD]x\)]\
+\)", StyleBox[GridBox[{{" "}, {
+                          "\!\(\*StyleBox[\"3\",FontColor->RGBColor[1., 0., \
+0.]]\)"}}, RowSpacings -> 0, ColumnSpacings -> 0.05, GridFrameMargins -> 
+                          {{0, 0}, {0, 0}}], FontSize -> 9]}}, 
+                      ColumnSpacings -> 0.05, RowAlignments -> Center], 
+                     AutoSpacing -> False, ShowAutoStyles -> False], 
+                    xAct`xTerior`PDFrame[M][{3, -ch}], Editable -> False]], 
+                  "[", InterpretationBox[StyleBox[GridBox[{{"dx", StyleBox[
+                        GridBox[{{"a"}, {" "}}, RowSpacings -> 0, 
+                         ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, 
+                          {0, 0}}], FontSize -> 9]}}, ColumnSpacings -> 0.05, 
+                     RowAlignments -> Center], AutoSpacing -> False, 
+                    ShowAutoStyles -> False], xAct`xTerior`dx[M][a], 
+                   Editable -> False], "]"}], AutoSpacing -> False, 
+                ShowAutoStyles -> False], KoszulCD[xAct`xTerior`PDFrame[M][
+                  {3, -ch}]][xAct`xTerior`dx[M][a]], Editable -> False]}], 
+            "+", RowBox[{InterpretationBox[StyleBox[GridBox[
+                 {{"dx", StyleBox[GridBox[
+                     {{"\!\(\*StyleBox[\"4\",FontColor->RGBColor[1., 0., \
+0.]]\)"}, {" "}}, RowSpacings -> 0, ColumnSpacings -> 0.05, 
+                     GridFrameMargins -> {{0, 0}, {0, 0}}], FontSize -> 9]}}, 
+                 ColumnSpacings -> 0.05, RowAlignments -> Center], 
+                AutoSpacing -> False, ShowAutoStyles -> False], 
+               xAct`xTerior`dx[M][{4, ch}], Editable -> False], 
+              "\[CircleTimes]", InterpretationBox[StyleBox[RowBox[
+                 {SubscriptBox["\[EmptyDownTriangle]", InterpretationBox[
+                    StyleBox[GridBox[
+                      {{
+                        "\!\(\*FractionBox[\(\[PartialD]\),\(\[PartialD]x\)]\
+\)", StyleBox[GridBox[{{" "}, {
+                          "\!\(\*StyleBox[\"4\",FontColor->RGBColor[1., 0., \
+0.]]\)"}}, RowSpacings -> 0, ColumnSpacings -> 0.05, GridFrameMargins -> 
+                          {{0, 0}, {0, 0}}], FontSize -> 9]}}, 
+                      ColumnSpacings -> 0.05, RowAlignments -> Center], 
+                     AutoSpacing -> False, ShowAutoStyles -> False], 
+                    xAct`xTerior`PDFrame[M][{4, -ch}], Editable -> False]], 
+                  "[", InterpretationBox[StyleBox[GridBox[{{"dx", StyleBox[
+                        GridBox[{{"a"}, {" "}}, RowSpacings -> 0, 
+                         ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, 
+                          {0, 0}}], FontSize -> 9]}}, ColumnSpacings -> 0.05, 
+                     RowAlignments -> Center], AutoSpacing -> False, 
+                    ShowAutoStyles -> False], xAct`xTerior`dx[M][a], 
+                   Editable -> False], "]"}], AutoSpacing -> False, 
+                ShowAutoStyles -> False], KoszulCD[xAct`xTerior`PDFrame[M][
+                  {4, -ch}]][xAct`xTerior`dx[M][a]], Editable -> False]}]}]], 
+         "Output", CellID -> 125003]}, Open]]}, Open]], 
+  Cell[CellGroupData[{Cell["Metadata", "MetadataSection", CellID -> 125021], 
+     Cell[TextData[{"New in: ", Cell[" ", "HistoryData", CellTags -> "New"], 
+        " | Modified in: ", Cell[" ", "HistoryData", CellTags -> "Modified"], 
+        " | Obsolete in: ", Cell[" ", "HistoryData", 
+         CellTags -> "Obsolete"]}], "History", CellID -> 125022], 
+     Cell[CellGroupData[{Cell["Categorization", "CategorizationSection", 
+         CellID -> 125023], Cell["Symbol", "Categorization", 
+         CellLabel -> "Entity Type", CellID -> 125024], 
+        Cell["xTerior", "Categorization", CellLabel -> "Paclet Name", 
+         CellID -> 125025], Cell["xAct`xTerior`", "Categorization", 
+         CellLabel -> "Context", CellID -> 125026], 
+        Cell["xTerior/ref/ExpandCovD", "Categorization", CellLabel -> "URI", 
+         CellID -> 125027]}, Closed]], 
+     Cell[CellGroupData[{Cell["Keywords", "KeywordsSection", 
+         CellID -> 125032], Cell["ExpandCovD", "Keywords", CellID -> 125028], 
+        Cell["xTerior", "Keywords", CellID -> 125029], 
+        Cell["exterior calculus", "Keywords", CellID -> 125030], 
+        Cell["Frames and index-free derivatives", "Keywords", 
+         CellID -> 125031]}, Closed]]}, Closed]]}, WindowSize -> {800, 900}, 
+ TaggingRules -> <|"Paclet" -> "xTerior"|>, CellContext -> "Global`", 
+ StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, 
+   "FunctionPageStylesExt.nb", CharacterEncoding -> "UTF-8"]]

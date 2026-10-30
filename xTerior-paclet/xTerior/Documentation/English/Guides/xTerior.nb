@@ -1,0 +1,756 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 15.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     28880,        748]
+NotebookOptionsPosition[     20512,        580]
+NotebookOutlinePosition[     21051,        599]
+CellTagsIndexPosition[     21008,        596]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["xTerior: Exterior Calculus", "GuideTitle",
+ CellID->900047, ExpressionUUID->"c3524304-f19d-4a36-bccf-f83e87e92d3e"],
+
+Cell["\<\
+xTerior extends xAct with differential forms, exterior covariant \
+differentiation, Hodge duality, frame calculus, and symbolic integration. \
+Install xAct (including xTensor and xCoba), then load the package with Needs[\
+\"xAct`xTerior`\"].\
+\>", "GuideAbstract",
+ CellID->900048, ExpressionUUID->"a18c9a32-a211-4fd8-a903-3c0046977ba9"],
+
+Cell["\<\
+The reference pages cover all 39 symbols with usage messages in the supplied \
+version 0.9.1. Pages for declared but unimplemented symbols describe their \
+current limitations. Run each page's setup once in a fresh kernel.\
+\>", "GuideAbstract",
+ CellChangeTimes->{{4.002381727394517*^9, 4.00238173637894*^9}},
+ CellID->900049, ExpressionUUID->"fc59cedb-5a78-40d3-b37e-d92e5f93acf7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Functions and Symbols", "GuideFunctionsSection",
+ CellID->900050, ExpressionUUID->"a1efba06-3b24-4441-9506-5e26e01305c6"],
+
+Cell[CellGroupData[{
+
+Cell["Defining and inspecting forms", "GuideFunctionsSubsection",
+ CellID->900001, ExpressionUUID->"e8402e6a-53a8-40e9-8e31-a79bb613e498"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["DefDiffForm",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/DefDiffForm"]], "InlineGuideFunction", 
+  ExpressionUUID->"5c1351a7-be78-4d28-8759-47a8775b7bc4"],
+ " \[LongDash] defines a tensor-valued differential form of exterior degree \
+deg on mani."
+}], "GuideText",
+ CellID->900002, ExpressionUUID->"3d71bef1-544b-43fa-b5b4-6a27fa1fcb41"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["UndefDiffForm",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/UndefDiffForm"]], "InlineGuideFunction", 
+  ExpressionUUID->"42782cd6-1202-44ac-afce-c96045209128"],
+ " \[LongDash] removes the definition of the differential-form tensor form."
+}], "GuideText",
+ CellID->900003, ExpressionUUID->"4f8d60d8-3512-4762-adfa-2dd69c75ac29"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["Deg",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/Deg"]], "InlineGuideFunction", 
+  ExpressionUUID->"d57416f7-702c-4ce9-891f-40e1a56091c9"],
+ " \[LongDash] gives the exterior degree of expr."
+}], "GuideText",
+ CellID->900004, ExpressionUUID->"182b3611-f6d0-412f-80c0-07b742c3cfc1"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["ZeroDegQ",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/ZeroDegQ"]], "InlineGuideFunction", 
+  ExpressionUUID->"2cdd951c-9743-4c87-9735-dbc6f5b43615"],
+ " \[LongDash] is the declared predicate for testing whether expr has \
+exterior degree zero."
+}], "GuideText",
+ CellID->900005, ExpressionUUID->"173decee-15e9-4c87-8de6-dd65dc13a132"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["UseDimensionStart",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/UseDimensionStart"]], 
+  "InlineGuideFunction", ExpressionUUID->
+  "52c6820d-291c-4faa-8d52-0d9b760c9616"],
+ " \[LongDash] enables simplification of forms whose exterior degree exceeds \
+the dimension of their manifold dependencies."
+}], "GuideText",
+ CellID->900006, ExpressionUUID->"ed951e2b-3013-4deb-b27e-253aa49cacad"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["UseDimensionStop",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/UseDimensionStop"]], "InlineGuideFunction",
+   ExpressionUUID->"b0abe52c-cd1d-431c-bc0d-999a80ee7b67"],
+ " \[LongDash] disables the dimension-based simplifications installed by \
+UseDimensionStart."
+}], "GuideText",
+ CellID->900007, ExpressionUUID->"756278df-a109-4699-982f-af43c81e1034"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Derivatives and contractions", "GuideFunctionsSubsection",
+ CellID->900009, ExpressionUUID->"6fd40acf-17c5-4a1d-aa75-e21235c92419"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["DiffFormQ",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/DiffFormQ"]], "InlineGuideFunction", 
+  ExpressionUUID->"643e51c7-6f6c-489c-9fcf-c3c2e22bd493"],
+ " \[LongDash] is declared as an option intended to make LieToCovD treat its \
+argument as a differential form."
+}], "GuideText",
+ CellID->900010, ExpressionUUID->"6bfa97d1-3a01-4c44-a246-b2da10560df9"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["Diff",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/Diff"]], "InlineGuideFunction", 
+  ExpressionUUID->"f1a1df7e-ec13-4ac6-a2b6-d5aab0e7857d"],
+ " \[LongDash] represents the exterior derivative of form."
+}], "GuideText",
+ CellID->900011, ExpressionUUID->"31e3c530-b0d1-4159-919f-d40bab15d4a8"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["FindPotential",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/FindPotential"]], "InlineGuideFunction", 
+  ExpressionUUID->"28651450-61b4-4ac3-bf47-baf81dda7cdb"],
+ " \[LongDash] constructs a local potential for a closed coordinate form on a \
+region star-shaped about point."
+}], "GuideText",
+ CellID->900012, ExpressionUUID->"729eb4b0-6ca0-4fa9-a062-13772d19d361"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["Int",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/Int"]], "InlineGuideFunction", 
+  ExpressionUUID->"13b315d2-8e7c-487c-a5e6-b1f792a5f7f6"],
+ " \[LongDash] represents the interior contraction of form with the vector \
+v."
+}], "GuideText",
+ CellID->900013, ExpressionUUID->"aa50642b-89f2-4d59-b085-558d1c17045f"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["CartanD",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/CartanD"]], "InlineGuideFunction", 
+  ExpressionUUID->"0feb4cfb-b1f1-40db-ae8c-b0305f4648d2"],
+ " \[LongDash] represents the Cartan derivative of form along the vector v."
+}], "GuideText",
+ CellID->900014, ExpressionUUID->"2d5a884a-6623-4ada-acad-5c74ce996083"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["CartanDToDiff",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/CartanDToDiff"]], "InlineGuideFunction", 
+  ExpressionUUID->"36859cb3-a387-4576-aff8-b884ff435b6f"],
+ " \[LongDash] expands Cartan derivatives in expr using Cartan's formula."
+}], "GuideText",
+ CellID->900015, ExpressionUUID->"04b9ac28-ea21-41bf-afe9-b1e54c224ff3"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["SortDerivations",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/SortDerivations"]], "InlineGuideFunction", 
+  ExpressionUUID->"dddfdaa1-258a-4e08-bec4-bb65434853b9"],
+ " \[LongDash] orders Cartan derivatives, contractions, and exterior \
+derivatives according to $DerivationSortOrder."
+}], "GuideText",
+ CellID->900016, ExpressionUUID->"093bbe87-dda1-4dec-ba8f-48847f03c2c1"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["$DerivationSortOrder",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/$DerivationSortOrder"]], 
+  "InlineGuideFunction", ExpressionUUID->
+  "3849baf9-3584-4593-bc98-ba07ec045d9c"],
+ " \[LongDash] specifies the default left-to-right order used by \
+SortDerivations."
+}], "GuideText",
+ CellID->900017, ExpressionUUID->"7b425f8c-3d8d-4e10-bb0f-35ce98a27163"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Connections and curvature", "GuideFunctionsSubsection",
+ CellID->900018, ExpressionUUID->"9a1c4e34-0664-49a6-abbe-7eb70df5655e"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["ChangeExtD",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/ChangeExtD"]], "InlineGuideFunction", 
+  ExpressionUUID->"03583275-13ac-4604-ac2b-e772535efbec"],
+ " \[LongDash] rewrites exterior covariant derivatives from cd1 to cd2."
+}], "GuideText",
+ CellID->900019, ExpressionUUID->"fda56460-80d6-484f-b22f-5f4ed5584ae0"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["ConnectionForm",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/ConnectionForm"]], "InlineGuideFunction", 
+  ExpressionUUID->"5ea3f74b-48c3-42d8-9e0d-567df905591a"],
+ " \[LongDash] represents the connection one-form for covd acting on \
+vbundle."
+}], "GuideText",
+ CellID->900020, ExpressionUUID->"caecee4a-2436-444f-8469-d93f28b48c12"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["CurvatureForm",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/CurvatureForm"]], "InlineGuideFunction", 
+  ExpressionUUID->"cfb11b87-ada3-48d8-a0ae-134e871a433b"],
+ " \[LongDash] represents the curvature two-form for covd acting on vbundle."
+}], "GuideText",
+ CellID->900021, ExpressionUUID->"0f0307f5-421c-4df0-ad42-5c00be16d768"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["ChristoffelForm",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/ChristoffelForm"]], "InlineGuideFunction", 
+  ExpressionUUID->"84d09ad5-4875-4591-8417-47d1dcc79b45"],
+ " \[LongDash] represents the connection one-form of covd on the tangent \
+bundle."
+}], "GuideText",
+ CellID->900022, ExpressionUUID->"13195c6a-8c8d-492f-a5db-a39c0d1be7dc"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["RiemannForm",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/RiemannForm"]], "InlineGuideFunction", 
+  ExpressionUUID->"31430737-81eb-40d2-bd6c-ba910d4bc048"],
+ " \[LongDash] represents the curvature two-form of covd on the tangent \
+bundle."
+}], "GuideText",
+ CellID->900023, ExpressionUUID->"6364a01d-8d2d-48c0-a2b0-db0a09389602"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["ConnectionFormToTensor",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/ConnectionFormToTensor"]], 
+  "InlineGuideFunction", ExpressionUUID->
+  "5f074e4c-1e20-4405-b254-1a2939db0802"],
+ " \[LongDash] expands connection forms in expr into connection tensors \
+relative to covd and elements of frame."
+}], "GuideText",
+ CellID->900024, ExpressionUUID->"2e0793e8-5c45-4ad1-b262-be40599fc356"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["CurvatureFormToTensor",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/CurvatureFormToTensor"]], 
+  "InlineGuideFunction", ExpressionUUID->
+  "ee615c69-3f7d-4ceb-92bc-70a1e1b2a384"],
+ " \[LongDash] expands curvature forms in expr into curvature tensors and \
+coframe wedge products."
+}], "GuideText",
+ CellID->900025, ExpressionUUID->"55419c68-ffce-4eae-b5e7-234b25210c67"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["ChangeCurvatureForm",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/ChangeCurvatureForm"]], 
+  "InlineGuideFunction", ExpressionUUID->
+  "c5c4b8d9-c302-417b-be15-6b0cac72681d"],
+ " \[LongDash] rewrites curvature forms for cd1 using the target connection \
+cd2."
+}], "GuideText",
+ CellID->900026, ExpressionUUID->"b1ebebc4-add5-427b-8f1a-d636229aa71b"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["TorsionForm",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/TorsionForm"]], "InlineGuideFunction", 
+  ExpressionUUID->"e0faa39b-da93-46cd-b261-8f5503c32a88"],
+ " \[LongDash] represents the tangent-bundle-valued torsion two-form of \
+covd."
+}], "GuideText",
+ CellID->900027, ExpressionUUID->"053ac852-8721-4ceb-8241-b18e8b3acbb8"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["UseCartan",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/UseCartan"]], "InlineGuideFunction", 
+  ExpressionUUID->"82642e2a-9719-4e58-a3bb-47ba7885637f"],
+ " \[LongDash] expands exterior derivatives using the Cartan structure \
+equations for covd."
+}], "GuideText",
+ CellID->900028, ExpressionUUID->"f570af72-15bb-4f27-ab01-a84dfe762a8d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Hodge duality and variations", "GuideFunctionsSubsection",
+ CellID->900029, ExpressionUUID->"03d7b5b7-e010-4ad8-81e1-12c75a89ac19"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["Hodge",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/Hodge"]], "InlineGuideFunction", 
+  ExpressionUUID->"98b709e8-0b76-49c5-8d6f-02a2077b18b3"],
+ " \[LongDash] represents the Hodge dual of form with respect to metric."
+}], "GuideText",
+ CellID->900030, ExpressionUUID->"205d91d1-114e-451a-a12b-7852699bcd08"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["ExpandHodgeDual",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/ExpandHodgeDual"]], "InlineGuideFunction", 
+  ExpressionUUID->"2903b2e5-4be4-4de7-86a4-122c3ac4cea3"],
+ " \[LongDash] expands Hodge duals of canonical coframe products for mani."
+}], "GuideText",
+ CellID->900031, ExpressionUUID->"c1de4bcc-4de8-4118-ae45-fe1cfe3373e7"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["Codiff",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/Codiff"]], "InlineGuideFunction", 
+  ExpressionUUID->"ce49853e-c35d-492f-9227-fe3bcab69d9c"],
+ " \[LongDash] represents the codifferential of form with respect to metric."
+}], "GuideText",
+ CellID->900032, ExpressionUUID->"f6748804-bc64-4cce-9b20-d548f6901a8a"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["CodiffToDiff",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/CodiffToDiff"]], "InlineGuideFunction", 
+  ExpressionUUID->"23e87292-c4f9-44e3-976a-da9d5eaa76fe"],
+ " \[LongDash] expands codifferentials in expr into Hodge duals and exterior \
+derivatives."
+}], "GuideText",
+ CellID->900033, ExpressionUUID->"ad1eecf6-7bb5-467c-afeb-916bec67a6f7"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["FormVarD",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/FormVarD"]], "InlineGuideFunction", 
+  ExpressionUUID->"a123b042-9364-4cbb-ab1e-b67833b2cfef"],
+ " \[LongDash] takes the variational derivative of the top-degree form expr \
+with respect to form."
+}], "GuideText",
+ CellID->900034, ExpressionUUID->"a4abfcd1-b7ed-4b6f-af3e-a372b5def7a3"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Frames and index-free derivatives", "GuideFunctionsSubsection",
+ CellID->900035, ExpressionUUID->"71e125ba-af0c-47a8-8327-a0dddf78c9c3"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["Coframe",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/Coframe"]], "InlineGuideFunction", 
+  ExpressionUUID->"1853a840-b700-415a-b008-c9eb5bd20d63"],
+ " \[LongDash] represents a canonical coframe one-form on mani."
+}], "GuideText",
+ CellID->900036, ExpressionUUID->"88f34182-b9c5-45e8-ab11-3df02ecfb106"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["dx",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/dx"]], "InlineGuideFunction", 
+  ExpressionUUID->"228096e8-37fc-4a0f-b6ee-96c1d66a18f0"],
+ " \[LongDash] represents a holonomic coframe one-form on mani."
+}], "GuideText",
+ CellID->900037, ExpressionUUID->"3b8be039-a261-4ceb-8f2d-f0ec37a82c55"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["eFrame",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/eFrame"]], "InlineGuideFunction", 
+  ExpressionUUID->"e2f6f60b-c54f-475c-a0c1-6a55a3eadf42"],
+ " \[LongDash] represents a general frame element on mani."
+}], "GuideText",
+ CellID->900038, ExpressionUUID->"697150dc-9523-49ca-b8e9-962374211c7c"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["PDFrame",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/PDFrame"]], "InlineGuideFunction", 
+  ExpressionUUID->"961eec11-b972-4883-b438-7740db6a9340"],
+ " \[LongDash] represents a holonomic frame element on mani."
+}], "GuideText",
+ CellID->900039, ExpressionUUID->"da96047e-3f3d-4b0d-ab60-85f3d871ee20"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["Koszul",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/Koszul"]], "InlineGuideFunction", 
+  ExpressionUUID->"51c0d0e6-b6e8-42cc-93c6-fb50b9e16d6c"],
+ " \[LongDash] applies the Koszul derivative associated with covd in the \
+direction v."
+}], "GuideText",
+ CellID->900040, ExpressionUUID->"809cc2c9-fe82-42d2-aa01-369664b500c7"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["ExpandKoszul",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/ExpandKoszul"]], "InlineGuideFunction", 
+  ExpressionUUID->"b8045ec3-dffd-43ed-af85-ed98768c9387"],
+ " \[LongDash] expands Koszul derivatives of frame and coframe elements into \
+Christoffel tensors relating cd1 and cd2."
+}], "GuideText",
+ CellID->900041, ExpressionUUID->"dbffd72b-d52b-4f48-9ed0-e60cee9a66c1"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["ExpandCovD",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/ExpandCovD"]], "InlineGuideFunction", 
+  ExpressionUUID->"b50586e7-8251-4bdc-a839-4c07f2a6d6e9"],
+ " \[LongDash] expands index-free covariant derivatives of tensor-product \
+degree one using the coordinate frame of chart."
+}], "GuideText",
+ CellID->900042, ExpressionUUID->"469bfd8a-9469-442b-86c4-29fb37582602"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["ChangeGenCovD",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/ChangeGenCovD"]], "InlineGuideFunction", 
+  ExpressionUUID->"de0a244a-aba1-42f4-8f26-209546faa942"],
+ " \[LongDash] rewrites generalized index-free covariant derivatives from cd1 \
+to cd2."
+}], "GuideText",
+ CellID->900043, ExpressionUUID->"4a4569ab-5cd3-48a2-a345-d05d5f1f5496"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Integration", "GuideFunctionsSubsection",
+ CellID->900044, ExpressionUUID->"8103b2e4-93f8-421f-9b33-3c7ae7ee398a"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["FormIntegrate",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/FormIntegrate"]], "InlineGuideFunction", 
+  ExpressionUUID->"558ffb31-b82f-4ed8-93d4-21971bf74c53"],
+ " \[LongDash] symbolically represents the integral of the top-degree form \
+form over mani."
+}], "GuideText",
+ CellID->900045, ExpressionUUID->"1e1f7bce-8288-4316-89aa-1eb4800e3f8d"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["UseStokes",
+   BaseStyle->"Link",
+   ButtonData->"paclet:xTerior/ref/UseStokes"]], "InlineGuideFunction", 
+  ExpressionUUID->"434d5928-9462-4129-b4d4-562ca69a3550"],
+ " \[LongDash] replaces integrals of ordinary exterior derivatives by \
+boundary integrals."
+}], "GuideText",
+ CellID->900046, ExpressionUUID->"ac612811-cdc7-4588-bdac-80baa3b59279"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Related Links", "GuideRelatedLinksSection",
+ CellID->900051, ExpressionUUID->"6a0b1d5e-da1b-4419-bbce-ff024d345972"],
+
+Cell[TextData[ButtonBox["xTerior project and manual",
+ BaseStyle->"Link",
+ ButtonData->"https://www.xact.es/xTerior/"]], "GuideRelatedLinks",
+ CellID->900052, ExpressionUUID->"b636e84d-2e99-48c8-a819-5ab41b6fb4cf"],
+
+Cell[TextData[ButtonBox["xAct tensor algebra packages",
+ BaseStyle->"Link",
+ ButtonData->"https://www.xact.es/"]], "GuideRelatedLinks",
+ CellID->900053, ExpressionUUID->"52895188-ee21-4f17-aec9-6644ec1f3e95"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Metadata", "MetadataSection",
+ CellID->900054, ExpressionUUID->"fe13acb7-7aac-419f-b42d-32b9d7a2b68f"],
+
+Cell[TextData[{
+ "New in: ",
+ Cell[" ", "HistoryData",
+  CellTags->"New", ExpressionUUID->"e1f3f37d-bc55-4891-9d39-b66c33fbaf7f"],
+ " | Modified in: ",
+ Cell[" ", "HistoryData",
+  CellTags->"Modified", ExpressionUUID->
+  "caca66bb-c36f-43d1-9af0-f959750dadc7"],
+ " | Obsolete in: ",
+ Cell[" ", "HistoryData",
+  CellTags->"Obsolete", ExpressionUUID->"d8c5570f-5659-48f4-bdb8-f15e2aff1850"]
+}], "History",
+ CellID->900055, ExpressionUUID->"37b6738b-12ea-4f75-8759-180411379dc2"],
+
+Cell[CellGroupData[{
+
+Cell["Categorization", "CategorizationSection",
+ CellID->900056, ExpressionUUID->"665ff481-e815-415b-9d2c-edd81fa4056d"],
+
+Cell["Guide", "Categorization",
+ CellLabel->"Entity Type",
+ CellID->900057, ExpressionUUID->"9208f40b-989c-4207-8dc3-e9a737b9baa5"],
+
+Cell["xTerior", "Categorization",
+ CellLabel->"Paclet Name",
+ CellID->900058, ExpressionUUID->"5bd247a0-b4a2-4d1d-86f8-87a0596f83c5"],
+
+Cell["xAct`xTerior`", "Categorization",
+ CellLabel->"Context",
+ CellID->900059, ExpressionUUID->"774ef074-9c23-49d0-be8b-7f41db2b9f10"],
+
+Cell["xTerior/guide/xTerior", "Categorization",
+ CellLabel->"URI",
+ CellID->900060, ExpressionUUID->"c4fecf41-5a5d-4aa0-958f-b0acef64c55d"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Keywords", "KeywordsSection",
+ CellID->900065, ExpressionUUID->"1fa57f2f-74a7-445c-8212-0bfce867aede"],
+
+Cell["xTerior", "Keywords",
+ CellID->900061, ExpressionUUID->"a428eaae-4ad7-4911-9a61-f275aeda0d96"],
+
+Cell["differential forms", "Keywords",
+ CellID->900062, ExpressionUUID->"5c5b888b-5979-4ad0-a03c-bcbf6c743126"],
+
+Cell["exterior calculus", "Keywords",
+ CellID->900063, ExpressionUUID->"a6fb20a1-f7f2-40ea-bbab-d499468fbba5"],
+
+Cell["xAct", "Keywords",
+ CellID->900064, ExpressionUUID->"ea35dfb8-397f-4d28-a4e8-aac443b297bd"]
+}, Closed]]
+}, Closed]]
+},
+WindowSize->{606, 683.25},
+WindowMargins->{{-1440, Automatic}, {Automatic, 0}},
+TaggingRules-><|"Paclet" -> "xTerior"|>,
+CellContext->"Global`",
+FrontEndVersion->"15.1 for Linux x86 (64-bit) (October 29, 2026)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "GuidePageStylesExt.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"ecb36ef7-8cef-4d58-b4e8-dd2a1df5f9f4"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 121, 1, 87, "GuideTitle", ExpressionUUID->"c3524304-f19d-4a36-bccf-f83e87e92d3e",
+ CellID->900047],
+Cell[700, 25, 347, 6, 62, "GuideAbstract", ExpressionUUID->"a18c9a32-a211-4fd8-a903-3c0046977ba9",
+ CellID->900048],
+Cell[1050, 33, 393, 6, 62, "GuideAbstract", ExpressionUUID->"fc59cedb-5a78-40d3-b37e-d92e5f93acf7",
+ CellID->900049]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1480, 44, 127, 1, 71, "GuideFunctionsSection", ExpressionUUID->"a1efba06-3b24-4441-9506-5e26e01305c6",
+ CellID->900050],
+Cell[CellGroupData[{
+Cell[1632, 49, 138, 1, 36, "GuideFunctionsSubsection", ExpressionUUID->"e8402e6a-53a8-40e9-8e31-a79bb613e498",
+ CellID->900001],
+Cell[1773, 52, 395, 9, 24, "GuideText", ExpressionUUID->"3d71bef1-544b-43fa-b5b4-6a27fa1fcb41",
+ CellID->900002],
+Cell[2171, 63, 384, 8, 24, "GuideText", ExpressionUUID->"4f8d60d8-3512-4762-adfa-2dd69c75ac29",
+ CellID->900003],
+Cell[2558, 73, 338, 8, 24, "GuideText", ExpressionUUID->"182b3611-f6d0-412f-80c0-07b742c3cfc1",
+ CellID->900004],
+Cell[2899, 83, 392, 9, 24, "GuideText", ExpressionUUID->"173decee-15e9-4c87-8de6-dd65dc13a132",
+ CellID->900005],
+Cell[3294, 94, 444, 10, 41, "GuideText", ExpressionUUID->"ed951e2b-3013-4deb-b27e-253aa49cacad",
+ CellID->900006],
+Cell[3741, 106, 408, 9, 41, "GuideText", ExpressionUUID->"756278df-a109-4699-982f-af43c81e1034",
+ CellID->900007]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4186, 120, 137, 1, 36, "GuideFunctionsSubsection", ExpressionUUID->"6fd40acf-17c5-4a1d-aa75-e21235c92419",
+ CellID->900009],
+Cell[4326, 123, 412, 9, 41, "GuideText", ExpressionUUID->"6bfa97d1-3a01-4c44-a246-b2da10560df9",
+ CellID->900010],
+Cell[4741, 134, 349, 8, 24, "GuideText", ExpressionUUID->"31e3c530-b0d1-4159-919f-d40bab15d4a8",
+ CellID->900011],
+Cell[5093, 144, 420, 9, 41, "GuideText", ExpressionUUID->"729eb4b0-6ca0-4fa9-a062-13772d19d361",
+ CellID->900012],
+Cell[5516, 155, 368, 9, 24, "GuideText", ExpressionUUID->"aa50642b-89f2-4d59-b085-558d1c17045f",
+ CellID->900013],
+Cell[5887, 166, 372, 8, 24, "GuideText", ExpressionUUID->"2d5a884a-6623-4ada-acad-5c74ce996083",
+ CellID->900014],
+Cell[6262, 176, 382, 8, 24, "GuideText", ExpressionUUID->"04b9ac28-ea21-41bf-afe9-b1e54c224ff3",
+ CellID->900015],
+Cell[6647, 186, 430, 9, 41, "GuideText", ExpressionUUID->"093bbe87-dda1-4dec-ba8f-48847f03c2c1",
+ CellID->900016],
+Cell[7080, 197, 409, 10, 24, "GuideText", ExpressionUUID->"7b425f8c-3d8d-4e10-bb0f-35ce98a27163",
+ CellID->900017]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7526, 212, 134, 1, 36, "GuideFunctionsSubsection", ExpressionUUID->"9a1c4e34-0664-49a6-abbe-7eb70df5655e",
+ CellID->900018],
+Cell[7663, 215, 374, 8, 24, "GuideText", ExpressionUUID->"fda56460-80d6-484f-b22f-5f4ed5584ae0",
+ CellID->900019],
+Cell[8040, 225, 390, 9, 24, "GuideText", ExpressionUUID->"caecee4a-2436-444f-8469-d93f28b48c12",
+ CellID->900020],
+Cell[8433, 236, 385, 8, 24, "GuideText", ExpressionUUID->"0f0307f5-421c-4df0-ad42-5c00be16d768",
+ CellID->900021],
+Cell[8821, 246, 395, 9, 24, "GuideText", ExpressionUUID->"13195c6a-8c8d-492f-a5db-a39c0d1be7dc",
+ CellID->900022],
+Cell[9219, 257, 386, 9, 24, "GuideText", ExpressionUUID->"6364a01d-8d2d-48c0-a2b0-db0a09389602",
+ CellID->900023],
+Cell[9608, 268, 443, 10, 41, "GuideText", ExpressionUUID->"2e0793e8-5c45-4ad1-b262-be40599fc356",
+ CellID->900024],
+Cell[10054, 280, 427, 10, 41, "GuideText", ExpressionUUID->"55419c68-ffce-4eae-b5e7-234b25210c67",
+ CellID->900025],
+Cell[10484, 292, 406, 10, 24, "GuideText", ExpressionUUID->"b1ebebc4-add5-427b-8f1a-d636229aa71b",
+ CellID->900026],
+Cell[10893, 304, 384, 9, 24, "GuideText", ExpressionUUID->"053ac852-8721-4ceb-8241-b18e8b3acbb8",
+ CellID->900027],
+Cell[11280, 315, 393, 9, 24, "GuideText", ExpressionUUID->"f570af72-15bb-4f27-ab01-a84dfe762a8d",
+ CellID->900028]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11710, 329, 137, 1, 36, "GuideFunctionsSubsection", ExpressionUUID->"03d7b5b7-e010-4ad8-81e1-12c75a89ac19",
+ CellID->900029],
+Cell[11850, 332, 365, 8, 24, "GuideText", ExpressionUUID->"205d91d1-114e-451a-a12b-7852699bcd08",
+ CellID->900030],
+Cell[12218, 342, 387, 8, 24, "GuideText", ExpressionUUID->"c1de4bcc-4de8-4118-ae45-fe1cfe3373e7",
+ CellID->900031],
+Cell[12608, 352, 371, 8, 24, "GuideText", ExpressionUUID->"f6748804-bc64-4cce-9b20-d548f6901a8a",
+ CellID->900032],
+Cell[12982, 362, 398, 9, 70, "GuideText", ExpressionUUID->"ad1eecf6-7bb5-467c-afeb-916bec67a6f7",
+ CellID->900033],
+Cell[13383, 373, 398, 9, 70, "GuideText", ExpressionUUID->"a4abfcd1-b7ed-4b6f-af3e-a372b5def7a3",
+ CellID->900034]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13818, 387, 142, 1, 70, "GuideFunctionsSubsection", ExpressionUUID->"71e125ba-af0c-47a8-8327-a0dddf78c9c3",
+ CellID->900035],
+Cell[13963, 390, 360, 8, 70, "GuideText", ExpressionUUID->"88f34182-b9c5-45e8-ab11-3df02ecfb106",
+ CellID->900036],
+Cell[14326, 400, 350, 8, 70, "GuideText", ExpressionUUID->"3b8be039-a261-4ceb-8f2d-f0ec37a82c55",
+ CellID->900037],
+Cell[14679, 410, 353, 8, 70, "GuideText", ExpressionUUID->"697150dc-9523-49ca-b8e9-962374211c7c",
+ CellID->900038],
+Cell[15035, 420, 357, 8, 70, "GuideText", ExpressionUUID->"da96047e-3f3d-4b0d-ab60-85f3d871ee20",
+ CellID->900039],
+Cell[15395, 430, 382, 9, 70, "GuideText", ExpressionUUID->"809cc2c9-fe82-42d2-aa01-369664b500c7",
+ CellID->900040],
+Cell[15780, 441, 427, 9, 70, "GuideText", ExpressionUUID->"dbffd72b-d52b-4f48-9ed0-e60cee9a66c1",
+ CellID->900041],
+Cell[16210, 452, 426, 9, 70, "GuideText", ExpressionUUID->"469bfd8a-9469-442b-86c4-29fb37582602",
+ CellID->900042],
+Cell[16639, 463, 396, 9, 70, "GuideText", ExpressionUUID->"4a4569ab-5cd3-48a2-a345-d05d5f1f5496",
+ CellID->900043]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17072, 477, 120, 1, 70, "GuideFunctionsSubsection", ExpressionUUID->"8103b2e4-93f8-421f-9b33-3c7ae7ee398a",
+ CellID->900044],
+Cell[17195, 480, 401, 9, 70, "GuideText", ExpressionUUID->"1e1f7bce-8288-4316-89aa-1eb4800e3f8d",
+ CellID->900045],
+Cell[17599, 491, 392, 9, 70, "GuideText", ExpressionUUID->"ac612811-cdc7-4588-bdac-80baa3b59279",
+ CellID->900046]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18040, 506, 122, 1, 70, "GuideRelatedLinksSection", ExpressionUUID->"6a0b1d5e-da1b-4419-bbce-ff024d345972",
+ CellID->900051],
+Cell[18165, 509, 214, 3, 70, "GuideRelatedLinks", ExpressionUUID->"b636e84d-2e99-48c8-a819-5ab41b6fb4cf",
+ CellID->900052],
+Cell[18382, 514, 208, 3, 70, "GuideRelatedLinks", ExpressionUUID->"52895188-ee21-4f17-aec9-6644ec1f3e95",
+ CellID->900053]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18627, 522, 108, 1, 70, "MetadataSection", ExpressionUUID->"fe13acb7-7aac-419f-b42d-32b9d7a2b68f",
+ CellID->900054],
+Cell[18738, 525, 476, 12, 70, "History", ExpressionUUID->"37b6738b-12ea-4f75-8759-180411379dc2",
+ CellID->900055],
+Cell[CellGroupData[{
+Cell[19239, 541, 120, 1, 70, "CategorizationSection", ExpressionUUID->"665ff481-e815-415b-9d2c-edd81fa4056d",
+ CellID->900056],
+Cell[19362, 544, 131, 2, 70, "Categorization", ExpressionUUID->"9208f40b-989c-4207-8dc3-e9a737b9baa5",
+ CellID->900057],
+Cell[19496, 548, 133, 2, 70, "Categorization", ExpressionUUID->"5bd247a0-b4a2-4d1d-86f8-87a0596f83c5",
+ CellID->900058],
+Cell[19632, 552, 135, 2, 70, "Categorization", ExpressionUUID->"774ef074-9c23-49d0-be8b-7f41db2b9f10",
+ CellID->900059],
+Cell[19770, 556, 139, 2, 70, "Categorization", ExpressionUUID->"c4fecf41-5a5d-4aa0-958f-b0acef64c55d",
+ CellID->900060]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[19946, 563, 108, 1, 70, "KeywordsSection", ExpressionUUID->"1fa57f2f-74a7-445c-8212-0bfce867aede",
+ CellID->900065],
+Cell[20057, 566, 100, 1, 70, "Keywords", ExpressionUUID->"a428eaae-4ad7-4911-9a61-f275aeda0d96",
+ CellID->900061],
+Cell[20160, 569, 111, 1, 70, "Keywords", ExpressionUUID->"5c5b888b-5979-4ad0-a03c-bcbf6c743126",
+ CellID->900062],
+Cell[20274, 572, 110, 1, 70, "Keywords", ExpressionUUID->"a6fb20a1-f7f2-40ea-bbab-d499468fbba5",
+ CellID->900063],
+Cell[20387, 575, 97, 1, 70, "Keywords", ExpressionUUID->"ea35dfb8-397f-4d28-a4e8-aac443b297bd",
+ CellID->900064]
+}, Closed]]
+}, Closed]]
+}
+]
+*)
+

@@ -1,0 +1,101 @@
+Notebook[{Cell[CellGroupData[{Cell["UseStokes", "ObjectName", 
+      CellID -> 139007], Cell[TextData[{Cell["   ", "ModInfo"], 
+        Cell[BoxData[RowBox[{"UseStokes", "[", StyleBox["expr", "TI"], 
+            "]"}]], "InlineFormula"], " \[LineSeparator]replaces integrals of \
+ordinary exterior derivatives by boundary integrals.", "\n", 
+        Cell["   ", "ModInfo"], Cell[BoxData[RowBox[{"UseStokes", "[", 
+            RowBox[{StyleBox["expr", "TI"], ",", StyleBox["mani", "TI"]}], 
+            "]"}]], "InlineFormula"], " \[LineSeparator]restricts the forward \
+transformation to integrals over mani.", "\n", Cell["   ", "ModInfo"], 
+        Cell[BoxData[RowBox[{"UseStokes", "[", RowBox[
+             {StyleBox["expr", "TI"], ",", StyleBox["form", "TI"]}], "]"}]], 
+         "InlineFormula"], " \[LineSeparator]turns boundary integrals of the \
+specified form into integrals of its exterior derivative."}], "Usage", 
+      CellID -> 139008], Cell["The forward rule replaces \
+FormIntegrate[Diff[form, PD], mani] with FormIntegrate[form, \
+ManifoldBoundary[mani]].", "Notes", CellID -> 139009], 
+     Cell["The second argument is interpreted as a manifold when ManifoldQ \
+returns True; otherwise it selects the form for the reverse transformation.", 
+      "Notes", CellID -> 139010], Cell["Use xTensor's ManifoldBoundary \
+notation for the boundary. The transformation is symbolic and does not check \
+analytic hypotheses of Stokes' theorem.", "Notes", CellID -> 139011]}, 
+    Open]], Cell[CellGroupData[{Cell["See Also", "SeeAlsoSection", 
+      CellID -> 139012], 
+     Cell[TextData[{Cell[BoxData[ButtonBox["FormIntegrate", 
+           BaseStyle -> "Link", ButtonData -> 
+            "paclet:xTerior/ref/FormIntegrate"]], "InlineSeeAlsoFunction"], 
+        " \[FilledVerySmallSquare] ", Cell[BoxData[ButtonBox["Diff", 
+           BaseStyle -> "Link", ButtonData -> "paclet:xTerior/ref/Diff"]], 
+         "InlineSeeAlsoFunction"]}], "SeeAlso", CellID -> 139013]}, Open]], 
+  Cell[CellGroupData[{Cell["Related Guides", "MoreAboutSection", 
+      CellID -> 139014], 
+     Cell[TextData[{ButtonBox["xTerior: Exterior Calculus", 
+         BaseStyle -> "Link", ButtonData -> 
+          "paclet:xTerior/guide/xTerior"]}], "MoreAbout", CellID -> 139015]}, 
+    Open]], Cell[CellGroupData[{Cell["Related Links", "RelatedLinksSection", 
+      CellID -> 139016], Cell[TextData[{ButtonBox["xTerior project", 
+         BaseStyle -> "Link", ButtonData -> 
+          "https://www.xact.es/xTerior/"]}], "RelatedLinks", 
+      CellID -> 139017], 
+     Cell[TextData[{ButtonBox["xAct tensor algebra packages", 
+         BaseStyle -> "Link", ButtonData -> "https://www.xact.es/"]}], 
+      "RelatedLinks", CellID -> 139018]}, Open]], 
+  Cell[CellGroupData[{Cell["Examples Initialization", 
+      "ExamplesInitializationSection", CellID -> 139019], 
+     Cell[BoxData[RowBox[{"Needs", "[", "\"xAct`xTerior`\"", "]"}]], 
+      "ExampleInitialization", CellID -> 139020]}, Open]], 
+  Cell[CellGroupData[{Cell["Basic Examples", "PrimaryExamplesSection", 
+      CellID -> 139021], Cell["Set up the geometric objects used in this page \
+(evaluate once in a fresh kernel):", "ExampleText", CellID -> 139022], 
+     Cell[BoxData[RowBox[{RowBox[{RowBox[{"DefManifold", "[", 
+             RowBox[{"M", ",", "4", ",", RowBox[{"{", RowBox[{"a", ",", "b", 
+                   ",", "c", ",", "d", ",", "e", ",", "f", ",", "h", ",", 
+                   "i", ",", "j", ",", "k"}], "}"}]}], "]"}], ";"}], 
+         "\[IndentingNewLine]", RowBox[{RowBox[{"DefDiffForm", "[", 
+             RowBox[{RowBox[{"eta", "[", "]"}], ",", "M", ",", "3"}], "]"}], 
+           ";"}]}]], "Input", CellID -> 139023], 
+     Cell["Turn a bulk integral into a boundary integral:", "ExampleText", 
+      CellID -> 139001], Cell[CellGroupData[
+       {Cell[BoxData[RowBox[{"boundaryIntegral", "=", 
+            RowBox[{"UseStokes", "[", RowBox[{RowBox[{"FormIntegrate", "[", 
+                  RowBox[{RowBox[{"Diff", "[", RowBox[{"eta", "[", "]"}], 
+                      "]"}], ",", "M"}], "]"}], ",", "M"}], "]"}]}]], 
+         "Input", CellID -> 139002], 
+        Cell[BoxData[RowBox[{SubscriptBox["\[Integral]", 
+             RowBox[{"\[PartialD]", "M"}]], InterpretationBox[
+             StyleBox["eta", AutoSpacing -> False, ShowAutoStyles -> False], 
+             eta[], Editable -> False]}]], "Output", CellID -> 139003]}, 
+       Open]], Cell["Reverse the transformation for the same form:", 
+      "ExampleText", CellID -> 139004], 
+     Cell[CellGroupData[{Cell[BoxData[RowBox[{"UseStokes", "[", 
+            RowBox[{"boundaryIntegral", ",", RowBox[{"eta", "[", "]"}]}], 
+            "]"}]], "Input", CellID -> 139005], 
+        Cell[BoxData[RowBox[{SubscriptBox["\[Integral]", "M"], 
+            InterpretationBox[StyleBox[RowBox[{"d", "[", InterpretationBox[
+                 StyleBox["eta", AutoSpacing -> False, ShowAutoStyles -> 
+                   False], eta[], Editable -> False], "]"}], 
+              AutoSpacing -> False, ShowAutoStyles -> False], 
+             xAct`xTerior`Diff[eta[], xAct`xTensor`PD], Editable -> 
+              False]}]], "Output", CellID -> 139006]}, Open]]}, Open]], 
+  Cell[CellGroupData[{Cell["Metadata", "MetadataSection", CellID -> 139024], 
+     Cell[TextData[{"New in: ", Cell[" ", "HistoryData", CellTags -> "New"], 
+        " | Modified in: ", Cell[" ", "HistoryData", CellTags -> "Modified"], 
+        " | Obsolete in: ", Cell[" ", "HistoryData", 
+         CellTags -> "Obsolete"]}], "History", CellID -> 139025], 
+     Cell[CellGroupData[{Cell["Categorization", "CategorizationSection", 
+         CellID -> 139026], Cell["Symbol", "Categorization", 
+         CellLabel -> "Entity Type", CellID -> 139027], 
+        Cell["xTerior", "Categorization", CellLabel -> "Paclet Name", 
+         CellID -> 139028], Cell["xAct`xTerior`", "Categorization", 
+         CellLabel -> "Context", CellID -> 139029], 
+        Cell["xTerior/ref/UseStokes", "Categorization", CellLabel -> "URI", 
+         CellID -> 139030]}, Closed]], 
+     Cell[CellGroupData[{Cell["Keywords", "KeywordsSection", 
+         CellID -> 139035], Cell["UseStokes", "Keywords", CellID -> 139031], 
+        Cell["xTerior", "Keywords", CellID -> 139032], 
+        Cell["exterior calculus", "Keywords", CellID -> 139033], 
+        Cell["Integration", "Keywords", CellID -> 139034]}, Closed]]}, 
+    Closed]]}, WindowSize -> {800, 900}, 
+ TaggingRules -> <|"Paclet" -> "xTerior"|>, CellContext -> "Global`", 
+ StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, 
+   "FunctionPageStylesExt.nb", CharacterEncoding -> "UTF-8"]]

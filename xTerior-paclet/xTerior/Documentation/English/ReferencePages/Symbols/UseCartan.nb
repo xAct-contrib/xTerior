@@ -1,0 +1,139 @@
+Notebook[{Cell[CellGroupData[{Cell["UseCartan", "ObjectName", 
+      CellID -> 135007], Cell[TextData[{Cell["   ", "ModInfo"], 
+        Cell[BoxData[RowBox[{"UseCartan", "[", RowBox[
+             {StyleBox["expr", "TI"], ",", StyleBox["covd", "TI"]}], "]"}]], 
+         "InlineFormula"], " \[LineSeparator]expands exterior derivatives \
+using the Cartan structure equations for covd.", "\n", 
+        Cell["   ", "ModInfo"], Cell[BoxData[RowBox[{"UseCartan", "[", 
+            RowBox[{StyleBox["expr", "TI"], ",", "PD", ",", RowBox[{"{", 
+                RowBox[{StyleBox["mani1", "TI"], ",", StyleBox["mani2", 
+                   "TI"]}], "}"}]}], "]"}]], "InlineFormula"], " \
+\[LineSeparator]expands exterior derivatives of degree-zero expressions over \
+the specified manifolds."}], "Usage", CellID -> 135008], 
+     Cell["The rules cover coframes, connection forms, torsion, curvature, \
+and the appropriate metric and volume tensor expressions.", "Notes", 
+      CellID -> 135009], Cell["With PD, the implementation expands \
+derivatives of degree-zero expressions into partial derivatives times dx. \
+With no explicit manifold list, it uses ManifoldsOf[expr].", "Notes", 
+      CellID -> 135010], Cell["With the parallel derivative of a chart, \
+coordinate scalar derivatives are used. Lists and equations are threaded.", 
+      "Notes", CellID -> 135011]}, Open]], 
+  Cell[CellGroupData[{Cell["See Also", "SeeAlsoSection", CellID -> 135012], 
+     Cell[TextData[{Cell[BoxData[ButtonBox["Diff", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/Diff"]], 
+         "InlineSeeAlsoFunction"], " \[FilledVerySmallSquare] ", 
+        Cell[BoxData[ButtonBox["Coframe", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/Coframe"]], 
+         "InlineSeeAlsoFunction"], " \[FilledVerySmallSquare] ", 
+        Cell[BoxData[ButtonBox["ChristoffelForm", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/ChristoffelForm"]], 
+         "InlineSeeAlsoFunction"], " \[FilledVerySmallSquare] ", 
+        Cell[BoxData[ButtonBox["TorsionForm", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/TorsionForm"]], 
+         "InlineSeeAlsoFunction"], " \[FilledVerySmallSquare] ", 
+        Cell[BoxData[ButtonBox["RiemannForm", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/RiemannForm"]], 
+         "InlineSeeAlsoFunction"]}], "SeeAlso", CellID -> 135013]}, Open]], 
+  Cell[CellGroupData[{Cell["Related Guides", "MoreAboutSection", 
+      CellID -> 135014], 
+     Cell[TextData[{ButtonBox["xTerior: Exterior Calculus", 
+         BaseStyle -> "Link", ButtonData -> 
+          "paclet:xTerior/guide/xTerior"]}], "MoreAbout", CellID -> 135015]}, 
+    Open]], Cell[CellGroupData[{Cell["Related Links", "RelatedLinksSection", 
+      CellID -> 135016], Cell[TextData[{ButtonBox["xTerior project", 
+         BaseStyle -> "Link", ButtonData -> 
+          "https://www.xact.es/xTerior/"]}], "RelatedLinks", 
+      CellID -> 135017], 
+     Cell[TextData[{ButtonBox["xAct tensor algebra packages", 
+         BaseStyle -> "Link", ButtonData -> "https://www.xact.es/"]}], 
+      "RelatedLinks", CellID -> 135018]}, Open]], 
+  Cell[CellGroupData[{Cell["Examples Initialization", 
+      "ExamplesInitializationSection", CellID -> 135019], 
+     Cell[BoxData[RowBox[{"Needs", "[", "\"xAct`xTerior`\"", "]"}]], 
+      "ExampleInitialization", CellID -> 135020]}, Open]], 
+  Cell[CellGroupData[{Cell["Basic Examples", "PrimaryExamplesSection", 
+      CellID -> 135021], Cell["Set up the geometric objects used in this page \
+(evaluate once in a fresh kernel):", "ExampleText", CellID -> 135022], 
+     Cell[BoxData[RowBox[{RowBox[{RowBox[{"DefManifold", "[", 
+             RowBox[{"M", ",", "4", ",", RowBox[{"{", RowBox[{"a", ",", "b", 
+                   ",", "c", ",", "d", ",", "e", ",", "f", ",", "h", ",", 
+                   "i", ",", "j", ",", "k"}], "}"}]}], "]"}], ";"}], 
+         "\[IndentingNewLine]", RowBox[{RowBox[{"DefMetric", "[", 
+             RowBox[{RowBox[{"{", RowBox[{"4", ",", "0", ",", "0"}], "}"}], 
+               ",", RowBox[{"g", "[", RowBox[{RowBox[{"-", "a"}], ",", 
+                   RowBox[{"-", "b"}]}], "]"}], ",", "CD"}], "]"}], ";"}]}]], 
+      "Input", CellID -> 135023], Cell["Use the first structure equation for \
+a torsion-free metric connection:", "ExampleText", CellID -> 135001], 
+     Cell[CellGroupData[{Cell[BoxData[RowBox[{"UseCartan", "[", 
+            RowBox[{RowBox[{"Diff", "[", RowBox[{RowBox[{"Coframe", "[", "M", 
+                    "]"}], "[", "a", "]"}], "]"}], ",", "CD"}], "]"}]], 
+         "Input", CellID -> 135002], 
+        Cell[BoxData[RowBox[{"-", RowBox[{"(", RowBox[{InterpretationBox[
+                 StyleBox[GridBox[{{"\[CapitalGamma][\[EmptyDownTriangle]]", 
+                     StyleBox[GridBox[{{"a", " "}, {" ", "b"}}, 
+                       RowSpacings -> 0, ColumnSpacings -> 0.05, 
+                       GridFrameMargins -> {{0, 0}, {0, 0}}], FontSize -> 
+                       9]}}, ColumnSpacings -> 0.05, RowAlignments -> 
+                    Center], AutoSpacing -> False, ShowAutoStyles -> False], 
+                 xAct`xTerior`ChristoffelForm[CD][a, -b], Editable -> False], 
+                "\[Wedge]", InterpretationBox[StyleBox[GridBox[
+                   {{"\[Theta]", StyleBox[GridBox[{{"b"}, {" "}}, 
+                       RowSpacings -> 0, ColumnSpacings -> 0.05, 
+                       GridFrameMargins -> {{0, 0}, {0, 0}}], FontSize -> 
+                       9]}}, ColumnSpacings -> 0.05, RowAlignments -> 
+                    Center], AutoSpacing -> False, ShowAutoStyles -> False], 
+                 xAct`xTerior`Coframe[M][b], Editable -> False]}], ")"}]}]], 
+         "Output", CellID -> 135003]}, Open]], 
+     Cell["Use the second structure equation:", "ExampleText", 
+      CellID -> 135004], Cell[CellGroupData[
+       {Cell[BoxData[RowBox[{"UseCartan", "[", RowBox[
+             {RowBox[{"Diff", "[", RowBox[{RowBox[{"ChristoffelForm", "[", 
+                    "CD", "]"}], "[", RowBox[{"a", ",", RowBox[{"-", "b"}]}], 
+                  "]"}], "]"}], ",", "CD"}], "]"}]], "Input", 
+         CellID -> 135005], Cell[BoxData[RowBox[
+           {RowBox[{"-", RowBox[{"(", RowBox[{InterpretationBox[StyleBox[
+                    GridBox[{{"\[CapitalGamma][\[EmptyDownTriangle]]", 
+                       StyleBox[GridBox[{{"a", " "}, {" ", "c"}}, 
+                         RowSpacings -> 0, ColumnSpacings -> 0.05, 
+                         GridFrameMargins -> {{0, 0}, {0, 0}}], FontSize -> 
+                         9]}}, ColumnSpacings -> 0.05, RowAlignments -> 
+                      Center], AutoSpacing -> False, ShowAutoStyles -> 
+                     False], xAct`xTerior`ChristoffelForm[CD][a, -c], 
+                   Editable -> False], "\[Wedge]", InterpretationBox[
+                   StyleBox[GridBox[
+                     {{"\[CapitalGamma][\[EmptyDownTriangle]]", StyleBox[
+                        GridBox[{{"c", " "}, {" ", "b"}}, RowSpacings -> 0, 
+                         ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, 
+                          {0, 0}}], FontSize -> 9]}}, ColumnSpacings -> 0.05, 
+                     RowAlignments -> Center], AutoSpacing -> False, 
+                    ShowAutoStyles -> False], xAct`xTerior`ChristoffelForm[
+                     CD][c, -b], Editable -> False]}], ")"}]}], "+", 
+            InterpretationBox[StyleBox[GridBox[{{"R[\[EmptyDownTriangle]]", 
+                 StyleBox[GridBox[{{"a", " "}, {" ", "b"}}, RowSpacings -> 0, 
+                   ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, 
+                     {0, 0}}], FontSize -> 9]}}, ColumnSpacings -> 0.05, 
+               RowAlignments -> Center], AutoSpacing -> False, 
+              ShowAutoStyles -> False], xAct`xTerior`RiemannForm[CD][a, -b], 
+             Editable -> False]}]], "Output", CellID -> 135006]}, Open]]}, 
+    Open]], Cell[CellGroupData[{Cell["Metadata", "MetadataSection", 
+      CellID -> 135024], Cell[TextData[{"New in: ", Cell[" ", "HistoryData", 
+         CellTags -> "New"], " | Modified in: ", Cell[" ", "HistoryData", 
+         CellTags -> "Modified"], " | Obsolete in: ", 
+        Cell[" ", "HistoryData", CellTags -> "Obsolete"]}], "History", 
+      CellID -> 135025], Cell[CellGroupData[
+       {Cell["Categorization", "CategorizationSection", CellID -> 135026], 
+        Cell["Symbol", "Categorization", CellLabel -> "Entity Type", 
+         CellID -> 135027], Cell["xTerior", "Categorization", 
+         CellLabel -> "Paclet Name", CellID -> 135028], 
+        Cell["xAct`xTerior`", "Categorization", CellLabel -> "Context", 
+         CellID -> 135029], Cell["xTerior/ref/UseCartan", "Categorization", 
+         CellLabel -> "URI", CellID -> 135030]}, Closed]], 
+     Cell[CellGroupData[{Cell["Keywords", "KeywordsSection", 
+         CellID -> 135035], Cell["UseCartan", "Keywords", CellID -> 135031], 
+        Cell["xTerior", "Keywords", CellID -> 135032], 
+        Cell["exterior calculus", "Keywords", CellID -> 135033], 
+        Cell["Connections and curvature", "Keywords", CellID -> 135034]}, 
+       Closed]]}, Closed]]}, WindowSize -> {800, 900}, 
+ TaggingRules -> <|"Paclet" -> "xTerior"|>, CellContext -> "Global`", 
+ StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, 
+   "FunctionPageStylesExt.nb", CharacterEncoding -> "UTF-8"]]

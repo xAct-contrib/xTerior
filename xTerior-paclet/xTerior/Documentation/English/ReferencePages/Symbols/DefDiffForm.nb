@@ -1,0 +1,108 @@
+Notebook[{Cell[CellGroupData[{Cell["DefDiffForm", "ObjectName", 
+      CellID -> 101007], Cell[TextData[{Cell["   ", "ModInfo"], 
+        Cell[BoxData[RowBox[{"DefDiffForm", "[", RowBox[
+             {RowBox[{StyleBox["form", "TI"], "[", StyleBox["inds", "TI"], 
+                "]"}], ",", StyleBox["mani", "TI"], ",", StyleBox["deg", 
+               "TI"]}], "]"}]], "InlineFormula"], " \[LineSeparator]defines a \
+tensor-valued differential form of exterior degree deg on mani.", "\n", 
+        Cell["   ", "ModInfo"], Cell[BoxData[RowBox[{"DefDiffForm", "[", 
+            RowBox[{RowBox[{StyleBox["form", "TI"], "[", StyleBox["inds", 
+                 "TI"], "]"}], ",", StyleBox["mani", "TI"], ",", 
+              StyleBox["deg", "TI"], ",", StyleBox["sym", "TI"]}], "]"}]], 
+         "InlineFormula"], " \[LineSeparator]also specifies the symmetry of \
+the explicit tensor indices."}], "Usage", CellID -> 101008], 
+     Cell["Define mani first with xTensor's DefManifold. The explicit indices \
+describe tensor values; they do not count toward the exterior degree.", 
+      "Notes", CellID -> 101009], Cell["Use form[] for a form with no \
+explicit tensor indices. Supply the form expression, including its indices, \
+when defining it.", "Notes", CellID -> 101010], Cell["DefDiffForm calls \
+DefTensor with GradeOfTensor -> {Wedge -> deg} and accepts DefTensor options, \
+including PrintAs. Use Wedge to multiply positive-degree forms.", "Notes", 
+      CellID -> 101011]}, Open]], 
+  Cell[CellGroupData[{Cell["See Also", "SeeAlsoSection", CellID -> 101012], 
+     Cell[TextData[{Cell[BoxData[ButtonBox["UndefDiffForm", 
+           BaseStyle -> "Link", ButtonData -> 
+            "paclet:xTerior/ref/UndefDiffForm"]], "InlineSeeAlsoFunction"], 
+        " \[FilledVerySmallSquare] ", Cell[BoxData[ButtonBox["Deg", 
+           BaseStyle -> "Link", ButtonData -> "paclet:xTerior/ref/Deg"]], 
+         "InlineSeeAlsoFunction"], " \[FilledVerySmallSquare] ", 
+        Cell[BoxData[ButtonBox["Diff", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/Diff"]], 
+         "InlineSeeAlsoFunction"], " \[FilledVerySmallSquare] ", 
+        Cell[BoxData[ButtonBox["Coframe", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/Coframe"]], 
+         "InlineSeeAlsoFunction"]}], "SeeAlso", CellID -> 101013]}, Open]], 
+  Cell[CellGroupData[{Cell["Related Guides", "MoreAboutSection", 
+      CellID -> 101014], 
+     Cell[TextData[{ButtonBox["xTerior: Exterior Calculus", 
+         BaseStyle -> "Link", ButtonData -> 
+          "paclet:xTerior/guide/xTerior"]}], "MoreAbout", CellID -> 101015]}, 
+    Open]], Cell[CellGroupData[{Cell["Related Links", "RelatedLinksSection", 
+      CellID -> 101016], Cell[TextData[{ButtonBox["xTerior project", 
+         BaseStyle -> "Link", ButtonData -> 
+          "https://www.xact.es/xTerior/"]}], "RelatedLinks", 
+      CellID -> 101017], 
+     Cell[TextData[{ButtonBox["xAct tensor algebra packages", 
+         BaseStyle -> "Link", ButtonData -> "https://www.xact.es/"]}], 
+      "RelatedLinks", CellID -> 101018]}, Open]], 
+  Cell[CellGroupData[{Cell["Examples Initialization", 
+      "ExamplesInitializationSection", CellID -> 101019], 
+     Cell[BoxData[RowBox[{"Needs", "[", "\"xAct`xTerior`\"", "]"}]], 
+      "ExampleInitialization", CellID -> 101020]}, Open]], 
+  Cell[CellGroupData[{Cell["Basic Examples", "PrimaryExamplesSection", 
+      CellID -> 101021], Cell["Set up the geometric objects used in this page \
+(evaluate once in a fresh kernel):", "ExampleText", CellID -> 101022], 
+     Cell[BoxData[RowBox[{RowBox[{"DefManifold", "[", 
+           RowBox[{"M", ",", "4", ",", RowBox[{"{", RowBox[{"a", ",", "b", 
+                 ",", "c", ",", "d", ",", "e", ",", "f", ",", "h", ",", "i", 
+                 ",", "j", ",", "k"}], "}"}]}], "]"}], ";"}]], "Input", 
+      CellID -> 101023], Cell["Define a one-form and inspect its degree:", 
+      "ExampleText", CellID -> 101001], 
+     Cell[CellGroupData[
+       {Cell[BoxData[RowBox[{RowBox[{RowBox[{"DefDiffForm", "[", 
+                RowBox[{RowBox[{"alpha", "[", "]"}], ",", "M", ",", "1"}], 
+                "]"}], ";"}], "\[IndentingNewLine]", 
+            RowBox[{"Deg", "[", RowBox[{"alpha", "[", "]"}], "]"}]}]], 
+         "Input", CellID -> 101002], Cell[BoxData["1"], "Output", 
+         CellID -> 101003]}, Open]], Cell["A tensor-valued two-form has both \
+an exterior degree and explicit tensor slots:", "ExampleText", 
+      CellID -> 101004], Cell[CellGroupData[
+       {Cell[BoxData[RowBox[{RowBox[{RowBox[{"DefDiffForm", "[", 
+                RowBox[{RowBox[{"omega", "[", RowBox[{"a", ",", RowBox[
+                       {"-", "b"}]}], "]"}], ",", "M", ",", "2"}], "]"}], 
+              ";"}], "\[IndentingNewLine]", RowBox[
+             {"{", RowBox[{RowBox[{"Deg", "[", RowBox[{"omega", "[", 
+                    RowBox[{"a", ",", RowBox[{"-", "b"}]}], "]"}], "]"}], 
+                ",", RowBox[{"SlotsOfTensor", "[", "omega", "]"}]}], 
+              "}"}]}]], "Input", CellID -> 101005], 
+        Cell[BoxData[RowBox[{"{", RowBox[{"2", ",", RowBox[{"{", 
+                RowBox[{InterpretationBox[StyleBox[
+                    "\[DoubleStruckCapitalT]M", AutoSpacing -> False, 
+                    ShowAutoStyles -> False], TangentM, Editable -> False], 
+                  ",", RowBox[{"-", InterpretationBox[StyleBox[
+                      "\[DoubleStruckCapitalT]M", AutoSpacing -> False, 
+                      ShowAutoStyles -> False], TangentM, Editable -> 
+                      False]}]}], "}"}]}], "}"}]], "Output", 
+         CellID -> 101006]}, Open]]}, Open]], 
+  Cell[CellGroupData[{Cell["Metadata", "MetadataSection", CellID -> 101024], 
+     Cell[TextData[{"New in: ", Cell[" ", "HistoryData", CellTags -> "New"], 
+        " | Modified in: ", Cell[" ", "HistoryData", CellTags -> "Modified"], 
+        " | Obsolete in: ", Cell[" ", "HistoryData", 
+         CellTags -> "Obsolete"]}], "History", CellID -> 101025], 
+     Cell[CellGroupData[{Cell["Categorization", "CategorizationSection", 
+         CellID -> 101026], Cell["Symbol", "Categorization", 
+         CellLabel -> "Entity Type", CellID -> 101027], 
+        Cell["xTerior", "Categorization", CellLabel -> "Paclet Name", 
+         CellID -> 101028], Cell["xAct`xTerior`", "Categorization", 
+         CellLabel -> "Context", CellID -> 101029], 
+        Cell["xTerior/ref/DefDiffForm", "Categorization", CellLabel -> "URI", 
+         CellID -> 101030]}, Closed]], 
+     Cell[CellGroupData[{Cell["Keywords", "KeywordsSection", 
+         CellID -> 101035], Cell["DefDiffForm", "Keywords", 
+         CellID -> 101031], Cell["xTerior", "Keywords", CellID -> 101032], 
+        Cell["exterior calculus", "Keywords", CellID -> 101033], 
+        Cell["Defining and inspecting forms", "Keywords", CellID -> 101034]}, 
+       Closed]]}, Closed]]}, WindowSize -> {800, 900}, 
+ TaggingRules -> <|"Paclet" -> "xTerior"|>, CellContext -> "Global`", 
+ StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, 
+   "FunctionPageStylesExt.nb", CharacterEncoding -> "UTF-8"]]

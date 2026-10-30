@@ -1,0 +1,108 @@
+Notebook[{Cell[CellGroupData[{Cell["Koszul", "ObjectName", CellID -> 123007], 
+     Cell[TextData[{Cell["   ", "ModInfo"], 
+        Cell[BoxData[RowBox[{RowBox[{RowBox[{"GiveSymbol", "[", 
+                RowBox[{"Koszul", ",", StyleBox["covd", "TI"]}], "]"}], "[", 
+              StyleBox["v", "TI"], "]"}], "[", StyleBox["expr", "TI"], 
+            "]"}]], "InlineFormula"], " \[LineSeparator]applies the Koszul \
+derivative associated with covd in the direction v."}], "Usage", 
+      CellID -> 123008], Cell["Koszul is a naming head: DefCovD creates a \
+derivative symbol using GiveSymbol[Koszul, covd]. For a derivative named CD \
+this is normally KoszulCD.", "Notes", CellID -> 123009], 
+     Cell["Use frame-vector expressions such as eFrame[M][-a] or \
+PDFrame[M][-a] for the direction. The generated operator is a derivation of \
+CircleTimes.", "Notes", CellID -> 123010], Cell["ExpandKoszul converts its \
+action on frame and coframe elements to connection tensors.", "Notes", 
+      CellID -> 123011]}, Open]], 
+  Cell[CellGroupData[{Cell["See Also", "SeeAlsoSection", CellID -> 123012], 
+     Cell[TextData[{Cell[BoxData[ButtonBox["ExpandKoszul", 
+           BaseStyle -> "Link", ButtonData -> 
+            "paclet:xTerior/ref/ExpandKoszul"]], "InlineSeeAlsoFunction"], 
+        " \[FilledVerySmallSquare] ", Cell[BoxData[ButtonBox["ExpandCovD", 
+           BaseStyle -> "Link", ButtonData -> 
+            "paclet:xTerior/ref/ExpandCovD"]], "InlineSeeAlsoFunction"], 
+        " \[FilledVerySmallSquare] ", Cell[BoxData[ButtonBox["eFrame", 
+           BaseStyle -> "Link", ButtonData -> "paclet:xTerior/ref/eFrame"]], 
+         "InlineSeeAlsoFunction"], " \[FilledVerySmallSquare] ", 
+        Cell[BoxData[ButtonBox["PDFrame", BaseStyle -> "Link", 
+           ButtonData -> "paclet:xTerior/ref/PDFrame"]], 
+         "InlineSeeAlsoFunction"]}], "SeeAlso", CellID -> 123013]}, Open]], 
+  Cell[CellGroupData[{Cell["Related Guides", "MoreAboutSection", 
+      CellID -> 123014], 
+     Cell[TextData[{ButtonBox["xTerior: Exterior Calculus", 
+         BaseStyle -> "Link", ButtonData -> 
+          "paclet:xTerior/guide/xTerior"]}], "MoreAbout", CellID -> 123015]}, 
+    Open]], Cell[CellGroupData[{Cell["Related Links", "RelatedLinksSection", 
+      CellID -> 123016], Cell[TextData[{ButtonBox["xTerior project", 
+         BaseStyle -> "Link", ButtonData -> 
+          "https://www.xact.es/xTerior/"]}], "RelatedLinks", 
+      CellID -> 123017], 
+     Cell[TextData[{ButtonBox["xAct tensor algebra packages", 
+         BaseStyle -> "Link", ButtonData -> "https://www.xact.es/"]}], 
+      "RelatedLinks", CellID -> 123018]}, Open]], 
+  Cell[CellGroupData[{Cell["Examples Initialization", 
+      "ExamplesInitializationSection", CellID -> 123019], 
+     Cell[BoxData[RowBox[{"Needs", "[", "\"xAct`xTerior`\"", "]"}]], 
+      "ExampleInitialization", CellID -> 123020]}, Open]], 
+  Cell[CellGroupData[{Cell["Basic Examples", "PrimaryExamplesSection", 
+      CellID -> 123021], Cell["Set up the geometric objects used in this page \
+(evaluate once in a fresh kernel):", "ExampleText", CellID -> 123022], 
+     Cell[BoxData[RowBox[{RowBox[{RowBox[{"DefManifold", "[", 
+             RowBox[{"M", ",", "4", ",", RowBox[{"{", RowBox[{"a", ",", "b", 
+                   ",", "c", ",", "d", ",", "e", ",", "f", ",", "h", ",", 
+                   "i", ",", "j", ",", "k"}], "}"}]}], "]"}], ";"}], 
+         "\[IndentingNewLine]", RowBox[{RowBox[{"DefMetric", "[", 
+             RowBox[{RowBox[{"{", RowBox[{"4", ",", "0", ",", "0"}], "}"}], 
+               ",", RowBox[{"g", "[", RowBox[{RowBox[{"-", "a"}], ",", 
+                   RowBox[{"-", "b"}]}], "]"}], ",", "CD"}], "]"}], ";"}]}]], 
+      "Input", CellID -> 123023], 
+     Cell["Obtain the generated Koszul derivative symbol:", "ExampleText", 
+      CellID -> 123001], Cell[CellGroupData[
+       {Cell[BoxData[RowBox[{"GiveSymbol", "[", RowBox[{"Koszul", ",", 
+              "CD"}], "]"}]], "Input", CellID -> 123002], 
+        Cell[BoxData["KoszulCD"], "Output", CellID -> 123003]}, Open]], 
+     Cell["Expand its action on a frame element:", "ExampleText", 
+      CellID -> 123004], Cell[CellGroupData[
+       {Cell[BoxData[RowBox[{"ExpandKoszul", "[", 
+            RowBox[{RowBox[{RowBox[{RowBox[{"GiveSymbol", "[", RowBox[
+                     {"Koszul", ",", "CD"}], "]"}], "[", RowBox[
+                   {RowBox[{"eFrame", "[", "M", "]"}], "[", RowBox[
+                     {"-", "a"}], "]"}], "]"}], "[", RowBox[
+                 {RowBox[{"eFrame", "[", "M", "]"}], "[", RowBox[{"-", "b"}], 
+                  "]"}], "]"}], ",", "CD", ",", "PD"}], "]"}]], "Input", 
+         CellID -> 123005], Cell[BoxData[RowBox[{InterpretationBox[
+             StyleBox[GridBox[{{"\[CapitalGamma][\[EmptyDownTriangle]]", 
+                 StyleBox[GridBox[{{"c", " ", " "}, {" ", "a", "b"}}, 
+                   RowSpacings -> 0, ColumnSpacings -> 0.05, 
+                   GridFrameMargins -> {{0, 0}, {0, 0}}], FontSize -> 9]}}, 
+               ColumnSpacings -> 0.05, RowAlignments -> Center], 
+              AutoSpacing -> False, ShowAutoStyles -> False], 
+             ChristoffelCD[c, -a, -b], Editable -> False], " ", 
+            InterpretationBox[StyleBox[GridBox[{{"e", StyleBox[GridBox[
+                   {{" "}, {"c"}}, RowSpacings -> 0, ColumnSpacings -> 0.05, 
+                   GridFrameMargins -> {{0, 0}, {0, 0}}], FontSize -> 9]}}, 
+               ColumnSpacings -> 0.05, RowAlignments -> Center], 
+              AutoSpacing -> False, ShowAutoStyles -> False], 
+             xAct`xTerior`eFrame[M][-c], Editable -> False]}]], "Output", 
+         CellID -> 123006]}, Open]]}, Open]], 
+  Cell[CellGroupData[{Cell["Metadata", "MetadataSection", CellID -> 123024], 
+     Cell[TextData[{"New in: ", Cell[" ", "HistoryData", CellTags -> "New"], 
+        " | Modified in: ", Cell[" ", "HistoryData", CellTags -> "Modified"], 
+        " | Obsolete in: ", Cell[" ", "HistoryData", 
+         CellTags -> "Obsolete"]}], "History", CellID -> 123025], 
+     Cell[CellGroupData[{Cell["Categorization", "CategorizationSection", 
+         CellID -> 123026], Cell["Symbol", "Categorization", 
+         CellLabel -> "Entity Type", CellID -> 123027], 
+        Cell["xTerior", "Categorization", CellLabel -> "Paclet Name", 
+         CellID -> 123028], Cell["xAct`xTerior`", "Categorization", 
+         CellLabel -> "Context", CellID -> 123029], 
+        Cell["xTerior/ref/Koszul", "Categorization", CellLabel -> "URI", 
+         CellID -> 123030]}, Closed]], 
+     Cell[CellGroupData[{Cell["Keywords", "KeywordsSection", 
+         CellID -> 123035], Cell["Koszul", "Keywords", CellID -> 123031], 
+        Cell["xTerior", "Keywords", CellID -> 123032], 
+        Cell["exterior calculus", "Keywords", CellID -> 123033], 
+        Cell["Frames and index-free derivatives", "Keywords", 
+         CellID -> 123034]}, Closed]]}, Closed]]}, WindowSize -> {800, 900}, 
+ TaggingRules -> <|"Paclet" -> "xTerior"|>, CellContext -> "Global`", 
+ StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, 
+   "FunctionPageStylesExt.nb", CharacterEncoding -> "UTF-8"]]
