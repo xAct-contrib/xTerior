@@ -17,6 +17,12 @@ label a. UseCartan expands its exterior derivative with a chosen connection."\
         Cell[BoxData[ButtonBox["ExpandKoszul", BaseStyle -> "Link", 
            ButtonData -> "paclet:xTerior/ref/ExpandKoszul"]], 
          "InlineSeeAlsoFunction"]}], "SeeAlso", CellID -> 119009]}, Open]], 
+  Cell[CellGroupData[{Cell["Tech Notes", "TechNotesSection", 
+      CellID -> 119032], 
+     Cell[TextData[{ButtonBox["Exterior Calculus with xTerior", 
+         BaseStyle -> "Link", ButtonData -> 
+          "paclet:xTerior/tutorial/ExteriorCalculus"]}], "Tutorials", 
+      CellID -> 119033]}, Open]], 
   Cell[CellGroupData[{Cell["Related Guides", "MoreAboutSection", 
       CellID -> 119010], 
      Cell[TextData[{ButtonBox["xTerior: Exterior Calculus", 

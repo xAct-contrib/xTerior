@@ -32,6 +32,12 @@ requires independent verification.", "Notes", CellID -> 133008]}, Open]],
         Cell[BoxData[ButtonBox["UseCartan", BaseStyle -> "Link", 
            ButtonData -> "paclet:xTerior/ref/UseCartan"]], 
          "InlineSeeAlsoFunction"]}], "SeeAlso", CellID -> 133010]}, Open]], 
+  Cell[CellGroupData[{Cell["Tech Notes", "TechNotesSection", 
+      CellID -> 133033], 
+     Cell[TextData[{ButtonBox["Exterior Calculus with xTerior", 
+         BaseStyle -> "Link", ButtonData -> 
+          "paclet:xTerior/tutorial/ExteriorCalculus"]}], "Tutorials", 
+      CellID -> 133034]}, Open]], 
   Cell[CellGroupData[{Cell["Related Guides", "MoreAboutSection", 
       CellID -> 133011], 
      Cell[TextData[{ButtonBox["xTerior: Exterior Calculus", 
@@ -75,26 +81,28 @@ requires independent verification.", "Notes", CellID -> 133008]}, Open]],
                        ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, 
                          {0, 0}}], FontSize -> 9]}}, ColumnSpacings -> 0.05, 
                    RowAlignments -> Center], AutoSpacing -> False, 
-                  ShowAutoStyles -> False], xAct`xTerior`ChristoffelForm[CD][
-                  a, -b], Editable -> False], "]"}], AutoSpacing -> False, 
-              ShowAutoStyles -> False], xAct`xTerior`Diff[
-              xAct`xTerior`ChristoffelForm[CD][a, -b], xAct`xTensor`PD], 
-             Editable -> False], "+", RowBox[{InterpretationBox[StyleBox[
-                GridBox[{{"\[CapitalGamma][\[EmptyDownTriangle]]", 
-                   StyleBox[GridBox[{{"a", " "}, {" ", "c"}}, RowSpacings -> 
-                      0, ColumnSpacings -> 0.05, GridFrameMargins -> 
-                      {{0, 0}, {0, 0}}], FontSize -> 9]}}, ColumnSpacings -> 
-                  0.05, RowAlignments -> Center], AutoSpacing -> False, 
-                ShowAutoStyles -> False], xAct`xTerior`ChristoffelForm[CD][a, 
-                -c], Editable -> False], "\[Wedge]", InterpretationBox[
-               StyleBox[GridBox[{{"\[CapitalGamma][\[EmptyDownTriangle]]", 
-                   StyleBox[GridBox[{{"c", " "}, {" ", "b"}}, RowSpacings -> 
-                      0, ColumnSpacings -> 0.05, GridFrameMargins -> 
-                      {{0, 0}, {0, 0}}], FontSize -> 9]}}, ColumnSpacings -> 
-                  0.05, RowAlignments -> Center], AutoSpacing -> False, 
-                ShowAutoStyles -> False], xAct`xTerior`ChristoffelForm[CD][c, 
-                -b], Editable -> False]}]}]], "Output", CellID -> 133003]}, 
-       Open]]}, Open]], 
+                  ShowAutoStyles -> False], xAct`xTerior`ChristoffelForm[
+                   Global`CD][Global`a, -Global`b], Editable -> False], 
+                "]"}], AutoSpacing -> False, ShowAutoStyles -> False], 
+             xAct`xTerior`Diff[xAct`xTerior`ChristoffelForm[Global`CD][
+               Global`a, -Global`b], xAct`xTensor`PD], Editable -> False], 
+            "+", RowBox[{InterpretationBox[StyleBox[GridBox[
+                 {{"\[CapitalGamma][\[EmptyDownTriangle]]", StyleBox[
+                    GridBox[{{"a", " "}, {" ", "c"}}, RowSpacings -> 0, 
+                     ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, 
+                       {0, 0}}], FontSize -> 9]}}, ColumnSpacings -> 0.05, 
+                 RowAlignments -> Center], AutoSpacing -> False, 
+                ShowAutoStyles -> False], xAct`xTerior`ChristoffelForm[
+                 Global`CD][Global`a, -Global`c], Editable -> False], 
+              "\[Wedge]", InterpretationBox[StyleBox[GridBox[
+                 {{"\[CapitalGamma][\[EmptyDownTriangle]]", StyleBox[
+                    GridBox[{{"c", " "}, {" ", "b"}}, RowSpacings -> 0, 
+                     ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, 
+                       {0, 0}}], FontSize -> 9]}}, ColumnSpacings -> 0.05, 
+                 RowAlignments -> Center], AutoSpacing -> False, 
+                ShowAutoStyles -> False], xAct`xTerior`ChristoffelForm[
+                 Global`CD][Global`c, -Global`b], Editable -> False]}]}]], 
+         "Output", CellID -> 133003]}, Open]]}, Open]], 
   Cell[CellGroupData[{Cell["Metadata", "MetadataSection", CellID -> 133021], 
      Cell[TextData[{"New in: ", Cell[" ", "HistoryData", CellTags -> "New"], 
         " | Modified in: ", Cell[" ", "HistoryData", CellTags -> "Modified"], 

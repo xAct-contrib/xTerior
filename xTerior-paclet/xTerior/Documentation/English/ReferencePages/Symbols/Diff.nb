@@ -33,6 +33,12 @@ coordinate derivatives.", "Notes", CellID -> 106011],
         Cell[BoxData[ButtonBox["FindPotential", BaseStyle -> "Link", 
            ButtonData -> "paclet:xTerior/ref/FindPotential"]], 
          "InlineSeeAlsoFunction"]}], "SeeAlso", CellID -> 106014]}, Open]], 
+  Cell[CellGroupData[{Cell["Tech Notes", "TechNotesSection", 
+      CellID -> 106037], 
+     Cell[TextData[{ButtonBox["Exterior Calculus with xTerior", 
+         BaseStyle -> "Link", ButtonData -> 
+          "paclet:xTerior/tutorial/ExteriorCalculus"]}], "Tutorials", 
+      CellID -> 106038]}, Open]], 
   Cell[CellGroupData[{Cell["Related Guides", "MoreAboutSection", 
       CellID -> 106015], 
      Cell[TextData[{ButtonBox["xTerior: Exterior Calculus", 
@@ -69,21 +75,23 @@ coordinate derivatives.", "Notes", CellID -> 106011],
                 "[", "]"}]}], "]"}]], "Input", CellID -> 106002], 
         Cell[BoxData[RowBox[{RowBox[{"-", RowBox[{"(", RowBox[
                  {InterpretationBox[StyleBox["alpha", AutoSpacing -> False, 
-                    ShowAutoStyles -> False], alpha[], Editable -> False], 
-                  "\[Wedge]", InterpretationBox[StyleBox[RowBox[{"d", "[", 
-                      InterpretationBox[StyleBox["beta", AutoSpacing -> 
-                         False, ShowAutoStyles -> False], beta[], Editable -> 
-                        False], "]"}], AutoSpacing -> False, 
-                    ShowAutoStyles -> False], xAct`xTerior`Diff[beta[], 
-                    xAct`xTensor`PD], Editable -> False]}], ")"}]}], "+", 
+                    ShowAutoStyles -> False], Global`alpha[], Editable -> 
+                    False], "\[Wedge]", InterpretationBox[StyleBox[
+                    RowBox[{"d", "[", InterpretationBox[StyleBox["beta", 
+                        AutoSpacing -> False, ShowAutoStyles -> False], 
+                       Global`beta[], Editable -> False], "]"}], 
+                    AutoSpacing -> False, ShowAutoStyles -> False], 
+                   xAct`xTerior`Diff[Global`beta[], xAct`xTensor`PD], 
+                   Editable -> False]}], ")"}]}], "+", 
             RowBox[{InterpretationBox[StyleBox[RowBox[{"d", "[", 
                   InterpretationBox[StyleBox["alpha", AutoSpacing -> False, 
-                    ShowAutoStyles -> False], alpha[], Editable -> False], 
-                  "]"}], AutoSpacing -> False, ShowAutoStyles -> False], 
-               xAct`xTerior`Diff[alpha[], xAct`xTensor`PD], Editable -> 
-                False], "\[Wedge]", InterpretationBox[StyleBox["beta", 
-                AutoSpacing -> False, ShowAutoStyles -> False], beta[], 
-               Editable -> False]}]}]], "Output", CellID -> 106003]}, Open]], 
+                    ShowAutoStyles -> False], Global`alpha[], Editable -> 
+                    False], "]"}], AutoSpacing -> False, ShowAutoStyles -> 
+                 False], xAct`xTerior`Diff[Global`alpha[], xAct`xTensor`PD], 
+               Editable -> False], "\[Wedge]", InterpretationBox[StyleBox[
+                "beta", AutoSpacing -> False, ShowAutoStyles -> False], 
+               Global`beta[], Editable -> False]}]}]], "Output", 
+         CellID -> 106003]}, Open]], 
      Cell["Apply the ordinary exterior derivative twice:", "ExampleText", 
       CellID -> 106004], Cell[CellGroupData[
        {Cell[BoxData[RowBox[{"Diff", "[", RowBox[{"Diff", "[", 

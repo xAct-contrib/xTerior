@@ -30,6 +30,12 @@ setting.", "Notes", CellID -> 116011]}, Open]],
         Cell[BoxData[ButtonBox["Diff", BaseStyle -> "Link", 
            ButtonData -> "paclet:xTerior/ref/Diff"]], 
          "InlineSeeAlsoFunction"]}], "SeeAlso", CellID -> 116013]}, Open]], 
+  Cell[CellGroupData[{Cell["Tech Notes", "TechNotesSection", 
+      CellID -> 116036], 
+     Cell[TextData[{ButtonBox["Exterior Calculus with xTerior", 
+         BaseStyle -> "Link", ButtonData -> 
+          "paclet:xTerior/tutorial/ExteriorCalculus"]}], "Tutorials", 
+      CellID -> 116037]}, Open]], 
   Cell[CellGroupData[{Cell["Related Guides", "MoreAboutSection", 
       CellID -> 116014], 
      Cell[TextData[{ButtonBox["xTerior: Exterior Calculus", 
@@ -74,11 +80,12 @@ setting.", "Notes", CellID -> 116011]}, Open]],
                         ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, 
                           {0, 0}}], FontSize -> 9]}}, ColumnSpacings -> 0.05, 
                     RowAlignments -> Center], AutoSpacing -> False, 
-                   ShowAutoStyles -> False], v[a], Editable -> False]], "[", 
-                InterpretationBox[StyleBox["beta", AutoSpacing -> False, 
-                  ShowAutoStyles -> False], beta[], Editable -> False], 
-                "]"}], AutoSpacing -> False, ShowAutoStyles -> False], 
-             xAct`xTerior`CartanD[v[a]][beta[], xAct`xTensor`PD], 
+                   ShowAutoStyles -> False], Global`v[Global`a], Editable -> 
+                   False]], "[", InterpretationBox[StyleBox["beta", 
+                  AutoSpacing -> False, ShowAutoStyles -> False], 
+                 Global`beta[], Editable -> False], "]"}], AutoSpacing -> 
+               False, ShowAutoStyles -> False], xAct`xTerior`CartanD[Global`v[
+                Global`a]][Global`beta[], xAct`xTensor`PD], 
              Editable -> False], "-", InterpretationBox[
              StyleBox[RowBox[{SubscriptBox["\[Iota]", InterpretationBox[
                   StyleBox[GridBox[{{"v", StyleBox[GridBox[{{"a"}, {" "}}, 
@@ -86,17 +93,17 @@ setting.", "Notes", CellID -> 116011]}, Open]],
                         GridFrameMargins -> {{0, 0}, {0, 0}}], FontSize -> 
                         9]}}, ColumnSpacings -> 0.05, RowAlignments -> 
                      Center], AutoSpacing -> False, ShowAutoStyles -> False], 
-                  v[a], Editable -> False]], "[", InterpretationBox[
-                 StyleBox[RowBox[{"d", "[", InterpretationBox[StyleBox[
-                      "beta", AutoSpacing -> False, ShowAutoStyles -> False], 
-                     beta[], Editable -> False], "]"}], AutoSpacing -> False, 
-                  ShowAutoStyles -> False], xAct`xTerior`Diff[beta[], 
-                  xAct`xTensor`PD], Editable -> False], "]"}], 
-              AutoSpacing -> False, ShowAutoStyles -> False], 
-             xAct`xTerior`Int[v[a]][xAct`xTerior`Diff[beta[], 
-               xAct`xTensor`PD]], Editable -> False]}]], "Output", 
-         CellID -> 116003]}, Open]], Cell["Choose an explicit order:", 
-      "ExampleText", CellID -> 116004], 
+                  Global`v[Global`a], Editable -> False]], "[", 
+                InterpretationBox[StyleBox[RowBox[{"d", "[", 
+                    InterpretationBox[StyleBox["beta", AutoSpacing -> False, 
+                      ShowAutoStyles -> False], Global`beta[], Editable -> 
+                      False], "]"}], AutoSpacing -> False, ShowAutoStyles -> 
+                   False], xAct`xTerior`Diff[Global`beta[], xAct`xTensor`PD], 
+                 Editable -> False], "]"}], AutoSpacing -> False, 
+              ShowAutoStyles -> False], xAct`xTerior`Int[Global`v[Global`a]][
+              xAct`xTerior`Diff[Global`beta[], xAct`xTensor`PD]], 
+             Editable -> False]}]], "Output", CellID -> 116003]}, Open]], 
+     Cell["Choose an explicit order:", "ExampleText", CellID -> 116004], 
      Cell[CellGroupData[{Cell[BoxData[RowBox[{"SortDerivations", "[", 
             RowBox[{RowBox[{RowBox[{"Int", "[", RowBox[{"v", "[", "a", "]"}], 
                   "]"}], "[", RowBox[{"Diff", "[", RowBox[{"beta", "[", 
@@ -111,26 +118,27 @@ setting.", "Notes", CellID -> 116011]}, Open]],
                           GridFrameMargins -> {{0, 0}, {0, 0}}], FontSize -> 
                           9]}}, ColumnSpacings -> 0.05, RowAlignments -> 
                           Center], AutoSpacing -> False, ShowAutoStyles -> 
-                          False], v[a], Editable -> False]], "[", 
-                      InterpretationBox[StyleBox["beta", AutoSpacing -> 
-                         False, ShowAutoStyles -> False], beta[], Editable -> 
-                        False], "]"}], AutoSpacing -> False, 
-                    ShowAutoStyles -> False], xAct`xTerior`Int[v[a]][beta[]], 
-                   Editable -> False], "]"}], AutoSpacing -> False, 
-                ShowAutoStyles -> False], xAct`xTerior`Diff[
-                xAct`xTerior`Int[v[a]][beta[]], xAct`xTensor`PD], Editable -> 
-                False]}], "+", InterpretationBox[StyleBox[
-              RowBox[{SubscriptBox["L", InterpretationBox[StyleBox[
-                   GridBox[{{"v", StyleBox[GridBox[{{"a"}, {" "}}, 
-                        RowSpacings -> 0, ColumnSpacings -> 0.05, 
-                        GridFrameMargins -> {{0, 0}, {0, 0}}], FontSize -> 
-                        9]}}, ColumnSpacings -> 0.05, RowAlignments -> 
-                     Center], AutoSpacing -> False, ShowAutoStyles -> False], 
-                  v[a], Editable -> False]], "[", InterpretationBox[
-                 StyleBox["beta", AutoSpacing -> False, ShowAutoStyles -> 
-                   False], beta[], Editable -> False], "]"}], 
-              AutoSpacing -> False, ShowAutoStyles -> False], 
-             xAct`xTerior`CartanD[v[a]][beta[], xAct`xTensor`PD], 
+                          False], Global`v[Global`a], Editable -> False]], 
+                      "[", InterpretationBox[StyleBox["beta", AutoSpacing -> 
+                         False, ShowAutoStyles -> False], Global`beta[], 
+                       Editable -> False], "]"}], AutoSpacing -> False, 
+                    ShowAutoStyles -> False], xAct`xTerior`Int[Global`v[
+                      Global`a]][Global`beta[]], Editable -> False], "]"}], 
+                AutoSpacing -> False, ShowAutoStyles -> False], 
+               xAct`xTerior`Diff[xAct`xTerior`Int[Global`v[Global`a]][
+                 Global`beta[]], xAct`xTensor`PD], Editable -> False]}], "+", 
+            InterpretationBox[StyleBox[RowBox[{SubscriptBox["L", 
+                 InterpretationBox[StyleBox[GridBox[{{"v", StyleBox[GridBox[
+                        {{"a"}, {" "}}, RowSpacings -> 0, ColumnSpacings -> 
+                         0.05, GridFrameMargins -> {{0, 0}, {0, 0}}], 
+                       FontSize -> 9]}}, ColumnSpacings -> 0.05, 
+                    RowAlignments -> Center], AutoSpacing -> False, 
+                   ShowAutoStyles -> False], Global`v[Global`a], Editable -> 
+                   False]], "[", InterpretationBox[StyleBox["beta", 
+                  AutoSpacing -> False, ShowAutoStyles -> False], 
+                 Global`beta[], Editable -> False], "]"}], AutoSpacing -> 
+               False, ShowAutoStyles -> False], xAct`xTerior`CartanD[Global`v[
+                Global`a]][Global`beta[], xAct`xTensor`PD], 
              Editable -> False]}]], "Output", CellID -> 116006]}, Open]]}, 
     Open]], Cell[CellGroupData[{Cell["Metadata", "MetadataSection", 
       CellID -> 116024], Cell[TextData[{"New in: ", Cell[" ", "HistoryData", 

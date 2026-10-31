@@ -31,6 +31,12 @@ A scalar-valued form has no such tensor-index correction.", "Notes",
         Cell[BoxData[ButtonBox["ChangeGenCovD", BaseStyle -> "Link", 
            ButtonData -> "paclet:xTerior/ref/ChangeGenCovD"]], 
          "InlineSeeAlsoFunction"]}], "SeeAlso", CellID -> 108009]}, Open]], 
+  Cell[CellGroupData[{Cell["Tech Notes", "TechNotesSection", 
+      CellID -> 108032], 
+     Cell[TextData[{ButtonBox["Exterior Calculus with xTerior", 
+         BaseStyle -> "Link", ButtonData -> 
+          "paclet:xTerior/tutorial/ExteriorCalculus"]}], "Tutorials", 
+      CellID -> 108033]}, Open]], 
   Cell[CellGroupData[{Cell["Related Guides", "MoreAboutSection", 
       CellID -> 108010], 
      Cell[TextData[{ButtonBox["xTerior: Exterior Calculus", 
@@ -75,24 +81,25 @@ A scalar-valued form has no such tensor-index correction.", "Notes",
                        ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, 
                          {0, 0}}], FontSize -> 9]}}, ColumnSpacings -> 0.05, 
                    RowAlignments -> Center], AutoSpacing -> False, 
-                  ShowAutoStyles -> False], omega[a], Editable -> False], 
-                "]"}], AutoSpacing -> False, ShowAutoStyles -> False], 
-             xAct`xTerior`Diff[omega[a], xAct`xTensor`PD], 
-             Editable -> False], "+", RowBox[{InterpretationBox[StyleBox[
-                GridBox[{{"\[CapitalGamma][\[EmptyDownTriangle]]", 
-                   StyleBox[GridBox[{{"a", " "}, {" ", "b"}}, RowSpacings -> 
+                  ShowAutoStyles -> False], Global`omega[Global`a], 
+                 Editable -> False], "]"}], AutoSpacing -> False, 
+              ShowAutoStyles -> False], xAct`xTerior`Diff[Global`omega[
+               Global`a], xAct`xTensor`PD], Editable -> False], "+", 
+            RowBox[{InterpretationBox[StyleBox[GridBox[
+                 {{"\[CapitalGamma][\[EmptyDownTriangle]]", StyleBox[
+                    GridBox[{{"a", " "}, {" ", "b"}}, RowSpacings -> 0, 
+                     ColumnSpacings -> 0.05, GridFrameMargins -> {{0, 0}, 
+                       {0, 0}}], FontSize -> 9]}}, ColumnSpacings -> 0.05, 
+                 RowAlignments -> Center], AutoSpacing -> False, 
+                ShowAutoStyles -> False], xAct`xTerior`ChristoffelForm[
+                 Global`CD][Global`a, -Global`b], Editable -> False], 
+              "\[Wedge]", InterpretationBox[StyleBox[GridBox[
+                 {{"omega", StyleBox[GridBox[{{"b"}, {" "}}, RowSpacings -> 
                       0, ColumnSpacings -> 0.05, GridFrameMargins -> 
                       {{0, 0}, {0, 0}}], FontSize -> 9]}}, ColumnSpacings -> 
                   0.05, RowAlignments -> Center], AutoSpacing -> False, 
-                ShowAutoStyles -> False], xAct`xTerior`ChristoffelForm[CD][a, 
-                -b], Editable -> False], "\[Wedge]", InterpretationBox[
-               StyleBox[GridBox[{{"omega", StyleBox[GridBox[{{"b"}, {" "}}, 
-                     RowSpacings -> 0, ColumnSpacings -> 0.05, 
-                     GridFrameMargins -> {{0, 0}, {0, 0}}], FontSize -> 9]}}, 
-                 ColumnSpacings -> 0.05, RowAlignments -> Center], 
-                AutoSpacing -> False, ShowAutoStyles -> False], omega[b], 
-               Editable -> False]}]}]], "Output", CellID -> 108003]}, 
-       Open]]}, Open]], 
+                ShowAutoStyles -> False], Global`omega[Global`b], Editable -> 
+                False]}]}]], "Output", CellID -> 108003]}, Open]]}, Open]], 
   Cell[CellGroupData[{Cell["Metadata", "MetadataSection", CellID -> 108020], 
      Cell[TextData[{"New in: ", Cell[" ", "HistoryData", CellTags -> "New"], 
         " | Modified in: ", Cell[" ", "HistoryData", CellTags -> "Modified"], 

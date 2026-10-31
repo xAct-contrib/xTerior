@@ -26,6 +26,12 @@ codifferential expressions.", "Notes", CellID -> 118008]}, Open]],
         Cell[BoxData[ButtonBox["Diff", BaseStyle -> "Link", 
            ButtonData -> "paclet:xTerior/ref/Diff"]], 
          "InlineSeeAlsoFunction"]}], "SeeAlso", CellID -> 118010]}, Open]], 
+  Cell[CellGroupData[{Cell["Tech Notes", "TechNotesSection", 
+      CellID -> 118033], 
+     Cell[TextData[{ButtonBox["Exterior Calculus with xTerior", 
+         BaseStyle -> "Link", ButtonData -> 
+          "paclet:xTerior/tutorial/ExteriorCalculus"]}], "Tutorials", 
+      CellID -> 118034]}, Open]], 
   Cell[CellGroupData[{Cell["Related Guides", "MoreAboutSection", 
       CellID -> 118011], 
      Cell[TextData[{ButtonBox["xTerior: Exterior Calculus", 
@@ -70,10 +76,11 @@ codifferential expressions.", "Notes", CellID -> 118008]}, Open]],
          CellID -> 118002], Cell[BoxData[RowBox[{"2", " ", InterpretationBox[
              StyleBox[RowBox[{"\!\(\*SubscriptBox[\(*\), \(g\)]\)", "[", 
                 RowBox[{InterpretationBox[StyleBox["beta", AutoSpacing -> 
-                     False, ShowAutoStyles -> False], beta[], Editable -> 
-                    False]}], "]"}], AutoSpacing -> False, ShowAutoStyles -> 
-               False], xAct`xTerior`Hodge[g][beta[]], Editable -> False]}]], 
-         "Output", CellID -> 118003]}, Open]]}, Open]], 
+                     False, ShowAutoStyles -> False], Global`beta[], 
+                   Editable -> False]}], "]"}], AutoSpacing -> False, 
+              ShowAutoStyles -> False], xAct`xTerior`Hodge[Global`g][
+              Global`beta[]], Editable -> False]}]], "Output", 
+         CellID -> 118003]}, Open]]}, Open]], 
   Cell[CellGroupData[{Cell["Metadata", "MetadataSection", CellID -> 118021], 
      Cell[TextData[{"New in: ", Cell[" ", "HistoryData", CellTags -> "New"], 
         " | Modified in: ", Cell[" ", "HistoryData", CellTags -> "Modified"], 

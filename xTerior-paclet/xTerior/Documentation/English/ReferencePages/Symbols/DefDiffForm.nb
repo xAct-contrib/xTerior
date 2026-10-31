@@ -32,6 +32,12 @@ including PrintAs. Use Wedge to multiply positive-degree forms.", "Notes",
         Cell[BoxData[ButtonBox["Coframe", BaseStyle -> "Link", 
            ButtonData -> "paclet:xTerior/ref/Coframe"]], 
          "InlineSeeAlsoFunction"]}], "SeeAlso", CellID -> 101013]}, Open]], 
+  Cell[CellGroupData[{Cell["Tech Notes", "TechNotesSection", 
+      CellID -> 101036], 
+     Cell[TextData[{ButtonBox["Exterior Calculus with xTerior", 
+         BaseStyle -> "Link", ButtonData -> 
+          "paclet:xTerior/tutorial/ExteriorCalculus"]}], "Tutorials", 
+      CellID -> 101037]}, Open]], 
   Cell[CellGroupData[{Cell["Related Guides", "MoreAboutSection", 
       CellID -> 101014], 
      Cell[TextData[{ButtonBox["xTerior: Exterior Calculus", 
@@ -78,10 +84,10 @@ an exterior degree and explicit tensor slots:", "ExampleText",
         Cell[BoxData[RowBox[{"{", RowBox[{"2", ",", RowBox[{"{", 
                 RowBox[{InterpretationBox[StyleBox[
                     "\[DoubleStruckCapitalT]M", AutoSpacing -> False, 
-                    ShowAutoStyles -> False], TangentM, Editable -> False], 
-                  ",", RowBox[{"-", InterpretationBox[StyleBox[
+                    ShowAutoStyles -> False], Global`TangentM, Editable -> 
+                    False], ",", RowBox[{"-", InterpretationBox[StyleBox[
                       "\[DoubleStruckCapitalT]M", AutoSpacing -> False, 
-                      ShowAutoStyles -> False], TangentM, Editable -> 
+                      ShowAutoStyles -> False], Global`TangentM, Editable -> 
                       False]}]}], "}"}]}], "}"}]], "Output", 
          CellID -> 101006]}, Open]]}, Open]], 
   Cell[CellGroupData[{Cell["Metadata", "MetadataSection", CellID -> 101024], 
